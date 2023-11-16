@@ -1,0 +1,18 @@
+{
+  "name": "bidify",
+  "version": "0.0.1",
+  "description": "An auction website where users can view, create and bid on listings using the Noroff API. Made for the Semester Project 2 course at Noroff.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "website",
+    "auction",
+    "bidify",
+    "noroff"
+  ],
+  "author": "MHerholdt94 <mathiasbherholdt@gmail.com>",
+  "license": "MIT"
+}
