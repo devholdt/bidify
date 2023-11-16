@@ -14,5 +14,8 @@
     "noroff"
   ],
   "author": "MHerholdt94 <mathiasbherholdt@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^5.3.2"
+  }
 }
