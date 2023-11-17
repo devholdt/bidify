@@ -1,0 +1,40 @@
+.navbar {
+    &-top {
+        max-width: 1620px;
+        height: 100px;
+        padding: 0;
+    }
+
+    &-bottom {
+        height: 60px;
+
+        .nav {
+            max-width: 1420px;
+            height: 100%;
+            text-transform: lowercase;
+            font-weight: 100;
+
+            &-item {
+                margin-right: 20px;
+                height: inherit;
+
+                a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: inherit;
+                }
+            }
+
+            &-regular {
+                font-size: 22px;
+                width: 120px;
+            }
+            
+            &-listing {
+                font-size: 28px;
+                width: 200px;
+            }
+        }
+    }
+}

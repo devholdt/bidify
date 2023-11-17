@@ -4,7 +4,12 @@
 // Bootstrap Sass
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
-body {
-    background-color: red;
-    color: green;
-}
+// Custom imports
+@import "./base/typography";
+@import "./components/buttons";
+@import "./components/forms";
+@import "./components/carousel";
+@import "./components/accordion";
+@import "./layout/header";
+@import "./layout/banner";
+@import "./page/home";
