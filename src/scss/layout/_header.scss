@@ -1,5 +1,4 @@
 .navbar {
-
     & > .container-fluid {
         flex-wrap: nowrap;
     }
@@ -23,25 +22,63 @@
             font-weight: 100;
 
             &-item {
-                margin-right: 20px;
                 height: inherit;
+                display: flex;
+                align-items: center;
 
                 a {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     height: inherit;
+                    transition: 0.2s;
+                    
+                    span {
+                        transition: 0.2s;
+                    }
+                }
+
+                .active span {
+                    box-shadow: inset 0 -3px 0 $light;
                 }
             }
 
             &-regular {
-                font-size: 22px;
                 width: 120px;
+                font-size: 22px;
+
+
+                a {
+                    margin: auto;
+                    width: 100%;
+
+
+                    span {
+                        padding: 6px 8px;
+                    }
+                }
+
+                a:hover span {
+                    box-shadow: inset 0 -3px 0 $light;
+                }
             }
             
             &-listing {
                 font-size: 28px;
                 width: 200px;
+                
+                a {
+                    background-color: white;
+                    color: $dark;
+                    margin: auto;
+                    height: inherit;
+                    width: 100%;
+                }
+
+                a:hover {
+                    box-shadow: inset 0 -4px 0 $gray-dark;
+                    filter: brightness(90%);
+                }
             }
         }
     }
