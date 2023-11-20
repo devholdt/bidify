@@ -11920,7 +11920,7 @@ p {
 .card {
   margin: auto;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 1.5em;
 }
 .card-img-top {
@@ -12039,6 +12039,22 @@ body {
 
 main {
   flex: 1 0 auto;
+}
+
+.profile {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  max-width: 280px;
+  max-height: 520px;
+}
+.profile-details span {
+  position: absolute;
+  cursor: pointer;
+}
+.profile-details img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .green-border {
