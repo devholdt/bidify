@@ -1,0 +1,25 @@
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    padding: 7px 8.5px;
+}
+
+.btn-cta {
+    width: 140px;
+    height: 40px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.btn-yellow {
+    background-color: $yellow;
+    color: $dark;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: $yellow;
+        color: $dark;
+        opacity: 60%;
+    }
+}

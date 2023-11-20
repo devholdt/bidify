@@ -2,4 +2,23 @@
 @import "./variables";
 
 // Bootstrap Sass
+<<<<<<< HEAD
 @import "../../node_modules/bootstrap/scss/bootstrap";
+=======
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Custom imports
+@import "./base/typography";
+@import "./components/buttons";
+@import "./components/forms";
+@import "./components/carousel";
+@import "./components/accordion";
+@import "./components/card";
+@import "./layout/header";
+@import "./layout/banner";
+@import "./layout/listings";
+@import "./layout/footer";
+@import "./layout/main";
+@import "./layout/profile-details";
+@import "./page/home";
+>>>>>>> bidify/home
