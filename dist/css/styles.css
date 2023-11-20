@@ -11963,22 +11963,51 @@ p {
   font-weight: 100;
 }
 .navbar-bottom .nav-item {
-  margin-right: 20px;
   height: inherit;
+  display: flex;
+  align-items: center;
 }
 .navbar-bottom .nav-item a {
   display: flex;
   justify-content: center;
   align-items: center;
   height: inherit;
+  transition: 0.2s;
+}
+.navbar-bottom .nav-item a span {
+  transition: 0.2s;
+}
+.navbar-bottom .nav-item .active span {
+  box-shadow: inset 0 -3px 0 #F6F6F6;
 }
 .navbar-bottom .nav-regular {
-  font-size: 22px;
   width: 120px;
+  font-size: 22px;
+}
+.navbar-bottom .nav-regular a {
+  margin: auto;
+  width: 100%;
+}
+.navbar-bottom .nav-regular a span {
+  padding: 6px 8px;
+}
+.navbar-bottom .nav-regular a:hover span {
+  box-shadow: inset 0 -3px 0 #F6F6F6;
 }
 .navbar-bottom .nav-listing {
   font-size: 28px;
   width: 200px;
+}
+.navbar-bottom .nav-listing a {
+  background-color: white;
+  color: #272727;
+  margin: auto;
+  height: inherit;
+  width: 100%;
+}
+.navbar-bottom .nav-listing a:hover {
+  box-shadow: inset 0 -4px 0 #747474;
+  filter: brightness(90%);
 }
 
 .banner {
