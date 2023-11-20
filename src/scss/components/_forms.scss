@@ -1,7 +1,13 @@
-.navbar input {
-    height: 45px;
-    width: 672px;
-    border-radius: 25px;
+.navbar {
+    form {
+        max-width: 672px;
+        min-width: 240px;
+    }
+
+    input {
+        height: 45px;
+        border-radius: 25px;
+    }
 }
 
 #createListingAccordion form {

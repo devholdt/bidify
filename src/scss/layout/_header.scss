@@ -1,8 +1,16 @@
 .navbar {
+
+    & > .container-fluid {
+        flex-wrap: nowrap;
+    }
+    
     &-top {
-        max-width: 1620px;
         height: 100px;
-        padding: 0;
+
+        form input {
+            height: 45px;
+            border-radius: 25px;
+        }
     }
 
     &-bottom {

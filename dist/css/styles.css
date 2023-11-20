@@ -4295,10 +4295,10 @@ textarea.form-control-lg {
   --bs-card-title-color: ;
   --bs-card-subtitle-color: ;
   --bs-card-border-width: var(--bs-border-width);
-  --bs-card-border-color: var(--bs-border-color-translucent);
-  --bs-card-border-radius: var(--bs-border-radius);
+  --bs-card-border-color: none;
+  --bs-card-border-radius: 0;
   --bs-card-box-shadow: ;
-  --bs-card-inner-border-radius: calc(var(--bs-border-radius) - (var(--bs-border-width)));
+  --bs-card-inner-border-radius: calc(0 - (var(--bs-border-width)));
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
   --bs-card-cap-bg: rgba(var(--bs-body-color-rgb), 0.03);
@@ -11886,9 +11886,12 @@ p {
   opacity: 60%;
 }
 
+.navbar form {
+  max-width: 672px;
+  min-width: 240px;
+}
 .navbar input {
   height: 45px;
-  width: 672px;
   border-radius: 25px;
 }
 
@@ -11904,6 +11907,9 @@ p {
   background: url("../../../dist/textures/bidify texture 1.png");
   background-size: contain;
 }
+#listingsCarousel .card {
+  max-width: 350px;
+}
 
 .accordion-header button {
   text-transform: uppercase;
@@ -11911,10 +11917,41 @@ p {
   font-weight: 500;
 }
 
+.card {
+  margin: auto;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.5em;
+}
+.card-img-top {
+  height: 300px;
+  width: auto;
+  margin: 10px;
+  object-fit: contain;
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .card {
+    height: 300px;
+  }
+  .card-img-top {
+    height: 100%;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+}
+.navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
+  flex-wrap: nowrap;
+}
 .navbar-top {
-  max-width: 1620px;
   height: 100px;
-  padding: 0;
+}
+.navbar-top form input {
+  height: 45px;
+  border-radius: 25px;
 }
 .navbar-bottom {
   height: 60px;
@@ -11946,6 +11983,33 @@ p {
 
 .banner {
   height: 616px;
+}
+
+.create-listing .accordion {
+  max-width: 978px;
+  margin-left: auto;
+}
+
+footer {
+  display: flex;
+  flex-shrink: 0;
+  margin-top: 5em;
+  height: 100px;
+  background-color: #195B33;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
 
 .green-border {

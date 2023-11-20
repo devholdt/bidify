@@ -1,0 +1,29 @@
+.card {
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5em;
+
+    &-img-top {
+        height: 300px;
+        width: auto;
+        margin: 10px;
+        object-fit: contain;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .card {
+        height: 300px;
+
+        &-img-top {
+            height: 100%;
+        }
+
+        &-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+    }
+}

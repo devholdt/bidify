@@ -17,22 +17,22 @@
 
 <body>
     <header>
-        <nav class="navbar bg-white p-0">
+        <nav class="navbar bg-white py-0">
 
-            <div class="container-fluid border-bottom border-light navbar-top">
+            <div class="container-fluid border-bottom border-light navbar-top mx-5">
                 <a class="navbar-brand" href="index.html">
-                    <img src="../../dist/logos/bidify_logo.svg" alt="Bidify logo" width="150" height="50">
+                    <img src="../../dist/logos/bidify_logo.svg" alt="Bidify logo" width="150">
                 </a>
 
-                <form class="d-flex" role="search">
-                    <input class="form-control border border-secondary ps-4 me-2 bg-white" type="search"
+                <form class="d-flex w-100 mx-5" role="search">
+                    <input class="form-control border border-secondary me-2 bg-white" type="search"
                         placeholder="Search listings..." aria-label="Search listings">
                     <button class="btn btn-dark btn-circle" type="submit"><span class="material-icons">
                             search
                         </span></button>
                 </form>
 
-                <div>
+                <div class="text-nowrap">
                     <p class="mb-0">username</p>
                     <p>credit(s): 1000</p>
                 </div>
@@ -62,202 +62,293 @@
         </nav>
     </header>
 
-    <div class="banner bg-dark">
-        <div class="container text-white d-flex flex-column text-center gap-5 justify-content-center h-100">
-            <h1 class="fw-light">Start bidding, start winning <br> - only at <span
-                    class="text-secondary fw-normal">bidify.</span>
-            </h1>
-            <p class="fs-5">
-                Welcome to Bidify, your premier online <br> auction destination. Join us today and start <br> bidding
-                your
-                way to
-                incredible savings!
-            </p>
-            <div class="d-flex justify-content-center gap-4">
-                <button type="button" class="btn btn-primary btn-cta">Register</button>
-                <button type="button" class="btn btn-yellow btn-cta">Listings</button>
+    <main>
+        <div class="banner bg-dark">
+            <div class="container text-white d-flex flex-column text-center gap-5 justify-content-center h-100">
+                <h1 class="fw-light">Start bidding, start winning <br> - only at <span
+                        class="text-secondary fw-normal">bidify.</span>
+                </h1>
+                <p class="fs-5">
+                    Welcome to Bidify, your premier online <br> auction destination. Join us today and start <br>
+                    bidding
+                    your
+                    way to
+                    incredible savings!
+                </p>
+                <div class="d-flex justify-content-center gap-4">
+                    <button type="button" class="btn btn-primary btn-cta">Register</button>
+                    <button type="button" class="btn btn-yellow btn-cta">Listings</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="listingsCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Popular today"></button>
-            <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="1"
-                aria-label="Latest listings"></button>
-            <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="2"
-                aria-label="Last chance"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active text-center py-5" data-bs-interval="6000">
-
-                <h2>Popular today</h2>
-
-                <div class="d-flex justify-content-center mt-5 gap-5">
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="../placeholder_images/smartwatch.png" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Smart Watch</h5>
-                            <p class="card-text">Current bid: 388c</p>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="../placeholder_images/headphones.png" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Headphones</h5>
-                            <p class="card-text">Current bid: 194c</p>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="../placeholder_images/gamingchair.png" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Gaming Chair</h5>
-                            <p class="card-text">Current bid: 570c</p>
-                        </div>
-                    </div>
-
-                </div>
-
-
+        <div id="listingsCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Popular today"></button>
+                <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="1"
+                    aria-label="Latest listings"></button>
+                <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="2"
+                    aria-label="Last chance"></button>
             </div>
+            <div class="container carousel-inner">
+                <div class="carousel-item active text-center py-1" data-bs-interval="6000">
 
-            <div class="carousel-item text-center py-5" data-bs-interval="6000">
+                    <h2>Popular today</h2>
 
-                <h2>Latest listings</h2>
+                    <div class="row row-cols-3 mt-5">
 
-                <div class="d-flex justify-content-center mt-5 gap-5">
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="../placeholder_images/headphones.png" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Headphones</h5>
-                            <p class="card-text">Current bid: 194c</p>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="../placeholder_images/gamingchair.png" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Gaming Chair</h5>
-                            <p class="card-text">Current bid: 570c</p>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="../placeholder_images/smartwatch.png" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Smart Watch</h5>
-                            <p class="card-text">Current bid: 388c</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="carousel-item text-center py-5" data-bs-interval="6000">
-
-                <h2>Last chance</h2>
-
-                <div class="d-flex justify-content-center mt-5 gap-5">
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="../placeholder_images/gamingchair.png" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Gaming Chair</h5>
-                            <p class="card-text">Current bid: 570c</p>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="../placeholder_images/smartwatch.png" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Smart Watch</h5>
-                            <p class="card-text">Current bid: 388c</p>
-                        </div>
-                    </div>
-
-                    <div class="card" style="width: 18rem;">
-                        <img src="../placeholder_images/headphones.png" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Headphones</h5>
-                            <p class="card-text">Current bid: 194c</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#listingsCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#listingsCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-
-    </div>
-
-    <hr class="green-border mt-0 border-primary">
-
-    <div class="container">
-        <div class="accordion" id="createListingAccordion">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button shadow-none" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Create listing
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#createListingAccordion">
-                    <div class="accordion-body">
-                        <form class="d-flex gap-3">
-
-                            <div>
-                                <div class="mb-3">
-                                    <label for="createListingTitle" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="createListingTitle" placeholder="title">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="createListingDescription" class="form-label">Description</label>
-                                    <textarea class="form-control" id="createListingDescription"
-                                        placeholder="description"></textarea>
+                        <div class="col">
+                            <div class="card">
+                                <img src="../placeholder_images/gamingchair.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Gaming Chair</h5>
+                                    <p class="card-text">Current bid: 570c</p>
                                 </div>
                             </div>
+                        </div>
 
-                            <div>
-                                <div class="mb-3">
-                                    <label for="createListingDate" class="form-label">End date</label>
-                                    <input type="date" class="form-control" id="createListingDate" value="2024-01-01">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="createListingTags" class="form-label">Tags</label>
-                                    <input type="text" class="form-control" id="createListingTags" placeholder="tags">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="createListingMedia" class="form-label">Media URL</label>
-                                    <input type="text" class="form-control" id="createListingMedia"
-                                        placeholder="media URL">
+                        <div class="col">
+                            <div class="card">
+                                <img src="../placeholder_images/smartwatch.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Smart Watch</h5>
+                                    <p class="card-text">Current bid: 388c</p>
                                 </div>
                             </div>
+                        </div>
 
-                        </form>
+                        <div class="col">
+                            <div class="card">
+                                <img src="../placeholder_images/headphones.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Headphones</h5>
+                                    <p class="card-text">Current bid: 194c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="carousel-item text-center py-1" data-bs-interval="6000">
+
+                    <h2>Latest listings</h2>
+
+                    <div class="row rol-cols-3 mt-5">
+
+                        <div class="col">
+                            <div class="card">
+                                <img src="../placeholder_images/headphones.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Headphones</h5>
+                                    <p class="card-text">Current bid: 194c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card">
+                                <img src="../placeholder_images/gamingchair.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Gaming Chair</h5>
+                                    <p class="card-text">Current bid: 570c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card">
+                                <img src="../placeholder_images/smartwatch.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Smart Watch</h5>
+                                    <p class="card-text">Current bid: 388c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="carousel-item text-center py-1" data-bs-interval="6000">
+
+                    <h2>Last chance</h2>
+
+                    <div class="row row-cols-3 mt-5">
+
+                        <div class="col">
+                            <div class="card">
+                                <img src="../placeholder_images/smartwatch.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Smart Watch</h5>
+                                    <p class="card-text">Current bid: 388c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card">
+                                <img src="../placeholder_images/headphones.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Headphones</h5>
+                                    <p class="card-text">Current bid: 194c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card">
+                                <img src="../placeholder_images/gamingchair.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Gaming Chair</h5>
+                                    <p class="card-text">Current bid: 570c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#listingsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#listingsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+        </div>
+
+        <hr class="green-border mt-0 border-primary">
+
+        <div class="container mb-5 create-listing">
+            <div class="accordion" id="createListingAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button shadow-none" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Create listing
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show"
+                        data-bs-parent="#createListingAccordion">
+                        <div class="accordion-body">
+                            <form class="d-flex gap-3">
+
+                                <div>
+                                    <div class="mb-3">
+                                        <label for="createListingTitle" class="form-label">Title</label>
+                                        <input type="text" class="form-control" id="createListingTitle"
+                                            placeholder="title">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="createListingDescription" class="form-label">Description</label>
+                                        <textarea class="form-control" id="createListingDescription"
+                                            placeholder="description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="mb-3">
+                                        <label for="createListingDate" class="form-label">End date</label>
+                                        <input type="date" class="form-control" id="createListingDate"
+                                            value="2024-01-01">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="createListingTags" class="form-label">Tags</label>
+                                        <input type="text" class="form-control" id="createListingTags"
+                                            placeholder="tags">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="createListingMedia" class="form-label">Media URL</label>
+                                        <input type="text" class="form-control" id="createListingMedia"
+                                            placeholder="media URL">
+                                    </div>
+                                </div>
+
+                            </form>
+                            <div></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 mb-5">
+                    <form>
+                        <div class="mb-3">
+                            <label for="searchListings" class="form-label">Search for listings</label>
+                            <input type="text" class="form-control" id="searchListings"
+                                placeholder="Search listings...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="filterByCurrentBid" class="form-label">Filter by current bid</label>
+                            <input type="range" class="form-range" id="filterByCurrentBid" min="0" max="1000" step="1">
+                        </div>
+                        <button type="submit" class="btn btn-yellow">Filter</button>
+                    </form>
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="row row-cols-3">
+
+                        <div class="col-12 col-lg-4 col-md-6">
+                            <div class="card">
+                                <img src="../placeholder_images/gamingchair.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Gaming Chair</h5>
+                                    <p class="card-text">Current bid: 570c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4 col-md-6">
+                            <div class="card">
+                                <img src="../placeholder_images/smartwatch.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Smart Watch</h5>
+                                    <p class="card-text">Current bid: 388c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4 col-md-6">
+                            <div class="card">
+                                <img src="../placeholder_images/headphones.png" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Headphones</h5>
+                                    <p class="card-text">Current bid: 194c</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="align-items-center">
+        <div class="container text-center">
+            <img src="../../dist/logos/bidify_logoimage_yellow_png.png" alt="Bidify logo" width="200">
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
