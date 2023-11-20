@@ -217,7 +217,6 @@ hr {
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-family: "Roboto Slab", serif;
   font-weight: 500;
   line-height: 1.2;
   color: var(--bs-heading-color);
@@ -11857,7 +11856,7 @@ textarea.form-control-lg {
   }
 }
 p {
-  font-family: "Roboto", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 300;
 }
 
@@ -11922,12 +11921,53 @@ p {
   text-align: center;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 1.5em;
+  font-family: "Raleway", sans-serif;
+}
+.card-buttons {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  gap: 0.5em;
+  margin: 0.5em;
+}
+.card-buttons button {
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+.card-buttons .btn-gavel {
+  background-color: #FFC952;
+  width: 50px;
+  height: 50px;
+}
+.card-buttons .btn-heart {
+  background-color: #FF5252;
+  width: 40px;
+  height: 40px;
+}
+.card-date {
+  position: absolute;
+  background-color: #F6F6F6;
+  width: 90%;
+  height: 70px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  top: 57.5%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .card-img-top {
   height: 300px;
   width: auto;
   margin: 10px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 @media (min-width: 992px) and (max-width: 1200px) {
@@ -12012,6 +12052,9 @@ p {
 
 .banner {
   height: 616px;
+}
+.banner h1, .banner .h1 {
+  font-family: "Roboto Slab", serif;
 }
 
 .create-listing .accordion {
