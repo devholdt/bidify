@@ -1,10 +1,20 @@
 import { getListings } from "./fetch.js";
 import { updateCountdown } from "../../utilities/index.js";
 
+async function getListingsByCreated() {
+  const listings = await getListings({ limit: 100 });
+
+  const sortedListings = listings.sort(
+    (a, b) => new Date(b.created) - new Date(a.created)
+  );
+
+  return sortedListings.slice(0, 12);
+}
+
 export async function displayListings() {
   const listingsContainer = document.querySelector(".listings");
 
-  const listings = await getListings();
+  const listings = await getListingsByCreated();
 
   listings.forEach((listing) => {
     let listingMedia = "";

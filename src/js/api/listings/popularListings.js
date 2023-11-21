@@ -38,27 +38,27 @@ export async function popularListings() {
     const card = document.createElement("div");
     card.classList.add("col", "mb-4");
     card.innerHTML = `
-          <div class="card">
-  
-              <div class="card-top">
-                  ${listingMedia}
-              </div>
-  
-              <div class="card-body pt-5 pb-4 ps-0">
-                  <h5 class="card-title fw-bold">${listing.title}</h5>
-                  ${listingBids}
-              </div>
-  
-              <div class="card-buttons">
-                  <button class="btn-gavel">
-                      <p class="material-icons">gavel</p>
-                  </button>
-                  <button class="btn-heart">
-                      <p class="material-icons">favorite_border</p>
-                  </button>
-              </div>
-  
-          </div>`;
+        <div class="card">
+
+            <div class="card-top">
+                ${listingMedia}
+            </div>
+
+            <div class="card-body pt-5 pb-4 ps-0">
+                <h5 class="card-title fw-bold">${listing.title}</h5>
+                ${listingBids}
+            </div>
+
+            <div class="card-buttons">
+                <button class="btn-gavel">
+                    <p class="material-icons">gavel</p>
+                </button>
+                <button class="btn-heart">
+                    <p class="material-icons">favorite_border</p>
+                </button>
+            </div>
+
+        </div>`;
 
     const countdownContainer = document.createElement("div");
     countdownContainer.classList.add("countdown");

@@ -2,7 +2,7 @@ import { API_PATH } from "../constants.js";
 import { headers } from "../headers.js";
 
 export async function getListings({
-  limit = 12,
+  limit = 100,
   offset = 0,
   sortOrder = "desc",
   sort = "",
