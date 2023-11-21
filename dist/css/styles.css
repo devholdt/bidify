@@ -12037,7 +12037,6 @@ p {
 .navbar-bottom .nav {
   max-width: 1420px;
   height: 100%;
-  text-transform: lowercase;
   font-weight: 100;
 }
 .navbar-bottom .nav-item {
@@ -12045,14 +12044,15 @@ p {
   display: flex;
   align-items: center;
 }
-.navbar-bottom .nav-item a {
+.navbar-bottom .nav-item a, .navbar-bottom .nav-item button {
   display: flex;
   justify-content: center;
   align-items: center;
   height: inherit;
+  text-transform: lowercase;
   transition: 0.2s;
 }
-.navbar-bottom .nav-item a span {
+.navbar-bottom .nav-item a span, .navbar-bottom .nav-item button span {
   transition: 0.2s;
 }
 .navbar-bottom .nav-item .active span {
@@ -12060,16 +12060,16 @@ p {
 }
 .navbar-bottom .nav-regular {
   width: 120px;
-  font-size: 22px;
+  font-size: 20px;
 }
-.navbar-bottom .nav-regular a {
+.navbar-bottom .nav-regular a, .navbar-bottom .nav-regular button {
   margin: auto;
   width: 100%;
 }
-.navbar-bottom .nav-regular a span {
+.navbar-bottom .nav-regular a span, .navbar-bottom .nav-regular button span {
   padding: 6px 8px;
 }
-.navbar-bottom .nav-regular a:hover span {
+.navbar-bottom .nav-regular a:hover span, .navbar-bottom .nav-regular button:hover span {
   box-shadow: inset 0 -3px 0 #F6F6F6;
 }
 .navbar-bottom .nav-listing {
