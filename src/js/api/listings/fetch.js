@@ -1,9 +1,14 @@
 import { API_PATH } from "../constants.js";
 import { headers } from "../headers.js";
 
-export async function getListings(limit = 12, offset = 0) {
+export async function getListings({
+  limit = 12,
+  offset = 0,
+  sortOrder = "desc",
+  sort = "",
+} = {}) {
   const response = await fetch(
-    `${API_PATH}/auction/listings?limit=${limit}&offset=${offset}&_seller=true&_bids=true&_active=true`,
+    `${API_PATH}/auction/listings?limit=${limit}&offset=${offset}&sortOrder=${sortOrder}${sort}&_seller=true&_bids=true&_active=true`,
     { headers: headers() }
   );
   if (response.ok) {

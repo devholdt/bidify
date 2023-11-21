@@ -1,3 +1,4 @@
-import { displayListings } from "./api/listings/display.js";
+import { displayListings, popularToday } from "./api/index.js";
 
+popularToday();
 displayListings();
