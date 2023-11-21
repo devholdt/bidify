@@ -1,5 +1,5 @@
 import { getListings } from "./fetch.js";
-import { formatDate } from "../../utilities/formatDate.js";
+import { updateCountdown } from "../../utilities/index.js";
 
 export async function displayListings() {
   const listingsContainer = document.querySelector(".listings");
@@ -10,7 +10,6 @@ export async function displayListings() {
     let listingMedia = "";
     let listingBids = "";
     const listingEndsAt = new Date(listing.endsAt);
-    const formattedDate = formatDate(listingEndsAt);
 
     if (listing.media.length === 0) {
       listingMedia = `<img src="https://shorturl.at/inwEL" class="card-img-top" alt="Listing image">`;
@@ -24,18 +23,12 @@ export async function displayListings() {
       listingBids = `<p class="card-text">Current bid: <span class="fw-semibold">${listing.bids[0].amount}c</span></p>`;
     }
 
-    console.log(listing.bids.length);
-
     const card = document.createElement("div");
     card.classList.add("col", "mb-4");
     card.innerHTML = `
         <div class="card">
 
             <div class="card-top">
-                <div class="card-date">
-                    <p class="m-0">Ends at:</p>
-                    <p class="m-0 fs-5 fw-medium listing-end">${formattedDate}</p>
-                </div>
                 ${listingMedia}
             </div>
 
@@ -54,6 +47,38 @@ export async function displayListings() {
             </div>
 
         </div>`;
+
+    const countdownContainer = document.createElement("div");
+    countdownContainer.classList.add("countdown");
+
+    const daysElement = document.createElement("span");
+    const hoursElement = document.createElement("span");
+    const minsElement = document.createElement("span");
+    const secsElement = document.createElement("span");
+
+    [daysElement, hoursElement, minsElement, secsElement].forEach((element) => {
+      element.classList.add("countdown-part");
+      countdownContainer.appendChild(element);
+    });
+
+    card.querySelector(".card-top").appendChild(countdownContainer);
+
+    updateCountdown(
+      listingEndsAt,
+      daysElement,
+      hoursElement,
+      minsElement,
+      secsElement
+    );
+    countdownContainer.countdownInterval = setInterval(() => {
+      updateCountdown(
+        listingEndsAt,
+        daysElement,
+        hoursElement,
+        minsElement,
+        secsElement
+      );
+    }, 1000);
 
     listingsContainer.appendChild(card);
   });
