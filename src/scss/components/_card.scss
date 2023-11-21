@@ -32,9 +32,13 @@
         height: 100%;
         text-align: center;
 
+        img {
+            border-radius: 5px;
+        }
+
         .countdown {
             position: absolute;
-            bottom: 10px;
+            bottom: 15px;
             left: 0;
             right: 0;
             text-align: center;
@@ -43,11 +47,15 @@
             gap: 5px;
 
             .countdown-part {
-                background-color: rgba(0, 0, 0, 0.75);
+                backdrop-filter: blur(2px);
                 color: white;
                 padding: 5px 10px;
                 border-radius: 5px;
-                font-size: 1em;
+                font-size: 1.2em;
+
+                span {
+                    font-size: .8em;
+                }
             }
         }
     }

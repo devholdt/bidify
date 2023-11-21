@@ -3,7 +3,7 @@ import { headers } from "../headers.js";
 
 export async function getListings(limit = 12, offset = 0) {
   const response = await fetch(
-    `${API_PATH}/auction/listings?limit=${limit}&offset=${offset}&_seller=true&_bids=true`,
+    `${API_PATH}/auction/listings?limit=${limit}&offset=${offset}&_seller=true&_bids=true&_active=true`,
     { headers: headers() }
   );
   if (response.ok) {

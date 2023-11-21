@@ -13,10 +13,10 @@ export function updateCountdown(
   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  daysElement.innerHTML = `${days}d`;
-  hoursElement.innerHTML = `${hours}h`;
-  minsElement.innerHTML = `${minutes}m`;
-  secsElement.innerHTML = `${seconds}s`;
+  daysElement.innerHTML = `${days}<span>d</span>`;
+  hoursElement.innerHTML = `${hours}<span>h</span>`;
+  minsElement.innerHTML = `${minutes}<span>m</span>`;
+  secsElement.innerHTML = `${seconds}<span>s</span>`;
 
   if (distance < 0) {
     clearInterval(daysElement.countdownInterval);

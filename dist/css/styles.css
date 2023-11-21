@@ -11855,6 +11855,20 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 p {
   font-family: "Raleway", sans-serif;
   font-weight: 300;
@@ -11949,9 +11963,12 @@ p {
   height: 100%;
   text-align: center;
 }
+.card-top img {
+  border-radius: 5px;
+}
 .card-top .countdown {
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   left: 0;
   right: 0;
   text-align: center;
@@ -11960,11 +11977,14 @@ p {
   gap: 5px;
 }
 .card-top .countdown .countdown-part {
-  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(2px);
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
-  font-size: 1em;
+  font-size: 1.2em;
+}
+.card-top .countdown .countdown-part span {
+  font-size: 0.8em;
 }
 .card-body {
   text-align: left;
@@ -12088,20 +12108,6 @@ footer {
   margin-top: 5em;
   height: 100px;
   background-color: #195B33;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1 0 auto;
 }
 
 .profile {
