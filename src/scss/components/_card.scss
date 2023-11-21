@@ -7,15 +7,23 @@
     margin: auto;
     background-color: white;
 
+    &:hover img {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
     &-top {
         position: relative;
         width: 100%;
-        height: 300px;
         text-align: center;
+        overflow: hidden;
 
         img {
             width: 100%;
-            height: 100%;
+            height: 300px;
+            display: block;
+            margin: 0;
+            transition: transform 0.4s;
             object-fit: cover;
         }
 
@@ -50,6 +58,7 @@
     &-body {
         text-align: left;
         margin: 0 20px;
+        border-top: 1px solid $light;
     }
 
     &-buttons {
