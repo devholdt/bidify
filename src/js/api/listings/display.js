@@ -7,7 +7,6 @@ export async function displayListings() {
   const listings = await getListings();
 
   listings.forEach((listing) => {
-    // console.log(listing);
     let listingMedia = "";
     let listingBids = "";
     const listingEndsAt = new Date(listing.endsAt);

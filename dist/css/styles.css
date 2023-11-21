@@ -11901,13 +11901,10 @@ p {
 
 #listingsCarousel {
   display: flex;
-  height: 780px;
+  height: 800px;
   align-items: center;
   background: url("../../../dist/textures/bidify texture 1.png");
   background-size: contain;
-}
-#listingsCarousel .card {
-  max-width: 350px;
 }
 
 .accordion-header button {
@@ -11917,72 +11914,72 @@ p {
 }
 
 .card {
-  margin: auto;
-  text-align: center;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  margin-bottom: 1.5em;
-  font-family: "Raleway", sans-serif;
-}
-.card-buttons {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  gap: 0.5em;
-  margin: 0.5em;
-}
-.card-buttons button {
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-}
-.card-buttons .btn-gavel {
-  background-color: #FFC952;
-  width: 50px;
-  height: 50px;
-}
-.card-buttons .btn-heart {
-  background-color: #FF5252;
-  width: 40px;
-  height: 40px;
+  max-width: 350px;
+  width: 100%;
+  max-height: 550px;
+  height: 100%;
 }
 .card-date {
   position: absolute;
+  width: 80%;
   background-color: #F6F6F6;
-  width: 90%;
   height: 70px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  top: 57.5%;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
+  top: 47.5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.card-img-top {
-  height: 300px;
-  width: auto;
-  margin: 10px;
-  object-fit: cover;
+.card-top {
+  padding: 10px;
+  border: 10px solid #F6F6F6;
+  width: 100%;
+  max-height: 350px;
+  height: 100%;
+  text-align: center;
+}
+.card-body {
+  text-align: left;
+  border-top: 1px solid #9D9696;
+  margin: 0 20px;
+}
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin: 0 20px 20px 20px;
+}
+.card-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+}
+.card-buttons button p {
+  margin: auto;
+  padding: auto;
+}
+.card-buttons .btn-gavel {
+  width: 50px;
+  height: 50px;
+  background-color: #FFC952;
+}
+.card-buttons .btn-heart {
+  width: 30px;
+  height: 30px;
+  background-color: #272727;
+  color: #F6F6F6;
+}
+.card-buttons .btn-heart p {
+  font-size: 18px;
 }
 
-@media (min-width: 992px) and (max-width: 1200px) {
-  .card {
-    height: 300px;
-  }
-  .card-img-top {
-    height: 100%;
-  }
-  .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-  }
-}
 .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
   flex-wrap: nowrap;
 }
