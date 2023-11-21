@@ -11901,10 +11901,14 @@ p {
 
 #listingsCarousel {
   display: flex;
-  height: 800px;
+  max-height: 830px;
+  height: 100%;
   align-items: center;
   background: url("../../../dist/textures/bidify texture 1.png");
   background-size: contain;
+}
+#listingsCarousel .carousel-inner {
+  height: 100%;
 }
 
 .accordion-header button {
@@ -11919,6 +11923,7 @@ p {
   width: 100%;
   max-height: 550px;
   height: 100%;
+  margin: auto;
 }
 .card-date {
   position: absolute;

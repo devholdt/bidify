@@ -1,7 +1,12 @@
 #listingsCarousel {
     display: flex;
-    height: 800px;
+    max-height: 830px;
+    height: 100%;
     align-items: center;
     background: url("../../../dist/textures/bidify\ texture\ 1.png");
     background-size: contain;
+
+    .carousel-inner {
+        height: 100%;
+    }
 }

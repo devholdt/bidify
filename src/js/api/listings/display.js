@@ -18,34 +18,42 @@ export async function displayListings() {
       listingMedia = `<img src="${listing.media[0]}" class="card-img-top" alt="Listing image">`;
     }
 
-    if (listing._count.bids === 0) {
-      listingBids = "No bids yet";
+    if (listing.bids.length === 0) {
+      listingBids = `<p class="card-text">No bids yet</p>`;
     } else {
-      listingBids = `Bids: ${listing._count.bids}`;
+      listingBids = `<p class="card-text">Current bid: <span class="fw-semibold">${listing.bids[0].amount}c</span></p>`;
     }
 
+    console.log(listing.bids.length);
+
     const card = document.createElement("div");
-    card.classList.add("col-12", "col-lg-4", "col-md-6");
+    card.classList.add("col", "mb-4");
     card.innerHTML = `
-    <div class="card">
-        <div class="card-buttons">
-            <button class="btn-gavel">
-                <span class="material-icons">gavel</span>
-            </button>
-            <button class="btn-heart">
-                <span class="material-icons">favorite_border</span>
-            </button>
-        </div>
-        <div class="card-date">
-            <p class="m-0">Ends at:</p>
-            <p class="m-0 fs-5 fw-medium listing-end">${formattedDate}</p>
-        </div>
-        ${listingMedia}
-        <div class="card-body">
-            <h5 class="card-title">${listing.title}</h5>
-            <p class="card-text">${listingBids}</p>
-        </div>
-    </div>`;
+        <div class="card">
+
+            <div class="card-top">
+                <div class="card-date">
+                    <p class="m-0">Ends at:</p>
+                    <p class="m-0 fs-5 fw-medium listing-end">${formattedDate}</p>
+                </div>
+                ${listingMedia}
+            </div>
+
+            <div class="card-body pt-5 pb-4 ps-0">
+                <h5 class="card-title fw-bold">${listing.title}</h5>
+                ${listingBids}
+            </div>
+
+            <div class="card-buttons">
+                <button class="btn-gavel">
+                    <p class="material-icons">gavel</p>
+                </button>
+                <button class="btn-heart">
+                    <p class="material-icons">favorite_border</p>
+                </button>
+            </div>
+
+        </div>`;
 
     listingsContainer.appendChild(card);
   });
