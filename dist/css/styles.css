@@ -11913,6 +11913,23 @@ p {
   height: 200px;
 }
 
+#registerModal form, #loginModal form {
+  width: 300px;
+}
+#registerModal form div, #loginModal form div {
+  padding-bottom: 6px;
+}
+#registerModal form input, #loginModal form input {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border: 1px solid #9D9696;
+}
+#registerModal form label, #loginModal form label {
+  margin-bottom: 2px;
+}
+#registerModal form button, #loginModal form button {
+  width: 160px;
+}
+
 #listingsCarousel {
   display: flex;
   max-height: 830px;

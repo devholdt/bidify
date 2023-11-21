@@ -60,17 +60,96 @@
                     </li>
 
                     <li class="nav-item nav-regular">
-                        <button class="nav-link text-white btn-signup"><span>Sign up</span></button>
+                        <button type="button" class="nav-link text-white btn-signup" data-bs-toggle="modal"
+                            data-bs-target="#registerModal"><span>Sign up</span></button>
                     </li>
 
                     <li class="nav-item nav-regular">
-                        <button class="nav-link text-white btn-login"><span>Log in</span></button>
+                        <button class="nav-link text-white btn-login" data-bs-toggle="modal"
+                            data-bs-target="#loginModal"><span>Log in</span></button>
                     </li>
 
                 </ul>
             </div>
 
         </nav>
+
+        <div class="modal fade shadow" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header d-flex flex-column">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <img src="../../dist/logos/bidify _logo_dark_png.png" alt="Bidify logo" width="230"
+                            class="my-3">
+                        <p class="modal-title fs-4 text-center w-100 fw-semibold" id="registerModalLabel">User
+                            Registration</p>
+                    </div>
+                    <div class="modal-body">
+                        <form class="d-flex flex-column justify-content-center mx-auto my-3">
+                            <div class="mb-3">
+                                <label for="registerUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="registerUsername" placeholder="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="registerEmail" placeholder="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="registerPassword"
+                                    placeholder="password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerAvatar" class="form-label">Avatar URL (Optional)</label>
+                                <input type="text" class="form-control" id="registerAvatar" placeholder="avatar URL">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary text-uppercase mx-auto mt-3">Submit</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-center w-100">Already have an account? Click <button
+                                class="border-0 bg-light text-primary fw-medium p-0 text-decoration-underline"
+                                data-bs-target="#loginModal" data-bs-toggle="modal">here</button> to log in.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header d-flex flex-column">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <img src="../../dist/logos/bidify _logo_dark_png.png" alt="Bidify logo" width="230"
+                            class="my-3">
+                        <p class="modal-title fs-4 text-center w-100 fw-semibold" id="loginModalLabel">Login</p>
+                    </div>
+                    <div class="modal-body">
+                        <form class="d-flex flex-column justify-content-center mx-auto my-3">
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="registerEmail" placeholder="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="registerPassword"
+                                    placeholder="password">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary text-uppercase mx-auto mt-3">Login</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-center w-100">Don't have an account? Click <button
+                                class="border-0 bg-light text-primary fw-medium p-0 text-decoration-underline"
+                                data-bs-target="#registerModal" data-bs-toggle="modal">here</button> to register.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </header>
 
     <main class="d-flex flex-column">
@@ -145,12 +224,12 @@
         <div class="container mb-5 create-listing">
             <div class="accordion" id="createListingAccordion">
                 <div class="accordion-item">
-                    <h2 class="accordion-header">
+                    <h3 class="accordion-header fs-2">
                         <button class="accordion-button shadow-none" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             Create listing
                         </button>
-                    </h2>
+                    </h3>
                     <div id="collapseOne" class="accordion-collapse collapse show"
                         data-bs-parent="#createListingAccordion">
                         <div class="accordion-body">
