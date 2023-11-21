@@ -1,4 +1,11 @@
-import { displayListings, popularToday } from "./api/index.js";
+import {
+  displayListings,
+  popularListings,
+  latestListings,
+  lastChance,
+} from "./api/index.js";
 
-popularToday();
+popularListings();
+latestListings();
+lastChance();
 displayListings();

@@ -1,20 +1,22 @@
 import { getListings } from "./fetch.js";
 import { updateCountdown } from "../../utilities/index.js";
 
-async function getTopListingsByBids() {
+async function getListingsByCreated() {
   const listings = await getListings({ limit: 100 });
-  const sortedListings = listings.sort((a, b) => b._count.bids - a._count.bids);
+
+  const sortedListings = listings.sort(
+    (a, b) => new Date(b.created) - new Date(a.created)
+  );
+
   return sortedListings.slice(0, 3);
 }
 
-export async function popularToday() {
-  const listingsContainer = document.querySelector(".popular-today");
+export async function latestListings() {
+  const listingsContainer = document.querySelector(".latest-listings");
 
-  const listings = await getTopListingsByBids();
+  const listings = await getListingsByCreated();
 
-  const sortedListings = listings.sort((a, b) => b._count.bids - a._count.bids);
-
-  sortedListings.forEach((listing) => {
+  listings.forEach((listing) => {
     let listingMedia = "";
     let listingBids = "";
     const listingEndsAt = new Date(listing.endsAt);
