@@ -11,6 +11,10 @@ export async function displayListings() {
     let listingBids = "";
     const listingEndsAt = new Date(listing.endsAt);
 
+    if (listing.bids && listing.bids.length > 0) {
+      listing.bids.reverse();
+    }
+
     if (listing.media.length === 0) {
       listingMedia = `<img src="https://shorturl.at/inwEL" class="card-img-top" alt="Listing image">`;
     } else {
