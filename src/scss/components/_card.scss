@@ -27,6 +27,11 @@
             object-fit: cover;
         }
 
+        .no-media-found {
+            object-fit: contain;
+            padding: 0 20px 40px 20px;
+        }
+
 
         .countdown {
             position: absolute;

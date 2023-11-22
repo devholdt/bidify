@@ -74,8 +74,8 @@
 
         </nav>
 
-        <div class="modal fade shadow" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
-            aria-hidden="true">
+        <div class="modal fade shadow" id="registerModal" tabindex="-1" data-bs-backdrop="static"
+            data-bs-keyboard="false" aria-labelledby="registerModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header d-flex flex-column">
@@ -105,7 +105,10 @@
                                 <input type="text" class="form-control" id="registerAvatar" placeholder="avatar URL">
                             </div>
 
-                            <button type="submit" class="btn btn-primary text-uppercase mx-auto mt-3">Submit</button>
+                            <div class="d-flex mt-3 gap-3">
+                                <button type="button" class="btn btn-dark w-25" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary text-uppercase flex-2 w-75">Submit</button>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -117,7 +120,8 @@
             </div>
         </div>
 
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal fade shadow" id="loginModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header d-flex flex-column">
@@ -138,7 +142,10 @@
                                     placeholder="password">
                             </div>
 
-                            <button type="submit" class="btn btn-primary text-uppercase mx-auto mt-3">Login</button>
+                            <div class="d-flex mt-3 gap-3">
+                                <button type="button" class="btn btn-dark w-25" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary text-uppercase w-75">Login</button>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">

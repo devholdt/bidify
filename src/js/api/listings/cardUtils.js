@@ -12,7 +12,7 @@ export function createCard(listing, containerSelector) {
   }
 
   if (listing.media.length === 0) {
-    listingMedia = `<img src="https://shorturl.at/inwEL" class="card-img-top" alt="Listing image">`;
+    listingMedia = `<img src="../../../../dist/logos/bidify_nomediasvg.svg" class="card-img-top no-media-found" alt="Listing image">`;
   } else {
     listingMedia = `<img src="${listing.media[0]}" class="card-img-top" alt="Listing image">`;
   }

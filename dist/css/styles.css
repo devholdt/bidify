@@ -11978,6 +11978,10 @@ p {
   transition: transform 0.4s;
   object-fit: cover;
 }
+.card-top .no-media-found {
+  object-fit: contain;
+  padding: 0 20px 40px 20px;
+}
 .card-top .countdown {
   position: absolute;
   bottom: 10px;
