@@ -33,7 +33,7 @@
                         </span></button>
                 </form>
 
-                <div class="text-nowrap">
+                <div class="text-nowrap user-info-header">
                     <p class="mb-0">username</p>
                     <p>credit(s): 1000</p>
                 </div>
@@ -51,13 +51,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item nav-regular">
-                        <a class="nav-link text-white active" href="index.html"><span>Home</span></a>
-                    </li>
-
-                    <li class="nav-item nav-regular">
-                        <a class="nav-link text-white" href="profile.html"><span>Profile</span></a>
-                    </li>
+                    <div class="nav-rendered d-flex"></div>
 
                     <li class="nav-item nav-regular">
                         <button type="button" class="nav-link text-white btn-signup" data-bs-toggle="modal"
@@ -86,23 +80,26 @@
                             Registration</p>
                     </div>
                     <div class="modal-body">
-                        <form class="d-flex flex-column justify-content-center mx-auto my-3">
+                        <form id="registerForm" class="d-flex flex-column justify-content-center mx-auto my-3">
                             <div class="mb-3">
                                 <label for="registerUsername" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="registerUsername" placeholder="username">
+                                <input type="text" class="form-control" id="registerUsername" name="name"
+                                    placeholder="username">
                             </div>
                             <div class="mb-3">
                                 <label for="registerEmail" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="registerEmail" placeholder="email">
+                                <input type="text" class="form-control" id="registerEmail" name="email"
+                                    placeholder="email">
                             </div>
                             <div class="mb-3">
                                 <label for="registerPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="registerPassword"
+                                <input type="password" class="form-control" id="registerPassword" name="password"
                                     placeholder="password">
                             </div>
                             <div class="mb-3">
                                 <label for="registerAvatar" class="form-label">Avatar URL (Optional)</label>
-                                <input type="text" class="form-control" id="registerAvatar" placeholder="avatar URL">
+                                <input type="text" class="form-control" id="registerAvatar" name="avatar"
+                                    placeholder="avatar URL">
                             </div>
 
                             <div class="d-flex mt-3 gap-3">
@@ -131,14 +128,15 @@
                         <p class="modal-title fs-4 text-center w-100 fw-semibold" id="loginModalLabel">Login</p>
                     </div>
                     <div class="modal-body">
-                        <form class="d-flex flex-column justify-content-center mx-auto my-3">
+                        <form id="loginForm" class="d-flex flex-column justify-content-center mx-auto my-3">
                             <div class="mb-3">
                                 <label for="registerEmail" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="registerEmail" placeholder="email">
+                                <input type="text" class="form-control" id="loginEmail" name="email"
+                                    placeholder="email">
                             </div>
                             <div class="mb-3">
                                 <label for="registerPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="registerPassword"
+                                <input type="password" class="form-control" name="password" id="loginPassword"
                                     placeholder="password">
                             </div>
 

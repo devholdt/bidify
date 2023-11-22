@@ -1,4 +1,4 @@
-import { API_PATH } from "../constants.js";
+import { API_URLS } from "../constants.js";
 import { headers } from "../headers.js";
 
 export async function getListings({
@@ -8,7 +8,7 @@ export async function getListings({
   sort = "",
 } = {}) {
   const response = await fetch(
-    `${API_PATH}/auction/listings?limit=${limit}&offset=${offset}&sortOrder=${sortOrder}${sort}&_seller=true&_bids=true&_active=true`,
+    `${API_URLS.LISTINGS}?limit=${limit}&offset=${offset}&sortOrder=${sortOrder}${sort}&_seller=true&_bids=true&_active=true`,
     { headers: headers() }
   );
   if (response.ok) {
@@ -20,7 +20,7 @@ export async function getListings({
 
 export async function getListing(id) {
   const response = await fetch(
-    `${API_PATH}/auction/listings/${id}?_seller=true&_bids=true`,
+    `${API_URLS.LISTINGS}/${id}?_seller=true&_bids=true`,
     { headers: headers() }
   );
   if (response.ok) {
