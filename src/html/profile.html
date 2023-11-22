@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bidify | Profile</title>
     <script src="https://kit.fontawesome.com/c609dd8d17.js" crossorigin="anonymous"></script>
+    <script src="../js/index.js" defer type="module"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,10 +33,7 @@
                         </span></button>
                 </form>
 
-                <div class="text-nowrap">
-                    <p class="mb-0">username</p>
-                    <p>credit(s): 1000</p>
-                </div>
+                <div class="text-nowrap user-info-header"></div>
             </div>
 
             <div class="container-fluid bg-primary shadow navbar-bottom">
@@ -43,18 +41,16 @@
 
                     <li class="nav-item nav-listing">
                         <a class="nav-link d-flex gap-2" aria-current="page" href="index.html">
-                            <span class="material-icons">storefront</span>
-                            Listings
+                            <span class="nav-listing_span">
+                                <span class="material-icons">storefront</span>
+                                <span>Listings</span>
+                            </span>
                         </a>
                     </li>
 
-                    <li class="nav-item nav-regular">
-                        <a class="nav-link text-white" href="index.html"><span>Home</span></a>
-                    </li>
-
-                    <li class="nav-item nav-regular">
-                        <a class="nav-link text-white active" href="profile.html"><span>Profile</span></a>
-                    </li>
+                    <div class="nav-links d-flex"></div>
+                    <div class="nav-divider"></div>
+                    <div class="nav-buttons"></div>
 
                 </ul>
             </div>

@@ -80,6 +80,15 @@
                     filter: brightness(90%);
                 }
             }
+
+            &-divider {
+                display: flex;
+                align-self: center;
+                width: 1px;
+                height: 64%;
+                border-radius: 50%;
+                background-color: $light;
+            }
         }
     }
 }

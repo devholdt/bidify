@@ -1,5 +1,25 @@
+.user-info-header {
+    padding: 10px;
+    border: 1px solid $light;
+    transition: 0.3s;
+
+    .avatar {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    &:hover {
+        box-shadow: $shadow-sm;
+    }
+}
+
 .profile {
-    box-shadow: $shadow-card;
+    box-shadow: $shadow-sm;
     max-width: 280px;
     max-height: 520px;
 
