@@ -1,5 +1,6 @@
 import { API_URLS } from "../api/index.js";
 import { headers } from "../api/index.js";
+import { alert } from "../utilities/message.js";
 
 export async function registerUser(name, email, password, avatar) {
   const response = await fetch(API_URLS.REGISTER, {

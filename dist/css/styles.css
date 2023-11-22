@@ -12042,6 +12042,50 @@ p {
   font-size: 18px;
 }
 
+.message-container .message {
+  padding: 0.25rem 1rem;
+  text-align: center;
+  width: fit-content;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: 600;
+}
+.message-container .success {
+  border: 3px solid #195B33;
+  color: #43A869;
+}
+.message-container .error {
+  border: 3px solid #FF5252;
+  color: #FF5252;
+}
+.message-container .info {
+  border: 3px solid #5277FF;
+  color: #5277FF;
+}
+
+.message-fixed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  transform: translate(-50%, -50%);
+}
+.message-fixed:hover p {
+  cursor: pointer;
+  border-color: #272727;
+}
+.message-fixed:hover::before {
+  content: "close";
+  background-color: #FF5252;
+  font-weight: 500;
+  position: absolute;
+  margin-top: -7.5%;
+  border: 3px solid #272727;
+  border-radius: 3px;
+  padding: 0 0.5em;
+  cursor: pointer;
+}
+
 .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
   flex-wrap: nowrap;
 }

@@ -1,6 +1,8 @@
 import { API_URLS } from "../api/index.js";
+import { URLS } from "../components/constants.js";
 import { headers } from "../api/index.js";
 import { setItem } from "../storage/index.js";
+import { alert } from "../utilities/message.js";
 
 export async function loginUser(email, password) {
   const response = await fetch(API_URLS.LOGIN, {
@@ -14,10 +16,14 @@ export async function loginUser(email, password) {
     setItem({ key: "token", value: user.accessToken });
     setItem({ key: "user", value: user });
     setItem({ key: "name", value: user.name });
+    alert(
+      "success",
+      `Login successful! Welcome back, <span class="fw-semibold">${user.name}</span>`,
+      ".alert-login"
+    );
+
     return user;
   }
-
-  throw new Error(response.statusText);
 }
 
 export async function loginEvent(event) {
@@ -28,11 +34,18 @@ export async function loginEvent(event) {
   const email = data.get("email");
   const password = data.get("password");
 
+  if (email.length < 1 || password.length < 1) {
+    alert("danger", "Both email and password are required.", ".alert-login");
+
+    return;
+  }
+
   try {
     const { name } = await loginUser(email, password);
-    // location.href = `/profile.html?name=${name}`;
-    console.log(`You are now logged into ${name}`);
+    setTimeout(() => {
+      location.href = `${URLS.PROFILE}?name=${name}`;
+    }, 2000);
   } catch (error) {
-    console.error(`An error occured when attempting to log in: ${error}`);
+    alert("danger", "Invalid login credentials.", ".alert-login");
   }
 }
