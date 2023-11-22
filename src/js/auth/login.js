@@ -58,5 +58,3 @@ export async function loginEvent(event) {
     alert("danger", "Invalid login credentials.", ".alert-login", null);
   }
 }
-
-localStorage.clear();

@@ -5,7 +5,6 @@ import {
   lastChance,
 } from "./api/index.js";
 import { modals } from "./utilities/modals.js";
-
 import { renderNav } from "./components/navigation.js";
 
 popularListings();
