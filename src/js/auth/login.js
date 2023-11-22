@@ -19,10 +19,14 @@ export async function loginUser(email, password) {
     alert(
       "success",
       `Login successful! Welcome back, <span class="fw-semibold">${user.name}</span>`,
-      ".alert-login"
+      ".alert-login",
+      null,
+      false
     );
 
     return user;
+  } else {
+    alert("danger", "Login unsuccsessful.", ".alert-login", null);
   }
 }
 
@@ -35,7 +39,12 @@ export async function loginEvent(event) {
   const password = data.get("password");
 
   if (email.length < 1 || password.length < 1) {
-    alert("danger", "Both email and password are required.", ".alert-login");
+    alert(
+      "danger",
+      "Both email and password are required.",
+      ".alert-login",
+      null
+    );
 
     return;
   }
@@ -46,6 +55,8 @@ export async function loginEvent(event) {
       location.href = `${URLS.PROFILE}?name=${name}`;
     }, 2000);
   } catch (error) {
-    alert("danger", "Invalid login credentials.", ".alert-login");
+    alert("danger", "Invalid login credentials.", ".alert-login", null);
   }
 }
+
+localStorage.clear();
