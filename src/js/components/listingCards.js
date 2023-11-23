@@ -83,3 +83,23 @@ export function createCard(listing, containerSelector) {
 
   listingsContainer.appendChild(card);
 }
+
+export function createBidCard(bid, containerSelector) {
+  const bidsContainer = document.querySelector(containerSelector);
+
+  const card = document.createElement("div");
+  card.classList.add("col", "mb-4");
+  card.innerHTML = `
+  <div class="card">
+    <div class="card-body">
+      <p>Name: ${bid.bidderName}</p>
+      <p>Amount: ${bid.amount}c</p>
+    </div>
+    <div class="card-body d-flex justify-content-between">
+      <p>Created: ${bid.created}</p>
+      <p>id: ${bid.id}</p>
+    </div>
+  </div>`;
+
+  bidsContainer.appendChild(card);
+}
