@@ -1,4 +1,5 @@
 import { updateCountdown } from "../utilities/index.js";
+import { DEFAULT_URLS } from "./constants.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -14,7 +15,7 @@ export function createCard(listing, containerSelector) {
   if (listing.media.length === 0) {
     listingMedia = `<img src="../../src/images/bidify_nomediasvg.svg" class="card-img-top no-media-found" alt="Listing image">`;
   } else {
-    listingMedia = `<img src="${listing.media[0]}" class="card-img-top" alt="Listing image">`;
+    listingMedia = `<img src="${listing.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
   }
 
   if (listing.bids.length === 0) {
