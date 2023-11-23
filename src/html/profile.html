@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bidify | Home</title>
+    <title>Bidify | Profile</title>
     <script src="https://kit.fontawesome.com/c609dd8d17.js" crossorigin="anonymous"></script>
+    <script src="../js/profile.js" defer type="module"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,10 +33,7 @@
                         </span></button>
                 </form>
 
-                <div class="text-nowrap">
-                    <p class="mb-0">username</p>
-                    <p>credit(s): 1000</p>
-                </div>
+                <div class="text-nowrap user-info-header"></div>
             </div>
 
             <div class="container-fluid bg-primary shadow navbar-bottom">
@@ -43,23 +41,113 @@
 
                     <li class="nav-item nav-listing">
                         <a class="nav-link d-flex gap-2" aria-current="page" href="index.html">
-                            <span class="material-icons">storefront</span>
-                            Listings
+                            <span class="nav-listing_span">
+                                <span class="material-icons">storefront</span>
+                                <span>Listings</span>
+                            </span>
                         </a>
                     </li>
 
-                    <li class="nav-item nav-regular">
-                        <a class="nav-link text-white" href="index.html"><span>Home</span></a>
-                    </li>
-
-                    <li class="nav-item nav-regular">
-                        <a class="nav-link text-white active" href="profile.html"><span>Profile</span></a>
-                    </li>
+                    <div class="nav-links d-flex"></div>
+                    <div class="nav-buttons d-flex"></div>
 
                 </ul>
             </div>
 
         </nav>
+
+        <div class="modal fade shadow" id="registerModal" tabindex="-1" data-bs-backdrop="static"
+            data-bs-keyboard="false" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header d-flex flex-column">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <img src="../../dist/logos/bidify _logo_dark_png.png" alt="Bidify logo" width="230"
+                            class="my-3">
+                        <p class="modal-title fs-4 text-center w-100 fw-semibold" id="registerModalLabel">User
+                            Registration</p>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registerForm" class="d-flex flex-column justify-content-center mx-auto mt-3">
+                            <div class="mb-3">
+                                <label for="registerUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="registerUsername" name="name"
+                                    placeholder="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="registerEmail" name="email"
+                                    placeholder="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="registerPassword" name="password"
+                                    placeholder="password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerAvatar" class="form-label">Avatar URL (Optional)</label>
+                                <input type="text" class="form-control" id="registerAvatar" name="avatar"
+                                    placeholder="avatar URL">
+                            </div>
+
+                            <div class="d-flex mt-3 gap-3">
+                                <button type="button" class="btn btn-dark w-25" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary text-uppercase flex-2 w-75">Submit</button>
+                            </div>
+
+                            <div class="alert-register mt-2"></div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-center w-100">Already have an account? Click <button
+                                class="border-0 bg-light text-primary fw-medium p-0 text-decoration-underline"
+                                data-bs-target="#loginModal" data-bs-toggle="modal">here</button> to log in.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade shadow" id="loginModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header d-flex flex-column">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <img src="../../dist/logos/bidify _logo_dark_png.png" alt="Bidify logo" width="230"
+                            class="my-3">
+                        <p class="modal-title fs-4 text-center w-100 fw-semibold" id="loginModalLabel">Login</p>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginForm" class="d-flex flex-column justify-content-center mx-auto mt-3">
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="loginEmail" name="email"
+                                    placeholder="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" id="loginPassword"
+                                    placeholder="password">
+                            </div>
+
+                            <div class="d-flex mt-3 gap-3">
+                                <button type="button" class="btn btn-dark w-25" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary text-uppercase w-75">Login</button>
+                            </div>
+
+                            <div class="alert-login mt-2"></div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-center w-100">Don't have an account? Click <button
+                                class="border-0 bg-light text-primary fw-medium p-0 text-decoration-underline"
+                                data-bs-target="#registerModal" data-bs-toggle="modal">here</button> to register.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main>
