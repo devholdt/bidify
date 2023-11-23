@@ -1,5 +1,5 @@
-import { API_PATH } from "../constants.js";
-import { headers } from "../headers.js";
+import { API_PATH } from "../index.js";
+import { headers } from "../index.js";
 
 export async function getProfiles() {
   const response = await fetch(`${API_PATH}/auction/profiles?_listings=true`, {

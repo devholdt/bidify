@@ -1,4 +1,4 @@
-import { DEFAULT_URLS, URLS } from "./constants.js";
+import { DEFAULT_URLS, URLS } from "./index.js";
 import { getItem } from "../storage/index.js";
 import { API_PATH, headers } from "../api/index.js";
 import { logoutUser } from "../auth/logout.js";

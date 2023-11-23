@@ -1,8 +1,16 @@
-import { renderNav, modals } from "./components/index.js";
-import { profileListings, profileBids } from "./api/profiles/index.js";
+import * as components from "./components/index.js";
+import * as profiles from "./api/profiles/index.js";
+import * as storage from "./storage/index.js";
 
-modals();
-renderNav();
+const userDataLocal = storage.getUser();
 
-profileListings();
-profileBids();
+if (!userDataLocal) {
+  window.location.href = components.URLS.INDEX;
+}
+
+components.modals();
+components.renderNav();
+
+profiles.profileListings();
+profiles.profileBids();
+profiles.renderProfileDetails();

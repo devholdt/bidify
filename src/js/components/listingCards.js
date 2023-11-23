@@ -1,5 +1,5 @@
 import { updateCountdown } from "../utilities/index.js";
-import { DEFAULT_URLS } from "./constants.js";
+import { DEFAULT_URLS } from "./index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
