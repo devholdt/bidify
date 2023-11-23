@@ -32,21 +32,4 @@ export async function getProfile(name, bids = false) {
     console.error(`Error fetching profile: `, error);
     throw error;
   }
-
-  // const response = await fetch(
-  //   `${API_PATH}/auction/profiles/${name}${bids}?_listings=true`,
-  //   { headers: headers() }
-  // );
-
-  // if (response.ok) {
-  //   return await response.json();
-  // }
-
-  // throw new Error(response.statusText);
 }
-
-// export async function getProfileBids(name) {
-//   const response = await fetch(
-//     `${API_PATH}/auction/profiles/${name}/bids?_listings=true`
-//   );
-// }
