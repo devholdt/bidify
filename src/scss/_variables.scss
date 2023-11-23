@@ -12,7 +12,9 @@ $light: #F6F6F6;
 $gray-dark: #747474;
 $gray-light: #9D9696;
 
-$shadow-card: 0 3px 5px rgba(0, 0, 0, 0.2);
+$shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.25);
+$shadow-md: 0 3px 8px rgba(0, 0, 0, 0.4);
+$shadow-lg: 0 4px 15px rgba(0, 0, 0, 0.5);
 
 $body-color: $dark;
 $body-bg: $light;

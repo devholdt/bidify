@@ -1,5 +1,7 @@
 .banner {
     height: 616px;
+    box-shadow: $shadow-lg;
+    z-index: 1;
 
     h1 {
         font-family: "Roboto Slab", serif;
