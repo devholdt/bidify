@@ -67,8 +67,10 @@ export async function renderNav() {
               </button>
           </li>`;
 
-        bannerButtons.innerHTML = `
-          <button type="button" class="btn btn-yellow btn-cta">Listings</button>`;
+        if (bannerButtons) {
+          bannerButtons.innerHTML = `
+            <button type="button" class="btn btn-yellow btn-cta">Listings</button>`;
+        }
 
         const logoutButton = document.getElementById("logoutButton");
         logoutButton.addEventListener("click", logoutUser);
