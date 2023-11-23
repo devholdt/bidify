@@ -1,5 +1,4 @@
-import { modals } from "./utilities/modals.js";
-import { renderNav } from "./components/navigation.js";
+import { renderNav, modals } from "./components/index.js";
 
 modals();
 renderNav();
