@@ -1,4 +1,4 @@
-import { updateCountdown } from "../utilities/index.js";
+import { updateCountdown, scrollingTitle } from "../utilities/index.js";
 import { DEFAULT_URLS } from "./index.js";
 
 export function createCard(listing, containerSelector) {
@@ -93,26 +93,7 @@ export function createCard(listing, containerSelector) {
 
   card.querySelector(".card-body").prepend(titleWrapper);
 
-  const carousel = document.querySelector(".carousel");
-
-  if (carousel) {
-    function addScrollingTitleClass() {
-      const maxWidth = 294;
-      const titles = carousel.querySelectorAll("h5");
-
-      titles.forEach((title) => {
-        if (title.scrollWidth > maxWidth) {
-          title.classList.add("scrolling-title");
-        }
-      });
-    }
-
-    addScrollingTitleClass();
-
-    carousel.addEventListener("slid.bs.carousel", () => {
-      addScrollingTitleClass();
-    });
-  }
+  scrollingTitle();
 }
 
 export function createBidCard(bid, containerSelector) {

@@ -64,7 +64,6 @@
 
         .title-wrapper {
             overflow-x: hidden;
-            max-width: 294px;
             width: 100%;
 
             /* Hide scrollbar for IE, Edge and Firefox */
@@ -86,16 +85,11 @@
                 animation: backAndForth 5s linear infinite;
             }
 
-            // @keyframes backAndForth {
-            //     0%, 100% { transform: translateX(0); }
-            //     50% { transform: translateX(calc(-100% + 294px)); }
-            //   }
-
             @keyframes backAndForth {
                 0% { transform: translateX(0); }
                 10% { transform: translateX(0); }
-                45% { transform: translateX(calc(-100% + 294px )); }
-                55% { transform: translateX(calc(-100% + 294px )); }
+                45% { transform: translateX(calc(-100% + var(--title-wrapper-width) )); }
+                55% { transform: translateX(calc(-100% + var(--title-wrapper-width) )); }
                 90% { transform: translateX(0); }
                 100% { transform: translateX(0); }
             }

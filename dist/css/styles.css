@@ -12010,7 +12010,6 @@ p {
 }
 .card-body .title-wrapper {
   overflow-x: hidden;
-  max-width: 294px;
   width: 100%;
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none;
@@ -12036,10 +12035,10 @@ p {
     transform: translateX(0);
   }
   45% {
-    transform: translateX(calc(-100% + 294px));
+    transform: translateX(calc(-100% + var(--title-wrapper-width)));
   }
   55% {
-    transform: translateX(calc(-100% + 294px));
+    transform: translateX(calc(-100% + var(--title-wrapper-width)));
   }
   90% {
     transform: translateX(0);
