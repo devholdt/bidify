@@ -1,5 +1,6 @@
 import { API_URLS } from "../api/index.js";
 import { URLS } from "../components/constants.js";
+import { setItem } from "../storage/index.js";
 import { headers } from "../api/index.js";
 import { alert } from "../utilities/message.js";
 
@@ -20,6 +21,31 @@ export async function registerUser(name, email, password, avatar) {
       null,
       false
     );
+
+    try {
+      const loginResponse = await fetch(API_URLS.LOGIN, {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: headers("application/json"),
+      });
+
+      if (loginResponse.ok) {
+        const loginUser = await loginResponse.json();
+        setItem({ key: "token", value: loginUser.accessToken });
+        setItem({ key: "user", value: loginUser });
+        setItem({ key: "name", value: loginUser.name });
+
+        setTimeout(() => {
+          location.href = `${URLS.PROFILE}?name=${loginUser.name}`;
+        }, 2000);
+      }
+    } catch (error) {
+      alert(
+        "danger",
+        "An error occured when attempting to login - please log in manually",
+        ".alert-register"
+      );
+    }
 
     return user;
   } else {
@@ -57,9 +83,6 @@ export async function registerEvent(event) {
 
   try {
     await registerUser(name, email, password, avatar);
-    setTimeout(() => {
-      location.href = `${URLS.PROFILE}?name=${name}`;
-    }, 2000);
   } catch (error) {
     alert(
       "danger",
