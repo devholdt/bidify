@@ -25,10 +25,12 @@ export async function registerUser(name, email, password, avatar) {
   } else {
     alert(
       "danger",
-      "Invalid user registration credentials",
+      "An error occured when attempting user registration",
       ".alert-register",
       null
     );
+
+    throw new Error("An error occured when attempting user registration");
   }
 }
 
@@ -61,7 +63,7 @@ export async function registerEvent(event) {
   } catch (error) {
     alert(
       "danger",
-      "An error occured when attempting user registration",
+      "Invalid user registration credentials",
       ".alert-register",
       null
     );
