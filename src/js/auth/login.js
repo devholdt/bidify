@@ -1,8 +1,8 @@
 import { API_URLS } from "../api/index.js";
-import { URLS } from "../components/constants.js";
+import { URLS } from "../components/index.js";
 import { headers } from "../api/index.js";
 import { setItem } from "../storage/index.js";
-import { alert } from "../utilities/message.js";
+import { alert } from "../utilities/index.js";
 
 export async function loginUser(email, password) {
   const response = await fetch(API_URLS.LOGIN, {

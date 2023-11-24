@@ -148,104 +148,41 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade shadow" id="logoutModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title fs-4 fw-semibold" id="loginModalLabel">Logout</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"
+                            aria-label="Cancel">Cancel</button>
+                        <button type="button" class="btn btn-dark w-25" id="logoutButton">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main>
         <div class="container mt-5">
             <div class="row">
                 <div class="col-lg-3 text-center py-4 profile">
-                    <div class="profile-details">
-                        <img src="../../src/images/vr-guy.jpg" alt="Profile picture">
-                        <span class="material-icons">
-                            more_horiz
-                        </span>
-                        <div class="mt-3">
-                            <p class="fs-4 fw-medium mb-0">username</p>
-                            <p>username@stud.noroff.no</p>
-                        </div>
-
-                        <p class="fs-5 fw-medium my-5">credit(s): 1000</p>
-
-                        <div>
-                            <p class="mb-0">listings: 3</p>
-                            <p class="mb-0">bids: 5</p>
-                            <p>wins: 4</p>
-                        </div>
-                    </div>
+                    <div class="profile-details"></div>
                 </div>
                 <div class="col-lg-9">
 
-                    <h1 class="text-center fs-2 mb-5">Your current listings</h1>
+                    <h1 class="text-center fs-2 mb-3">Your current listings</h1>
+                    <div class="profile-listings"></div>
 
-                    <div class="row row-cols-3">
-
-                        <div class="col-12 col-lg-4 col-md-6">
-                            <div class="card">
-                                <img src="../images/bidify_nomediasvg.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Gaming Chair</h5>
-                                    <p class="card-text">Current bid: 570c</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-4 col-md-6">
-                            <div class="card">
-                                <img src="../images/bidify_nomediasvg.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Smart Watch</h5>
-                                    <p class="card-text">Current bid: 388c</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-4 col-md-6">
-                            <div class="card">
-                                <img src="../images/bidify_nomediasvg.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Headphones</h5>
-                                    <p class="card-text">Current bid: 194c</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <h2 class="text-center my-5">Your current bids</h2>
-
-                    <div class="row row-cols-3">
-
-                        <div class="col-12 col-lg-4 col-md-6">
-                            <div class="card">
-                                <img src="../images/bidify_nomediasvg.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Gaming Chair</h5>
-                                    <p class="card-text">Current bid: 570c</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-4 col-md-6">
-                            <div class="card">
-                                <img src="../images/bidify_nomediasvg.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Smart Watch</h5>
-                                    <p class="card-text">Current bid: 388c</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-4 col-md-6">
-                            <div class="card">
-                                <img src="../images/bidify_nomediasvg.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Headphones</h5>
-                                    <p class="card-text">Current bid: 194c</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    <h2 class="text-center mt-5 my-3">Your current bids</h2>
+                    <div class="profile-bids"></div>
 
                 </div>
             </div>

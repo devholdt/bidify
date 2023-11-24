@@ -1,6 +1,6 @@
-import { getListings } from "./fetch.js";
+import { getListings } from "./index.js";
 import { sortListings } from "../../utilities/index.js";
-import { createCard } from "../../components/listingCards.js";
+import { createCard } from "../../components/index.js";
 
 export async function popularListings() {
   const listings = await getListings();

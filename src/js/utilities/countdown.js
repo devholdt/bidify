@@ -25,5 +25,6 @@ export function updateCountdown(
     );
 
     daysElement.innerHTML = "Expired";
+    daysElement.classList.add("w-auto");
   }
 }
