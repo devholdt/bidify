@@ -1,6 +1,6 @@
 import { DEFAULT_URLS, URLS } from "./index.js";
-import { getItem } from "../storage/index.js";
-import { API_PATH, headers } from "../api/index.js";
+import { getItem, getUser } from "../storage/index.js";
+import { API_URLS, headers } from "../api/index.js";
 import { logoutUser } from "../auth/logout.js";
 
 export async function renderNav() {
@@ -13,14 +13,17 @@ export async function renderNav() {
 
   const links = [];
   const linkHome = { href: URLS.INDEX, text: "Home" };
-  const linkProfile = { href: URLS.PROFILE, text: "Profile" };
 
   links.push(linkHome);
 
   try {
     if (getItem("name")) {
+      const linkProfile = {
+        href: `${URLS.PROFILE}?name=${getUser().name}`,
+        text: "Profile",
+      };
       const userDataLocal = getItem("user");
-      const userUrl = `${API_PATH}/auction/profiles/${userDataLocal.name}?_listings=true`;
+      const userUrl = `${API_URLS.PROFILES}/${userDataLocal.name}?_listings=true`;
 
       const response = await fetch(`${userUrl}`, { headers: headers() });
       const userDataApi = await response.json();

@@ -1,8 +1,8 @@
-import { API_PATH } from "../index.js";
+import { API_URLS } from "../index.js";
 import { headers } from "../index.js";
 
 export async function getProfiles() {
-  const response = await fetch(`${API_PATH}/auction/profiles?_listings=true`, {
+  const response = await fetch(`${API_URLS.PROFILES}?_listings=true`, {
     headers: headers(),
   });
 
@@ -14,11 +14,9 @@ export async function getProfiles() {
 }
 
 export async function getProfile(name, bids = false) {
-  const endpoint = bids
-    ? `/auction/profiles/${name}/bids`
-    : `/auction/profiles/${name}`;
+  const endpoint = bids ? `${name}/bids` : `${name}`;
 
-  const url = `${API_PATH}${endpoint}?_listings=true`;
+  const url = `${API_URLS.PROFILES}/${endpoint}?_listings=true`;
 
   try {
     const response = await fetch(url, { headers: headers() });

@@ -8,5 +8,5 @@ export const DEFAULT_URLS = {
 
 export const URLS = {
   INDEX: "index.html",
-  PROFILE: "profile.html",
+  PROFILE: `profile.html`,
 };

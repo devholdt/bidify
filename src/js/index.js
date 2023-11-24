@@ -1,15 +1,10 @@
-import { renderNav, modals } from "./components/index.js";
-import {
-  displayListings,
-  popularListings,
-  latestListings,
-  lastChance,
-} from "./api/index.js";
+import * as components from "./components/index.js";
+import * as api from "./api/index.js";
 
-popularListings();
-latestListings();
-lastChance();
-displayListings();
-modals();
+api.popularListings();
+api.latestListings();
+api.lastChance();
+api.displayListings();
 
-renderNav();
+components.modals();
+components.renderNav();
