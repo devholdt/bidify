@@ -1,8 +1,24 @@
 import { registerEvent, loginEvent } from "../auth/index.js";
 
 export const modals = () => {
-  document
-    .querySelector("#registerForm")
-    .addEventListener("submit", registerEvent);
-  document.querySelector("#loginForm").addEventListener("submit", loginEvent);
+  const formModals = document.querySelectorAll(".form-modal");
+
+  formModals.forEach((modal) => {
+    const registerForm = modal.querySelector("#registerForm");
+    const loginForm = modal.querySelector("#loginForm");
+
+    if (registerForm) {
+      registerForm.addEventListener("submit", registerEvent);
+    } else if (loginForm) {
+      loginForm.addEventListener("submit", loginEvent);
+    }
+
+    modal.addEventListener("hidden.bs.modal", () => {
+      const form = modal.querySelector("form");
+      const alert = modal.querySelector(".alert-wrapper");
+
+      form.reset();
+      alert.innerHTML = "";
+    });
+  });
 };

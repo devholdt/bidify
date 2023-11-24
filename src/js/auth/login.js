@@ -16,6 +16,7 @@ export async function loginUser(email, password) {
     setItem({ key: "token", value: user.accessToken });
     setItem({ key: "user", value: user });
     setItem({ key: "name", value: user.name });
+
     alert(
       "success",
       `Login successful! Welcome back, <span class="fw-semibold">${user.name}</span>`,
@@ -27,6 +28,8 @@ export async function loginUser(email, password) {
     return user;
   } else {
     alert("danger", "Login unsuccsessful.", ".alert-login", null);
+
+    throw new Error("Login unsuccessful");
   }
 }
 
