@@ -1,4 +1,4 @@
-import { registerEvent, loginEvent } from "../auth/index.js";
+import * as auth from "../auth/index.js";
 
 export const modals = () => {
   const formModals = document.querySelectorAll(".form-modal");
@@ -8,9 +8,9 @@ export const modals = () => {
     const loginForm = modal.querySelector("#loginForm");
 
     if (registerForm) {
-      registerForm.addEventListener("submit", registerEvent);
+      registerForm.addEventListener("submit", auth.registerEvent);
     } else if (loginForm) {
-      loginForm.addEventListener("submit", loginEvent);
+      loginForm.addEventListener("submit", auth.loginEvent);
     }
 
     modal.addEventListener("hidden.bs.modal", () => {

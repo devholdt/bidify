@@ -11913,21 +11913,24 @@ p {
   height: 200px;
 }
 
-#registerModal form, #loginModal form {
+#registerModal form, #loginModal form, #editProfileModal form {
   width: 300px;
 }
-#registerModal form div, #loginModal form div {
+#registerModal form div, #loginModal form div, #editProfileModal form div {
   padding-bottom: 6px;
 }
-#registerModal form input, #loginModal form input {
+#registerModal form input, #loginModal form input, #editProfileModal form input {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   border: 1px solid #9D9696;
 }
-#registerModal form label, #loginModal form label {
+#registerModal form label, #loginModal form label, #editProfileModal form label {
   margin-bottom: 2px;
 }
-#registerModal form button, #loginModal form button {
-  width: 160px;
+#registerModal form .modal-buttons .cancel-button, #loginModal form .modal-buttons .cancel-button, #editProfileModal form .modal-buttons .cancel-button {
+  width: 33%;
+}
+#registerModal form .modal-buttons .submit-button, #loginModal form .modal-buttons .submit-button, #editProfileModal form .modal-buttons .submit-button {
+  width: 66%;
 }
 
 #listingsCarousel {
