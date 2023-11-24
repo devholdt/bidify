@@ -11989,6 +11989,7 @@ p {
   display: flex;
   justify-content: center;
   gap: 5px;
+  margin: 0 5px;
   width: 100%;
 }
 .card-top .countdown .countdown-part {
@@ -11998,7 +11999,6 @@ p {
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 1.2em;
-  width: 70px;
 }
 .card-top .countdown .countdown-part span {
   font-size: 0.8em;
