@@ -6,11 +6,24 @@ export const modals = () => {
   formModals.forEach((modal) => {
     const registerForm = modal.querySelector("#registerForm");
     const loginForm = modal.querySelector("#loginForm");
+    const editProfileForm = modal.querySelector("#editProfileForm");
 
     if (registerForm) {
       registerForm.addEventListener("submit", auth.registerEvent);
     } else if (loginForm) {
       loginForm.addEventListener("submit", auth.loginEvent);
+    } else if (editProfileForm) {
+      const input = editProfileForm.querySelector("input");
+      const submit = editProfileForm.querySelector(".submit-button");
+
+      const handleInput = () => {
+        const inputValue = input.value.trim();
+
+        submit.disabled = !inputValue;
+      };
+
+      input.addEventListener("input", handleInput);
+      editProfileForm.addEventListener("submit", auth.editProfileEvent);
     }
 
     modal.addEventListener("hidden.bs.modal", () => {

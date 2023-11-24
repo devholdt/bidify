@@ -13,11 +13,11 @@ export async function renderProfileDetails() {
   if (!user.avatar) {
     avatar = DEFAULT_URLS.AVATAR;
   } else {
-    avatar = userDataApi.avatar;
+    avatar = user.avatar;
   }
 
   profileDetailsContainer.innerHTML = `
-    <img src="${avatar}" alt="${user.name}'s avatar">
+    <img src="${avatar}" id="userAvatar" alt="${user.name}'s avatar">
     <span class="material-icons" data-bs-toggle="modal" data-bs-target="#editProfileModal" title="Edit profile" aria-label="Edit profile">more_horiz</span>
     <div class="mt-3">
         <p class="fs-4 fw-medium mb-0">${user.name}</p>
