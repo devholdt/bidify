@@ -26,6 +26,7 @@ export function createCard(listing, containerSelector) {
 
   const card = document.createElement("div");
   card.classList.add("col", "mb-4");
+
   card.innerHTML = `
         <div class="card">
 
@@ -34,8 +35,7 @@ export function createCard(listing, containerSelector) {
             </div>
 
             <div class="card-body pt-5 pb-4 ps-0">
-                <h5 class="card-title fw-bold">${listing.title}</h5>
-                ${listingBids}
+              ${listingBids}
             </div>
 
             <div class="card-buttons">
@@ -82,6 +82,37 @@ export function createCard(listing, containerSelector) {
   }, 1000);
 
   listingsContainer.appendChild(card);
+
+  const titleElement = document.createElement("h5");
+  titleElement.classList.add("card-title", "fw-bold");
+  titleElement.textContent = listing.title;
+
+  const titleWrapper = document.createElement("div");
+  titleWrapper.classList.add("title-wrapper");
+  titleWrapper.appendChild(titleElement);
+
+  card.querySelector(".card-body").prepend(titleWrapper);
+
+  const carousel = document.querySelector(".carousel");
+
+  if (carousel) {
+    function addScrollingTitleClass() {
+      const maxWidth = 294;
+      const titles = carousel.querySelectorAll("h5");
+
+      titles.forEach((title) => {
+        if (title.scrollWidth > maxWidth) {
+          title.classList.add("scrolling-title");
+        }
+      });
+    }
+
+    addScrollingTitleClass();
+
+    carousel.addEventListener("slid.bs.carousel", () => {
+      addScrollingTitleClass();
+    });
+  }
 }
 
 export function createBidCard(bid, containerSelector) {

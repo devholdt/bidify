@@ -21,8 +21,6 @@
         img {
             width: 100%;
             height: 300px;
-            display: block;
-            margin: 0;
             transition: transform 0.4s;
             object-fit: cover;
         }
@@ -31,7 +29,6 @@
             object-fit: contain;
             padding: 0 20px 40px 20px;
         }
-
 
         .countdown {
             position: absolute;
@@ -64,6 +61,45 @@
         text-align: left;
         margin: 0 20px;
         border-top: 1px solid $light;
+
+        .title-wrapper {
+            overflow-x: hidden;
+            max-width: 294px;
+            width: 100%;
+
+            /* Hide scrollbar for IE, Edge and Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .card-title {
+                text-align: center;
+                white-space: nowrap;
+                display: inline-flex;
+            }
+
+            .scrolling-title {
+                animation: backAndForth 5s linear infinite;
+            }
+
+            // @keyframes backAndForth {
+            //     0%, 100% { transform: translateX(0); }
+            //     50% { transform: translateX(calc(-100% + 294px)); }
+            //   }
+
+            @keyframes backAndForth {
+                0% { transform: translateX(0); }
+                10% { transform: translateX(0); }
+                45% { transform: translateX(calc(-100% + 294px )); }
+                55% { transform: translateX(calc(-100% + 294px )); }
+                90% { transform: translateX(0); }
+                100% { transform: translateX(0); }
+            }
+        }
     }
 
     &-buttons {

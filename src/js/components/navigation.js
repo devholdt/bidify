@@ -17,19 +17,6 @@ export async function renderNav() {
 
   links.push(linkHome);
 
-  navButtons.innerHTML = `
-  <div class="nav-divider"></div>
-  <li class="nav-item nav-regular">
-      <button class="nav-link text-white btn-login" data-bs-toggle="modal"
-      data-bs-target="#loginModal"><span>Login</span></button>
-  </li>`;
-
-  if (bannerButtons) {
-    bannerButtons.innerHTML = `
-    <button type="button" class="btn btn-primary btn-cta" 
-    data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>`;
-  }
-
   try {
     if (getItem("name")) {
       const userDataLocal = getItem("user");
@@ -76,6 +63,19 @@ export async function renderNav() {
         logoutButton.addEventListener("click", logoutUser);
 
         links.push(linkProfile);
+      }
+    } else {
+      navButtons.innerHTML = `
+      <div class="nav-divider"></div>
+      <li class="nav-item nav-regular">
+          <button class="nav-link text-white btn-login" data-bs-toggle="modal"
+          data-bs-target="#loginModal"><span>Login</span></button>
+      </li>`;
+
+      if (bannerButtons) {
+        bannerButtons.innerHTML = `
+        <button type="button" class="btn btn-primary btn-cta" 
+        data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>`;
       }
     }
 
