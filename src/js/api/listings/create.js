@@ -86,12 +86,6 @@ export async function createListingEvent(event) {
   }
 
   try {
-    // console.log("Title: ", title);
-    // console.log("End date: ", new Date(endsAt));
-    // console.log("Description: ", description);
-    // console.log("Media: ", media);
-    // console.log("Tags: ", tags);
-
     await createListing(title, endsAt, description, media, tags);
 
     alert(
@@ -110,36 +104,3 @@ export async function createListingEvent(event) {
     );
   }
 }
-
-// export async function createListing() {
-//   const form = document.querySelector("#createListingForm");
-//   const titleInput = document.querySelector("#createListingTitle");
-//   const endDateInput = document.querySelector("#createListingDate");
-//   const descriptionInput = document.querySelector("#createListingDescription");
-
-//   form.addEventListener("submit", (event) => {
-//     event.preventDefault();
-
-//     const title = titleInput.value;
-//     const endDate = endDateInput.value;
-//     const description = descriptionInput.value;
-
-//     const mediaInputs = document.querySelectorAll(
-//       "#mediaInputsContainer input"
-//     );
-//     const media = Array.from(mediaInputs).map((input) => input.value);
-
-//     const tagInputs = document.querySelectorAll("#tagInputsContainer input");
-//     const tags = Array.from(tagInputs).map((input) => input.value);
-
-//     const listing = {
-//       title: title,
-//       endsAt: new Date(endDate),
-//       description: description,
-//       media: media,
-//       tags: tags,
-//     };
-
-//     return listing;
-//   });
-// }

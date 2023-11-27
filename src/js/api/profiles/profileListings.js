@@ -15,7 +15,7 @@ export async function profileListings() {
       if (listings.length > 0) {
         profileListingsContainer.classList.add("row", "row-cols-3");
         listings
-          .slice(0, 3)
+          .slice(0, 6)
           .forEach((listing) => createCard(listing, ".profile-listings"));
       } else {
         profileListingsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active listings.</p>`;
