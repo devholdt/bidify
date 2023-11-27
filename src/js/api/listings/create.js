@@ -37,11 +37,6 @@ export async function createListingEvent(event) {
 
   const form = event.target;
   const data = new FormData(form);
-
-  const mediaInputs = document.querySelectorAll("#mediaInputsContainer input");
-
-  const tagInputs = document.querySelectorAll("#tagInputsContainer input");
-
   const title = data.get("title");
   const endsAt = data.get("endsAt");
   const description = data.get("description");
@@ -50,10 +45,12 @@ export async function createListingEvent(event) {
 
   const now = new Date();
 
-  const mediaArray = Array.from(mediaInputs).map((input) => input.value);
-  const tagArray = Array.from(tagInputs).map((input) => input.value);
-
   if (title.length < 1) {
+    const titleInput = form.querySelector("#createListingTitle");
+    titleInput.style.borderColor = "#FF5252";
+    setTimeout(() => {
+      titleInput.style.borderColor = "#DEE2E6";
+    }, 2000);
     alert("danger", "Title is required", ".alert-create-listing", null);
 
     return;
