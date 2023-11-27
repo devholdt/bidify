@@ -5,6 +5,7 @@ api.popularListings();
 api.latestListings();
 api.lastChance();
 api.displayListings();
+api.createListing();
 
 components.modals();
 components.renderNav();

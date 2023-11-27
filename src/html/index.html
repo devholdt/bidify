@@ -248,45 +248,103 @@
                     </h3>
                     <div id="collapseOne" class="accordion-collapse collapse show"
                         data-bs-parent="#createListingAccordion">
-                        <div class="accordion-body">
-                            <form class="d-flex gap-3">
+                        <div class="accordion-body row row-md-auto">
 
-                                <div>
-                                    <div class="mb-3">
-                                        <label for="createListingTitle" class="form-label">Title</label>
-                                        <input type="text" class="form-control" id="createListingTitle"
-                                            placeholder="title">
+                            <form class="row col-md-6" id="createListingForm">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="createListingTitle" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="createListingTitle" placeholder="title">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="createListingDate" class="form-label">End date</label>
+                                    <input type="date" class="form-control" id="createListingDate" value="2024-01-01">
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label for="createListingDescription" class="form-label">Description</label>
+                                    <textarea class="form-control" id="createListingDescription"
+                                        placeholder="description"></textarea>
+                                </div>
+
+                                <!---------------------------------------------------------------------->
+
+                                <div class="col-12 mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <label for="createListingMedia" class="form-label">Media URL</label>
+                                        <span id="mediaInputCount"></span>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="createListingDescription" class="form-label">Description</label>
-                                        <textarea class="form-control" id="createListingDescription"
-                                            placeholder="description"></textarea>
+                                    <div class="d-flex">
+
+                                        <div id="mediaInputsContainer" class="w-100 me-1">
+                                            <div class="input-group mb-2">
+
+                                                <input type="text" class="form-control" id="createListingMedia"
+                                                    placeholder="media URL">
+
+                                                <button type="button"
+                                                    class="btn btn-outline-dark btn-sm rounded-end input-group-text"
+                                                    id="clearUrlButton">clear</button>
+
+                                                <button type="button" id="addMediaButton"
+                                                    class="btn border-0 input-group-text text-primary">
+
+                                                    <span class="material-icons">add</span>
+
+                                                </button>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
-                                <div>
-                                    <div class="mb-3">
-                                        <label for="createListingDate" class="form-label">End date</label>
-                                        <input type="date" class="form-control" id="createListingDate"
-                                            value="2024-01-01">
+                                <!---------------------------------------------------------------------->
+
+                                <div class="col-12 mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <label for="createListingtTags" class="form-label">Tags</label>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="createListingTags" class="form-label">Tags</label>
-                                        <input type="text" class="form-control" id="createListingTags"
-                                            placeholder="tags">
-                                    </div>
+                                    <div class="d-flex justify-content-between">
 
-                                    <div class="mb-3">
-                                        <label for="createListingMedia" class="form-label">Media URL</label>
-                                        <input type="text" class="form-control" id="createListingMedia"
-                                            placeholder="media URL">
+                                        <div id="tagInputsContainer" class="me-1">
+                                            <div class="input-group mb-2">
+
+                                                <input type="text" class="form-control rounded-end"
+                                                    id="createListingTag" placeholder="tag">
+
+                                                <button type="button" id="addTagButton"
+                                                    class="btn border-0 input-group-text text-primary">
+
+                                                    <span class="material-icons">add</span>
+
+                                                </button>
+                                            </div>
+                                        </div>
+
                                     </div>
+                                </div>
+
+                                <!---------------------------------------------------------------------->
+
+                                <div class="col-md-12">
+                                    <button type="submit"
+                                        class="btn btn-primary text-uppercase fw-medium">Create</button>
                                 </div>
 
                             </form>
-                            <div></div>
+
+                            <div class="col-md-6">
+                                <p class="fw-semibold ms-3 mb-0">Requirements:</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Title and end date are required.</li>
+                                    <li class="list-group-item">Description, media and tags are optional.</li>
+                                    <li class="list-group-item">Media must be a valid image URL.</li>
+                                    <li class="list-group-item">Max. 280 characters in description.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

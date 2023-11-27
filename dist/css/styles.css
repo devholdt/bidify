@@ -11908,9 +11908,22 @@ p {
   border-radius: 25px;
 }
 
+#createListingAccordion form label {
+  margin-bottom: 0;
+}
 #createListingAccordion form textarea {
   resize: none;
-  height: 200px;
+  height: 250px;
+}
+#createListingAccordion form button[type=submit] {
+  width: 110px;
+}
+#createListingAccordion form button.input-group-text {
+  max-width: 50px;
+}
+#createListingAccordion form #addMediaButton, #createListingAccordion form .remove-media, #createListingAccordion form #addTagButton {
+  width: 25px;
+  height: 25px;
 }
 
 #registerModal form, #loginModal form {
@@ -11969,10 +11982,11 @@ p {
   width: 100%;
   text-align: center;
   overflow: hidden;
+  height: 300px;
 }
 .card-top img {
   width: 100%;
-  height: 300px;
+  height: 100%;
   transition: transform 0.4s;
   object-fit: cover;
 }
