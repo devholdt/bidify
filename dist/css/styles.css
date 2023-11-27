@@ -11921,7 +11921,7 @@ p {
 #createListingAccordion form button.input-group-text {
   max-width: 50px;
 }
-#createListingAccordion form #addMediaButton, #createListingAccordion form .remove-media, #createListingAccordion form #addTagButton {
+#createListingAccordion form #addMediaButton, #createListingAccordion form .remove-media, #createListingAccordion form #addTagButton, #createListingAccordion form .remove-tag {
   width: 25px;
   height: 25px;
 }
