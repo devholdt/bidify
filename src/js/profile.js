@@ -1,6 +1,7 @@
 import * as components from "./components/index.js";
 import * as profiles from "./api/profiles/index.js";
 import * as storage from "./storage/index.js";
+import * as api from "./api/index.js";
 
 const userDataLocal = storage.getUser();
 

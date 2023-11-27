@@ -8,45 +8,44 @@ export function createCard(listing, containerSelector) {
   let listingBids = "";
   const listingEndsAt = new Date(listing.endsAt);
 
-  if (listing.bids && listing.bids.length > 0) {
-    listing.bids.reverse();
-  }
-
   if (listing.media.length === 0) {
     listingMedia = `<img src="../../src/images/bidify_nomediasvg.svg" class="card-img-top no-media-found" alt="Listing image">`;
   } else {
     listingMedia = `<img src="${listing.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
   }
 
-  if (listing.bids.length === 0) {
-    listingBids = `<p class="card-text">No bids yet</p>`;
-  } else {
+  if (listing.bids && listing.bids.length > 0) {
+    listing.bids.reverse();
     listingBids = `<p class="card-text">Current bid: <span class="fw-semibold">${listing.bids[0].amount}c</span></p>`;
+  } else {
+    listingBids = `<p class="card-text">No bids yet</p>`;
   }
 
   const card = document.createElement("div");
   card.classList.add("col", "mb-4");
 
   card.innerHTML = `
-        <div class="card">
+        <div class="listing-card">
+          <div class="card">
 
-            <div class="card-top">
-                ${listingMedia}
-            </div>
+              <div class="card-top">
+                  ${listingMedia}
+              </div>
 
-            <div class="card-body pt-5 pb-4 ps-0">
+              <div class="card-body pt-5 pb-4 ps-0">
               ${listingBids}
-            </div>
+              </div>
 
-            <div class="card-buttons">
-                <button class="btn-gavel">
-                    <p class="material-icons">gavel</p>
-                </button>
-                <button class="btn-heart">
-                    <p class="material-icons">favorite_border</p>
-                </button>
-            </div>
+              <div class="card-buttons">
+                  <button class="btn-gavel">
+                      <p class="material-icons">gavel</p>
+                  </button>
+                  <button class="btn-heart">
+                      <p class="material-icons">favorite_border</p>
+                  </button>
+              </div>
 
+          </div>
         </div>`;
 
   const countdownContainer = document.createElement("div");

@@ -6,5 +6,6 @@ api.latestListings();
 api.lastChance();
 api.displayListings();
 
-components.modals();
 components.renderNav();
+components.modals();
+components.createListingForm();

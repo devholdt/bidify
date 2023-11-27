@@ -1,8 +1,6 @@
-import { API_URLS } from "../api/index.js";
-import { URLS } from "../components/constants.js";
-import { setItem } from "../storage/index.js";
-import { headers } from "../api/index.js";
-import { alert } from "../utilities/message.js";
+import { API_URLS, headers } from "../api/index.js";
+import { URLS } from "../components/index.js";
+import { alert } from "../utilities/index.js";
 
 export async function registerUser(name, email, password, avatar) {
   const response = await fetch(API_URLS.REGISTER, {
@@ -83,7 +81,10 @@ export async function registerEvent(event) {
 
   try {
     await registerUser(name, email, password, avatar);
-  } catch (error) {
+    setTimeout(() => {
+      location.href = `${URLS.PROFILE}?name=${name}`;
+    }, 2000);
+  } catch {
     alert(
       "danger",
       "Invalid user registration credentials",

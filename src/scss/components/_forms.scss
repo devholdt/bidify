@@ -11,9 +11,26 @@
 }
 
 #createListingAccordion form {
+    label {
+        margin-bottom: 0;
+    }
+
     textarea {
         resize: none;
-        height: 200px;
+        height: 250px;
+    }
+
+    button[type="submit"] {
+        width: 110px;
+    }
+
+    button.input-group-text {
+        max-width: 50px;
+    }
+
+    #addMediaButton, #addTagButton, .remove-input {
+        width: 25px;
+        height: 25px;
     }
 }
 

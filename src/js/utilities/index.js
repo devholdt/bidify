@@ -3,3 +3,4 @@ export * from "./formatDate.js";
 export * from "./sortListings.js";
 export * from "./message.js";
 export * from "./scrollingTitle.js";
+export * from "./handleInputs.js";
