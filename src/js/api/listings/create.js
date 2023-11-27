@@ -1,5 +1,12 @@
 import { API_URLS, headers } from "../index.js";
 import { alert } from "../../utilities/index.js";
+import { getUser } from "../../storage/index.js";
+
+const user = getUser();
+
+if (!user) {
+  document.querySelector(".create-listing").style.display = "none";
+}
 
 async function createListing(title, endsAt, description, media, tags) {
   const response = await fetch(API_URLS.LISTINGS, {
