@@ -95,6 +95,8 @@ export async function createListingEvent(event) {
   try {
     await createListing(title, endsAt, description, media, tags);
 
+    form.reset();
+
     alert(
       "success",
       "Listing successfully posted!",
