@@ -254,17 +254,19 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label for="createListingTitle" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="createListingTitle" placeholder="title">
+                                    <input type="text" class="form-control" id="createListingTitle" name="title"
+                                        placeholder="title">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <label for="createListingDate" class="form-label">End date</label>
-                                    <input type="date" class="form-control" id="createListingDate" value="2024-01-01">
+                                    <input type="date" class="form-control" id="createListingDate" name="endsAt"
+                                        value="2024-01-01">
                                 </div>
 
                                 <div class="col-12 mb-3">
                                     <label for="createListingDescription" class="form-label">Description</label>
-                                    <textarea class="form-control" id="createListingDescription"
+                                    <textarea class="form-control" name="description" id="createListingDescription"
                                         placeholder="description"></textarea>
                                 </div>
 
@@ -274,12 +276,13 @@
                                         <span id="mediaInputCount"></span>
                                     </div>
                                     <div class="d-flex">
+
                                         <div id="mediaInputsContainer" class="w-100 me-1">
                                             <div class="input-group mb-2">
-                                                <input type="text" class="form-control" id="createListingMedia"
-                                                    placeholder="media URL">
+                                                <input type="text" class="form-control" name="media"
+                                                    id="createListingMedia" placeholder="media URL">
                                                 <button type="button"
-                                                    class="btn btn-outline-dark btn-sm rounded-end input-group-text"
+                                                    class="btn btn-outline-dark btn-sm rounded-end input-group-text clear-button"
                                                     id="clearUrlButton">clear</button>
                                                 <button type="button" id="addMediaButton"
                                                     class="btn border-0 input-group-text text-primary">
@@ -296,10 +299,11 @@
                                         <label for="createListingtTags" class="form-label">Tags</label>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <div id="tagInputsContainer" class="me-1">
+
+                                        <div id="tagInputsContainer" class="w-100 me-1">
                                             <div class="input-group mb-2">
                                                 <input type="text" class="form-control rounded-end"
-                                                    id="createListingTag" placeholder="tag">
+                                                    id="createListingTag" name="tags" placeholder="tag">
                                                 <button type="button" id="addTagButton"
                                                     class="btn border-0 input-group-text text-primary">
                                                     <span class="material-icons">add</span>
@@ -325,6 +329,8 @@
                                     <li class="list-group-item">Media must be a valid image URL.</li>
                                     <li class="list-group-item">Max. 280 characters in description.</li>
                                 </ul>
+
+                                <div class="alert-create-listing alert-wrapper mt-2"></div>
                             </div>
                         </div>
                     </div>

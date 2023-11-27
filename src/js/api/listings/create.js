@@ -1,12 +1,100 @@
+import { API_URLS, headers } from "../index.js";
+import { alert } from "../../utilities/index.js";
+
+export async function postListing(title, endsAt, description, media, tags) {
+  const response = await fetch(API_URLS.LISTINGS, {
+    method: "POST",
+    body: JSON.stringify({ title, endsAt, description, media, tags }),
+    headers: headers("application/json"),
+  });
+
+  if (response.ok) {
+    const listing = await response.json();
+
+    alert(
+      "success",
+      "Listing successfully posted!",
+      ".alert-create-listing",
+      3000,
+      false
+    );
+
+    return listing;
+  } else {
+    alert(
+      "danger",
+      "An error occured when attempting to post listing",
+      ".alert-create-listing",
+      null
+    );
+
+    throw new Error("An error occured when attempting to post listing");
+  }
+}
+
+export async function createListingEvent(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const data = new FormData(form);
+
+  const mediaInputs = document.querySelectorAll("#mediaInputsContainer input");
+
+  const tagInputs = document.querySelectorAll("#tagInputsContainer input");
+
+  const title = data.get("title");
+  const endsAt = data.get("endsAt");
+  const description = data.get("description");
+  const media = data.get("media");
+  const tags = data.get("tags");
+
+  const now = new Date();
+
+  const mediaArray = Array.from(mediaInputs).map((input) => input.value);
+  const tagArray = Array.from(tagInputs).map((input) => input.value);
+
+  if (title.length < 1) {
+    alert("danger", "Title is required", ".alert-create-listing", null);
+
+    return;
+  }
+
+  if (endsAt < now) {
+    alert(
+      "danger",
+      "End date must be in the future",
+      ".alert-create-listing",
+      null
+    );
+
+    return;
+  }
+
+  try {
+    // await createListing(title, endsAt, description, media, tags);
+
+    console.log("Title: ", title);
+    console.log("End date: ", endsAt);
+    console.log("Description: ", description);
+    console.log("Media: ", media);
+    console.log("Tags: ", tags);
+
+    alert("success", "Listing successfully posted!", ".alert-create-listing");
+  } catch {
+    alert(
+      "danger",
+      "An error occured when attempting to post listing",
+      ".alert-create-listing",
+      null
+    );
+  }
+}
+
 export async function createListing() {
   const form = document.querySelector("#createListingForm");
   const titleInput = document.querySelector("#createListingTitle");
   const endDateInput = document.querySelector("#createListingDate");
   const descriptionInput = document.querySelector("#createListingDescription");
-  const tagsInput = document.querySelector("#createListingTags");
-
-  handleMediaInputs();
-  handleTagInputs();
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -23,67 +111,14 @@ export async function createListing() {
     const tagInputs = document.querySelectorAll("#tagInputsContainer input");
     const tags = Array.from(tagInputs).map((input) => input.value);
 
-    console.log("Title: ", title);
-    console.log("End date: ", endDate);
-    console.log("Description: ", description);
-    console.log("Tags: ", tags);
-    console.log("Media: ", media);
-  });
-}
+    const listing = {
+      title: title,
+      endsAt: new Date(endDate),
+      description: description,
+      media: media,
+      tags: tags,
+    };
 
-function handleMediaInputs() {
-  document.getElementById("addMediaButton").addEventListener("click", () => {
-    const container = document.getElementById("mediaInputsContainer");
-    const newInput = document.createElement("div");
-    newInput.classList.add("input-group", "mb-2");
-    newInput.innerHTML = `
-        <input type="text" class="form-control" placeholder="media URL">
-
-        <button type="button" 
-            class="btn btn-outline-dark btn-sm rounded-end input-group-text"
-            id="clearUrlButton">clear</button>
-
-        <button type="button"
-            class="btn border-0 input-group-text text-danger remove-media">
-            <span class="material-icons">remove</span>
-        </button>`;
-
-    if (container.children.length === 4) {
-      return;
-    } else {
-      container.appendChild(newInput);
-    }
-
-    const removeMediaButton = newInput.querySelector(".remove-media");
-
-    removeMediaButton.addEventListener("click", (event) => {
-      container.removeChild(event.target.parentElement.parentElement);
-    });
-  });
-}
-
-function handleTagInputs() {
-  document.getElementById("addTagButton").addEventListener("click", () => {
-    const container = document.getElementById("tagInputsContainer");
-    const newInput = document.createElement("div");
-    newInput.classList.add("input-group", "mb-2");
-    newInput.innerHTML = `
-        <input type="text" class="form-control rounded-end" placeholder="tag">
-
-        <button type="button"
-            class="btn border-0 input-group-text text-danger remove-tag">
-            <span class="material-icons">remove</span>
-        </button>`;
-
-    if (container.children.length === 4) {
-      return;
-    } else {
-      container.appendChild(newInput);
-    }
-
-    const removeTagButton = newInput.querySelector(".remove-tag");
-    removeTagButton.addEventListener("click", (event) => {
-      container.removeChild(event.target.parentElement.parentElement);
-    });
+    return listing;
   });
 }
