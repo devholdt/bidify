@@ -24,14 +24,19 @@ export async function editProfileEvent(event) {
     });
 
     if (response.ok) {
-      alert(".success", "Avatar updated", ".alert-editprofile");
+      alert("success", "Avatar updated", ".alert-editprofile");
 
       setTimeout(() => {
         userMedia.avatar = newUserMedia.avatar;
 
-        const avatarImage = document.getElementById("userAvatar");
-        avatarImage.src = newUserMedia.avatar;
-      });
+        const avatars = document.querySelectorAll(".avatar");
+
+        avatars.forEach((avatar) => {
+          avatar.src = newUserMedia.avatar;
+        });
+
+        location.reload();
+      }, 2000);
     }
   } catch (error) {
     alert(

@@ -17,7 +17,7 @@ export async function renderProfileDetails() {
   }
 
   profileDetailsContainer.innerHTML = `
-    <img src="${avatar}" id="userAvatar" alt="${user.name}'s avatar">
+    <img src="${avatar}" class="avatar" alt="${user.name}'s avatar">
     <span class="material-icons" data-bs-toggle="modal" data-bs-target="#editProfileModal" title="Edit profile" aria-label="Edit profile">more_horiz</span>
     <div class="mt-3">
         <p class="fs-4 fw-medium mb-0">${user.name}</p>
