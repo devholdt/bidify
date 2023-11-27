@@ -1,7 +1,7 @@
 import { API_URLS, headers } from "../index.js";
 import { alert } from "../../utilities/index.js";
 
-export async function postListing(title, endsAt, description, media, tags) {
+async function createListing(title, endsAt, description, media, tags) {
   const response = await fetch(API_URLS.LISTINGS, {
     method: "POST",
     body: JSON.stringify({ title, endsAt, description, media, tags }),
@@ -36,27 +36,45 @@ export async function createListingEvent(event) {
   event.preventDefault();
 
   const form = event.target;
-  const data = new FormData(form);
-  const title = data.get("title");
-  const endsAt = data.get("endsAt");
-  const description = data.get("description");
-  const media = data.get("media");
-  const tags = data.get("tags");
+  const title = form.querySelector("#createListingTitle").value;
+  const endsAt = form.querySelector("#createListingDate").value;
+  const description = form.querySelector("#createListingDescription").value;
+
+  const mediaInputs = form.querySelectorAll("#mediaInputsContainer input");
+  const media = Array.from(mediaInputs)
+    .map((input) => input.value)
+    .filter((value) => value.trim() !== "");
+
+  const tagInputs = form.querySelectorAll("#tagInputsContainer input");
+  const tags = Array.from(tagInputs)
+    .map((input) => input.value)
+    .filter((value) => value.trim() !== "");
 
   const now = new Date();
 
   if (title.length < 1) {
     const titleInput = form.querySelector("#createListingTitle");
+
     titleInput.style.borderColor = "#FF5252";
+
     setTimeout(() => {
       titleInput.style.borderColor = "#DEE2E6";
     }, 2000);
+
     alert("danger", "Title is required", ".alert-create-listing", null);
 
     return;
   }
 
-  if (endsAt < now) {
+  if (new Date(endsAt) < now) {
+    const endsAtInput = form.querySelector("#createListingDate");
+
+    endsAtInput.style.borderColor = "#FF5252";
+
+    setTimeout(() => {
+      endsAtInput.style.borderColor = "#DEE2E6";
+    }, 2000);
+
     alert(
       "danger",
       "End date must be in the future",
@@ -68,15 +86,21 @@ export async function createListingEvent(event) {
   }
 
   try {
-    // await createListing(title, endsAt, description, media, tags);
+    // console.log("Title: ", title);
+    // console.log("End date: ", new Date(endsAt));
+    // console.log("Description: ", description);
+    // console.log("Media: ", media);
+    // console.log("Tags: ", tags);
 
-    console.log("Title: ", title);
-    console.log("End date: ", endsAt);
-    console.log("Description: ", description);
-    console.log("Media: ", media);
-    console.log("Tags: ", tags);
+    await createListing(title, endsAt, description, media, tags);
 
-    alert("success", "Listing successfully posted!", ".alert-create-listing");
+    alert(
+      "success",
+      "Listing successfully posted!",
+      ".alert-create-listing",
+      6000,
+      false
+    );
   } catch {
     alert(
       "danger",
@@ -87,35 +111,35 @@ export async function createListingEvent(event) {
   }
 }
 
-export async function createListing() {
-  const form = document.querySelector("#createListingForm");
-  const titleInput = document.querySelector("#createListingTitle");
-  const endDateInput = document.querySelector("#createListingDate");
-  const descriptionInput = document.querySelector("#createListingDescription");
+// export async function createListing() {
+//   const form = document.querySelector("#createListingForm");
+//   const titleInput = document.querySelector("#createListingTitle");
+//   const endDateInput = document.querySelector("#createListingDate");
+//   const descriptionInput = document.querySelector("#createListingDescription");
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+//   form.addEventListener("submit", (event) => {
+//     event.preventDefault();
 
-    const title = titleInput.value;
-    const endDate = endDateInput.value;
-    const description = descriptionInput.value;
+//     const title = titleInput.value;
+//     const endDate = endDateInput.value;
+//     const description = descriptionInput.value;
 
-    const mediaInputs = document.querySelectorAll(
-      "#mediaInputsContainer input"
-    );
-    const media = Array.from(mediaInputs).map((input) => input.value);
+//     const mediaInputs = document.querySelectorAll(
+//       "#mediaInputsContainer input"
+//     );
+//     const media = Array.from(mediaInputs).map((input) => input.value);
 
-    const tagInputs = document.querySelectorAll("#tagInputsContainer input");
-    const tags = Array.from(tagInputs).map((input) => input.value);
+//     const tagInputs = document.querySelectorAll("#tagInputsContainer input");
+//     const tags = Array.from(tagInputs).map((input) => input.value);
 
-    const listing = {
-      title: title,
-      endsAt: new Date(endDate),
-      description: description,
-      media: media,
-      tags: tags,
-    };
+//     const listing = {
+//       title: title,
+//       endsAt: new Date(endDate),
+//       description: description,
+//       media: media,
+//       tags: tags,
+//     };
 
-    return listing;
-  });
-}
+//     return listing;
+//   });
+// }

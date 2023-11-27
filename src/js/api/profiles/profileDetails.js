@@ -13,7 +13,7 @@ export async function renderProfileDetails() {
   if (!user.avatar) {
     avatar = DEFAULT_URLS.AVATAR;
   } else {
-    avatar = userDataApi.avatar;
+    avatar = user.avatar;
   }
 
   profileDetailsContainer.innerHTML = `

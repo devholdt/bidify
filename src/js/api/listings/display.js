@@ -6,6 +6,8 @@ export async function displayListings() {
   const listings = await getListings();
   const sortedListings = sortListings(listings, "created");
 
+  console.log(sortedListings);
+
   sortedListings
     .slice(0, 12)
     .forEach((listing) => createCard(listing, ".listings"));

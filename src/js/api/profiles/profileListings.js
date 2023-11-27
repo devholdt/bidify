@@ -13,13 +13,10 @@ export async function profileListings() {
         document.querySelector(".profile-listings");
 
       if (listings.length > 0) {
-        const profileListingsRow = document.createElement("div");
-        profileListingsRow.classList.add("row", "row-cols-3", "mt-5");
-        profileListingsContainer.append(profileListingsRow);
-
+        profileListingsContainer.classList.add("row", "row-cols-3");
         listings
           .slice(0, 3)
-          .forEach((listing) => createCard(listing, profileListingsRow));
+          .forEach((listing) => createCard(listing, ".profile-listings"));
       } else {
         profileListingsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active listings.</p>`;
       }
@@ -41,11 +38,8 @@ export async function profileBids() {
       const profileBidsContainer = document.querySelector(".profile-bids");
 
       if (bids.length > 0) {
-        const profileBidsRow = document.createElement("div");
-        profileBidsRow.classList.add("row", "row-cols-3", "mt-5");
-        profileBidsContainer.append(profileBidsRow);
-
-        bids.slice(0, 3).forEach((bid) => createBidCard(bid, profileBidsRow));
+        profileBidsContainer.classList.add("row", "row-cols-3");
+        bids.slice(0, 3).forEach((bid) => createBidCard(bid, ".profile-bids"));
       } else {
         profileBidsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active bids</p>`;
       }
