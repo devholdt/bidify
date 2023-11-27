@@ -1,0 +1,15 @@
+.profile-details {
+    img {
+        box-shadow: $shadow-sm;
+    }
+    .material-icons {
+        border: 1px solid transparent;
+        border-radius: 3px;
+        transition: 0.3s;
+
+        &:hover {
+            border-color: $gray-400;
+            color: $gray-dark;
+        }
+    }
+}
