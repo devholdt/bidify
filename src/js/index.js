@@ -7,5 +7,7 @@ api.lastChance();
 api.displayListings();
 
 components.renderNav();
-components.modals();
+components.authModals();
 components.createListingForm();
+
+// components.listingModalPreview();

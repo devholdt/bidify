@@ -1,5 +1,6 @@
 import { updateCountdown, scrollingTitle } from "../utilities/index.js";
 import { DEFAULT_URLS } from "./index.js";
+import { listingModalPreview } from "./index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -25,10 +26,10 @@ export function createCard(listing, containerSelector) {
   card.classList.add("col", "mb-4");
 
   card.innerHTML = `
-        <div class="listing-card">
+        <div class="listing-card" data-id="${listing.id}">
           <div class="card">
 
-              <div class="card-top">
+              <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">
                   ${listingMedia}
               </div>
 
@@ -37,9 +38,6 @@ export function createCard(listing, containerSelector) {
               </div>
 
               <div class="card-buttons">
-                  <button class="btn-gavel" data-bs-toggle="modal" data-bs-target="#listingModal">
-                      <p class="material-icons">gavel</p>
-                  </button>
                   <button class="btn-heart">
                       <p class="material-icons">favorite_border</p>
                   </button>
@@ -93,6 +91,20 @@ export function createCard(listing, containerSelector) {
   card.querySelector(".card-body").prepend(titleWrapper);
 
   scrollingTitle();
+
+  const cardButton = document.createElement("button");
+  cardButton.classList.add("btn-gavel");
+  cardButton.setAttribute("data-bs-toggle", "modal");
+  cardButton.setAttribute("data-bs-target", "#listingModal");
+  cardButton.innerHTML = `<p class="material-icons">gavel</p>`;
+
+  card.querySelector(".card-buttons").prepend(cardButton);
+
+  const cardTop = card.querySelector(".card-top");
+  const gavelButton = card.querySelector(".btn-gavel");
+
+  listingModalPreview(listing, cardTop);
+  listingModalPreview(listing, gavelButton);
 }
 
 export function createBidCard(bid, containerSelector) {
@@ -101,7 +113,7 @@ export function createBidCard(bid, containerSelector) {
   const card = document.createElement("div");
   card.classList.add("col", "mb-4");
   card.innerHTML = `
-  <div class="card">
+  <div class="card" id="${bid.id}">
     <div class="card-body">
       <p>Name: ${bid.bidderName}</p>
       <p>Amount: ${bid.amount}c</p>

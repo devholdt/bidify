@@ -178,33 +178,25 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content d-flex flex-row">
 
-                    <div class="col-6 p-2 m-auto d-flex justify-content-center">
-                        <img src="../images/vr-guy.jpg" class="listing-media" alt="Listing media" width="440">
+                    <div id="listingModalMedia" class="col-6 p-2 m-auto d-flex justify-content-center">
+                        <img src="" class="listing-media" alt="Listing media" width="440"
+                            onerror="this.src='../images/bidify_nomediasvg.svg'">
                     </div>
 
                     <div class="col-6 p-2">
                         <div class="modal-header flex-column align-items-start">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             <div class="d-flex gap-2">
-                                <h5 class="fw-bold">Listing title</h5>
-                                <span>- created by username at 28.11.2023</span>
+                                <h5 id="listingModalTitle" class="fw-bold"></h5>
+                                <span id="listingModalSeller"></span>
                             </div>
-                            <span>id: 1994</span>
+                            <span id="listingModalId"></span>
                         </div>
-                        <div class="modal-body">
-                            <p class="fw-medium">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-                                architecto beatae vitae dicta sunt explicabo.
-                            </p>
-                            <p class="fw-medium">
-                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                            </p>
-                            <p class="mb-0">Ends at: <span class="fw-bold">December 15th, 2023</span></p>
+                        <div id="listingModalBody" class="modal-body">
+                            <p id="listingModalEndsAt" class="mb-0">test</p>
                         </div>
-                        <div class="modal-footer justify-content-start">
-                            <p class="mb-4">Tags: <span class="fw-bold">Listing, Product, Preview</span></p>
+                        <div class="modal-footer justify-content-start flex-column align-items-start">
+                            <p id="listingModalTags" class="mb-4"></p>
                             <form id="listingModalForm"
                                 class="d-flex align-items-end w-100 justify-content-between align-items-center bg-white px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
 
@@ -218,6 +210,11 @@
                                     class="btn btn-primary text-uppercase py-2 px-3 fw-medium fs-5 shadow-sm">Place
                                     bid</button>
                             </form>
+                            <div id="listingModalButtons" class="btn-group ms-auto" role="group"
+                                aria-label="Listing interaction">
+                                <button type="button" class="btn btn-outline-dark">Edit</button>
+                                <button type="button" class="btn btn-outline-dark">Delete</button>
+                            </div>
                         </div>
                     </div>
 
@@ -280,14 +277,6 @@
                 </div>
 
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#listingsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#listingsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
 
         </div>
 

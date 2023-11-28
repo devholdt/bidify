@@ -9,7 +9,7 @@ if (!userDataLocal) {
   window.location.href = components.URLS.INDEX;
 }
 
-components.modals();
+components.authModals();
 components.renderNav();
 
 profiles.profileListings();
