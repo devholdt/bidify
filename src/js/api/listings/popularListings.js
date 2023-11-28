@@ -1,5 +1,4 @@
 import { getListings } from "./index.js";
-import { sortListings } from "../../utilities/index.js";
 import { createCard } from "../../components/index.js";
 
 export async function popularListings() {
@@ -7,7 +6,7 @@ export async function popularListings() {
     sortOrder: "asc",
     sort: "&sort=created",
   });
-  const sortedListings = sortListings(listings, "bids");
+  const sortedListings = listings.sort((a, b) => b._count.bids - a._count.bids);
 
   sortedListings
     .slice(0, 3)
