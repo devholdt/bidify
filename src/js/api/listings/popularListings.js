@@ -3,7 +3,10 @@ import { sortListings } from "../../utilities/index.js";
 import { createCard } from "../../components/index.js";
 
 export async function popularListings() {
-  const listings = await getListings();
+  const listings = await getListings({
+    sortOrder: "asc",
+    sort: "&sort=created",
+  });
   const sortedListings = sortListings(listings, "bids");
 
   sortedListings

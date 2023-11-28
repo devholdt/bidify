@@ -73,7 +73,7 @@ export async function createListingEvent(event) {
     return;
   }
 
-  if (new Date(endsAt) < now) {
+  if (new Date(endsAt) <= now) {
     const endsAtInput = form.querySelector("#createListingDate");
 
     endsAtInput.style.borderColor = "#FF5252";
