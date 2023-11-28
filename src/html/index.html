@@ -173,6 +173,58 @@
             </div>
         </div>
 
+        <div class="modal modal-xl fade shadow" id="listingModal" tabindex="-1" aria-labelledby="listingModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content d-flex flex-row">
+
+                    <div class="col-6 p-2 m-auto d-flex justify-content-center">
+                        <img src="../images/vr-guy.jpg" class="listing-media" alt="Listing media" width="440">
+                    </div>
+
+                    <div class="col-6 p-2">
+                        <div class="modal-header flex-column align-items-start">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="d-flex gap-2">
+                                <h5 class="fw-bold">Listing title</h5>
+                                <span>- created by username at 28.11.2023</span>
+                            </div>
+                            <span>id: 1994</span>
+                        </div>
+                        <div class="modal-body">
+                            <p class="fw-medium">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                                architecto beatae vitae dicta sunt explicabo.
+                            </p>
+                            <p class="fw-medium">
+                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                            </p>
+                            <p class="mb-0">Ends at: <span class="fw-bold">December 15th, 2023</span></p>
+                        </div>
+                        <div class="modal-footer justify-content-start">
+                            <p class="mb-4">Tags: <span class="fw-bold">Listing, Product, Preview</span></p>
+                            <form id="listingModalForm"
+                                class="d-flex align-items-end w-100 justify-content-between align-items-center bg-white px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
+
+                                <div class="mb-3">
+                                    <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
+                                    <input type="number" class="form-control shadow-sm" name="amount" id="amount"
+                                        min="1" placeholder="credit(s)">
+                                </div>
+
+                                <button type="submit"
+                                    class="btn btn-primary text-uppercase py-2 px-3 fw-medium fs-5 shadow-sm">Place
+                                    bid</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </header>
 
     <main class="d-flex flex-column">

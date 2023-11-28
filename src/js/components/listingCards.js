@@ -37,7 +37,7 @@ export function createCard(listing, containerSelector) {
               </div>
 
               <div class="card-buttons">
-                  <button class="btn-gavel">
+                  <button class="btn-gavel" data-bs-toggle="modal" data-bs-target="#listingModal">
                       <p class="material-icons">gavel</p>
                   </button>
                   <button class="btn-heart">
