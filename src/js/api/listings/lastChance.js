@@ -1,12 +1,13 @@
 import { getListings } from "./index.js";
-import { sortListings } from "../../utilities/index.js";
 import { createCard } from "../../components/index.js";
 
 export async function lastChance() {
-  const listings = await getListings();
-  const sortedListings = sortListings(listings, "endsAt");
+  const listings = await getListings({
+    sortOrder: "asc",
+    sort: "&sort=endsAt",
+  });
 
-  sortedListings
+  listings
     .slice(0, 3)
     .forEach((listing) => createCard(listing, ".last-chance"));
 }
