@@ -12140,6 +12140,13 @@ p {
   cursor: pointer;
 }
 
+#listingModal .modal-content {
+  max-height: 540px;
+}
+#listingModal .listing-media {
+  height: 480px;
+}
+
 .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
   flex-wrap: nowrap;
 }

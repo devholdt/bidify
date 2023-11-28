@@ -176,25 +176,26 @@
         <div class="modal modal-xl fade shadow" id="listingModal" tabindex="-1" aria-labelledby="listingModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content d-flex flex-row">
+                <div class="modal-content d-flex flex-row justify-content-center rounded-0 p-2">
 
-                    <div id="listingModalMedia" class="col-6 p-2 m-auto d-flex justify-content-center">
-                        <img src="" class="listing-media" alt="Listing media" width="440"
-                            onerror="this.src='../images/bidify_nomediasvg.svg'">
+                    <div class="col-6 d-flex listing-media p-2 w-50">
+                        <img src="../images/bidify_nomediasvg.svg" class="w-100 h-100 border object-fit-cover"
+                            alt="Listing media" onerror="this.src='../images/bidify_nomediasvg.svg'">
                     </div>
 
-                    <div class="col-6 p-2">
+                    <div class="col-6 d-flex flex-column listing-details w-50">
+
+                        <button type="button" class="btn-close ms-auto p-3" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+
                         <div class="modal-header flex-column align-items-start">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             <div class="d-flex gap-2">
                                 <h5 id="listingModalTitle" class="fw-bold"></h5>
                                 <span id="listingModalSeller"></span>
                             </div>
                             <span id="listingModalId"></span>
                         </div>
-                        <div id="listingModalBody" class="modal-body">
-                            <p id="listingModalEndsAt" class="mb-0">test</p>
-                        </div>
+                        <div id="listingModalBody" class="modal-body d-flex flex-column justify-content-between"></div>
                         <div class="modal-footer justify-content-start flex-column align-items-start">
                             <p id="listingModalTags" class="mb-4"></p>
                             <form id="listingModalForm"
@@ -217,7 +218,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

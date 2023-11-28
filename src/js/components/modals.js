@@ -41,13 +41,8 @@ export const authModals = () => {
 
 export function listingModalPreview(listing, button) {
   button.addEventListener("click", () => {
-    // console.log(listing);
-
-    // const footer = document.getElementById("listingModalFooter");
-    // const amount = document.getElementById("listingModalBidAmount");
-
     const title = document.querySelector("#listingModalTitle");
-    const media = document.querySelector(".listing-media");
+    const media = document.querySelector(".listing-media img");
     const body = document.querySelector("#listingModalBody");
     const seller = document.querySelector("#listingModalSeller");
     const id = document.querySelector("#listingModalId");
