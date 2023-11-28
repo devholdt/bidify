@@ -41,6 +41,7 @@ export const authModals = () => {
 
 export function listingModalPreview(listing, button) {
   button.addEventListener("click", () => {
+    const modal = document.querySelector("#listingModal");
     const title = document.querySelector("#listingModalTitle");
     const media = document.querySelector(".listing-media img");
     const body = document.querySelector("#listingModalBody");
@@ -81,9 +82,18 @@ export function listingModalPreview(listing, button) {
       <p class="mb-0">Ends at: <span class="fw-medium">${endsAt}</span></p>`;
 
     if (listing.tags.length < 1) {
-      tags.innerHTML = `Tags: empty`;
+      tags.innerHTML = "empty";
     } else {
-      tags.innerHTML = `Tags: <span class="fw-bold">${listing.tags[0]}</span>`;
+      listing.tags.forEach((tag) => {
+        const tagElement = document.createElement("span");
+        tagElement.classList.add("fw-bold", "badge", "bg-dark", "me-1");
+        tagElement.innerHTML += `${tag} `;
+        tags.append(tagElement);
+      });
     }
+
+    modal.addEventListener("hidden.bs.modal", () => {
+      tags.innerHTML = "";
+    });
   });
 }
