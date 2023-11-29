@@ -45,6 +45,7 @@ export function listingModalPreview(listing, button) {
     const title = document.querySelector("#listingModalTitle");
     const media = document.querySelector(".listing-media img");
     const description = document.querySelector("#listingModalDescription");
+    const created = document.querySelector("#listingModalCreated");
     const seller = document.querySelector("#listingModalSeller");
     const endsAt = document.querySelector("#listingModalEndsAt");
     const tags = document.querySelector("#listingModalTags");
@@ -80,9 +81,15 @@ export function listingModalPreview(listing, button) {
         6
       )}</span>`;
 
-    seller.innerHTML = `created by ${sellerName} on ${createdDate}`;
+    if (listing.description.length < 1) {
+      description.innerHTML = `<p class="fst-italic">No description</p>`;
+    } else {
+      description.innerHTML = `<p class="fw-normal">${listing.description}</p>`;
+    }
 
-    description.innerHTML = `<p class="fw-medium">${listing.description}</p>`;
+    created.innerHTML = createdDate;
+
+    seller.innerHTML = sellerName;
 
     endsAt.innerHTML = endsAtDate;
 
