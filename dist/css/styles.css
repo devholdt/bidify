@@ -12144,8 +12144,11 @@ p {
 #listingModal .modal-content {
   max-height: 640px;
 }
-#listingModal .listing-media {
-  max-height: 580px;
+#listingModal .carousel {
+  width: 100%;
+}
+#listingModal .carousel-item {
+  height: 580px;
 }
 
 .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {

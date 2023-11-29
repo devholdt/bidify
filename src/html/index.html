@@ -178,10 +178,12 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content d-flex flex-row justify-content-center rounded-0 p-2">
 
-                    <div class="col-6 d-flex listing-media p-2 w-50">
-                        <img src="../images/bidify_nomediasvg.svg" class="w-100 h-100 border object-fit-cover"
-                            alt="Listing media" onerror="this.src='../images/bidify_nomediasvg.svg'">
+                    <div id="listingModalMedia" class="col-6 d-flex listing-media p-2 w-50">
+                        <!-- <img src="../images/bidify_nomediasvg.svg" class="w-100 h-100 border object-fit-cover"
+                            alt="Listing media" onerror="this.src='../images/bidify_nomediasvg.svg'"> -->
                     </div>
+
+                    <!-- <div id="listingModalMedia" class="col-6 listing-media"></div> -->
 
                     <div class="col-6 d-flex flex-column w-50 p-2 pe-4 listing-details">
 
@@ -199,9 +201,10 @@
                             <div id="listingModalDescription" class="pb-4"></div>
                         </div>
 
-                        <div class="modal-footer justify-content-start m-auto ps-0 border-0 pt-0">
+                        <div class="modal-footer justify-content-start m-auto ps-0 pt-0 me-2pe-0 border-0">
 
-                            <h6 class="badge bg-dark rounded-0 justify-content-start d-flex w-100 ms-0 mt-0">Details
+                            <h6 class="badge bg-dark rounded-0 justify-content-start d-flex w-100 ms-0 mt-0">
+                                Details
                             </h6>
 
                             <ul class="list-group list-group-flush w-100">
@@ -259,7 +262,7 @@
             </div>
         </div>
 
-        <div id="listingsCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel" data-bs-touch="false">
+        <div id="listingsCarousel" class="carousel slide carousel-dark" data-bs-touch="false">
             <div class="carousel-indicators mb-5">
                 <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Popular today"></button>

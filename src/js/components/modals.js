@@ -43,7 +43,7 @@ export function listingModalPreview(listing, button) {
   button.addEventListener("click", () => {
     const modal = document.querySelector("#listingModal");
     const title = document.querySelector("#listingModalTitle");
-    const media = document.querySelector(".listing-media img");
+    const media = document.querySelector("#listingModalMedia");
     const description = document.querySelector("#listingModalDescription");
     const created = document.querySelector("#listingModalCreated");
     const seller = document.querySelector("#listingModalSeller");
@@ -66,10 +66,41 @@ export function listingModalPreview(listing, button) {
       buttons.classList.add("d-none");
     }
 
+    media.innerHTML = "";
+
     if (listing.media.length < 1) {
-      media.src = DEFAULT_URLS.LISTING_MEDIA;
+      media.innerHTML = `
+        <img src="${DEFAULT_URLS.LISTING_MEDIA}" class="w-100 h-100 border object-fit-cover" alt="Listing media">`;
+    } else if (listing.media.length > 1) {
+      media.innerHTML = `
+      <div id="listingModalCarousel" class="carousel slide carousel-fade">
+        <div id="listingModalCarouselInner" class="carousel-inner">
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#listingModalCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#listingModalCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>`;
+
+      const carouselInner = document.querySelector(
+        "#listingModalCarouselInner"
+      );
+
+      listing.media.forEach((media, index) => {
+        const carouselItem = document.createElement("div");
+        carouselItem.classList.add("carousel-item");
+        if (index === 0) carouselItem.classList.add("active");
+
+        carouselItem.innerHTML = `<img src="${media}" class="d-block w-100 h-100 object-fit-cover" alt="Listing media">`;
+        carouselInner.appendChild(carouselItem);
+      });
     } else {
-      media.src = listing.media[0];
+      media.innerHTML = `
+      <img src="${listing.media[0]}" class="w-100 h-100 border object-fit-cover" alt="Listing media">`;
     }
 
     title.innerHTML = `
@@ -87,10 +118,8 @@ export function listingModalPreview(listing, button) {
       description.innerHTML = `<p class="fw-normal">${listing.description}</p>`;
     }
 
-    created.innerHTML = createdDate;
-
     seller.innerHTML = sellerName;
-
+    created.innerHTML = createdDate;
     endsAt.innerHTML = endsAtDate;
 
     if (listing.tags.length < 1) {

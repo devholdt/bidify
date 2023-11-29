@@ -3,7 +3,11 @@
         max-height: 640px;
     }
 
-    .listing-media {
-        max-height: 580px;
+    .carousel {
+        width: 100%;
+
+        &-item {
+            height: 580px;
+        }
     }
 }
