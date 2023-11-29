@@ -44,15 +44,15 @@ export function listingModalPreview(listing, button) {
     const modal = document.querySelector("#listingModal");
     const title = document.querySelector("#listingModalTitle");
     const media = document.querySelector(".listing-media img");
-    const body = document.querySelector("#listingModalBody");
+    const description = document.querySelector("#listingModalDescription");
     const seller = document.querySelector("#listingModalSeller");
-    const id = document.querySelector("#listingModalId");
+    const endsAt = document.querySelector("#listingModalEndsAt");
     const tags = document.querySelector("#listingModalTags");
     const form = document.querySelector("#listingModalForm");
     const buttons = document.querySelector("#listingModalButtons");
 
-    const created = formatDate(new Date(listing.created));
-    const endsAt = formatDate(new Date(listing.endsAt));
+    const createdDate = formatDate(new Date(listing.created));
+    const endsAtDate = formatDate(new Date(listing.endsAt), true);
     let sellerName;
 
     if (listing.seller.name === getUser().name) {
@@ -71,15 +71,20 @@ export function listingModalPreview(listing, button) {
       media.src = listing.media[0];
     }
 
-    title.innerHTML = listing.title;
+    title.innerHTML = `
+      <h5 class="fw-bold fs-4 align-self-center align-items-center my-auto">${
+        listing.title
+      }</h5>
+      <span class="fw-light align-self-center align-items-center my-auto">id: ${listing.id.slice(
+        0,
+        6
+      )}</span>`;
 
-    seller.innerHTML = `- created by ${sellerName} on ${created}`;
+    seller.innerHTML = `created by ${sellerName} on ${createdDate}`;
 
-    id.innerHTML = `id: ${listing.id.slice(0, 8)}`;
+    description.innerHTML = `<p class="fw-medium">${listing.description}</p>`;
 
-    body.innerHTML = `
-      <p class="fw-medium">${listing.description}</p>
-      <p class="mb-0">Ends at: <span class="fw-medium">${endsAt}</span></p>`;
+    endsAt.innerHTML = endsAtDate;
 
     if (listing.tags.length < 1) {
       tags.innerHTML = "empty";
