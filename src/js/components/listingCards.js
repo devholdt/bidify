@@ -1,6 +1,7 @@
 import { updateCountdown, scrollingTitle } from "../utilities/index.js";
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
 import { getUser } from "../storage/index.js";
+import { deleteListing, editListing } from "../auth/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -92,6 +93,9 @@ export function createCard(listing, containerSelector) {
 
   scrollingTitle();
 
+  const cardTop = card.querySelector(".card-top");
+  listingModalPreview(listing, cardTop);
+
   if (listing.seller && listing.seller.name !== getUser().name) {
     const cardButton = document.createElement("button");
     cardButton.classList.add("btn-gavel");
@@ -103,12 +107,7 @@ export function createCard(listing, containerSelector) {
 
     const gavelButton = card.querySelector(".btn-gavel");
     listingModalPreview(listing, gavelButton);
-  }
-
-  const cardTop = card.querySelector(".card-top");
-  listingModalPreview(listing, cardTop);
-
-  if (!listing.seller || listing.seller.name === getUser().name) {
+  } else if (!listing.seller || listing.seller.name == getUser().name) {
     const cardButtons = card.querySelector(".card-buttons");
     cardButtons.classList.remove("justify-content-between");
     cardButtons.classList.add("justify-content-end");
@@ -119,6 +118,14 @@ export function createCard(listing, containerSelector) {
     <button class="btn btn-light rounded-0 rounded-end btn-delete">
       <p class="material-icons">delete</p>
     </button>`;
+
+    cardButtons
+      .querySelector(".btn-delete")
+      .addEventListener("click", deleteListing);
+
+    cardButtons
+      .querySelector(".btn-edit")
+      .addEventListener("click", editListing);
   }
 }
 
