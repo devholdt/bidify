@@ -1,6 +1,6 @@
 import { updateCountdown, scrollingTitle } from "../utilities/index.js";
-import { DEFAULT_URLS } from "./index.js";
-import { listingModalPreview } from "./index.js";
+import { DEFAULT_URLS, listingModalPreview } from "./index.js";
+import { getUser } from "../storage/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -37,7 +37,7 @@ export function createCard(listing, containerSelector) {
               ${listingBids}
               </div>
 
-              <div class="card-buttons">
+              <div class="card-buttons d-flex justify-content-between align-items-end">
                   <button class="btn-heart">
                       <p class="material-icons">favorite_border</p>
                   </button>
@@ -92,19 +92,34 @@ export function createCard(listing, containerSelector) {
 
   scrollingTitle();
 
-  const cardButton = document.createElement("button");
-  cardButton.classList.add("btn-gavel");
-  cardButton.setAttribute("data-bs-toggle", "modal");
-  cardButton.setAttribute("data-bs-target", "#listingModal");
-  cardButton.innerHTML = `<p class="material-icons">gavel</p>`;
+  if (listing.seller && listing.seller.name !== getUser().name) {
+    const cardButton = document.createElement("button");
+    cardButton.classList.add("btn-gavel");
+    cardButton.setAttribute("data-bs-toggle", "modal");
+    cardButton.setAttribute("data-bs-target", "#listingModal");
+    cardButton.innerHTML = `<p class="material-icons">gavel</p>`;
 
-  card.querySelector(".card-buttons").prepend(cardButton);
+    card.querySelector(".card-buttons").prepend(cardButton);
+
+    const gavelButton = card.querySelector(".btn-gavel");
+    listingModalPreview(listing, gavelButton);
+  }
 
   const cardTop = card.querySelector(".card-top");
-  const gavelButton = card.querySelector(".btn-gavel");
-
   listingModalPreview(listing, cardTop);
-  listingModalPreview(listing, gavelButton);
+
+  if (!listing.seller || listing.seller.name === getUser().name) {
+    const cardButtons = card.querySelector(".card-buttons");
+    cardButtons.classList.remove("justify-content-between");
+    cardButtons.classList.add("justify-content-end");
+    cardButtons.innerHTML = `
+    <button class="btn btn-light rounded-0 rounded-start btn-edit">
+      <p class="material-icons">edit</p>
+    </button>
+    <button class="btn btn-light rounded-0 rounded-end btn-delete">
+      <p class="material-icons">delete</p>
+    </button>`;
+  }
 }
 
 export function createBidCard(bid, containerSelector) {

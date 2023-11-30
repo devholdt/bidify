@@ -138,19 +138,19 @@
                             </h6>
 
                             <ul class="list-group list-group-flush w-100">
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Seller: <span
+                                <li class="list-group-item fw-medium d-flex justify-content-between">Seller:<span
                                         id="listingModalSeller" class="fw-light"></span></li>
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Created: <span
+                                <li class="list-group-item fw-medium d-flex justify-content-between">Created:<span
                                         id="listingModalCreated" class="fw-light"></span></li>
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Ends at: <span
+                                <li class="list-group-item fw-medium d-flex justify-content-between">Ends at:<span
                                         id="listingModalEndsAt" class="fw-light"></span>
                                 </li>
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Tags: <span
+                                <li class="list-group-item fw-medium d-flex justify-content-between">Tags:<span
                                         id="listingModalTags"></span></li>
                             </ul>
 
                             <form id="listingModalForm"
-                                class="d-flex align-items-end w-100 justify-content-between align-items-center bg-white px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
+                                class="d-flex align-items-end w-100 justify-content-between bg-light border align-items-center px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
 
                                 <div class="mb-3 ps-0">
                                     <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
@@ -164,8 +164,16 @@
                             </form>
                             <div id="listingModalButtons" class="btn-group ms-auto" role="group"
                                 aria-label="Listing interaction">
-                                <button type="button" class="btn btn-outline-dark">Edit</button>
-                                <button type="button" class="btn btn-outline-dark">Delete</button>
+                                <button type="button" id="editListingButton"
+                                    class="btn btn-light border d-flex gap-1 align-items-center" title="edit"
+                                    aria-label="edit">
+                                    <span class="material-icons">edit</span>
+                                </button>
+                                <button type="button" id="deleteListingButton"
+                                    class="btn btn-light border d-flex gap-1 align-items-center" title="delete"
+                                    aria-label="delete">
+                                    <span class="material-icons">delete</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -178,7 +186,7 @@
     <main>
         <div class="container mt-5">
             <div class="row">
-                <div class="col-lg-3 text-center py-4 profile">
+                <div class="col-lg-3 text-center py-4 me-3 profile">
                     <div class="profile-details"></div>
                 </div>
                 <div class="col-lg-9">

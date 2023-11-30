@@ -215,7 +215,7 @@
                             </ul>
 
                             <form id="listingModalForm"
-                                class="d-flex align-items-end w-100 justify-content-between align-items-center bg-white px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
+                                class="d-flex align-items-end w-100 justify-content-between align-items-center bg-light border px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
 
                                 <div class="mb-3 ps-0">
                                     <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
@@ -229,8 +229,16 @@
                             </form>
                             <div id="listingModalButtons" class="btn-group ms-auto" role="group"
                                 aria-label="Listing interaction">
-                                <button type="button" class="btn btn-outline-dark">Edit</button>
-                                <button type="button" class="btn btn-outline-dark">Delete</button>
+                                <button type="button" id="editListingButton"
+                                    class="btn btn-light border d-flex gap-1 align-items-center" title="edit"
+                                    aria-label="edit">
+                                    <span class="material-icons">edit</span>
+                                </button>
+                                <button type="button" id="deleteListingButton"
+                                    class="btn btn-light border d-flex gap-1 align-items-center" title="delete"
+                                    aria-label="delete">
+                                    <span class="material-icons">delete</span>
+                                </button>
                             </div>
                         </div>
                     </div>

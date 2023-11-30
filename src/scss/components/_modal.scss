@@ -1,4 +1,8 @@
 #listingModal {
+    .modal-content, .list-group-item {
+        background-color: white;
+    }
+
     .modal-content {
         max-height: 640px;
     }

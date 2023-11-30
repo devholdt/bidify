@@ -12071,9 +12071,6 @@ p {
   }
 }
 .card-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
   margin: 0 20px 20px 20px;
 }
 .card-buttons button {
@@ -12146,6 +12143,9 @@ p {
   cursor: pointer;
 }
 
+#listingModal .modal-content, #listingModal .list-group-item {
+  background-color: white;
+}
 #listingModal .modal-content {
   max-height: 640px;
 }

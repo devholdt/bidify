@@ -148,7 +148,7 @@ export function listingModalPreview(listing, button) {
     } else {
       listing.tags.forEach((tag) => {
         const tagElement = document.createElement("span");
-        tagElement.classList.add("fw-bold", "badge", "bg-dark", "me-1");
+        tagElement.classList.add("fw-bold", "badge", "bg-dark", "ms-1");
         tagElement.innerHTML += `${tag} `;
         tags.append(tagElement);
       });
