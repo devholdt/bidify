@@ -17,7 +17,7 @@ export function handleInputs(
       }
 
       const newInput = document.createElement("div");
-      newInput.classList.add("input-group", "mb-2");
+      newInput.classList.add("input-group");
 
       let inputHtml = `<input type="text" class="form-control rounded-end" placeholder="${placeholder}">`;
 

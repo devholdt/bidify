@@ -1,5 +1,5 @@
 import { alert, handleInputs } from "../utilities/index.js";
-import { API_URLS, headers, getListing } from "../api/index.js";
+import { API_URLS, headers, getListing, editListing } from "../api/index.js";
 
 export async function listingInteractions(event) {
   let targetElement = event.target;
@@ -34,7 +34,6 @@ export async function listingInteractions(event) {
 
   if (targetElement.classList.contains("btn-edit")) {
     const id = targetElement.dataset.id;
-    // const url = `${API_URLS.LISTINGS}/${id}`;
 
     handleInputs(
       "editMediaInputsContainer",
@@ -46,6 +45,7 @@ export async function listingInteractions(event) {
     handleInputs("editTagInputsContainer", "Edit", "Tag", "tag");
 
     try {
+      const form = document.querySelector("#editListingModal form");
       const listing = await getListing(id);
       const titleInput = document.querySelector("#editListingTitle");
       const descriptionInput = document.querySelector(
@@ -55,7 +55,38 @@ export async function listingInteractions(event) {
       titleInput.value = listing.title;
       descriptionInput.value = listing.description;
 
-      console.log(response);
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        try {
+          const editedListing = await editListing(
+            id,
+            titleInput.value,
+            descriptionInput.value
+          );
+
+          if (editedListing) {
+            alert(
+              "success",
+              "Listing edited successfully!",
+              ".alert-absolute",
+              2000,
+              false
+            );
+
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          }
+        } catch {
+          alert(
+            "danger",
+            "An error occured when attempting to edit listing",
+            ".alert-absolute",
+            4000
+          );
+        }
+      });
     } catch {
       alert(
         "danger",
