@@ -42,7 +42,7 @@ async function createListing(title, endsAt, description, media, tags) {
 export async function createListingEvent(event) {
   event.preventDefault();
 
-  const form = event.target;
+  const form = document.getElementById("createListingForm");
   const title = form.querySelector("#createListingTitle").value;
   const endsAt = form.querySelector("#createListingDate").value;
   const description = form.querySelector("#createListingDescription").value;

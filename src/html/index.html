@@ -173,6 +173,71 @@
             </div>
         </div>
 
+        <div class="modal modal-xl fade shadow" id="listingModal" tabindex="-1" aria-labelledby="listingModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content d-flex flex-row justify-content-center rounded-0 p-2">
+
+                    <div id="listingModalMedia" class="col-6 d-flex listing-media p-2 w-50"></div>
+
+                    <div class="col-6 d-flex flex-column w-50 p-2 pe-4 listing-details">
+
+                        <button type="button" class="btn-close position-absolute end-0 pt-0 pe-4 shadow-none"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+
+                        <div class="modal-header flex-column align-items-start ps-0 py-0 border-0">
+                            <p id="listingModalTitle"
+                                class="w-100 d-flex justify-content-between fs-6 rounded-0 mb-0 border-bottom px-2 py-1">
+                            </p>
+                        </div>
+
+                        <div id="listingModalBody"
+                            class="modal-body d-flex flex-column justify-content-between pb-0 me-3">
+                            <div id="listingModalDescription" class="pb-4"></div>
+                        </div>
+
+                        <div class="modal-footer justify-content-start m-auto ps-0 pt-0 me-2pe-0 border-0">
+
+                            <h6 class="badge bg-dark rounded-0 justify-content-start d-flex w-100 ms-0 mt-0">
+                                Details
+                            </h6>
+
+                            <ul class="list-group list-group-flush w-100">
+                                <li class="list-group-item fw-medium d-flex justify-content-between">Seller: <span
+                                        id="listingModalSeller" class="fw-light"></span></li>
+                                <li class="list-group-item fw-medium d-flex justify-content-between">Created: <span
+                                        id="listingModalCreated" class="fw-light"></span></li>
+                                <li class="list-group-item fw-medium d-flex justify-content-between">Ends at: <span
+                                        id="listingModalEndsAt" class="fw-light"></span>
+                                </li>
+                                <li class="list-group-item fw-medium d-flex justify-content-between">Tags: <span
+                                        id="listingModalTags"></span></li>
+                            </ul>
+
+                            <form id="listingModalForm"
+                                class="d-flex align-items-end w-100 justify-content-between align-items-center bg-white px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
+
+                                <div class="mb-3 ps-0">
+                                    <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
+                                    <input type="number" class="form-control shadow-sm" name="amount" id="amount"
+                                        min="1" placeholder="credit(s)">
+                                </div>
+
+                                <button type="submit"
+                                    class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm">Place
+                                    bid</button>
+                            </form>
+                            <div id="listingModalButtons" class="btn-group ms-auto" role="group"
+                                aria-label="Listing interaction">
+                                <button type="button" class="btn btn-outline-dark">Edit</button>
+                                <button type="button" class="btn btn-outline-dark">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </header>
 
     <main class="d-flex flex-column">
@@ -192,7 +257,7 @@
             </div>
         </div>
 
-        <div id="listingsCarousel" class="carousel slide carousel-dark">
+        <div id="listingsCarousel" class="carousel slide carousel-dark" data-bs-touch="false">
             <div class="carousel-indicators mb-5">
                 <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Popular today"></button>
@@ -203,39 +268,44 @@
             </div>
             <div class="container carousel-inner">
 
-                <div class="carousel-item active mt-5 text-center">
+                <div class="carousel-item active mt-5 text-center" data-bs-interval="5000">
 
-                    <h2>Popular listings</h2>
-                    <p>Our most popular listings. Join the bidding!</p>
-                    <div class="row row-cols-3 mt-5 popular-listings"></div>
+                    <div class="d-block w-100">
 
-                </div>
+                        <h2>Popular listings</h2>
+                        <p>Our most popular listings. Join the bidding!</p>
+                        <div class="row row-cols-3 mt-5 popular-listings"></div>
 
-                <div class="carousel-item mt-5 text-center">
-
-                    <h2>Latest listings</h2>
-                    <p>Brand new listings. Be the first to place a bid!</p>
-                    <div class="row row-cols-3 mt-5 latest-listings"></div>
+                    </div>
 
                 </div>
 
-                <div class="carousel-item mt-5 text-center">
+                <div class="carousel-item mt-5 text-center" data-bs-interval="5000">
 
-                    <h2>Last chance</h2>
-                    <p>Last chance to bid on these listings. Don't miss out!</p>
-                    <div class="row row-cols-3 mt-5 last-chance"></div>
+                    <div class="d-block w-100">
+
+                        <h2>Latest listings</h2>
+                        <p>Brand new listings. Be the first to place a bid!</p>
+                        <div class="row row-cols-3 mt-5 latest-listings"></div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="carousel-item mt-5 text-center" data-bs-interval="5000">
+
+                    <div class="d-block w-100">
+
+                        <h2>Last chance</h2>
+                        <p>Last chance to bid on these listings. Don't miss out!</p>
+                        <div class="row row-cols-3 mt-5 last-chance"></div>
+
+                    </div>
 
                 </div>
 
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#listingsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#listingsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
 
         </div>
 

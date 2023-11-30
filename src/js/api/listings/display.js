@@ -1,14 +1,8 @@
 import { getListings } from "./fetch.js";
 import { createCard } from "../../components/listingCards.js";
-// import { sortListings } from "../../utilities/index.js";
 
 export async function displayListings() {
   const listings = await getListings({ sort: "&sort=created" });
 
   listings.slice(0, 12).forEach((listing) => createCard(listing, ".listings"));
-  // const sortedListings = sortListings(listings, "created");
-
-  // sortedListings
-  //   .slice(0, 100)
-  //   .forEach((listing) => createCard(listing, ".listings"));
 }

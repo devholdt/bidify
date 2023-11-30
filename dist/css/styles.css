@@ -11992,6 +11992,7 @@ p {
   height: 100%;
   transition: transform 0.4s;
   object-fit: cover;
+  object-position: 50% 50%;
 }
 .card-top .no-media-found {
   object-fit: contain;
@@ -12138,6 +12139,27 @@ p {
   border-radius: 3px;
   padding: 0 0.5em;
   cursor: pointer;
+}
+
+#listingModal .modal-content {
+  max-height: 640px;
+}
+#listingModal .carousel-indicators {
+  position: relative;
+  margin: 9px 0 0;
+}
+#listingModal .media-carousel {
+  height: 620px;
+}
+#listingModal .media-carousel .carousel {
+  width: 100%;
+}
+#listingModal .media-carousel .carousel-item {
+  height: 540px;
+}
+#listingModal .media-carousel .carousel-thumbnail {
+  height: 40px;
+  width: 78px;
 }
 
 .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {

@@ -11,6 +11,11 @@ export async function editProfileEvent(event) {
     const newAvatarInput = document.querySelector("#editProfileAvatar");
     const newAvatarValue = newAvatarInput.value;
 
+    const clearButton = document.querySelector(".clear-button");
+    clearButton.addEventListener("click", () => {
+      document.querySelector("input[name='media']").value = "";
+    });
+
     let newUserMedia = { avatar: userMedia.avatar };
 
     if (newAvatarValue.trim() !== "") {
