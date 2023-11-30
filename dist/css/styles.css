@@ -11908,41 +11908,39 @@ p {
   border-radius: 25px;
 }
 
-#createListingAccordion form label {
+#createListingAccordion form label, #editListingModal form label {
   margin-bottom: 0;
 }
-#createListingAccordion form textarea {
+#createListingAccordion form textarea, #editListingModal form textarea {
   resize: none;
   height: 250px;
 }
-#createListingAccordion form button[type=submit] {
-  width: 110px;
-}
-#createListingAccordion form button.input-group-text {
-  max-width: 50px;
-}
-#createListingAccordion form #addMediaButton, #createListingAccordion form #addTagButton, #createListingAccordion form .remove-input {
-  width: 25px;
-  height: 25px;
-}
-
-#registerModal form, #loginModal form, #editProfileModal form {
-  width: 300px;
-}
-#registerModal form div, #loginModal form div, #editProfileModal form div {
-  padding-bottom: 6px;
-}
-#registerModal form input, #loginModal form input, #editProfileModal form input {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+#createListingAccordion form input, #createListingAccordion form textarea, #editListingModal form input, #editListingModal form textarea {
   border: 1px solid #9D9696;
 }
-#registerModal form label, #loginModal form label, #editProfileModal form label {
+#createListingAccordion form button[type=submit], #editListingModal form button[type=submit] {
+  width: 110px;
+}
+#createListingAccordion form button.input-group-text, #editListingModal form button.input-group-text {
+  max-width: 50px;
+}
+
+#registerModal form, #loginModal form, #editProfileModal form, #editListingModal form {
+  width: 300px;
+}
+#registerModal form div, #loginModal form div, #editProfileModal form div, #editListingModal form div {
+  padding-bottom: 6px;
+}
+#registerModal form input, #registerModal form textarea, #loginModal form input, #loginModal form textarea, #editProfileModal form input, #editProfileModal form textarea, #editListingModal form input, #editListingModal form textarea {
+  border: 1px solid #9D9696;
+}
+#registerModal form label, #loginModal form label, #editProfileModal form label, #editListingModal form label {
   margin-bottom: 2px;
 }
-#registerModal form .modal-buttons .cancel-button, #loginModal form .modal-buttons .cancel-button, #editProfileModal form .modal-buttons .cancel-button {
+#registerModal form .modal-buttons .cancel-button, #loginModal form .modal-buttons .cancel-button, #editProfileModal form .modal-buttons .cancel-button, #editListingModal form .modal-buttons .cancel-button {
   width: 33%;
 }
-#registerModal form .modal-buttons .submit-button, #loginModal form .modal-buttons .submit-button, #editProfileModal form .modal-buttons .submit-button {
+#registerModal form .modal-buttons .submit-button, #loginModal form .modal-buttons .submit-button, #editProfileModal form .modal-buttons .submit-button, #editListingModal form .modal-buttons .submit-button {
   width: 66%;
 }
 

@@ -7,7 +7,9 @@ export function handleInputs(
   const container = document.getElementById(containerElement);
 
   document.getElementById(`add${type}Button`).addEventListener("click", () => {
-    if (container.children.length === 4) {
+    if (type === "Media" && container.children.length === 4) {
+      return;
+    } else if (type === "Tag" && container.children.length === 6) {
       return;
     }
 

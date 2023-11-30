@@ -62,7 +62,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <p class="modal-title fs-4 text-center w-100 fw-semibold" id="editProfileModalLabel">Edit
-                            Profile</p>
+                            profile</p>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -149,34 +149,87 @@
                                             id="listingModalTags"></span></li>
                                 </ul>
 
-                                <form id="listingModalForm"
-                                    class="d-flex align-items-end w-100 justify-content-between bg-light border align-items-center px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
-
-                                    <div class="mb-3 ps-0">
-                                        <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
-                                        <input type="number" class="form-control shadow-sm" name="amount" id="amount"
-                                            min="1" placeholder="credit(s)">
-                                    </div>
-
-                                    <button type="submit"
-                                        class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm">Place
-                                        bid</button>
-                                </form>
-                                <div id="listingModalButtons" class="btn-group ms-auto" role="group"
-                                    aria-label="Listing interaction">
-                                    <button type="button" id="editListingButton"
-                                        class="btn btn-light d-flex gap-1 align-items-center" title="edit"
-                                        aria-label="edit">
-                                        <span class="material-icons">edit</span>
-                                    </button>
-                                    <button type="button" id="deleteListingButton"
-                                        class="btn btn-light d-flex gap-1 align-items-center" title="delete"
-                                        aria-label="delete">
-                                        <span class="material-icons">delete</span>
-                                    </button>
-                                </div>
+                                <div id="listingModalFooterDynamic" class="w-100 d-flex justify-content-end"></div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade shadow" id="editListingModal" tabindex="-1" data-bs-backdrop="static"
+            data-bs-keyboard="false" aria-labelledby="editListingModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <p class="modal-title fs-4 text-center w-100 fw-semibold" id="editListingModalLabel">Edit
+                            listing</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <form class="d-flex flex-column justify-content-center mx-auto mt-3">
+                            <div class="mb-3">
+                                <label for="editListingTitle" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="editListingTitle" name="title"
+                                    placeholder="title">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="editListingDescription" class="form-label">Description</label>
+                                <textarea class="form-control" name="description" id="editListingDescription"
+                                    placeholder="description"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <label for="editListingMedia" class="form-label">Media URL</label>
+                                    <span id="editMediaInputCount" class="text-danger fw-light">max. 4</span>
+                                </div>
+                                <div class="d-flex">
+                                    <div id="editMediaInputsContainer" class="w-100 me-1">
+                                        <div class="input-group mb-2">
+                                            <input type="text" class="form-control" name="editMedia"
+                                                id="editListingMedia" placeholder="media URL">
+                                            <button type="button"
+                                                class="btn btn-outline-dark btn-sm rounded-end input-group-text clear-button">clear</button>
+                                            <button type="button" class="btn border-0 input-group-text text-primary">
+                                                <span class="material-icons">add</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <label for="editListingTags" class="form-label">Tags</label>
+                                    <span class="text-danger fw-light">max. 6</span>
+                                </div>
+                                <div class="d-flex">
+                                    <div id="editTagsInputsContainer" class="w-100 me-1">
+                                        <div class="input-group mb-2">
+                                            <input type="text" class="form-control rounded-end" id="editListingTag"
+                                                name="editTags" placeholder="tag">
+                                            <button type="button" class="btn border-0 input-group-text text-primary">
+                                                <span class="material-icons">add</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-3 gap-3 modal-buttons">
+                                <button type="button" class="btn btn-dark cancel-button"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary text-uppercase submit-button"
+                                    disabled>Edit</button>
+                            </div>
+
+                            <div class="alert-editlisting alert-wrapper mt-2"></div>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -201,6 +254,8 @@
                 </div>
             </div>
         </div>
+
+        <div class="alert-absolute alert-wrapper position-fixed top-50 start-50 translate-middle"></div>
     </main>
 
 

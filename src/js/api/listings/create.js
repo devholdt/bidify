@@ -65,7 +65,7 @@ export async function createListingEvent(event) {
     titleInput.style.borderColor = "#FF5252";
 
     setTimeout(() => {
-      titleInput.style.borderColor = "#DEE2E6";
+      titleInput.style.borderColor = "#9D9696";
     }, 2000);
 
     alert("danger", "Title is required", ".alert-create-listing", null);
@@ -79,7 +79,7 @@ export async function createListingEvent(event) {
     endsAtInput.style.borderColor = "#FF5252";
 
     setTimeout(() => {
-      endsAtInput.style.borderColor = "#DEE2E6";
+      endsAtInput.style.borderColor = "#9D9696";
     }, 2000);
 
     alert(

@@ -1,7 +1,7 @@
 import { updateCountdown, scrollingTitle } from "../utilities/index.js";
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
 import { getUser } from "../storage/index.js";
-import { deleteListing, editListing } from "../auth/index.js";
+import { listingInteractions } from "../auth/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -112,20 +112,19 @@ export function createCard(listing, containerSelector) {
     cardButtons.classList.remove("justify-content-between");
     cardButtons.classList.add("justify-content-end");
     cardButtons.innerHTML = `
-    <button class="btn btn-light rounded-0 rounded-start btn-edit">
-      <p class="material-icons">edit</p>
+    <button class="btn btn-light rounded-0 rounded-start btn-edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
+      <span class="material-icons">edit</span>
     </button>
-    <button class="btn btn-light rounded-0 rounded-end btn-delete">
-      <p class="material-icons">delete</p>
+    <button class="btn btn-light rounded-0 rounded-end btn-delete" data-id="${listing.id}">
+      <span class="material-icons">delete</span>
     </button>`;
 
     cardButtons
       .querySelector(".btn-delete")
-      .addEventListener("click", deleteListing);
-
+      .addEventListener("click", listingInteractions);
     cardButtons
       .querySelector(".btn-edit")
-      .addEventListener("click", editListing);
+      .addEventListener("click", listingInteractions);
   }
 }
 

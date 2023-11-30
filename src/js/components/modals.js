@@ -2,6 +2,7 @@ import * as auth from "../auth/index.js";
 import { DEFAULT_URLS } from "./index.js";
 import { formatDate } from "../utilities/index.js";
 import { getUser } from "../storage/index.js";
+import { listingInteractions } from "../auth/index.js";
 
 export const authModals = () => {
   const formModals = document.querySelectorAll(".form-modal");
@@ -55,28 +56,72 @@ export function listingModalPreview(listing, button) {
 
     const endsAt = document.querySelector("#listingModalEndsAt");
     const tags = document.querySelector("#listingModalTags");
-    const form = document.querySelector("#listingModalForm");
-    const buttons = document.querySelector("#listingModalButtons");
 
     const createdDate = formatDate(new Date(listing.created));
     const endsAtDate = formatDate(new Date(listing.endsAt), true);
+
+    const listingModalFooterDynamic = modal.querySelector(
+      "#listingModalFooterDynamic"
+    );
+
+    const listingForm = `
+    <form id="listingModalForm"
+      class="d-flex align-items-end justify-content-between bg-light border align-items-center px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
+      <div class="mb-3 ps-0">
+          <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
+          <input type="number" class="form-control shadow-sm" name="amount" id="amount"
+              min="1" placeholder="credit(s)">
+      </div>
+      <button type="submit"
+          class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm">Place
+          bid
+      </button>
+    </form>`;
+
+    const interactionButtons = `
+    <div id="listingModalButtons" class="btn-group" role="group"
+      aria-label="Listing interaction">
+      <button type="button" class="btn btn-light d-flex gap-1 align-items-center btn-edit"
+          title="edit" aria-label="edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
+          <span class="material-icons">edit</span>
+      </button>
+      <button type="button"
+          class="btn btn-light d-flex gap-1 align-items-center btn-delete" title="delete"
+          aria-label="delete" data-id="${listing.id}">
+          <span class="material-icons">delete</span>
+      </button>
+    </div>`;
 
     let sellerName;
 
     if (listing.seller) {
       if (listing.seller.name === getUser().name) {
         sellerName = "you";
-        form.classList.add("d-none");
-        buttons.classList.remove("d-none");
+
+        listingModalFooterDynamic.innerHTML = interactionButtons;
+
+        modal
+          .querySelector(".btn-delete")
+          .addEventListener("click", listingInteractions);
+        modal
+          .querySelector(".btn-edit")
+          .addEventListener("click", listingInteractions);
       } else {
         sellerName = listing.seller.name;
-        form.classList.remove("d-none");
-        buttons.classList.add("d-none");
+
+        listingModalFooterDynamic.innerHTML = listingForm;
       }
     } else {
       sellerName = getUser().name;
-      form.classList.add("d-none");
-      buttons.classList.remove("d-none");
+
+      listingModalFooterDynamic.innerHTML = interactionButtons;
+
+      modal
+        .querySelector(".btn-delete")
+        .addEventListener("click", listingInteractions);
+      modal
+        .querySelector(".btn-edit")
+        .addEventListener("click", listingInteractions);
     }
 
     media.innerHTML = "";
