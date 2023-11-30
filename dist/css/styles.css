@@ -11954,6 +11954,11 @@ p {
   background: url("../../../src/images/bidify texture 1.png");
   background-size: contain;
 }
+#listingsCarousel .carousel-indicators button {
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+}
 #listingsCarousel .carousel-inner {
   height: 100%;
 }
