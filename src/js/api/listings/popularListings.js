@@ -11,4 +11,12 @@ export async function popularListings() {
   sortedListings
     .slice(0, 3)
     .forEach((listing) => createCard(listing, ".popular-listings"));
+
+  const container = document.querySelector(".popular-listings");
+  const cards = Array.from(container.children);
+
+  cards.forEach((card) => {
+    card.classList.remove("col-12", "col-sm-6", "col-lg-4");
+    card.classList.add("col-4");
+  });
 }

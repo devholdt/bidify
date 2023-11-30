@@ -23,7 +23,7 @@ export function createCard(listing, containerSelector) {
   }
 
   const card = document.createElement("div");
-  card.classList.add("col", "mb-4");
+  card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4");
 
   card.innerHTML = `
         <div class="listing-card" data-id="${listing.id}">

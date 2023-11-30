@@ -41,14 +41,13 @@
             display: flex;
             justify-content: center;
             gap: 5px;
-            margin: 0 5px;
             width: 100%;
 
             .countdown-part {
                 backdrop-filter: blur(2px);
                 background-color: rgba(0, 0, 0, 0.33);
                 color: white;
-                padding: 5px 10px;
+                padding: 4px 8px;
                 border-radius: 5px;
                 font-size: 1.2em;
 
