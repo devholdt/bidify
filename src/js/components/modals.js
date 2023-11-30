@@ -44,26 +44,35 @@ export function listingModalPreview(listing, button) {
     const modal = document.querySelector("#listingModal");
     const title = document.querySelector("#listingModalTitle");
     const media = document.querySelector("#listingModalMedia");
+
     const description = document.querySelector("#listingModalDescription");
     const created = document.querySelector("#listingModalCreated");
     const seller = document.querySelector("#listingModalSeller");
+
     const endsAt = document.querySelector("#listingModalEndsAt");
     const tags = document.querySelector("#listingModalTags");
     const form = document.querySelector("#listingModalForm");
-    const buttons = document.querySelector("#listingModalButtons");
 
+    const buttons = document.querySelector("#listingModalButtons");
     const createdDate = formatDate(new Date(listing.created));
     const endsAtDate = formatDate(new Date(listing.endsAt), true);
+
     let sellerName;
 
-    if (listing.seller.name === getUser().name) {
-      sellerName = "you";
+    if (listing.seller) {
+      if (listing.seller.name === getUser().name) {
+        sellerName = "you";
+        form.classList.add("d-none");
+        buttons.classList.remove("d-none");
+      } else {
+        sellerName = listing.seller.name;
+        form.classList.remove("d-none");
+        buttons.classList.add("d-none");
+      }
+    } else {
+      sellerName = getUser().name;
       form.classList.add("d-none");
       buttons.classList.remove("d-none");
-    } else {
-      sellerName = listing.seller.name;
-      form.classList.remove("d-none");
-      buttons.classList.add("d-none");
     }
 
     media.innerHTML = "";
