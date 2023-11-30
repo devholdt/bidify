@@ -56,8 +56,8 @@ export function listingModalPreview(listing, button) {
     const endsAt = document.querySelector("#listingModalEndsAt");
     const tags = document.querySelector("#listingModalTags");
     const form = document.querySelector("#listingModalForm");
-
     const buttons = document.querySelector("#listingModalButtons");
+
     const createdDate = formatDate(new Date(listing.created));
     const endsAtDate = formatDate(new Date(listing.endsAt), true);
 

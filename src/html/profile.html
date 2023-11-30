@@ -111,69 +111,70 @@
         <div class="modal modal-xl fade shadow" id="listingModal" tabindex="-1" aria-labelledby="listingModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content d-flex flex-row justify-content-center rounded-0 p-2">
+                <div class="modal-content rounded-0">
+                    <button type="button" class="btn-close position-absolute end-0 p-2 m-1 shadow-none"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
 
-                    <div id="listingModalMedia" class="col-6 d-flex listing-media p-2 w-50"></div>
+                    <div class="row p-3">
+                        <div id="listingModalMedia" class="col-12 col-lg-6 d-flex listing-media"></div>
 
-                    <div class="col-6 d-flex flex-column w-50 p-2 pe-4 listing-details">
+                        <div class="col-12 col-lg-6 py-2 d-flex flex-column listing-detail">
 
-                        <button type="button" class="btn-close position-absolute end-0 pt-0 pe-4 shadow-none"
-                            data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-header flex-column align-items-start ps-0 py-0 border-0">
+                                <p id="listingModalTitle"
+                                    class="w-100 d-flex justify-content-between fs-6 rounded-0 mb-0 border-bottom px-2 py-1">
+                                </p>
+                            </div>
 
-                        <div class="modal-header flex-column align-items-start ps-0 py-0 border-0">
-                            <p id="listingModalTitle"
-                                class="w-100 d-flex justify-content-between fs-6 rounded-0 mb-0 border-bottom px-2 py-1">
-                            </p>
-                        </div>
+                            <div id="listingModalBody"
+                                class="modal-body d-flex flex-column justify-content-between pb-0 me-3">
+                                <div id="listingModalDescription" class="pb-4"></div>
+                            </div>
 
-                        <div id="listingModalBody"
-                            class="modal-body d-flex flex-column justify-content-between pb-0 me-3">
-                            <div id="listingModalDescription" class="pb-4"></div>
-                        </div>
+                            <div class="modal-footer justify-content-start m-auto border-0 w-100">
 
-                        <div class="modal-footer justify-content-start m-auto ps-0 pt-0 me-2pe-0 border-0">
+                                <h6 class="badge bg-dark rounded-0 justify-content-start d-flex w-100 ms-0 mt-0">
+                                    Details
+                                </h6>
 
-                            <h6 class="badge bg-dark rounded-0 justify-content-start d-flex w-100 ms-0 mt-0">
-                                Details
-                            </h6>
+                                <ul class="list-group list-group-flush w-100">
+                                    <li class="list-group-item fw-medium d-flex justify-content-between">Seller:<span
+                                            id="listingModalSeller" class="fw-light"></span></li>
+                                    <li class="list-group-item fw-medium d-flex justify-content-between">Created:<span
+                                            id="listingModalCreated" class="fw-light"></span></li>
+                                    <li class="list-group-item fw-medium d-flex justify-content-between">Ends at:<span
+                                            id="listingModalEndsAt" class="fw-light"></span>
+                                    </li>
+                                    <li class="list-group-item fw-medium d-flex justify-content-between">Tags:<span
+                                            id="listingModalTags"></span></li>
+                                </ul>
 
-                            <ul class="list-group list-group-flush w-100">
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Seller:<span
-                                        id="listingModalSeller" class="fw-light"></span></li>
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Created:<span
-                                        id="listingModalCreated" class="fw-light"></span></li>
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Ends at:<span
-                                        id="listingModalEndsAt" class="fw-light"></span>
-                                </li>
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Tags:<span
-                                        id="listingModalTags"></span></li>
-                            </ul>
+                                <form id="listingModalForm"
+                                    class="d-flex align-items-end w-100 justify-content-between bg-light border align-items-center px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
 
-                            <form id="listingModalForm"
-                                class="d-flex align-items-end w-100 justify-content-between bg-light border align-items-center px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
+                                    <div class="mb-3 ps-0">
+                                        <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
+                                        <input type="number" class="form-control shadow-sm" name="amount" id="amount"
+                                            min="1" placeholder="credit(s)">
+                                    </div>
 
-                                <div class="mb-3 ps-0">
-                                    <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
-                                    <input type="number" class="form-control shadow-sm" name="amount" id="amount"
-                                        min="1" placeholder="credit(s)">
+                                    <button type="submit"
+                                        class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm">Place
+                                        bid</button>
+                                </form>
+                                <div id="listingModalButtons" class="btn-group ms-auto" role="group"
+                                    aria-label="Listing interaction">
+                                    <button type="button" id="editListingButton"
+                                        class="btn btn-light d-flex gap-1 align-items-center" title="edit"
+                                        aria-label="edit">
+                                        <span class="material-icons">edit</span>
+                                    </button>
+                                    <button type="button" id="deleteListingButton"
+                                        class="btn btn-light d-flex gap-1 align-items-center" title="delete"
+                                        aria-label="delete">
+                                        <span class="material-icons">delete</span>
+                                    </button>
                                 </div>
-
-                                <button type="submit"
-                                    class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm">Place
-                                    bid</button>
-                            </form>
-                            <div id="listingModalButtons" class="btn-group ms-auto" role="group"
-                                aria-label="Listing interaction">
-                                <button type="button" id="editListingButton"
-                                    class="btn btn-light d-flex gap-1 align-items-center" title="edit"
-                                    aria-label="edit">
-                                    <span class="material-icons">edit</span>
-                                </button>
-                                <button type="button" id="deleteListingButton"
-                                    class="btn btn-light d-flex gap-1 align-items-center" title="delete"
-                                    aria-label="delete">
-                                    <span class="material-icons">delete</span>
-                                </button>
                             </div>
                         </div>
                     </div>
