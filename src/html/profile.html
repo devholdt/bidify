@@ -67,12 +67,13 @@
                     </div>
                     <div class="modal-body">
                         <form id="editProfileForm" class="d-flex flex-column justify-content-center mx-auto mt-3">
-                            <div class="mb-3">
-                                <label for="editProfileAvatar" class="form-label">Avatar URL</label>
-                                <input type="text" class="form-control" id="editProfileAvatar" name="avatar"
+                            <div class="input-group shadow-sm mb-3 p-0">
+                                <input type="text" id="editProfileAvatar" class="form-control shadow-none" name="avatar"
                                     placeholder="avatar URL">
+                                <button type="button"
+                                    class="btn btn-outline-dark btn-sm rounded-end input-group-text clear-button"
+                                    id="clearUrlButton">clear</button>
                             </div>
-
                             <div class="d-flex mt-3 gap-3 modal-buttons">
                                 <button type="button" class="btn btn-dark cancel-button"
                                     data-bs-dismiss="modal">Cancel</button>

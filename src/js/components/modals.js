@@ -18,6 +18,10 @@ export const authModals = () => {
     } else if (editProfileForm) {
       const input = editProfileForm.querySelector("input");
       const submit = editProfileForm.querySelector(".submit-button");
+      const clearButton = document.querySelector(".clear-button");
+      clearButton.addEventListener("click", () => {
+        document.querySelector("input[name='avatar']").value = "";
+      });
 
       const handleInput = () => {
         const inputValue = input.value.trim();
