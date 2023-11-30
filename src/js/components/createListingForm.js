@@ -7,8 +7,8 @@ export const createListingForm = () => {
     .addEventListener("submit", createListingEvent);
 
   // Handles adding and removing additional media and tag inputs
-  handleInputs("mediaInputsContainer", "Media", "media URL", true);
-  handleInputs("tagInputsContainer", "Tag", "tag");
+  handleInputs("mediaInputsContainer", "Create", "Media", "media URL", true);
+  handleInputs("tagInputsContainer", "Create", "Tag", "tag");
 
   // Sets the default date input value to local date + one day
   const todayDate = new Date();

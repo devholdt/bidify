@@ -36,14 +36,26 @@ export async function listingInteractions(event) {
     const id = targetElement.dataset.id;
     // const url = `${API_URLS.LISTINGS}/${id}`;
 
+    handleInputs(
+      "editMediaInputsContainer",
+      "Edit",
+      "Media",
+      "media URL",
+      true
+    );
+    handleInputs("editTagInputsContainer", "Edit", "Tag", "tag");
+
     try {
-      const response = await getListing(id);
+      const listing = await getListing(id);
+      const titleInput = document.querySelector("#editListingTitle");
+      const descriptionInput = document.querySelector(
+        "#editListingDescription"
+      );
+
+      titleInput.value = listing.title;
+      descriptionInput.value = listing.description;
 
       console.log(response);
-
-      if (response.ok) {
-        console.log(response);
-      }
     } catch {
       alert(
         "danger",

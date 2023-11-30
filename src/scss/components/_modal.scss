@@ -26,6 +26,17 @@
     }
 }
 
+#editListingModal {
+    .back-button {
+        color: $gray-dark;
+        transition: 0s;
+
+        &:hover {
+            color: $dark;
+        }
+    }
+}
+
 @media (max-width: 992px) {
     #listingModal {
         .modal-dialog {
