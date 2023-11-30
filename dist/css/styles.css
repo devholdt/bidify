@@ -12144,11 +12144,22 @@ p {
 #listingModal .modal-content {
   max-height: 640px;
 }
-#listingModal .carousel {
+#listingModal .carousel-indicators {
+  position: relative;
+  margin: 9px 0 0;
+}
+#listingModal .media-carousel {
+  height: 620px;
+}
+#listingModal .media-carousel .carousel {
   width: 100%;
 }
-#listingModal .carousel-item {
-  height: 580px;
+#listingModal .media-carousel .carousel-item {
+  height: 540px;
+}
+#listingModal .media-carousel .carousel-thumbnail {
+  height: 40px;
+  width: 78px;
 }
 
 .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {

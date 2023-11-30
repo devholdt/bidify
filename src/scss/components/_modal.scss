@@ -3,11 +3,25 @@
         max-height: 640px;
     }
 
-    .carousel {
-        width: 100%;
+    .carousel-indicators {
+        position: relative;
+        margin: 9px 0 0;
+    }
 
-        &-item {
-            height: 580px;
+    .media-carousel {
+        height: 620px;
+
+        .carousel {
+            width: 100%;
+    
+            &-item {
+                height: 540px;
+            }
+
+            &-thumbnail {
+                height: 40px;
+                width: 78px;
+            }
         }
     }
 }

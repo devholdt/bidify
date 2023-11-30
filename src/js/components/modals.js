@@ -69,23 +69,19 @@ export function listingModalPreview(listing, button) {
     media.innerHTML = "";
 
     if (listing.media.length < 1) {
+      media.classList.remove("media-carousel");
       media.innerHTML = `
         <img src="${DEFAULT_URLS.LISTING_MEDIA}" class="w-100 h-100 border object-fit-cover" alt="Listing media">`;
     } else if (listing.media.length > 1) {
+      media.classList.add("media-carousel");
+
       media.innerHTML = `
       <div id="listingModalCarousel" class="carousel slide carousel-fade">
-        <div id="listingModalCarouselInner" class="carousel-inner">
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#listingModalCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#listingModalCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+      <div id="listingModalCarouselInner" class="carousel-inner"></div>
+      <div class="carousel-indicators"></div>
       </div>`;
 
+      const carouselIndicators = document.querySelector(".carousel-indicators");
       const carouselInner = document.querySelector(
         "#listingModalCarouselInner"
       );
@@ -97,8 +93,20 @@ export function listingModalPreview(listing, button) {
 
         carouselItem.innerHTML = `<img src="${media}" class="d-block w-100 h-100 object-fit-cover" alt="Listing media">`;
         carouselInner.appendChild(carouselItem);
+
+        const indicator = document.createElement("button");
+        indicator.classList.add("carousel-thumbnail");
+        if (index === 0) {
+          indicator.classList.add("active");
+        }
+        indicator.setAttribute("data-bs-target", "#listingModalCarousel");
+        indicator.setAttribute("data-bs-slide-to", index);
+        indicator.style.background = `no-repeat center url(${media})`;
+        indicator.style.backgroundSize = "cover";
+        carouselIndicators.appendChild(indicator);
       });
     } else {
+      media.classList.remove("media-carousel");
       media.innerHTML = `
       <img src="${listing.media[0]}" class="w-100 h-100 border object-fit-cover" alt="Listing media">`;
     }
