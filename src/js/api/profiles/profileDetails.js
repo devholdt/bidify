@@ -17,18 +17,38 @@ export async function renderProfileDetails() {
   }
 
   profileDetailsContainer.innerHTML = `
-    <img src="${avatar}" class="avatar" alt="${user.name}'s avatar">
-    <span class="material-icons" data-bs-toggle="modal" data-bs-target="#editProfileModal" title="Edit profile" aria-label="Edit profile">more_horiz</span>
-    <div class="mt-3">
-        <p class="fs-4 fw-medium mb-0">${user.name}</p>
-        <p>${user.email}</p>
-    </div>
-    
-    <p class="fs-5 fw-medium my-5">credit(s): ${user.credits}</p>
-    
-    <div>
-        <p class="mb-0">listings: ${user._count.listings}</p>
-        <p class="mb-0">bids: ${bids.length}</p>
-        <p>wins: ${user.wins.length}</p>
+    <div class="profile-details_container text-center">
+
+      <div class="profile-details_icon text-end">
+        <p class="material-icons" data-bs-toggle="modal" data-bs-target="#editProfileModal" title="Edit profile" aria-label="Edit profile">more_horiz</p>
+      </div>
+
+      <div class="row align-items-center m-auto">
+
+        <div class="profile-details_user mb-5 col-6 col-lg-12">
+
+          <div class="profile-details_img mb-3">
+            <img src="${avatar}" class="avatar" alt="${user.name}'s avatar">
+          </div>
+
+          <div>
+            <p class="fs-4 fw-medium mb-0">${user.name}</p>
+            <p>${user.email}</p>
+          </div>
+        </div>
+        
+        <div class="profile-details_info col-6 col-lg-12">
+
+          <p class="fs-5 fw-medium pb-5">credit(s): ${user.credits}</p>
+          
+          <div>
+            <p class="mb-0">listings: ${user._count.listings}</p>
+            <p class="mb-0">bids: ${bids.length}</p>
+            <p>wins: ${user.wins.length}</p>
+          </div>
+        </div>
+
+      </div>
+
     </div>`;
 }

@@ -22,14 +22,11 @@
 
     input, textarea {
         border: 1px solid $gray-light;
+        border-radius: 0;
     }
 
     button[type="submit"] {
         width: 110px;
-    }
-
-    button.input-group-text {
-        max-width: 50px;
     }
 
     #editListingTitle {
@@ -50,7 +47,6 @@
     }
 
     input, textarea {
-        // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         border: 1px solid $gray-light;
     }
 

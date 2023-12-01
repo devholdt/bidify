@@ -19,18 +19,18 @@ export function handleInputs(
       const newInput = document.createElement("div");
       newInput.classList.add("input-group");
 
-      let inputHtml = `<input type="text" class="form-control rounded-end" placeholder="${placeholder}">`;
+      let inputHtml = `<input type="text" class="form-control" placeholder="${placeholder}">`;
 
       if (includeButton) {
         inputHtml += `
           <button type="button" 
-          class="btn btn-outline-dark btn-sm rounded-end input-group-text clear-button">
-              Clear
+          class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">
+              clear
           </button>`;
       }
 
       inputHtml += `
-        <button type="button" class="btn border-0 input-group-text text-danger remove-input">
+        <button type="button" class="btn ps-1 pe-0 border-0 input-group-text text-danger remove-input">
           <span class="material-icons">remove</span>
         </button>`;
 

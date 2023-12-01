@@ -11917,12 +11917,10 @@ p {
 }
 #createListingAccordion form input, #createListingAccordion form textarea, #editListingModal form input, #editListingModal form textarea {
   border: 1px solid #9D9696;
+  border-radius: 0;
 }
 #createListingAccordion form button[type=submit], #editListingModal form button[type=submit] {
   width: 110px;
-}
-#createListingAccordion form button.input-group-text, #editListingModal form button.input-group-text {
-  max-width: 50px;
 }
 #createListingAccordion form #editListingTitle, #editListingModal form #editListingTitle {
   height: 43px;
@@ -12285,6 +12283,13 @@ footer {
   background-color: #195B33;
 }
 
+.green-border {
+  border-width: 60px;
+  opacity: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.33);
+  margin-bottom: 120px;
+}
+
 .user-info-header {
   padding: 10px;
   border: 1px solid #F6F6F6;
@@ -12302,40 +12307,19 @@ footer {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 
-.profile {
+.profile-details_container {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  max-width: 280px;
-  max-height: 520px;
 }
-.profile-details span {
-  position: absolute;
-  cursor: pointer;
+.profile-details_icon p {
+  padding: 6px;
+  margin: 0;
 }
-.profile-details img {
+.profile-details_user img {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
-  width: 200px;
-  height: 200px;
   object-fit: cover;
-}
-
-.green-border {
-  border-width: 60px;
-  opacity: 100%;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.33);
-  margin-bottom: 120px;
-}
-
-.profile-details img {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-}
-.profile-details .material-icons {
-  border: 1px solid transparent;
-  border-radius: 3px;
-  transition: 0.3s;
-}
-.profile-details .material-icons:hover {
-  border-color: #ced4da;
-  color: #747474;
 }
 
 /*# sourceMappingURL=styles.css.map */
