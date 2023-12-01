@@ -1,10 +1,12 @@
 import { API_URLS, headers } from "../index.js";
 
-export async function editListing(id, title, description) {
+export async function editListing(id, title, description, media, tags) {
   const url = `${API_URLS.LISTINGS}/${id}`;
   const editedListing = {
     title: title,
     description: description,
+    media: media,
+    tags: tags,
   };
 
   try {

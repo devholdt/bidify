@@ -1,5 +1,9 @@
-import { alert, handleInputs } from "../utilities/index.js";
-import { API_URLS, headers, getListing, editListing } from "../api/index.js";
+import {
+  alert,
+  manageInputFields,
+  collectInputValues,
+} from "../utilities/index.js";
+import { API_URLS, getListing, editListing } from "../api/index.js";
 
 export async function listingInteractions(event) {
   let targetElement = event.target;
@@ -35,34 +39,75 @@ export async function listingInteractions(event) {
   if (targetElement.classList.contains("btn-edit")) {
     const id = targetElement.dataset.id;
 
-    handleInputs(
-      "editMediaInputsContainer",
-      "Edit",
-      "Media",
-      "media URL",
-      true
-    );
-    handleInputs("editTagInputsContainer", "Edit", "Tag", "tag");
+    const editModal = document.getElementById("editListingModal");
+    const form = document.querySelector("#editListingModal form");
+    const listing = await getListing(id);
+    const titleInput = document.querySelector("#editListingTitle");
+    const descriptionInput = document.querySelector("#editListingDescription");
+    const mediaContainer = document.getElementById("editMediaInputsContainer");
+    const tagContainer = document.getElementById("editTagInputsContainer");
+
+    function resetInputs() {
+      const resetContainer = (containerId) => {
+        const container = document.getElementById(containerId);
+        while (container.children.length > 1) {
+          container.removeChild(container.lastChild);
+        }
+        const firstInput = container.querySelector('input[type="text"]');
+        if (firstInput) firstInput.value = "";
+      };
+
+      resetContainer("editMediaInputsContainer");
+      resetContainer("editTagInputsContainer");
+    }
+
+    editModal.addEventListener("hidden.bs.modal", resetInputs);
 
     try {
-      const form = document.querySelector("#editListingModal form");
-      const listing = await getListing(id);
-      const titleInput = document.querySelector("#editListingTitle");
-      const descriptionInput = document.querySelector(
-        "#editListingDescription"
-      );
-
       titleInput.value = listing.title;
       descriptionInput.value = listing.description;
 
+      if (listing.media.length > 0) {
+        mediaContainer.querySelector("input[type='text']").value =
+          listing.media[0];
+      }
+      manageInputFields(
+        "editMediaInputsContainer",
+        "Edit",
+        "Media",
+        "media URL",
+        true,
+        4,
+        listing.media
+      );
+
+      if (listing.tags.length > 0) {
+        tagContainer.querySelector("input[type='text']").value =
+          listing.tags[0];
+      }
+      manageInputFields(
+        "editTagInputsContainer",
+        "Edit",
+        "Tag",
+        "tag",
+        false,
+        6,
+        listing.tags
+      );
+
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
+
+        const mediaValues = collectInputValues("editMediaInputsContainer");
+        const tagValues = collectInputValues("editTagInputsContainer");
 
         try {
           const editedListing = await editListing(
             id,
             titleInput.value,
-            descriptionInput.value
+            descriptionInput.value,
+            mediaValues,
+            tagValues
           );
 
           if (editedListing) {
@@ -88,48 +133,7 @@ export async function listingInteractions(event) {
         }
       });
     } catch {
-      alert(
-        "danger",
-        "An error occured when attempting to edit listing",
-        ".alert-absolute",
-        4000
-      );
+      console.log("An error occured");
     }
   }
-
-  //   if (targetElement.classList.contains("btn-edit")) {
-  //     const id = targetElement.dataset.id;
-
-  //     handleInputs(
-  //       "editMediaInputsContainer",
-  //       "Edit",
-  //       "Media",
-  //       "media URL",
-  //       true
-  //     );
-  //     handleInputs("editTagInputsContainer", "Edit", "Tag", "tag");
-
-  //     try {
-  //       const form = document.querySelector("#editListingModal form");
-  //       const listing = await getListing(id);
-  //       const titleInput = document.querySelector("#editListingTitle");
-  //       const descriptionInput = document.querySelector(
-  //         "#editListingDescription"
-  //       );
-
-  //       const mediaContainer = document.getElementById(
-  //         "editMediaInputsContainer"
-  //       );
-  //       listing.media.forEach((mediaUrl) => {
-  //         createInputField(mediaContainer, mediaUrl, "media URL", true);
-  //       });
-
-  //       const tagContainer = document.getElementById("editTagInputsContainer");
-  //       listing.tags.forEach((tag) => {
-  //         createInputField(tagContainer, tag, "tag", false);
-  //       });
-  //     } catch {
-  //       console.log("An error occured");
-  //     }
-  //   }
 }

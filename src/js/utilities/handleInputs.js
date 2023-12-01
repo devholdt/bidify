@@ -1,91 +1,72 @@
-export function handleInputs(
+export function manageInputFields(
   containerElement,
   request,
   type,
   placeholder,
-  includeButton
+  includeButton,
+  maxCount,
+  initialValues = []
 ) {
   const container = document.getElementById(containerElement);
+  const addButton = document.getElementById(`add${request}${type}Button`);
 
-  document
-    .getElementById(`add${request}${type}Button`)
-    .addEventListener("click", () => {
-      if (type === "Media" && container.children.length === 4) {
-        return;
-      } else if (type === "Tag" && container.children.length === 6) {
-        return;
-      }
+  const createInputField = (value = "") => {
+    const inputGroup = document.createElement("div");
+    inputGroup.classList.add("input-group");
 
-      const newInput = document.createElement("div");
-      newInput.classList.add("input-group", "new-input");
+    let inputHtml = `<input type="text" class="form-control" placeholder="${placeholder}" value="${value}">`;
 
-      let inputHtml = `<input type="text" class="form-control" placeholder="${placeholder}">`;
-
-      if (includeButton) {
-        inputHtml += `
-          <button type="button" 
-          class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">
-              clear
-          </button>`;
-      }
-
+    if (includeButton) {
       inputHtml += `
-        <button type="button" class="btn ps-1 pe-0 border-0 input-group-text text-danger remove-input">
-          <span class="material-icons">remove</span>
-        </button>`;
+        <button type="button" class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">clear</button>`;
+    }
 
-      newInput.innerHTML = inputHtml;
+    inputHtml += `
+    <button type="button" class="btn ps-1 pe-0 border-0 input-group-text text-danger remove-input">
+      <span class="material-icons">remove</span>
+    </button>`;
 
-      container.appendChild(newInput);
+    inputGroup.innerHTML = inputHtml;
 
-      const removeButton = newInput.querySelector(".remove-input");
-      if (removeButton) {
-        removeButton.addEventListener("click", (event) => {
-          container.removeChild(event.target.closest(".input-group"));
-        });
-      }
+    const removeButton = inputGroup.querySelector(".remove-input");
+    removeButton.addEventListener("click", (event) => {
+      container.removeChild(event.target.closest(".input-group"));
+    });
 
-      if (includeButton) {
-        const clearButton = newInput.querySelector(".clear-button");
-        if (clearButton) {
-          clearButton.addEventListener("click", () => {
-            newInput.querySelector("input[type='text']").value = "";
-          });
-        }
+    if (includeButton) {
+      const clearButton = inputGroup.querySelector(".clear-button");
+      clearButton.addEventListener("click", () => {
+        inputGroup.querySelector("input[type='text']").value = "";
+      });
+    }
+
+    container.appendChild(inputGroup);
+  };
+
+  let startIndex = container.querySelector("input[type='text']").value ? 1 : 0;
+
+  initialValues.slice(startIndex).forEach((value) => createInputField(value));
+
+  if (!addButton.dataset.listenerAdded) {
+    addButton.addEventListener("click", () => {
+      if (container.querySelectorAll(".input-group").length < maxCount) {
+        createInputField();
       }
     });
+    addButton.dataset.listenerAdded = "true";
+  }
 }
 
-// function createInputField(container, value, placeholder, includeClearButton) {
-//   const inputGroup = document.createElement("div");
-//   inputGroup.classList.add("input-group");
+export function collectInputValues(containerId) {
+  const values = [];
 
-//   let inputHtml = `<input type="text" class="form-control" placeholder="${placeholder}" value="${value}">`;
+  const container = document.getElementById(containerId);
 
-//   if (includeClearButton) {
-//     inputHtml += `
-//       <button type="button" class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">clear</button>`;
-//   }
+  container.querySelectorAll("input[type='text']").forEach((input) => {
+    if (input.value.trim() !== "") {
+      values.push(input.value.trim());
+    }
+  });
 
-//   inputHtml += `
-//   <button type="button" class="btn ps-1 pe-0 border-0 input-group-text text-danger remove-input">
-//     <span class="material-icons">remove</span>
-//   </button>`;
-
-//   inputGroup.innerHTML = inputHtml;
-
-//   // Add event listeners for remove and clear buttons
-//   const removeButton = inputGroup.querySelector(".remove-input");
-//   removeButton.addEventListener("click", (event) => {
-//     container.removeChild(event.target.closest(".input-group"));
-//   });
-
-//   if (includeClearButton) {
-//     const clearButton = inputGroup.querySelector(".clear-button");
-//     clearButton.addEventListener("click", () => {
-//       inputGroup.querySelector("input[type='text']").value = "";
-//     });
-//   }
-
-//   container.appendChild(inputGroup);
-// }
+  return values;
+}
