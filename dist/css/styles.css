@@ -11938,6 +11938,7 @@ p {
 }
 #registerModal form input, #registerModal form textarea, #loginModal form input, #loginModal form textarea, #editProfileModal form input, #editProfileModal form textarea, #editListingModal form input, #editListingModal form textarea {
   border: 1px solid #9D9696;
+  border-radius: 0;
 }
 #registerModal form label, #loginModal form label, #editProfileModal form label, #editListingModal form label {
   margin-bottom: 2px;

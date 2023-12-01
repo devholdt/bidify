@@ -96,4 +96,40 @@ export async function listingInteractions(event) {
       );
     }
   }
+
+  //   if (targetElement.classList.contains("btn-edit")) {
+  //     const id = targetElement.dataset.id;
+
+  //     handleInputs(
+  //       "editMediaInputsContainer",
+  //       "Edit",
+  //       "Media",
+  //       "media URL",
+  //       true
+  //     );
+  //     handleInputs("editTagInputsContainer", "Edit", "Tag", "tag");
+
+  //     try {
+  //       const form = document.querySelector("#editListingModal form");
+  //       const listing = await getListing(id);
+  //       const titleInput = document.querySelector("#editListingTitle");
+  //       const descriptionInput = document.querySelector(
+  //         "#editListingDescription"
+  //       );
+
+  //       const mediaContainer = document.getElementById(
+  //         "editMediaInputsContainer"
+  //       );
+  //       listing.media.forEach((mediaUrl) => {
+  //         createInputField(mediaContainer, mediaUrl, "media URL", true);
+  //       });
+
+  //       const tagContainer = document.getElementById("editTagInputsContainer");
+  //       listing.tags.forEach((tag) => {
+  //         createInputField(tagContainer, tag, "tag", false);
+  //       });
+  //     } catch {
+  //       console.log("An error occured");
+  //     }
+  //   }
 }

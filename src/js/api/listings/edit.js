@@ -1,5 +1,4 @@
 import { API_URLS, headers } from "../index.js";
-// import { alert } from "../../utilities/index.js";
 
 export async function editListing(id, title, description) {
   const url = `${API_URLS.LISTINGS}/${id}`;
