@@ -1,7 +1,11 @@
 import * as auth from "../auth/index.js";
 import { deleteListingEvent, bidEvent } from "../events/index.js";
 import { DEFAULT_URLS } from "./index.js";
-import { formatDate, getListingValues } from "../utilities/index.js";
+import {
+  formatDate,
+  getListingValues,
+  updateCountdown,
+} from "../utilities/index.js";
 import { getUser } from "../storage/index.js";
 import { setQueryString, removeQueryString } from "../utilities/index.js";
 
@@ -146,6 +150,21 @@ export function listingModalPreview(listing, button) {
 
     media.innerHTML = "";
 
+    const listingEndsAt = new Date(listing.endsAt);
+
+    const countdownContainer = document.createElement("div");
+    countdownContainer.classList.add("countdown");
+
+    const daysElement = document.createElement("span");
+    const hoursElement = document.createElement("span");
+    const minsElement = document.createElement("span");
+    const secsElement = document.createElement("span");
+
+    [daysElement, hoursElement, minsElement, secsElement].forEach((element) => {
+      element.classList.add("countdown-part");
+      countdownContainer.appendChild(element);
+    });
+
     if (listing.media.length < 1) {
       media.classList.remove("media-carousel");
       media.innerHTML = `
@@ -155,8 +174,8 @@ export function listingModalPreview(listing, button) {
 
       media.innerHTML = `
       <div id="listingModalCarousel" class="carousel slide carousel-fade">
-        <div id="listingModalCarouselInner" class="carousel-inner"></div>
-        <div class="carousel-indicators"></div>
+      <div id="listingModalCarouselInner" class="carousel-inner"></div>
+      <div class="carousel-indicators"></div>
       </div>`;
 
       const carouselIndicators = document.querySelector(".carousel-indicators");
@@ -187,6 +206,29 @@ export function listingModalPreview(listing, button) {
       media.classList.remove("media-carousel");
       media.innerHTML = `
       <img src="${listing.media[0]}" class="w-100 h-100 border object-fit-cover" alt="Listing media">`;
+    }
+
+    modal.querySelector("#listingModalMedia").appendChild(countdownContainer);
+
+    updateCountdown(
+      listingEndsAt,
+      daysElement,
+      hoursElement,
+      minsElement,
+      secsElement
+    );
+    countdownContainer.countdownInterval = setInterval(() => {
+      updateCountdown(
+        listingEndsAt,
+        daysElement,
+        hoursElement,
+        minsElement,
+        secsElement
+      );
+    }, 1000);
+
+    if (daysElement.innerHTML === "Expired") {
+      countdownContainer.classList.add("listing-expired");
     }
 
     title.innerHTML = `

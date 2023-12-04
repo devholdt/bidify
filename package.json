@@ -5,6 +5,7 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
+    "build": "sass src/scss:dist/css",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "sass src/scss:dist/css --watch",
     "start": "live-server --open=src/html",

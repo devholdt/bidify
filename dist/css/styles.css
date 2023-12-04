@@ -12276,14 +12276,67 @@ p {
   margin-left: auto;
 }
 
-#listingModalDescription {
+#listingModal #listingModalDescription {
   white-space: pre-wrap;
+}
+#listingModal #listingModalMedia .listing-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: auto;
+}
+#listingModal #listingModalMedia .countdown {
+  display: flex;
+  position: absolute;
+  align-self: center;
+  gap: 5px;
+  bottom: 25px;
+  left: 25px;
+  z-index: 1;
+}
+#listingModal #listingModalMedia .countdown .countdown-part {
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.33);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 1.4em;
+  height: fit-content;
+}
+#listingModal #listingModalMedia .countdown .countdown-part span {
+  font-size: 0.8em;
+}
+#listingModal #listingModalMedia .listing-expired {
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  width: inherit;
+  left: initial;
+  bottom: initial;
+}
+#listingModal #listingModalMedia .listing-expired .countdown-part:first-of-type {
+  font-size: 3.5rem;
+  background-color: #FF5252;
+  padding: 0.3em 0.9em;
+  transform: rotate(-10deg);
 }
 
 .listing-bid .list-group-item {
   background-color: white;
 }
 
+@media (min-width: 992px) {
+  #listingModal .countdown {
+    bottom: 0;
+    top: 25px;
+  }
+  #listingModal .listing-expired {
+    top: initial;
+    bottom: initial;
+  }
+}
 footer {
   display: flex;
   flex-shrink: 0;
