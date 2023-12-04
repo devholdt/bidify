@@ -1,5 +1,6 @@
 import { handleInputs, removeQueryString, setQueryString } from "./index.js";
 import { getListing } from "../api/index.js";
+import { alert } from "./index.js";
 
 document.addEventListener("reload", removeQueryString("id"));
 
@@ -84,7 +85,12 @@ export async function getListingValues(event) {
         listing.tags
       );
     } catch {
-      console.log("An error occured");
+      alert(
+        "danger",
+        "An error occured when attempting to get listing values",
+        ".alert-editlisting",
+        null
+      );
     }
   }
 }

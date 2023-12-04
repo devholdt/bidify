@@ -2,6 +2,7 @@ import { DEFAULT_URLS, URLS } from "./index.js";
 import { getItem, getUser } from "../storage/index.js";
 import { API_URLS, headers } from "../api/index.js";
 import { logoutUser } from "../auth/logout.js";
+import { alert } from "../utilities/index.js";
 
 export async function renderNav() {
   const { pathname } = document.location;
@@ -94,9 +95,13 @@ export async function renderNav() {
     </li>`
       )
       .join("");
-  } catch (error) {
-    console.error(
-      `An error occured when attempting to render nav menu: ${error}`
+  } catch {
+    alert(
+      "danger",
+      "An error occured when attempting to render navigation menu",
+      ".alert-absolute",
+      null,
+      false
     );
   }
 }

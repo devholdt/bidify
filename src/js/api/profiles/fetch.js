@@ -1,5 +1,5 @@
-import { API_URLS } from "../index.js";
-import { headers } from "../index.js";
+import { API_URLS, headers } from "../index.js";
+import { alert } from "../../utilities/index.js";
 
 export async function getProfiles() {
   const response = await fetch(`${API_URLS.PROFILES}?_listings=true`, {
@@ -26,9 +26,13 @@ export async function getProfile(name, bids = false) {
     }
 
     throw new Error(response.statusText);
-  } catch (error) {
-    console.error(`Error fetching profile: `, error);
-    throw error;
+  } catch {
+    alert(
+      "danger",
+      "An error occured when fetching profile",
+      ".alert-absolute",
+      null
+    );
   }
 }
 
@@ -43,8 +47,12 @@ export async function getProfileListings(name) {
     }
 
     throw new Error(response.statusText);
-  } catch (error) {
-    console.error("Error fetching profile listings");
-    throw error;
+  } catch {
+    alert(
+      "danger",
+      "An error occured when fetching profile listings",
+      ".alert-absolute",
+      null
+    );
   }
 }
