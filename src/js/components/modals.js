@@ -109,7 +109,16 @@ export function listingModalPreview(listing, button) {
 
     let sellerName;
 
-    if (listing.seller) {
+    sellerName = listing.seller.name;
+
+    listingModalFooterDynamic.innerHTML = "";
+
+    if (getUser()) {
+      listingModalFooterDynamic.innerHTML = listingForm;
+
+      const listingModalForm = document.querySelector("#listingModalForm");
+      listingModalForm.addEventListener("submit", bidEvent);
+
       if (listing.seller.name === getUser().name) {
         sellerName = "you";
         listingModalFooterDynamic.innerHTML = interactionButtons;
@@ -120,23 +129,7 @@ export function listingModalPreview(listing, button) {
         modal
           .querySelector(".btn-edit")
           .addEventListener("click", getListingValues);
-      } else {
-        sellerName = listing.seller.name;
-        listingModalFooterDynamic.innerHTML = listingForm;
-
-        const listingModalForm = document.querySelector("#listingModalForm");
-        listingModalForm.addEventListener("submit", bidEvent);
       }
-    } else {
-      sellerName = getUser().name;
-      listingModalFooterDynamic.innerHTML = interactionButtons;
-
-      modal
-        .querySelector(".btn-delete")
-        .addEventListener("click", deleteListingEvent);
-      modal
-        .querySelector(".btn-edit")
-        .addEventListener("click", getListingValues);
     }
 
     modal.addEventListener("hide.bs.modal", () => {

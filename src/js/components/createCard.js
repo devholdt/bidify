@@ -107,40 +107,42 @@ export function createCard(listing, containerSelector) {
   const cardTop = card.querySelector(".card-top");
   listingModalPreview(listing, cardTop);
 
-  if (listing.seller && listing.seller.name !== getUser().name) {
-    const cardButton = document.createElement("button");
-    cardButton.classList.add("btn-gavel");
-    cardButton.setAttribute("data-bs-toggle", "modal");
-    cardButton.setAttribute("data-bs-target", "#listingModal");
-    cardButton.innerHTML = `<p class="material-icons">gavel</p>`;
+  if (getUser()) {
+    if (listing.seller && listing.seller.name !== getUser().name) {
+      const cardButton = document.createElement("button");
+      cardButton.classList.add("btn-gavel");
+      cardButton.setAttribute("data-bs-toggle", "modal");
+      cardButton.setAttribute("data-bs-target", "#listingModal");
+      cardButton.innerHTML = `<p class="material-icons">gavel</p>`;
 
-    card.querySelector(".card-buttons").prepend(cardButton);
+      card.querySelector(".card-buttons").prepend(cardButton);
 
-    const gavelButton = card.querySelector(".btn-gavel");
-    listingModalPreview(listing, gavelButton);
-  } else if (!listing.seller || listing.seller.name == getUser().name) {
-    const cardButtons = card.querySelector(".card-buttons");
-    cardButtons.classList.remove("justify-content-between");
-    cardButtons.classList.add("justify-content-end");
-    cardButtons.innerHTML = `
-    <button class="btn btn-light rounded-0 rounded-start btn-edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
-      <span class="material-icons">edit</span>
-    </button>
-    <button class="btn btn-light rounded-0 rounded-end btn-delete" data-id="${listing.id}">
-      <span class="material-icons">delete</span>
-    </button>`;
+      const gavelButton = card.querySelector(".btn-gavel");
+      listingModalPreview(listing, gavelButton);
+    } else if (!listing.seller || listing.seller.name == getUser().name) {
+      const cardButtons = card.querySelector(".card-buttons");
+      cardButtons.classList.remove("justify-content-between");
+      cardButtons.classList.add("justify-content-end");
+      cardButtons.innerHTML = `
+      <button class="btn btn-light rounded-0 rounded-start btn-edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
+        <span class="material-icons">edit</span>
+      </button>
+      <button class="btn btn-light rounded-0 rounded-end btn-delete" data-id="${listing.id}">
+        <span class="material-icons">delete</span>
+      </button>`;
 
-    cardButtons
-      .querySelector(".btn-delete")
-      .addEventListener("click", deleteListingEvent);
+      cardButtons
+        .querySelector(".btn-delete")
+        .addEventListener("click", deleteListingEvent);
 
-    cardButtons
-      .querySelector(".btn-edit")
-      .addEventListener("click", getListingValues);
+      cardButtons
+        .querySelector(".btn-edit")
+        .addEventListener("click", getListingValues);
 
-    document
-      .querySelector("#editListingForm")
-      .addEventListener("submit", editListingEvent);
+      document
+        .querySelector("#editListingForm")
+        .addEventListener("submit", editListingEvent);
+    }
   }
 }
 
