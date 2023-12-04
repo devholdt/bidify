@@ -1,6 +1,7 @@
 import { updateCountdown, scrollingTitle } from "../utilities/index.js";
-import { DEFAULT_URLS } from "./index.js";
-import { listingModalPreview } from "./index.js";
+import { DEFAULT_URLS, listingModalPreview } from "./index.js";
+import { getUser } from "../storage/index.js";
+import { listingInteractions } from "../auth/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -23,7 +24,7 @@ export function createCard(listing, containerSelector) {
   }
 
   const card = document.createElement("div");
-  card.classList.add("col", "mb-4");
+  card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4");
 
   card.innerHTML = `
         <div class="listing-card" data-id="${listing.id}">
@@ -37,7 +38,7 @@ export function createCard(listing, containerSelector) {
               ${listingBids}
               </div>
 
-              <div class="card-buttons">
+              <div class="card-buttons d-flex justify-content-between align-items-end">
                   <button class="btn-heart">
                       <p class="material-icons">favorite_border</p>
                   </button>
@@ -92,19 +93,39 @@ export function createCard(listing, containerSelector) {
 
   scrollingTitle();
 
-  const cardButton = document.createElement("button");
-  cardButton.classList.add("btn-gavel");
-  cardButton.setAttribute("data-bs-toggle", "modal");
-  cardButton.setAttribute("data-bs-target", "#listingModal");
-  cardButton.innerHTML = `<p class="material-icons">gavel</p>`;
-
-  card.querySelector(".card-buttons").prepend(cardButton);
-
   const cardTop = card.querySelector(".card-top");
-  const gavelButton = card.querySelector(".btn-gavel");
-
   listingModalPreview(listing, cardTop);
-  listingModalPreview(listing, gavelButton);
+
+  if (listing.seller && listing.seller.name !== getUser().name) {
+    const cardButton = document.createElement("button");
+    cardButton.classList.add("btn-gavel");
+    cardButton.setAttribute("data-bs-toggle", "modal");
+    cardButton.setAttribute("data-bs-target", "#listingModal");
+    cardButton.innerHTML = `<p class="material-icons">gavel</p>`;
+
+    card.querySelector(".card-buttons").prepend(cardButton);
+
+    const gavelButton = card.querySelector(".btn-gavel");
+    listingModalPreview(listing, gavelButton);
+  } else if (!listing.seller || listing.seller.name == getUser().name) {
+    const cardButtons = card.querySelector(".card-buttons");
+    cardButtons.classList.remove("justify-content-between");
+    cardButtons.classList.add("justify-content-end");
+    cardButtons.innerHTML = `
+    <button class="btn btn-light rounded-0 rounded-start btn-edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
+      <span class="material-icons">edit</span>
+    </button>
+    <button class="btn btn-light rounded-0 rounded-end btn-delete" data-id="${listing.id}">
+      <span class="material-icons">delete</span>
+    </button>`;
+
+    cardButtons
+      .querySelector(".btn-delete")
+      .addEventListener("click", listingInteractions);
+    cardButtons
+      .querySelector(".btn-edit")
+      .addEventListener("click", listingInteractions);
+  }
 }
 
 export function createBidCard(bid, containerSelector) {

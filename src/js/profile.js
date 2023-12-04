@@ -10,6 +10,7 @@ if (!userDataLocal) {
 
 components.authModals();
 components.renderNav();
+components.createListingForm();
 
 profiles.profileListings();
 profiles.profileBids();

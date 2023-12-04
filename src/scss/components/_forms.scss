@@ -10,7 +10,7 @@
     }
 }
 
-#createListingAccordion form {
+#createListingAccordion form, #editListingModal form {
     label {
         margin-bottom: 0;
     }
@@ -20,30 +20,35 @@
         height: 250px;
     }
 
+    input, textarea {
+        border: 1px solid $gray-light;
+        border-radius: 0;
+    }
+
     button[type="submit"] {
         width: 110px;
     }
 
-    button.input-group-text {
-        max-width: 50px;
+    #editListingTitle {
+        height: 43px;
     }
 
-    #addMediaButton, #addTagButton, .remove-input {
-        width: 25px;
-        height: 25px;
+    #editListingDescription {
+        height: 435px;
+        margin-bottom: 1.1em;
     }
 }
 
-#registerModal form, #loginModal form, #editProfileModal form {
+#registerModal form, #loginModal form, #editProfileModal form, #editListingModal form {
     width: 300px;
 
     div {
         padding-bottom: 6px;
     }
 
-    input {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    input, textarea {
         border: 1px solid $gray-light;
+        border-radius: 0;
     }
 
     label {

@@ -176,63 +176,134 @@
         <div class="modal modal-xl fade shadow" id="listingModal" tabindex="-1" aria-labelledby="listingModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content d-flex flex-row justify-content-center rounded-0 p-2">
+                <div class="modal-content rounded-0">
+                    <button type="button" class="btn-close position-absolute end-0 p-2 m-1 shadow-none"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
 
-                    <div id="listingModalMedia" class="col-6 d-flex listing-media p-2 w-50"></div>
+                    <div class="row p-3">
+                        <div id="listingModalMedia" class="col-12 col-lg-6 d-flex listing-media"></div>
 
-                    <div class="col-6 d-flex flex-column w-50 p-2 pe-4 listing-details">
+                        <div class="col-12 col-lg-6 py-2 d-flex flex-column listing-detail">
 
-                        <button type="button" class="btn-close position-absolute end-0 pt-0 pe-4 shadow-none"
-                            data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-header flex-column align-items-start ps-0 py-0 border-0">
+                                <p id="listingModalTitle"
+                                    class="w-100 d-flex justify-content-between fs-6 rounded-0 mb-0 border-bottom px-2 py-1">
+                                </p>
+                            </div>
 
-                        <div class="modal-header flex-column align-items-start ps-0 py-0 border-0">
-                            <p id="listingModalTitle"
-                                class="w-100 d-flex justify-content-between fs-6 rounded-0 mb-0 border-bottom px-2 py-1">
-                            </p>
-                        </div>
+                            <div id="listingModalBody"
+                                class="modal-body d-flex flex-column justify-content-between pb-0 me-3">
+                                <div id="listingModalDescription" class="pb-4"></div>
+                            </div>
 
-                        <div id="listingModalBody"
-                            class="modal-body d-flex flex-column justify-content-between pb-0 me-3">
-                            <div id="listingModalDescription" class="pb-4"></div>
-                        </div>
+                            <div class="modal-footer justify-content-start m-auto border-0 w-100">
 
-                        <div class="modal-footer justify-content-start m-auto ps-0 pt-0 me-2pe-0 border-0">
+                                <h6 class="badge bg-dark rounded-0 justify-content-start d-flex w-100 ms-0 mt-0">
+                                    Details
+                                </h6>
 
-                            <h6 class="badge bg-dark rounded-0 justify-content-start d-flex w-100 ms-0 mt-0">
-                                Details
-                            </h6>
+                                <ul class="list-group list-group-flush w-100">
+                                    <li class="list-group-item fw-medium d-flex justify-content-between">Seller:<span
+                                            id="listingModalSeller" class="fw-light"></span></li>
+                                    <li class="list-group-item fw-medium d-flex justify-content-between">Created:<span
+                                            id="listingModalCreated" class="fw-light"></span></li>
+                                    <li class="list-group-item fw-medium d-flex justify-content-between">Ends at:<span
+                                            id="listingModalEndsAt" class="fw-light"></span>
+                                    </li>
+                                    <li class="list-group-item fw-medium d-flex justify-content-between">Tags:<span
+                                            id="listingModalTags"></span></li>
+                                </ul>
 
-                            <ul class="list-group list-group-flush w-100">
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Seller: <span
-                                        id="listingModalSeller" class="fw-light"></span></li>
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Created: <span
-                                        id="listingModalCreated" class="fw-light"></span></li>
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Ends at: <span
-                                        id="listingModalEndsAt" class="fw-light"></span>
-                                </li>
-                                <li class="list-group-item fw-medium d-flex justify-content-between">Tags: <span
-                                        id="listingModalTags"></span></li>
-                            </ul>
-
-                            <form id="listingModalForm"
-                                class="d-flex align-items-end w-100 justify-content-between align-items-center bg-white px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
-
-                                <div class="mb-3 ps-0">
-                                    <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
-                                    <input type="number" class="form-control shadow-sm" name="amount" id="amount"
-                                        min="1" placeholder="credit(s)">
-                                </div>
-
-                                <button type="submit"
-                                    class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm">Place
-                                    bid</button>
-                            </form>
-                            <div id="listingModalButtons" class="btn-group ms-auto" role="group"
-                                aria-label="Listing interaction">
-                                <button type="button" class="btn btn-outline-dark">Edit</button>
-                                <button type="button" class="btn btn-outline-dark">Delete</button>
+                                <div id="listingModalFooterDynamic" class="w-100"></div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal-lg fade shadow" id="editListingModal" tabindex="-1" data-bs-backdrop="static"
+            data-bs-keyboard="false" aria-labelledby="editListingModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="btn d-flex p-0 align-items-center back-button"
+                            data-bs-toggle="modal" aria-label="Back">
+                            <span class="material-icons">arrow_back_ios</span>
+                        </button>
+                        <p class="modal-title fs-4 text-center w-100 fw-semibold" id="editListingModalLabel">Edit
+                            listing</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <form class="d-flex justify-content-center mx-auto mt-3 row w-100">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="editListingTitle" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="editListingTitle" name="title"
+                                        placeholder="title">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="editListingDescription" class="form-label">Description</label>
+                                    <textarea class="form-control" name="description" id="editListingDescription"
+                                        placeholder="description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div>
+                                    <div class="d-flex justify-content-between pb-0">
+                                        <label for="editListingMedia" class="form-label">Media URL</label>
+                                        <span id="editMediaInputCount" class="text-danger fw-light">max.
+                                            4</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div id="editMediaInputsContainer" class="w-100 me-1">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control mb-0" name="media"
+                                                    id="editListingMedia" placeholder="media URL">
+                                                <button type="button"
+                                                    class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">clear</button>
+                                                <button type="button" id="addEditMediaButton"
+                                                    class="btn border-0 input-group-text text-primary">
+                                                    <span class="material-icons">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between pb-0">
+                                        <label for="editListingTags" class="form-label mb-0">Tags</label>
+                                        <span class="text-danger fw-light">max. 6</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div id="editTagInputsContainer" class="w-100 me-1">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="editListingTag"
+                                                    name="editTags" placeholder="tag">
+                                                <button type="button" id="addEditTagButton"
+                                                    class="btn border-0 input-group-text text-primary">
+                                                    <span class="material-icons">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-3 gap-3 modal-buttons">
+                                <button type="button" class="btn btn-dark cancel-button"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary text-uppercase submit-button">Edit</button>
+                            </div>
+
+                            <div class="alert-editlisting alert-wrapper mt-2"></div>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -350,15 +421,15 @@
                                     </div>
                                     <div class="d-flex">
 
-                                        <div id="mediaInputsContainer" class="w-100 me-1">
-                                            <div class="input-group mb-2">
+                                        <div id="createMediaInputsContainer"
+                                            class="w-100 me-1 d-flex flex-column gap-2">
+                                            <div class="input-group">
                                                 <input type="text" class="form-control" name="media"
                                                     id="createListingMedia" placeholder="media URL">
                                                 <button type="button"
-                                                    class="btn btn-outline-dark btn-sm rounded-end input-group-text clear-button"
-                                                    id="clearUrlButton">clear</button>
-                                                <button type="button" id="addMediaButton"
-                                                    class="btn border-0 input-group-text text-primary">
+                                                    class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">clear</button>
+                                                <button type="button" id="addCreateMediaButton"
+                                                    class="btn ps-1 pe-0 border-0 input-group-text text-primary add-media-button">
                                                     <span class="material-icons">add</span>
                                                 </button>
                                             </div>
@@ -369,17 +440,17 @@
 
                                 <div class="col-12 mb-3">
                                     <div class="d-flex justify-content-between">
-                                        <label for="createListingtTags" class="form-label">Tags</label>
-                                        <span id="tagInputCount" class="text-danger fw-light">max. 4</span>
+                                        <label for="createListingTags" class="form-label">Tags</label>
+                                        <span id="tagInputCount" class="text-danger fw-light">max. 6</span>
                                     </div>
                                     <div class="d-flex">
 
-                                        <div id="tagInputsContainer" class="w-100 me-1">
-                                            <div class="input-group mb-2">
-                                                <input type="text" class="form-control rounded-end"
-                                                    id="createListingTag" name="tags" placeholder="tag">
-                                                <button type="button" id="addTagButton"
-                                                    class="btn border-0 input-group-text text-primary">
+                                        <div id="createTagInputsContainer" class="w-100 me-1 d-flex flex-column gap-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="createListingTag"
+                                                    name="tags" placeholder="tag">
+                                                <button type="button" id="addCreateTagButton"
+                                                    class="btn ps-1 pe-0 border-0 input-group-text text-primary add-tag-button">
                                                     <span class="material-icons">add</span>
                                                 </button>
                                             </div>
@@ -437,7 +508,7 @@
             </div>
         </div>
 
-        <div class="message-container message-fixed" title="Click to remove"></div>
+        <div class="alert-absolute alert-wrapper position-fixed top-50 start-50 translate-middle"></div>
 
     </main>
 

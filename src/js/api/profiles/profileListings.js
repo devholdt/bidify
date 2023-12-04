@@ -13,7 +13,7 @@ export async function profileListings() {
         document.querySelector(".profile-listings");
 
       if (listings.length > 0) {
-        profileListingsContainer.classList.add("row", "row-cols-3");
+        profileListingsContainer.classList.add("row");
         listings
           .slice(0, 6)
           .forEach((listing) => createCard(listing, ".profile-listings"));

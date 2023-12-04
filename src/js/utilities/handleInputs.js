@@ -1,52 +1,72 @@
 export function handleInputs(
   containerElement,
+  request,
   type,
   placeholder,
-  includeButton
+  includeButton,
+  maxCount,
+  initialValues = []
 ) {
   const container = document.getElementById(containerElement);
+  const addButton = document.getElementById(`add${request}${type}Button`);
 
-  document.getElementById(`add${type}Button`).addEventListener("click", () => {
-    if (container.children.length === 4) {
-      return;
-    }
+  const createInputField = (value = "") => {
+    const inputGroup = document.createElement("div");
+    inputGroup.classList.add("input-group");
 
-    const newInput = document.createElement("div");
-    newInput.classList.add("input-group", "mb-2");
-
-    let inputHtml = `<input type="text" class="form-control rounded-end" placeholder="${placeholder}">`;
+    let inputHtml = `<input type="text" class="form-control" placeholder="${placeholder}" value="${value}" name="${type.toLowerCase()}">`;
 
     if (includeButton) {
       inputHtml += `
-          <button type="button" 
-          class="btn btn-outline-dark btn-sm rounded-end input-group-text clear-button">
-              Clear
-          </button>`;
+        <button type="button" class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">clear</button>`;
     }
 
     inputHtml += `
-        <button type="button" class="btn border-0 input-group-text text-danger remove-input">
-          <span class="material-icons">remove</span>
-        </button>`;
+    <button type="button" class="btn ps-1 pe-0 border-0 input-group-text text-danger remove-input">
+      <span class="material-icons">remove</span>
+    </button>`;
 
-    newInput.innerHTML = inputHtml;
+    inputGroup.innerHTML = inputHtml;
 
-    container.appendChild(newInput);
+    const removeButton = inputGroup.querySelector(".remove-input");
+    removeButton.addEventListener("click", (event) => {
+      container.removeChild(event.target.closest(".input-group"));
+    });
 
-    const removeButton = newInput.querySelector(".remove-input");
-    if (removeButton) {
-      removeButton.addEventListener("click", (event) => {
-        container.removeChild(event.target.closest(".input-group"));
+    if (includeButton) {
+      const clearButton = inputGroup.querySelector(".clear-button");
+      clearButton.addEventListener("click", () => {
+        inputGroup.querySelector("input[name='media']").value = "";
       });
     }
 
-    if (includeButton) {
-      const clearButton = newInput.querySelector(".clear-button");
-      if (clearButton) {
-        clearButton.addEventListener("click", () => {
-          newInput.querySelector("input[type='text']").value = "";
-        });
+    container.appendChild(inputGroup);
+  };
+
+  let startIndex = container.querySelector("input[type='text']").value ? 1 : 0;
+
+  initialValues.slice(startIndex).forEach((value) => createInputField(value));
+
+  if (!addButton.dataset.listenerAdded) {
+    addButton.addEventListener("click", () => {
+      if (container.querySelectorAll(".input-group").length < maxCount) {
+        createInputField();
       }
+    });
+    addButton.dataset.listenerAdded = "true";
+  }
+}
+
+export function collectInputValues(containerId) {
+  const values = [];
+
+  const container = document.getElementById(containerId);
+
+  container.querySelectorAll("input[type='text']").forEach((input) => {
+    if (input.value.trim() !== "") {
+      values.push(input.value.trim());
     }
   });
+
+  return values;
 }

@@ -2,24 +2,32 @@ import { createListingEvent } from "../api/index.js";
 import { handleInputs } from "../utilities/index.js";
 
 export const createListingForm = () => {
-  document
-    .querySelector("form#createListingForm")
-    .addEventListener("submit", createListingEvent);
+  const form = document.querySelector("form#createListingForm");
+  const mediaInputsContainer = document.getElementById(
+    "createMediaInputsContainer"
+  );
 
-  // Handles adding and removing additional media and tag inputs
-  handleInputs("mediaInputsContainer", "Media", "media URL", true);
-  handleInputs("tagInputsContainer", "Tag", "tag");
+  form.addEventListener("submit", createListingEvent);
 
-  // Sets the default date input value to local date + one day
+  handleInputs(
+    "createMediaInputsContainer",
+    "Create",
+    "Media",
+    "media URL",
+    true,
+    4
+  );
+  handleInputs("createTagInputsContainer", "Create", "Tag", "tag", false, 6);
+
   const todayDate = new Date();
   const tomorrowDate = todayDate.setDate(todayDate.getDate() + 1);
   document.getElementById("createListingDate").valueAsDate = new Date(
     tomorrowDate
   );
 
-  // Button to clear the media URL input(s)
-  const clearButton = document.querySelector(".clear-button");
-  clearButton.addEventListener("click", () => {
-    document.querySelector("input[name='media']").value = "";
+  mediaInputsContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("clear-button")) {
+      event.target.closest(".input-group").querySelector("input").value = "";
+    }
   });
 };
