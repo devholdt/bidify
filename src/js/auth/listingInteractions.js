@@ -1,8 +1,4 @@
-import {
-  alert,
-  manageInputFields,
-  collectInputValues,
-} from "../utilities/index.js";
+import { alert, handleInputs, collectInputValues } from "../utilities/index.js";
 import { API_URLS, getListing, editListing } from "../api/index.js";
 
 export async function listingInteractions(event) {
@@ -47,6 +43,12 @@ export async function listingInteractions(event) {
     const mediaContainer = document.getElementById("editMediaInputsContainer");
     const tagContainer = document.getElementById("editTagInputsContainer");
 
+    mediaContainer.addEventListener("click", (event) => {
+      if (event.target.classList.contains("clear-button")) {
+        event.target.closest(".input-group").querySelector("input").value = "";
+      }
+    });
+
     function resetInputs() {
       const resetContainer = (containerId) => {
         const container = document.getElementById(containerId);
@@ -71,7 +73,13 @@ export async function listingInteractions(event) {
         mediaContainer.querySelector("input[type='text']").value =
           listing.media[0];
       }
-      manageInputFields(
+
+      if (listing.tags.length > 0) {
+        tagContainer.querySelector("input[type='text']").value =
+          listing.tags[0];
+      }
+
+      handleInputs(
         "editMediaInputsContainer",
         "Edit",
         "Media",
@@ -81,11 +89,7 @@ export async function listingInteractions(event) {
         listing.media
       );
 
-      if (listing.tags.length > 0) {
-        tagContainer.querySelector("input[type='text']").value =
-          listing.tags[0];
-      }
-      manageInputFields(
+      handleInputs(
         "editTagInputsContainer",
         "Edit",
         "Tag",

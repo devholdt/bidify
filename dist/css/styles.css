@@ -12315,6 +12315,9 @@ footer {
   padding: 6px;
   margin: 0;
 }
+.profile-details_icon p:hover {
+  cursor: pointer;
+}
 .profile-details_user img {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   width: 170px;

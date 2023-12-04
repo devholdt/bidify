@@ -1,4 +1,4 @@
-export function manageInputFields(
+export function handleInputs(
   containerElement,
   request,
   type,
@@ -14,7 +14,7 @@ export function manageInputFields(
     const inputGroup = document.createElement("div");
     inputGroup.classList.add("input-group");
 
-    let inputHtml = `<input type="text" class="form-control" placeholder="${placeholder}" value="${value}">`;
+    let inputHtml = `<input type="text" class="form-control" placeholder="${placeholder}" value="${value}" name="${type.toLowerCase()}">`;
 
     if (includeButton) {
       inputHtml += `
@@ -36,7 +36,7 @@ export function manageInputFields(
     if (includeButton) {
       const clearButton = inputGroup.querySelector(".clear-button");
       clearButton.addEventListener("click", () => {
-        inputGroup.querySelector("input[type='text']").value = "";
+        inputGroup.querySelector("input[name='media']").value = "";
       });
     }
 

@@ -1,20 +1,23 @@
 import { createListingEvent } from "../api/index.js";
-import { manageInputFields } from "../utilities/index.js";
+import { handleInputs } from "../utilities/index.js";
 
 export const createListingForm = () => {
-  document
-    .querySelector("form#createListingForm")
-    .addEventListener("submit", createListingEvent);
+  const form = document.querySelector("form#createListingForm");
+  const mediaInputsContainer = document.getElementById(
+    "createMediaInputsContainer"
+  );
 
-  manageInputFields(
-    "editMediaInputsContainer",
-    "Edit",
+  form.addEventListener("submit", createListingEvent);
+
+  handleInputs(
+    "createMediaInputsContainer",
+    "Create",
     "Media",
     "media URL",
     true,
     4
   );
-  manageInputFields("editTagInputsContainer", "Edit", "Tag", "tag", false, 6);
+  handleInputs("createTagInputsContainer", "Create", "Tag", "tag", false, 6);
 
   const todayDate = new Date();
   const tomorrowDate = todayDate.setDate(todayDate.getDate() + 1);
@@ -22,8 +25,9 @@ export const createListingForm = () => {
     tomorrowDate
   );
 
-  const clearButton = document.querySelector(".clear-button");
-  clearButton.addEventListener("click", () => {
-    document.querySelector("input[name='media']").value = "";
+  mediaInputsContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("clear-button")) {
+      event.target.closest(".input-group").querySelector("input").value = "";
+    }
   });
 };

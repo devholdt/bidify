@@ -14,15 +14,16 @@ export const authModals = () => {
 
     if (registerForm) {
       registerForm.addEventListener("submit", auth.registerEvent);
-    } else if (loginForm) {
+    }
+
+    if (loginForm) {
       loginForm.addEventListener("submit", auth.loginEvent);
-    } else if (editProfileForm) {
+    }
+
+    if (editProfileForm) {
       const input = editProfileForm.querySelector("input");
       const submit = editProfileForm.querySelector(".submit-button");
       const clearButton = document.querySelector(".clear-button");
-      clearButton.addEventListener("click", () => {
-        document.querySelector("input[name='avatar']").value = "";
-      });
 
       const handleInput = () => {
         const inputValue = input.value.trim();
@@ -31,6 +32,11 @@ export const authModals = () => {
       };
 
       input.addEventListener("input", handleInput);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        handleInput();
+      });
+
       editProfileForm.addEventListener("submit", auth.editProfileEvent);
     }
 
