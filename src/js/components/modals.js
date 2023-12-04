@@ -1,9 +1,11 @@
 import * as auth from "../auth/index.js";
-import { deleteListingEvent, editListingEvent } from "../events/index.js";
-import { bidListing } from "../api/listings/index.js";
+import { deleteListingEvent, bidEvent } from "../events/index.js";
 import { DEFAULT_URLS } from "./index.js";
 import { formatDate, getListingValues } from "../utilities/index.js";
 import { getUser } from "../storage/index.js";
+import { setQueryString, removeQueryString } from "../utilities/index.js";
+
+document.addEventListener("reload", removeQueryString("id"));
 
 export const authModals = () => {
   const formModals = document.querySelectorAll(".form-modal");
@@ -53,6 +55,7 @@ export const authModals = () => {
 
 export function listingModalPreview(listing, button) {
   button.addEventListener("click", () => {
+    setQueryString("id", listing.id);
     const modal = document.querySelector("#listingModal");
     const title = document.querySelector("#listingModalTitle");
     const media = document.querySelector("#listingModalMedia");
@@ -70,6 +73,10 @@ export function listingModalPreview(listing, button) {
     const listingModalFooterDynamic = modal.querySelector(
       "#listingModalFooterDynamic"
     );
+
+    modal.addEventListener("hide.bs.modal", () => {
+      removeQueryString("id");
+    });
 
     const listingForm = `
     <form id="listingModalForm"
@@ -117,11 +124,11 @@ export function listingModalPreview(listing, button) {
         sellerName = listing.seller.name;
         listingModalFooterDynamic.innerHTML = listingForm;
 
-        const placeBidButton = document.querySelector("#placeBidButton");
-        placeBidButton.addEventListener("click", bidListing);
+        const listingModalForm = document.querySelector("#listingModalForm");
+        listingModalForm.addEventListener("submit", bidEvent);
 
-        modal.addEventListener("hidden.bs.modal", () => {
-          document.querySelector(".alert-listing").innerHTML = "";
+        modal.addEventListener("hide.bs.modal", () => {
+          document.querySelector(".alert-preview").innerHTML = "";
           amount.value = "";
         });
       }

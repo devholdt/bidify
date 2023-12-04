@@ -21,7 +21,7 @@ export async function editListingEvent(event) {
       mediaValues,
       tagValues
     );
-  } catch (error) {
+  } catch {
     alert(
       "danger",
       "An error occured when attempting to edit listing",
