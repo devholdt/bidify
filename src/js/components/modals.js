@@ -199,9 +199,9 @@ export function listingModalPreview(listing, button) {
       )}</span>`;
 
     if (listing.description.length < 1) {
-      description.innerHTML = `<p class="fst-italic">No description</p>`;
+      description.innerHTML = `<div class="fst-italic">No description</div>`;
     } else {
-      description.innerHTML = `<p class="fw-normal">${listing.description}</p>`;
+      description.innerHTML = listing.description;
     }
 
     seller.innerHTML = sellerName;

@@ -11936,7 +11936,7 @@ p {
 #registerModal form div, #loginModal form div, #editProfileModal form div, #editListingModal form div {
   padding-bottom: 6px;
 }
-#registerModal form input, #registerModal form textarea, #loginModal form input, #loginModal form textarea, #editProfileModal form input, #editProfileModal form textarea, #editListingModal form input, #editListingModal form textarea {
+#registerModal form input, #loginModal form input, #editProfileModal form input, #editListingModal form input {
   border: 1px solid #9D9696;
   border-radius: 0;
 }
@@ -12274,6 +12274,10 @@ p {
 .create-listing .accordion {
   max-width: 978px;
   margin-left: auto;
+}
+
+#listingModalDescription {
+  white-space: pre-wrap;
 }
 
 footer {
