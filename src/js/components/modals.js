@@ -1,8 +1,9 @@
 import * as auth from "../auth/index.js";
+import { deleteListingEvent, editListingEvent } from "../events/index.js";
+import { bidListing } from "../api/listings/index.js";
 import { DEFAULT_URLS } from "./index.js";
-import { formatDate } from "../utilities/index.js";
+import { formatDate, getListingValues } from "../utilities/index.js";
 import { getUser } from "../storage/index.js";
-import { listingInteractions } from "../auth/index.js";
 
 export const authModals = () => {
   const formModals = document.querySelectorAll(".form-modal");
@@ -74,12 +75,13 @@ export function listingModalPreview(listing, button) {
     <form id="listingModalForm"
       class="d-flex align-items-end justify-content-between bg-light border align-items-center px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
       <div class="mb-3 ps-0">
-          <label for="listingModalBidAmount" class="form-label mb-0">Bid amount</label>
+          <label for="amount" class="form-label mb-0">Bid amount</label>
           <input type="number" class="form-control shadow-sm" name="amount" id="amount"
               min="1" placeholder="credit(s)">
       </div>
-      <button type="submit"
-          class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm">Place
+      <button type="submit" id="placeBidButton"
+          class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm"
+          data-id="${listing.id}">Place
           bid
       </button>
     </form>`;
@@ -103,31 +105,36 @@ export function listingModalPreview(listing, button) {
     if (listing.seller) {
       if (listing.seller.name === getUser().name) {
         sellerName = "you";
-
         listingModalFooterDynamic.innerHTML = interactionButtons;
 
         modal
           .querySelector(".btn-delete")
-          .addEventListener("click", listingInteractions);
+          .addEventListener("click", deleteListingEvent);
         modal
           .querySelector(".btn-edit")
-          .addEventListener("click", listingInteractions);
+          .addEventListener("click", getListingValues);
       } else {
         sellerName = listing.seller.name;
-
         listingModalFooterDynamic.innerHTML = listingForm;
+
+        const placeBidButton = document.querySelector("#placeBidButton");
+        placeBidButton.addEventListener("click", bidListing);
+
+        modal.addEventListener("hidden.bs.modal", () => {
+          document.querySelector(".alert-listing").innerHTML = "";
+          amount.value = "";
+        });
       }
     } else {
       sellerName = getUser().name;
-
       listingModalFooterDynamic.innerHTML = interactionButtons;
 
       modal
         .querySelector(".btn-delete")
-        .addEventListener("click", listingInteractions);
+        .addEventListener("click", deleteListingEvent);
       modal
         .querySelector(".btn-edit")
-        .addEventListener("click", listingInteractions);
+        .addEventListener("click", getListingValues);
     }
 
     media.innerHTML = "";
@@ -205,6 +212,7 @@ export function listingModalPreview(listing, button) {
       });
     }
 
+    // Remove displayed tags to not stack them every time you open modal
     modal.addEventListener("hidden.bs.modal", () => {
       tags.innerHTML = "";
     });

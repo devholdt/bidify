@@ -1,7 +1,11 @@
-import { updateCountdown, scrollingTitle } from "../utilities/index.js";
+import {
+  updateCountdown,
+  scrollingTitle,
+  getListingValues,
+} from "../utilities/index.js";
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
 import { getUser } from "../storage/index.js";
-import { listingInteractions } from "../auth/index.js";
+import { deleteListingEvent, editListingEvent } from "../events/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -121,10 +125,15 @@ export function createCard(listing, containerSelector) {
 
     cardButtons
       .querySelector(".btn-delete")
-      .addEventListener("click", listingInteractions);
+      .addEventListener("click", deleteListingEvent);
+
     cardButtons
       .querySelector(".btn-edit")
-      .addEventListener("click", listingInteractions);
+      .addEventListener("click", getListingValues);
+
+    document
+      .querySelector("#editListingForm")
+      .addEventListener("submit", editListingEvent);
   }
 }
 

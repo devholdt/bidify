@@ -1,7 +1,7 @@
 import { API_URLS, headers } from "../index.js";
+import { alert } from "../../utilities/index.js";
 
 export async function editListing(id, title, description, media, tags) {
-  const url = `${API_URLS.LISTINGS}/${id}`;
   const editedListing = {
     title: title,
     description: description,
@@ -10,16 +10,28 @@ export async function editListing(id, title, description, media, tags) {
   };
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(`${API_URLS.LISTINGS}/${id}`, {
       method: "PUT",
       body: JSON.stringify(editedListing),
       headers: headers("application/json"),
     });
 
     if (response.ok) {
+      alert(
+        "success",
+        "Listing successfully edited",
+        ".alert-absolute",
+        3000,
+        false
+      );
+
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
+
       return await response.json();
     }
-  } catch (error) {
-    console.log("An error occcured when editing listing", error);
+  } catch {
+    throw new Error(response.statusText);
   }
 }

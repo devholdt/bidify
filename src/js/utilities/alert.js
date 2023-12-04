@@ -16,7 +16,7 @@ export function alert(
 
   if (dismissible) {
     dismiss = "alert-dismissible";
-    dismissBtn = `<button type="button" class="btn-close m-auto p-0 w-25 h-100" data-bs-dismiss="alert" aria-label="Close"></button>`;
+    dismissBtn = `<button type="button" class="btn-close m-auto p-3" data-bs-dismiss="alert" aria-label="Close"></button>`;
   } else {
     dismiss = "";
     dismissBtn = "";
