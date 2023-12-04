@@ -22,6 +22,7 @@ export async function profileListings() {
       }
     }
   } catch (error) {
+    console.log(error);
     console.error(
       `An error occured when trying to get profile listings: ${error}`
     );

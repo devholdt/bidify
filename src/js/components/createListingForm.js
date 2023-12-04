@@ -1,4 +1,4 @@
-import { createListingEvent } from "../api/index.js";
+import { createListingEvent } from "../events/index.js";
 import { handleInputs } from "../utilities/index.js";
 
 export const createListingForm = () => {
