@@ -2,6 +2,7 @@ import {
   updateCountdown,
   scrollingTitle,
   getListingValues,
+  formatDate,
 } from "../utilities/index.js";
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
 import { getUser } from "../storage/index.js";
@@ -85,6 +86,12 @@ export function createCard(listing, containerSelector) {
 
   listingsContainer.appendChild(card);
 
+  if (daysElement.innerHTML === "Expired") {
+    card.querySelector(".card-img-top").style.opacity = "50%";
+    card.querySelector(".card-body").style.opacity = "50%";
+    card.querySelector(".countdown-part").style.backgroundColor = "#FF5252";
+  }
+
   const titleElement = document.createElement("h5");
   titleElement.classList.add("card-title", "fw-bold");
   titleElement.textContent = listing.title;
@@ -139,20 +146,86 @@ export function createCard(listing, containerSelector) {
 
 export function createBidCard(bid, containerSelector) {
   const bidsContainer = document.querySelector(containerSelector);
-
   const card = document.createElement("div");
-  card.classList.add("col", "mb-4");
+  card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4", "listing-bid");
+
+  let listingMedia = "";
+
+  if (bid.listing.media.length === 0) {
+    listingMedia = `<img src="../../src/images/bidify_nomediasvg.svg" class="card-img-top no-media-found" alt="Listing image">`;
+  } else {
+    listingMedia = `<img src="${bid.listing.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
+  }
+
+  const listingEndsAt = new Date(bid.listing.endsAt);
+
   card.innerHTML = `
-  <div class="card" id="${bid.id}">
-    <div class="card-body">
-      <p>Name: ${bid.bidderName}</p>
-      <p>Amount: ${bid.amount}c</p>
+  <div class="listing-card" id="${bid.listing.id}">
+    <div class="card">
+
+    <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">
+      ${listingMedia}
     </div>
-    <div class="card-body d-flex justify-content-between">
-      <p>Created: ${bid.created}</p>
-      <p>id: ${bid.id}</p>
+
+      <div class="card-body d-flex flex-column justify-content-between border-0 w-100 m-0 p-0">
+        <ul class="list-group list-group-flush w-100">
+
+          <li class="list-group-item fw-medium d-flex justify-content-between">
+            Amount:
+            <span class="fw-light">${bid.amount} credit(s)</span>
+          </li>
+
+          <li class="list-group-item fw-medium d-flex justify-content-between">
+            Date:
+            <span class="fw-light">${formatDate(new Date(bid.created))}</span>
+          </li>
+
+          <li class="list-group-item fw-medium d-flex justify-content-between">
+            Bid ID:
+            <span class="fw-light">${bid.id.slice(0, 8)}</span>
+          </li>
+  
+        </ul>
+      </div>
+
     </div>
   </div>`;
 
+  const countdownContainer = document.createElement("div");
+  countdownContainer.classList.add("countdown");
+
+  const daysElement = document.createElement("span");
+  const hoursElement = document.createElement("span");
+  const minsElement = document.createElement("span");
+  const secsElement = document.createElement("span");
+
+  [daysElement, hoursElement, minsElement, secsElement].forEach((element) => {
+    element.classList.add("countdown-part");
+    countdownContainer.appendChild(element);
+  });
+
+  card.querySelector(".card-top").appendChild(countdownContainer);
+
+  updateCountdown(
+    listingEndsAt,
+    daysElement,
+    hoursElement,
+    minsElement,
+    secsElement
+  );
+  countdownContainer.countdownInterval = setInterval(() => {
+    updateCountdown(
+      listingEndsAt,
+      daysElement,
+      hoursElement,
+      minsElement,
+      secsElement
+    );
+  }, 1000);
+
   bidsContainer.appendChild(card);
+
+  if (daysElement.innerHTML === "Expired") {
+    card.style.display = "none";
+  }
 }

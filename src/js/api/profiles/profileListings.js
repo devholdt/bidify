@@ -1,16 +1,18 @@
-import { getProfile } from "./fetch.js";
+import { getProfile, getProfileListings } from "./fetch.js";
 import { getItem } from "../../storage/index.js";
 import { createCard, createBidCard } from "../../components/index.js";
+import { alert } from "../../utilities/index.js";
+import { API_URLS, headers } from "../index.js";
 
 export async function profileListings() {
   try {
     if (getItem("name")) {
       const userDataLocal = getItem("user");
-      const userDataApi = await getProfile(userDataLocal.name);
-      const listings = userDataApi.listings;
-
+      const listings = await getProfileListings(userDataLocal.name);
       const profileListingsContainer =
         document.querySelector(".profile-listings");
+
+      console.log(listings);
 
       if (listings.length > 0) {
         profileListingsContainer.classList.add("row");
@@ -29,6 +31,33 @@ export async function profileListings() {
   }
 }
 
+// export async function profileListings() {
+//   try {
+//     if (getItem("name")) {
+//       const userDataLocal = getItem("user");
+//       const userDataApi = await getProfile(userDataLocal.name);
+//       const listings = userDataApi.listings;
+
+//       const profileListingsContainer =
+//         document.querySelector(".profile-listings");
+
+//       if (listings.length > 0) {
+//         profileListingsContainer.classList.add("row");
+//         listings
+//           .slice(0, 6)
+//           .forEach((listing) => createCard(listing, ".profile-listings"));
+//       } else {
+//         profileListingsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active listings.</p>`;
+//       }
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     console.error(
+//       `An error occured when trying to get profile listings: ${error}`
+//     );
+//   }
+// }
+
 export async function profileBids() {
   try {
     if (getItem("name")) {
@@ -46,6 +75,12 @@ export async function profileBids() {
       }
     }
   } catch (error) {
-    console.error(`An error occured when trying to get profile bids: ${error}`);
+    alert(
+      "danger",
+      "An error occured when trying to get profile bids",
+      ".profile-bids",
+      null,
+      false
+    );
   }
 }

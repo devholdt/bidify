@@ -31,3 +31,20 @@ export async function getProfile(name, bids = false) {
     throw error;
   }
 }
+
+export async function getProfileListings(name) {
+  const url = `${API_URLS.PROFILES}/${name}/listings?_bids=true&_seller=true`;
+
+  try {
+    const response = await fetch(url, { headers: headers() });
+
+    if (response.ok) {
+      return await response.json();
+    }
+
+    throw new Error(response.statusText);
+  } catch (error) {
+    console.error("Error fetching profile listings");
+    throw error;
+  }
+}

@@ -74,10 +74,6 @@ export function listingModalPreview(listing, button) {
       "#listingModalFooterDynamic"
     );
 
-    modal.addEventListener("hide.bs.modal", () => {
-      removeQueryString("id");
-    });
-
     const listingForm = `
     <form id="listingModalForm"
       class="d-flex align-items-end justify-content-between bg-light border align-items-center px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
@@ -126,11 +122,6 @@ export function listingModalPreview(listing, button) {
 
         const listingModalForm = document.querySelector("#listingModalForm");
         listingModalForm.addEventListener("submit", bidEvent);
-
-        modal.addEventListener("hide.bs.modal", () => {
-          document.querySelector(".alert-preview").innerHTML = "";
-          amount.value = "";
-        });
       }
     } else {
       sellerName = getUser().name;
@@ -144,6 +135,15 @@ export function listingModalPreview(listing, button) {
         .addEventListener("click", getListingValues);
     }
 
+    modal.addEventListener("hide.bs.modal", () => {
+      document.querySelector(".alert-preview").innerHTML = "";
+      removeQueryString("id");
+
+      if (modal.querySelector("#listingModalForm")) {
+        amount.value = "";
+      }
+    });
+
     media.innerHTML = "";
 
     if (listing.media.length < 1) {
@@ -155,8 +155,8 @@ export function listingModalPreview(listing, button) {
 
       media.innerHTML = `
       <div id="listingModalCarousel" class="carousel slide carousel-fade">
-      <div id="listingModalCarouselInner" class="carousel-inner"></div>
-      <div class="carousel-indicators"></div>
+        <div id="listingModalCarouselInner" class="carousel-inner"></div>
+        <div class="carousel-indicators"></div>
       </div>`;
 
       const carouselIndicators = document.querySelector(".carousel-indicators");
@@ -195,7 +195,7 @@ export function listingModalPreview(listing, button) {
       }</h5>
       <span class="fw-light align-self-center align-items-center my-auto">id: ${listing.id.slice(
         0,
-        6
+        8
       )}</span>`;
 
     if (listing.description.length < 1) {

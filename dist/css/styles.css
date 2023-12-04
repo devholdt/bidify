@@ -12280,6 +12280,10 @@ p {
   white-space: pre-wrap;
 }
 
+.listing-bid .list-group-item {
+  background-color: white;
+}
+
 footer {
   display: flex;
   flex-shrink: 0;
