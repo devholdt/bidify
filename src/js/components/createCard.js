@@ -201,8 +201,8 @@ export async function createBidCard(bid, containerSelector) {
     </div>
   </div>`;
 
-  // console.log("Bid: ", bid);
-  // console.log("Listing: ", listing);
+  const cardTop = card.querySelector(".card-top");
+  listingModalPreview(listing, cardTop);
 
   const countdownContainer = document.createElement("div");
   countdownContainer.classList.add("countdown");

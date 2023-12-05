@@ -122,6 +122,7 @@ export function listingModalPreview(listing, button) {
     </div>`;
 
     let sellerName;
+    let currentBidder;
 
     sellerName = listing.seller.name;
 
@@ -147,6 +148,19 @@ export function listingModalPreview(listing, button) {
     }
 
     details.innerHTML += detailsListItem("Seller", sellerName);
+
+    if (listing.bids.length > 0) {
+      let bidderName;
+      bidderName = listing.bids[0].bidderName;
+
+      if (bidderName.length > 10) {
+        bidderName = listing.bids[0].bidderName.substring(0, 10) + "...";
+      }
+      currentBidder = `<span class="text-primary fw-medium">$${listing.bids[0].amount}</span> (${bidderName})`;
+
+      details.innerHTML += detailsListItem("Current bid", currentBidder);
+    }
+
     details.innerHTML += detailsListItem("Created", createdDate);
     details.innerHTML += detailsListItem("Ends at", endsAtDate);
 
