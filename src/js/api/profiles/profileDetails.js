@@ -39,7 +39,7 @@ export async function renderProfileDetails() {
         
         <div class="profile-details_info col-6 col-lg-12">
 
-          <p class="fs-5 fw-medium pb-5">credit(s): ${user.credits}</p>
+          <p class="fs-5 fw-medium pb-5">$${user.credits}</p>
           
           <div>
             <p class="mb-0">listings: ${user._count.listings}</p>

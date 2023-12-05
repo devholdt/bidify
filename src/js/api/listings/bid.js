@@ -16,7 +16,7 @@ export async function bidListing(id, amount) {
   if (amountInputValue <= currentBid) {
     alert(
       "warning",
-      `Your bid of <strong>${amountInputValue}</strong> credit(s) must exceed the current highest bid of <strong>${currentBid}</strong>`,
+      `Your bid of <strong>$${amountInputValue}</strong> must exceed the current highest bid of <strong>${currentBid}</strong>`,
       ".alert-preview",
       null
     );

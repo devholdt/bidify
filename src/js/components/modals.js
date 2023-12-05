@@ -78,20 +78,36 @@ export function listingModalPreview(listing, button) {
       "#listingModalFooterDynamic"
     );
 
+    let bidAmount;
+
+    if (listing.bids.length < 1) {
+      bidAmount = 0;
+    } else {
+      bidAmount = listing.bids.sort((a, b) => b.amount - a.amount)[0].amount;
+    }
+
     const listingForm = `
-    <form id="listingModalForm"
-      class="d-flex align-items-end justify-content-between bg-light border align-items-center px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
-      <div class="mb-3 ps-0">
-          <label for="amount" class="form-label mb-0">Bid amount</label>
-          <input type="number" class="form-control shadow-sm" name="amount" id="amount"
-              min="1" placeholder="credit(s)">
-      </div>
-      <button type="submit" id="placeBidButton"
-          class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm"
-          data-id="${listing.id}">Place
-          bid
-      </button>
-    </form>`;
+    <div class="bg-light border rounded-2 shadow-sm p-3">
+
+      <p class="mb-0">Current top bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
+
+      <form id="listingModalForm"
+        class="d-flex align-items-end justify-content-between align-items-center mt-2">
+
+        <div class="input-group d-flex align-items-center">
+          <span class="input-group-text text-primary bg-white">$</span>
+          <input type="number" class="form-control fw-light bg-white" name="amount" id="amount" min="1" 
+          value="${bidAmount + 1}" aria-label="Bid amount">
+          <button type="submit" id="placeBidButton" class="btn btn-primary text-uppercase" data-id="${
+            listing.id
+          }">
+            Place bid
+          </button>
+        </div>
+
+      </form>
+
+    </div>`;
 
     const interactionButtons = `
     <div id="listingModalButtons" class="btn-group" role="group"
@@ -244,7 +260,7 @@ export function listingModalPreview(listing, button) {
     endsAt.innerHTML = endsAtDate;
 
     if (listing.tags.length < 1) {
-      tags.innerHTML = "empty";
+      tags.innerHTML = `<span class="fw-light">empty</span>`;
     } else {
       listing.tags.forEach((tag) => {
         const tagElement = document.createElement("span");

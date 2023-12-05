@@ -7,6 +7,7 @@ import {
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
 import { getUser } from "../storage/index.js";
 import { deleteListingEvent, editListingEvent } from "../events/index.js";
+import { getListing } from "../api/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -23,7 +24,7 @@ export function createCard(listing, containerSelector) {
 
   if (listing.bids && listing.bids.length > 0) {
     listing.bids.reverse();
-    listingBids = `<p class="card-text">Current bid: <span class="fw-semibold">${listing.bids[0].amount}c</span></p>`;
+    listingBids = `<p class="card-text">Top bid: <span class="fw-medium text-primary">$${listing.bids[0].amount}</span></p>`;
   } else {
     listingBids = `<p class="card-text">No bids yet</p>`;
   }
@@ -146,8 +147,10 @@ export function createCard(listing, containerSelector) {
   }
 }
 
-export function createBidCard(bid, containerSelector) {
+export async function createBidCard(bid, containerSelector) {
   const bidsContainer = document.querySelector(containerSelector);
+  const listing = await getListing(bid.listing.id);
+  const sortedListing = listing.bids.sort((a, b) => b.amount - a.amount);
   const card = document.createElement("div");
   card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4", "listing-bid");
 
@@ -173,8 +176,13 @@ export function createBidCard(bid, containerSelector) {
         <ul class="list-group list-group-flush w-100">
 
           <li class="list-group-item fw-medium d-flex justify-content-between">
-            Amount:
-            <span class="fw-light">${bid.amount} credit(s)</span>
+            Your bid:
+            <span class="text-primary">$${bid.amount}</span>
+          </li>
+
+          <li class="list-group-item fw-medium d-flex justify-content-between">
+            Top bid:
+            <span class="text-primary">$${sortedListing[0].amount}</span>
           </li>
 
           <li class="list-group-item fw-medium d-flex justify-content-between">
@@ -192,6 +200,9 @@ export function createBidCard(bid, containerSelector) {
 
     </div>
   </div>`;
+
+  // console.log("Bid: ", bid);
+  // console.log("Listing: ", listing);
 
   const countdownContainer = document.createElement("div");
   countdownContainer.classList.add("countdown");
