@@ -11907,6 +11907,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   opacity: 60%;
 }
 
+input::placeholder, textarea::placeholder {
+  font-weight: 300;
+}
+
 .navbar form {
   max-width: 672px;
   min-width: 240px;

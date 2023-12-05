@@ -89,15 +89,13 @@ export function listingModalPreview(listing, button) {
 
     const listingForm = `
     <div class="bg-light border rounded-2 shadow-sm p-3">
-
       <p class="mb-0">Current top bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
 
       <form id="listingModalForm"
         class="d-flex align-items-end justify-content-between align-items-center mt-2">
-
         <div class="input-group d-flex align-items-center">
           <span class="input-group-text text-primary bg-white">$</span>
-          <input type="number" class="form-control fw-light bg-white" name="amount" id="amount" min="1" 
+          <input type="number" class="form-control bg-white" name="amount" id="amount" min="1" 
           value="${bidAmount + 1}" aria-label="Bid amount">
           <button type="submit" id="placeBidButton" class="btn btn-primary text-uppercase" data-id="${
             listing.id
@@ -105,7 +103,6 @@ export function listingModalPreview(listing, button) {
             Place bid
           </button>
         </div>
-
       </form>
 
     </div>`;
