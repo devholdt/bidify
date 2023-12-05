@@ -144,24 +144,25 @@ export function listingModalPreview(listing, button) {
         modal
           .querySelector(".btn-edit")
           .addEventListener("click", getListingValues);
-      } else {
-        sellerName = listing.seller.name;
-        listingModalFooterDynamic.innerHTML = listingForm;
-
-        const listingModalForm = document.querySelector("#listingModalForm");
-        listingModalForm.addEventListener("submit", bidEvent);
       }
-    } else {
-      sellerName = getUser().name;
-      listingModalFooterDynamic.innerHTML = interactionButtons;
-
-      modal
-        .querySelector(".btn-delete")
-        .addEventListener("click", deleteListingEvent);
-      modal
-        .querySelector(".btn-edit")
-        .addEventListener("click", getListingValues);
     }
+
+    details.innerHTML += detailsListItem("Seller", sellerName);
+
+    if (listing.bids.length > 0) {
+      let bidderName;
+      bidderName = listing.bids[0].bidderName;
+
+      if (bidderName.length > 10) {
+        bidderName = listing.bids[0].bidderName.substring(0, 10) + "...";
+      }
+      currentBidder = `<span class="text-primary fw-medium">$${listing.bids[0].amount}</span> (${bidderName})`;
+
+      details.innerHTML += detailsListItem("Current bid", currentBidder);
+    }
+
+    details.innerHTML += detailsListItem("Created", createdDate);
+    details.innerHTML += detailsListItem("Ends at", endsAtDate);
 
     modal.addEventListener("hide.bs.modal", () => {
       document.querySelector(".alert-preview").innerHTML = "";
