@@ -63,16 +63,17 @@ export function listingModalPreview(listing, button) {
     const modal = document.querySelector("#listingModal");
     const title = document.querySelector("#listingModalTitle");
     const media = document.querySelector("#listingModalMedia");
-
+    const details = document.querySelector("#listingModalDetails");
     const description = document.querySelector("#listingModalDescription");
-    const created = document.querySelector("#listingModalCreated");
-    const seller = document.querySelector("#listingModalSeller");
-
-    const endsAt = document.querySelector("#listingModalEndsAt");
-    const tags = document.querySelector("#listingModalTags");
-
     const createdDate = formatDate(new Date(listing.created));
     const endsAtDate = formatDate(new Date(listing.endsAt), true);
+
+    const detailsListItem = (label, value) => {
+      return `<li class="list-group-item fw-medium d-flex justify-content-between">
+        ${label}
+        <span class="fw-light">${value}</span>
+      </li>`;
+    };
 
     const listingModalFooterDynamic = modal.querySelector(
       "#listingModalFooterDynamic"
@@ -110,7 +111,7 @@ export function listingModalPreview(listing, button) {
     </div>`;
 
     const interactionButtons = `
-    <div id="listingModalButtons" class="btn-group" role="group"
+    <div id="listingModalButtons" class="btn-group float-end" role="group"
       aria-label="Listing interaction">
       <button type="button" class="btn btn-light d-flex gap-1 align-items-center btn-edit"
           title="edit" aria-label="edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
@@ -148,6 +149,10 @@ export function listingModalPreview(listing, button) {
       }
     }
 
+    details.innerHTML += detailsListItem("Seller", sellerName);
+    details.innerHTML += detailsListItem("Created", createdDate);
+    details.innerHTML += detailsListItem("Ends at", endsAtDate);
+
     modal.addEventListener("hide.bs.modal", () => {
       document.querySelector(".alert-preview").innerHTML = "";
       removeQueryString("id");
@@ -177,15 +182,15 @@ export function listingModalPreview(listing, button) {
     if (listing.media.length < 1) {
       media.classList.remove("media-carousel");
       media.innerHTML = `
-        <img src="${DEFAULT_URLS.LISTING_MEDIA}" class="w-100 h-100 border object-fit-cover" alt="Listing media">`;
+        <img src="${DEFAULT_URLS.LISTING_MEDIA}" class="w-100 h-100 border object-fit-cover" alt="Listing media" onerror="this.src='${DEFAULT_URLS.LISTING_MEDIA}'">`;
     } else if (listing.media.length > 1) {
       media.classList.add("media-carousel");
 
       media.innerHTML = `
-      <div id="listingModalCarousel" class="carousel slide carousel-fade">
-      <div id="listingModalCarouselInner" class="carousel-inner"></div>
-      <div class="carousel-indicators"></div>
-      </div>`;
+        <div id="listingModalCarousel" class="carousel slide carousel-fade">
+          <div id="listingModalCarouselInner" class="carousel-inner"></div>
+          <div class="carousel-indicators"></div>
+        </div>`;
 
       const carouselIndicators = document.querySelector(".carousel-indicators");
       const carouselInner = document.querySelector(
@@ -197,7 +202,7 @@ export function listingModalPreview(listing, button) {
         carouselItem.classList.add("carousel-item");
         if (index === 0) carouselItem.classList.add("active");
 
-        carouselItem.innerHTML = `<img src="${media}" class="d-block w-100 h-100 object-fit-cover" alt="Listing media">`;
+        carouselItem.innerHTML = `<img src="${media}" class="d-block w-100 h-100 object-fit-cover" alt="Listing media" onerror="this.src='${DEFAULT_URLS.LISTING_MEDIA}'">`;
         carouselInner.appendChild(carouselItem);
 
         const indicator = document.createElement("button");
@@ -214,7 +219,7 @@ export function listingModalPreview(listing, button) {
     } else {
       media.classList.remove("media-carousel");
       media.innerHTML = `
-      <img src="${listing.media[0]}" class="w-100 h-100 border object-fit-cover" alt="Listing media">`;
+      <img src="${listing.media[0]}" class="w-100 h-100 border object-fit-cover" alt="Listing media" onerror="this.src='${DEFAULT_URLS.LISTING_MEDIA}'">`;
     }
 
     modal.querySelector("#listingModalMedia").appendChild(countdownContainer);
@@ -255,24 +260,30 @@ export function listingModalPreview(listing, button) {
       description.innerHTML = listing.description;
     }
 
-    seller.innerHTML = sellerName;
-    created.innerHTML = createdDate;
-    endsAt.innerHTML = endsAtDate;
+    let tagsHtml = listing.tags
+      .map((tag) => {
+        return `<span class="fw-medium badge bg-dark listing-tag">${tag}</span>`;
+      })
+      .join(" ");
 
-    if (listing.tags.length < 1) {
-      tags.innerHTML = `<span class="fw-light">empty</span>`;
-    } else {
+    if (listing.tags.length > 0) {
       listing.tags.forEach((tag) => {
-        const tagElement = document.createElement("span");
-        tagElement.classList.add("fw-bold", "badge", "bg-dark", "ms-1");
-        tagElement.innerHTML += `${tag} `;
-        tags.append(tagElement);
+        if (tag === "") {
+          // Populate existing tags with no inner text
+          tagsHtml = `<span class="fw-medium badge bg-dark listing-tag">tag</span>`;
+        }
       });
+
+      details.innerHTML += detailsListItem("Tags", tagsHtml);
+    } else {
+      details.innerHTML += detailsListItem(
+        "Tags",
+        `<span class="fw-light">empty</span>`
+      );
     }
 
-    // Remove displayed tags to not stack them every time you open modal
     modal.addEventListener("hidden.bs.modal", () => {
-      tags.innerHTML = "";
+      details.innerHTML = "";
     });
   });
 }
