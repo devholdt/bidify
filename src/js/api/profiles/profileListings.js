@@ -42,7 +42,7 @@ export async function profileBids() {
 
       if (bids.length > 0) {
         profileBidsContainer.classList.add("row", "row-cols-3");
-        bids.slice(0, 3).forEach((bid) => createBidCard(bid, ".profile-bids"));
+        bids.slice(0, 6).forEach((bid) => createBidCard(bid, ".profile-bids"));
       } else {
         profileBidsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active bids</p>`;
       }
