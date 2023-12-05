@@ -1,59 +1,47 @@
 import { getListings } from "./fetch.js";
-import { createCard } from "../../components/createCard.js";
+import { createCard } from "../../components/index.js";
+
+function display(container, listings) {
+  container.innerHTML = "";
+  listings
+    .filter((listing) => listing.title && listing.title.trim() !== "")
+    .forEach((listing) => createCard(listing, ".listings"));
+}
 
 export async function displayListings() {
-  const sortListings = document.querySelector("#sortListings");
+  const sortListingsContainer = document.querySelector("#sortListings");
   const listingsContainer = document.querySelector(".listings");
-  const listings = await getListings({ sort: "&sort=created" });
 
-  listings.slice(0, 12).forEach((listing) => createCard(listing, ".listings"));
+  let allListings = await getListings({ sort: "&sort=created" });
 
-  sortListings.addEventListener("change", async (event) => {
-    if (event.target.value === "Latest") {
-      listingsContainer.innerHTML = "";
+  display(listingsContainer, allListings.slice(0, 12));
 
-      const listings = await getListings({ sort: "&sort=created" });
+  sortListingsContainer.addEventListener("change", (event) => {
+    let sortedListings;
 
-      listings
-        .slice(0, 12)
-        .forEach((listing) => createCard(listing, ".listings"));
-    } else if (event.target.value === "Popular") {
-      listingsContainer.innerHTML = "";
-
-      const listings = await getListings({
-        sortOrder: "asc",
-        sort: "&sort=created",
-      });
-
-      const sortedListings = listings.sort(
-        (a, b) => b._count.bids - a._count.bids
-      );
-
-      sortedListings
-        .slice(0, 12)
-        .forEach((listing) => createCard(listing, ".listings"));
-    } else if (event.target.value === "Title A - Z") {
-      listingsContainer.innerHTML = "";
-
-      const listings = await getListings({
-        sortOrder: "asc",
-        sort: "&sort=title",
-      });
-
-      listings
-        .slice(0, 12)
-        .forEach((listing) => createCard(listing, ".listings"));
-    } else if (event.target.value === "Title Z - A") {
-      listingsContainer.innerHTML = "";
-
-      const listings = await getListings({
-        sortOrder: "desc",
-        sort: "&sort=title",
-      });
-
-      listings
-        .slice(0, 12)
-        .forEach((listing) => createCard(listing, ".listings"));
+    switch (event.target.value) {
+      case "Latest":
+        sortedListings = allListings.slice();
+        break;
+      case "Popular":
+        sortedListings = [...allListings].sort(
+          (a, b) => b._count.bids - a._count.bids
+        );
+        break;
+      case "Title A - Z":
+        sortedListings = [...allListings].sort((a, b) =>
+          a.title.localeCompare(b.title)
+        );
+        break;
+      case "Title Z - A":
+        sortedListings = [...allListings].sort((a, b) =>
+          b.title.localeCompare(a.title)
+        );
+        break;
+      default:
+        sortedListings = allListings.slice();
     }
+
+    display(listingsContainer, sortedListings.slice(0, 12));
   });
 }

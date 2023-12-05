@@ -6,3 +6,4 @@ export * from "./handleInputs.js";
 export * from "./getListingValues.js";
 export * from "./changeUrl.js";
 export * from "./detailsListItem.js";
+export * from "./sortListings.js";
