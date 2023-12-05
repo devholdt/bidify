@@ -63,38 +63,52 @@ export function listingModalPreview(listing, button) {
     const modal = document.querySelector("#listingModal");
     const title = document.querySelector("#listingModalTitle");
     const media = document.querySelector("#listingModalMedia");
-
+    const details = document.querySelector("#listingModalDetails");
     const description = document.querySelector("#listingModalDescription");
-    const created = document.querySelector("#listingModalCreated");
-    const seller = document.querySelector("#listingModalSeller");
-
-    const endsAt = document.querySelector("#listingModalEndsAt");
-    const tags = document.querySelector("#listingModalTags");
-
     const createdDate = formatDate(new Date(listing.created));
     const endsAtDate = formatDate(new Date(listing.endsAt), true);
+
+    const detailsListItem = (label, value) => {
+      return `<li class="list-group-item fw-medium d-flex justify-content-between">
+        ${label}
+        <span class="fw-light">${value}</span>
+      </li>`;
+    };
 
     const listingModalFooterDynamic = modal.querySelector(
       "#listingModalFooterDynamic"
     );
 
+    let bidAmount;
+
+    if (listing.bids.length < 1) {
+      bidAmount = 0;
+    } else {
+      bidAmount = listing.bids.sort((a, b) => b.amount - a.amount)[0].amount;
+    }
+
     const listingForm = `
-    <form id="listingModalForm"
-      class="d-flex align-items-end justify-content-between bg-light border align-items-center px-3 pt-2 pb-1 m-auto rounded-2 shadow-sm">
-      <div class="mb-3 ps-0">
-          <label for="amount" class="form-label mb-0">Bid amount</label>
-          <input type="number" class="form-control shadow-sm" name="amount" id="amount"
-              min="1" placeholder="credit(s)">
-      </div>
-      <button type="submit" id="placeBidButton"
-          class="btn btn-primary text-uppercase py-2 px-3 fw-semibold fs-5 shadow-sm"
-          data-id="${listing.id}">Place
-          bid
-      </button>
-    </form>`;
+    <div class="bg-light border rounded-2 shadow-sm p-3">
+      <p class="mb-0">Current top bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
+
+      <form id="listingModalForm"
+        class="d-flex align-items-end justify-content-between align-items-center mt-2">
+        <div class="input-group d-flex align-items-center">
+          <span class="input-group-text text-primary bg-white">$</span>
+          <input type="number" class="form-control bg-white" name="amount" id="amount" min="1" 
+          value="${bidAmount + 1}" aria-label="Bid amount">
+          <button type="submit" id="placeBidButton" class="btn btn-primary text-uppercase" data-id="${
+            listing.id
+          }">
+            Place bid
+          </button>
+        </div>
+      </form>
+
+    </div>`;
 
     const interactionButtons = `
-    <div id="listingModalButtons" class="btn-group" role="group"
+    <div id="listingModalButtons" class="btn-group float-end" role="group"
       aria-label="Listing interaction">
       <button type="button" class="btn btn-light d-flex gap-1 align-items-center btn-edit"
           title="edit" aria-label="edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
@@ -108,6 +122,7 @@ export function listingModalPreview(listing, button) {
     </div>`;
 
     let sellerName;
+    let currentBidder;
 
     sellerName = listing.seller.name;
 
@@ -129,7 +144,23 @@ export function listingModalPreview(listing, button) {
         modal
           .querySelector(".btn-edit")
           .addEventListener("click", getListingValues);
+      } else {
+        sellerName = listing.seller.name;
+        listingModalFooterDynamic.innerHTML = listingForm;
+
+        const listingModalForm = document.querySelector("#listingModalForm");
+        listingModalForm.addEventListener("submit", bidEvent);
       }
+    } else {
+      sellerName = getUser().name;
+      listingModalFooterDynamic.innerHTML = interactionButtons;
+
+      modal
+        .querySelector(".btn-delete")
+        .addEventListener("click", deleteListingEvent);
+      modal
+        .querySelector(".btn-edit")
+        .addEventListener("click", getListingValues);
     }
 
     modal.addEventListener("hide.bs.modal", () => {
@@ -161,15 +192,15 @@ export function listingModalPreview(listing, button) {
     if (listing.media.length < 1) {
       media.classList.remove("media-carousel");
       media.innerHTML = `
-        <img src="${DEFAULT_URLS.LISTING_MEDIA}" class="w-100 h-100 border object-fit-cover" alt="Listing media">`;
+        <img src="${DEFAULT_URLS.LISTING_MEDIA}" class="w-100 h-100 border object-fit-cover" alt="Listing media" onerror="this.src='${DEFAULT_URLS.LISTING_MEDIA}'">`;
     } else if (listing.media.length > 1) {
       media.classList.add("media-carousel");
 
       media.innerHTML = `
-      <div id="listingModalCarousel" class="carousel slide carousel-fade">
-      <div id="listingModalCarouselInner" class="carousel-inner"></div>
-      <div class="carousel-indicators"></div>
-      </div>`;
+        <div id="listingModalCarousel" class="carousel slide carousel-fade">
+          <div id="listingModalCarouselInner" class="carousel-inner"></div>
+          <div class="carousel-indicators"></div>
+        </div>`;
 
       const carouselIndicators = document.querySelector(".carousel-indicators");
       const carouselInner = document.querySelector(
@@ -181,7 +212,7 @@ export function listingModalPreview(listing, button) {
         carouselItem.classList.add("carousel-item");
         if (index === 0) carouselItem.classList.add("active");
 
-        carouselItem.innerHTML = `<img src="${media}" class="d-block w-100 h-100 object-fit-cover" alt="Listing media">`;
+        carouselItem.innerHTML = `<img src="${media}" class="d-block w-100 h-100 object-fit-cover" alt="Listing media" onerror="this.src='${DEFAULT_URLS.LISTING_MEDIA}'">`;
         carouselInner.appendChild(carouselItem);
 
         const indicator = document.createElement("button");
@@ -198,7 +229,7 @@ export function listingModalPreview(listing, button) {
     } else {
       media.classList.remove("media-carousel");
       media.innerHTML = `
-      <img src="${listing.media[0]}" class="w-100 h-100 border object-fit-cover" alt="Listing media">`;
+      <img src="${listing.media[0]}" class="w-100 h-100 border object-fit-cover" alt="Listing media" onerror="this.src='${DEFAULT_URLS.LISTING_MEDIA}'">`;
     }
 
     modal.querySelector("#listingModalMedia").appendChild(countdownContainer);
@@ -239,24 +270,30 @@ export function listingModalPreview(listing, button) {
       description.innerHTML = listing.description;
     }
 
-    seller.innerHTML = sellerName;
-    created.innerHTML = createdDate;
-    endsAt.innerHTML = endsAtDate;
+    let tagsHtml = listing.tags
+      .map((tag) => {
+        return `<span class="fw-medium badge bg-dark listing-tag">${tag}</span>`;
+      })
+      .join(" ");
 
-    if (listing.tags.length < 1) {
-      tags.innerHTML = "empty";
-    } else {
+    if (listing.tags.length > 0) {
       listing.tags.forEach((tag) => {
-        const tagElement = document.createElement("span");
-        tagElement.classList.add("fw-bold", "badge", "bg-dark", "ms-1");
-        tagElement.innerHTML += `${tag} `;
-        tags.append(tagElement);
+        if (tag === "") {
+          // Populate existing tags with no inner text
+          tagsHtml = `<span class="fw-medium badge bg-dark listing-tag">tag</span>`;
+        }
       });
+
+      details.innerHTML += detailsListItem("Tags", tagsHtml);
+    } else {
+      details.innerHTML += detailsListItem(
+        "Tags",
+        `<span class="fw-light">empty</span>`
+      );
     }
 
-    // Remove displayed tags to not stack them every time you open modal
     modal.addEventListener("hidden.bs.modal", () => {
-      tags.innerHTML = "";
+      details.innerHTML = "";
     });
   });
 }

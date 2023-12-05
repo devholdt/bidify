@@ -1,3 +1,9 @@
+input, textarea {
+    &::placeholder {
+        font-weight: 300;
+    }
+}
+
 .navbar {
     form {
         max-width: 672px;

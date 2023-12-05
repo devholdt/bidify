@@ -40,7 +40,7 @@ export async function renderNav() {
               <img src="${userDataApi.avatar}" class="avatar" alt="${userDataApi.name}'s avatar" onerror='this.src="${DEFAULT_URLS.AVATAR}"'>
               <div class="d-flex flex-column">
                 <p class="mb-0 fw-medium">${userDataApi.name}</p>
-                <p>Credit(s): ${userDataApi.credits}</p>
+                <p>$${userDataApi.credits}</p>
               </div>
             </a>
             <button class="btn btn-outline-dark h-100 my-auto ms-2 rounded-0 shadow-sm" 

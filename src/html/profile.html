@@ -26,8 +26,8 @@
                 </a>
 
                 <form class="d-flex w-100 mx-5" role="search">
-                    <input class="form-control border border-secondary me-2 bg-white" type="search"
-                        placeholder="Search listings..." aria-label="Search listings">
+                    <input class="form-control border border-secondary me-2 px-3 bg-white" type="search"
+                        placeholder="search listings..." aria-label="Search listings">
                     <button class="btn btn-dark btn-circle" type="submit"><span class="material-icons">
                             search
                         </span></button>
@@ -115,39 +115,31 @@
                         data-bs-dismiss="modal" aria-label="Close"></button>
 
                     <div class="row p-3">
-                        <div id="listingModalMedia" class="col-12 col-lg-6 d-flex listing-media"></div>
+                        <div id="listingModalMedia" class="col-12 col-lg-6 d-flex listing-media">
+                        </div>
 
-                        <div class="col-12 col-lg-6 py-2 d-flex flex-column listing-detail">
+                        <div class="col-12 col-lg-6 pt-2 d-flex flex-column listing-detail">
 
                             <div class="modal-header flex-column align-items-start ps-0 py-0 border-0">
                                 <p id="listingModalTitle"
-                                    class="w-100 d-flex justify-content-between fs-6 rounded-0 mb-0 border-bottom px-2 py-1">
+                                    class="w-100 d-flex justify-content-between fs-6 rounded-0 border-bottom px-2 py-1">
                                 </p>
                             </div>
 
                             <div id="listingModalDescription"
-                                class="modal-body d-flex flex-column justify-content-between me-3">
+                                class="modal-body d-flex flex-column justify-content-between pb-3 flex-1">
                             </div>
 
-                            <div class="modal-footer justify-content-start m-auto border-0 w-100">
+                            <div class="modal-footer justify-content-start m-auto border-0 w-100 mb-0 pb-0">
 
-                                <h6 class="badge bg-dark rounded-0 justify-content-start d-flex w-100 ms-0 mt-0">
+                                <h6 class="badge bg-dark rounded-0 justify-content-start d-flex w-100">
                                     Details
                                 </h6>
 
-                                <ul class="list-group list-group-flush w-100">
-                                    <li class="list-group-item fw-medium d-flex justify-content-between">Seller:<span
-                                            id="listingModalSeller" class="fw-light"></span></li>
-                                    <li class="list-group-item fw-medium d-flex justify-content-between">Created:<span
-                                            id="listingModalCreated" class="fw-light"></span></li>
-                                    <li class="list-group-item fw-medium d-flex justify-content-between">Ends at:<span
-                                            id="listingModalEndsAt" class="fw-light"></span>
-                                    </li>
-                                    <li class="list-group-item fw-medium d-flex justify-content-between">Tags:<span
-                                            id="listingModalTags"></span></li>
+                                <ul id="listingModalDetails" class="list-group list-group-flush w-100">
                                 </ul>
 
-                                <div id="listingModalFooterDynamic" class="w-100 d-flex justify-content-end"></div>
+                                <div id="listingModalFooterDynamic" class="w-100"></div>
 
                                 <div class="alert-preview alert-wrapper mt-2"></div>
                             </div>
@@ -362,10 +354,10 @@
                         </div>
                     </div>
 
-                    <h1 class="text-center fs-2 mb-3">Your current listings</h1>
+                    <h1 class="text-center fs-2 mb-3">Your listings</h1>
                     <div class="profile-listings"></div>
 
-                    <h2 class="text-center mt-5 my-3">Your current bids</h2>
+                    <h2 class="text-center mt-5 my-3">Your bids</h2>
                     <div class="profile-bids"></div>
 
                 </div>
