@@ -376,7 +376,7 @@
 
         <hr class="green-border mt-0 border-primary">
 
-        <div class="container mb-5 create-listing">
+        <div class="container-sm mb-5 create-listing">
             <div class="accordion" id="createListingAccordion">
                 <div class="accordion-item">
                     <h3 class="accordion-header fs-2">
@@ -478,28 +478,40 @@
         </div>
 
         <div class="container">
-            <div class="row">
 
-                <div class="col-lg-3 mb-5">
-                    <form>
-                        <div class="mb-3">
-                            <label for="searchListings" class="form-label">Search for listings</label>
-                            <input type="text" class="form-control" id="searchListings"
-                                placeholder="Search listings...">
-                        </div>
-                        <div class="mb-3">
-                            <label for="filterByCurrentBid" class="form-label">Filter by current bid</label>
-                            <input type="range" class="form-range" id="filterByCurrentBid" min="0" max="1000" step="1">
-                        </div>
-                        <button type="submit" class="btn btn-yellow">Filter</button>
-                    </form>
+            <div
+                class="d-flex mb-3 py-3 px-4 border-bottom border-primary listing-sorting d-flex justify-content-between">
+                <div class="d-flex gap-5 w-100">
+                    <div class="btn-group" role="group" aria-label="Change listings layout">
+                        <button type="button" class="btn btn-outline-primary d-flex align-items-center active">
+                            <span class="material-icons">grid_view</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary d-flex align-items-center">
+                            <span class="material-icons fs-3">list</span>
+                        </button>
+                    </div>
+
+                    <div class="input-group w-100">
+                        <input id="searchListings" type="search"
+                            class="form-control rounded-start-5 border-primary px-3" placeholder="Search listings..."
+                            aria-label="Search listings">
+                        <button type="button"
+                            class="input-group-text btn btn-primary rounded-end-5 d-flex align-items-center">
+                            <span class="material-icons">search</span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="col-lg-9">
-                    <div class="listings row row-cols-3"></div>
-                </div>
-
+                <select id="sortListings" class="form-select rounded-0 border-primary ms-5" aria-label="Sort listings">
+                    <option class="sort-latest" selected>Latest</option>
+                    <option class="sort-popular">Popular</option>
+                    <option class="sort-az">Title A - Z</option>
+                    <option class="sort-za">Title Z - A</option>
+                </select>
             </div>
+
+            <div class="listings row row-cols-3"></div>
+
         </div>
 
         <div class="alert-absolute alert-wrapper position-fixed top-50 start-50 translate-middle"></div>

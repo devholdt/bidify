@@ -71,3 +71,19 @@ input, textarea {
         }
     }
 }
+
+.listing-sorting {
+    .btn-group button {
+        width: 50px;
+        height: 100%;
+        margin: auto;
+    }
+
+    .input-group {
+        max-width: 450px;
+    }
+
+    select {
+        max-width: 200px;
+    }
+}
