@@ -11962,6 +11962,18 @@ input::placeholder, textarea::placeholder {
   width: 66%;
 }
 
+.listing-sorting .btn-group button {
+  width: 50px;
+  height: 100%;
+  margin: auto;
+}
+.listing-sorting .input-group {
+  max-width: 450px;
+}
+.listing-sorting select {
+  max-width: 200px;
+}
+
 #listingsCarousel {
   display: flex;
   max-height: 830px;
@@ -12281,11 +12293,6 @@ input::placeholder, textarea::placeholder {
 }
 .banner h1, .banner .h1 {
   font-family: "Roboto Slab", serif;
-}
-
-.create-listing .accordion {
-  max-width: 978px;
-  margin-left: auto;
 }
 
 #listingModal #listingModalDescription {

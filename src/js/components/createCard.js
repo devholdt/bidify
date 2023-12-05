@@ -25,7 +25,7 @@ export function createCard(listing, containerSelector) {
 
   if (listing.bids && listing.bids.length > 0) {
     listing.bids.reverse();
-    listingBids = `<p class="card-text">Current bid: <span class="fw-medium text-primary">$${listing.bids[0].amount}</span></p>`;
+    listingBids = `<p class="card-text">Current bid: <span class="fw-medium text-primary">$${listing.bids[0].amount}</span> (${listing._count.bids})</p>`;
   } else {
     listingBids = `<p class="card-text">No bids yet</p>`;
   }
@@ -42,7 +42,7 @@ export function createCard(listing, containerSelector) {
               </div>
 
               <div class="card-body pt-5 pb-4 ps-0">
-              ${listingBids}
+                ${listingBids}
               </div>
 
               <div class="card-buttons d-flex justify-content-between align-items-end">

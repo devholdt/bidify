@@ -3,7 +3,6 @@ import { createCard } from "../../components/index.js";
 
 export async function popularListings() {
   const listings = await getListings({
-    sortOrder: "asc",
     sort: "&sort=created",
   });
   const sortedListings = listings.sort((a, b) => b._count.bids - a._count.bids);
