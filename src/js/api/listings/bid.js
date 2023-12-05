@@ -39,6 +39,10 @@ export async function bidListing(id, amount) {
         null
       );
 
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
+
       return await response.json();
     }
   } catch {

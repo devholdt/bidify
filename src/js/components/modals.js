@@ -5,9 +5,11 @@ import {
   formatDate,
   getListingValues,
   updateCountdown,
+  setQueryString,
+  removeQueryString,
+  detailsListItem,
 } from "../utilities/index.js";
 import { getUser } from "../storage/index.js";
-import { setQueryString, removeQueryString } from "../utilities/index.js";
 
 document.addEventListener("reload", removeQueryString("id"));
 
@@ -67,19 +69,13 @@ export function listingModalPreview(listing, button) {
     const description = document.querySelector("#listingModalDescription");
     const createdDate = formatDate(new Date(listing.created));
     const endsAtDate = formatDate(new Date(listing.endsAt), true);
-
-    const detailsListItem = (label, value) => {
-      return `<li class="list-group-item fw-medium d-flex justify-content-between">
-        ${label}
-        <span class="fw-light">${value}</span>
-      </li>`;
-    };
-
     const listingModalFooterDynamic = modal.querySelector(
       "#listingModalFooterDynamic"
     );
 
     let bidAmount;
+    let sellerName;
+    let currentBidder;
 
     if (listing.bids.length < 1) {
       bidAmount = 0;
@@ -89,7 +85,7 @@ export function listingModalPreview(listing, button) {
 
     const listingForm = `
     <div class="bg-light border rounded-2 shadow-sm p-3">
-      <p class="mb-0">Current top bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
+      <p class="mb-0">Current bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
 
       <form id="listingModalForm"
         class="d-flex align-items-end justify-content-between align-items-center mt-2">
@@ -120,9 +116,6 @@ export function listingModalPreview(listing, button) {
           <span class="material-icons">delete</span>
       </button>
     </div>`;
-
-    let sellerName;
-    let currentBidder;
 
     sellerName = listing.seller.name;
 
@@ -159,6 +152,8 @@ export function listingModalPreview(listing, button) {
       currentBidder = `<span class="text-primary fw-medium">$${listing.bids[0].amount}</span> (${bidderName})`;
 
       details.innerHTML += detailsListItem("Current bid", currentBidder);
+    } else {
+      details.innerHTML += detailsListItem("Current bid", "no bids yet");
     }
 
     details.innerHTML += detailsListItem("Created", createdDate);

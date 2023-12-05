@@ -3,6 +3,7 @@ import {
   scrollingTitle,
   getListingValues,
   formatDate,
+  detailsListItem,
 } from "../utilities/index.js";
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
 import { getUser } from "../storage/index.js";
@@ -24,7 +25,7 @@ export function createCard(listing, containerSelector) {
 
   if (listing.bids && listing.bids.length > 0) {
     listing.bids.reverse();
-    listingBids = `<p class="card-text">Top bid: <span class="fw-medium text-primary">$${listing.bids[0].amount}</span></p>`;
+    listingBids = `<p class="card-text">Current bid: <span class="fw-medium text-primary">$${listing.bids[0].amount}</span></p>`;
   } else {
     listingBids = `<p class="card-text">No bids yet</p>`;
   }
@@ -168,34 +169,13 @@ export async function createBidCard(bid, containerSelector) {
   <div class="listing-card" id="${bid.listing.id}">
     <div class="card">
 
-    <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">
-      ${listingMedia}
-    </div>
+      <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">
+        ${listingMedia}
+      </div>
 
       <div class="card-body d-flex flex-column justify-content-between border-0 w-100 m-0 p-0">
-        <ul class="list-group list-group-flush w-100">
-
-          <li class="list-group-item fw-medium d-flex justify-content-between">
-            Your bid:
-            <span class="text-primary">$${bid.amount}</span>
-          </li>
-
-          <li class="list-group-item fw-medium d-flex justify-content-between">
-            Top bid:
-            <span class="text-primary">$${sortedListing[0].amount}</span>
-          </li>
-
-          <li class="list-group-item fw-medium d-flex justify-content-between">
-            Date:
-            <span class="fw-light">${formatDate(new Date(bid.created))}</span>
-          </li>
-
-          <li class="list-group-item fw-medium d-flex justify-content-between">
-            Bid ID:
-            <span class="fw-light">${bid.id.slice(0, 8)}</span>
-          </li>
-  
-        </ul>
+        <ul class="list-group list-group-flush w-100"></ul>
+      
       </div>
 
     </div>
@@ -235,6 +215,19 @@ export async function createBidCard(bid, containerSelector) {
       secsElement
     );
   }, 1000);
+
+  const listGroup = card.querySelector(".list-group");
+
+  listGroup.innerHTML += detailsListItem("Your bid", bid.amount);
+  listGroup.innerHTML += detailsListItem(
+    "Current bid",
+    sortedListing[0].amount
+  );
+  listGroup.innerHTML += detailsListItem(
+    "Date",
+    formatDate(new Date(bid.created))
+  );
+  listGroup.innerHTML += detailsListItem("Bid ID", bid.id.slice(0, 8));
 
   bidsContainer.appendChild(card);
 
