@@ -39,8 +39,8 @@ export async function renderNav() {
             <a href="${URLS.PROFILE}?name=${userDataApi.name}" class="d-flex gap-2 text-decoration-none text-dark border-end pe-2">
               <img src="${userDataApi.avatar}" class="avatar" alt="${userDataApi.name}'s avatar" onerror='this.src="${DEFAULT_URLS.AVATAR}"'>
               <div class="d-flex flex-column">
-                <p class="mb-0 fw-medium">${userDataApi.name}</p>
-                <p>$${userDataApi.credits}</p>
+                <p class="mb-0 fw-light">${userDataApi.name}</p>
+                <p class="text-primary fw-normal">$${userDataApi.credits}</p>
               </div>
             </a>
             <button class="btn btn-outline-dark h-100 my-auto ms-2 rounded-0 shadow-sm" 
