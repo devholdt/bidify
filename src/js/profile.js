@@ -8,6 +8,9 @@ if (!userDataLocal) {
   window.location.href = components.URLS.INDEX;
 }
 
+const title = document.querySelector("title");
+title.innerHTML = `Bidify | ${getUser().name}'s profile`;
+
 components.authModals();
 components.renderNav();
 components.createListingForm();
