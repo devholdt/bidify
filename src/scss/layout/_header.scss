@@ -65,10 +65,22 @@
             background-color: $light;
         }
     }
+
+    .user-header-collapse {
+        display: none;
+    }
+}
+
+.user-info-header {
+    a {
+        border-right: 1px solid $gray-light;
+    }
 }
 
 @media (max-width: 992px) {
     .navbar-top {
+        border-bottom: 4px solid $primary;
+
         form, .user-info-header {
             display: none;
         }
@@ -80,5 +92,36 @@
 
     .navbar-bottom {
         display: none;
+    }
+
+    #navbarNav {
+        border-top: 4px solid $primary;
+
+        li {
+            padding: 0 .4em;
+            font-size: 1.3rem;
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .user-info-collapse {
+            div {
+                justify-content: space-between;
+            }
+
+            a {
+                padding: .5em;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .btn {
+                padding: .6em 1.2em;
+            }
+        }
+
+        .nav-links-collapse {
+            border-top: 1px solid $gray-light;
+            padding-top: 1rem;
+        }
     }
 }

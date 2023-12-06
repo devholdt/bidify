@@ -4,19 +4,17 @@ import { API_URLS, headers } from "../api/index.js";
 import { logoutUser } from "../auth/logout.js";
 import { alert } from "../utilities/index.js";
 import {
-  updateUserHeader,
+  updateUserInfo,
   updateNavLinks,
-  updateNavButtons,
   setupNav,
 } from "../utilities/setupNav.js";
 
 export async function renderNav() {
   const userInfoHeader = document.querySelector(".user-info-header");
+  const userInfoCollapse = document.querySelector(".user-info-collapse");
   const navLinks = document.querySelector(".nav-links");
   const navButtons = document.querySelector(".nav-buttons");
   const navLinksCollapse = document.querySelector(".nav-links-collapse");
-  const navButtonsCollapse = document.querySelector(".nav-buttons-collapse");
-  const bannerButtons = document.querySelector(".banner-buttons");
 
   const links = [];
   const linkHome = { href: URLS.INDEX, text: "Home" };
@@ -40,7 +38,11 @@ export async function renderNav() {
           userDataApi.avatar = DEFAULT_URLS.AVATAR;
         }
 
-        updateUserHeader(userInfoHeader, userDataApi);
+        updateUserInfo(userInfoHeader, userInfoCollapse, userDataApi);
+
+        window.addEventListener("resize", () => {
+          updateUserInfo(userInfoHeader, userInfoCollapse, userDataApi);
+        });
 
         const logoutButton = document.getElementById("logoutButton");
         logoutButton.addEventListener("click", logoutUser);
@@ -49,15 +51,13 @@ export async function renderNav() {
       }
     }
 
-    setupNav(navButtons, navLinks, navButtonsCollapse, navLinksCollapse, links);
+    setupNav(navButtons, navLinks, navLinksCollapse, links);
 
     window.addEventListener("resize", () => {
       if (screen.width < 992) {
         updateNavLinks(navLinksCollapse, links);
-        updateNavButtons(getItem("name"), navButtonsCollapse, bannerButtons);
       } else {
         navLinksCollapse.innerHTML = "";
-        navButtonsCollapse.innerHTML = "";
       }
     });
   } catch (error) {
@@ -69,6 +69,6 @@ export async function renderNav() {
       false
     );
 
-    console.log(error);
+    console.error(error);
   }
 }

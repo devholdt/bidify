@@ -1,30 +1,22 @@
 import { URLS, DEFAULT_URLS } from "../components/index.js";
 import { getItem } from "../storage/index.js";
 
-export function setupNav(
-  navButtons,
-  navLinks,
-  navButtonsCollapse,
-  navLinksCollapse,
-  links
-) {
+export function setupNav(navButtons, navLinks, navLinksCollapse, links) {
   const isLoggedIn = getItem("name");
   updateNavButtons(isLoggedIn, navButtons);
   updateNavLinks(navLinks, links);
 
   if (window.innerWidth < 992) {
-    updateNavButtons(isLoggedIn, navButtonsCollapse);
     updateNavLinks(navLinksCollapse, links);
   } else {
     navLinksCollapse.innerHTML = "";
-    navButtonsCollapse.innerHTML = "";
   }
 }
 
-export function updateUserHeader(container, userData) {
+function userInfo(container, userData) {
   container.innerHTML = `
     <div class="d-flex">
-      <a href="${URLS.PROFILE}?name=${userData.name}" class="d-flex gap-2 text-decoration-none text-dark border-end pe-2">
+      <a href="${URLS.PROFILE}?name=${userData.name}" class="d-flex gap-2 text-decoration-none text-dark pe-2">
         <img src="${userData.avatar}" class="avatar" alt="${userData.name}'s avatar" onerror='this.src="${DEFAULT_URLS.AVATAR}"'>
         <div class="d-flex flex-column">
           <p class="mb-0 fw-light">${userData.name}</p>
@@ -38,7 +30,34 @@ export function updateUserHeader(container, userData) {
     </div>`;
 }
 
-export function updateNavButtons(isLoggedIn, container1, container2) {
+export function updateUserInfo(headerContainer, collapseContainer, userData) {
+  userInfo(headerContainer, userData);
+
+  if (screen.width < 992) {
+    userInfo(collapseContainer, userData);
+  } else {
+    collapseContainer.innerHTML = "";
+  }
+}
+
+export function updateNavLinks(container, links) {
+  const { pathname } = document.location;
+
+  container.innerHTML = links
+    .map(
+      (link) => `
+      <li class="nav-item nav-regular">
+          <a href="${link.href}" class="nav-link text-white ${
+        pathname === `/${link.href}` ? "active" : ""
+      }">
+              <span>${link.text}</span>
+          </a>
+      </li>`
+    )
+    .join("");
+}
+
+function updateNavButtons(isLoggedIn, container1, container2) {
   if (isLoggedIn) {
     container1.innerHTML = `
         <div class="nav-divider"></div>
@@ -67,21 +86,4 @@ export function updateNavButtons(isLoggedIn, container1, container2) {
         data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>`;
     }
   }
-}
-
-export function updateNavLinks(container, links) {
-  const { pathname } = document.location;
-
-  container.innerHTML = links
-    .map(
-      (link) => `
-    <li class="nav-item nav-regular">
-        <a href="${link.href}" class="nav-link text-white ${
-        pathname === `/${link.href}` ? "active" : ""
-      }">
-            <span>${link.text}</span>
-        </a>
-    </li>`
-    )
-    .join("");
 }
