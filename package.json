@@ -6,10 +6,8 @@
   "main": "src/index.js",
   "scripts": {
     "build": "sass src/scss:dist/css",
-    "start": "live-server",
-    "watch": "sass src/scss:dist/css --watch",
-    "dev": "npm-run-all --parallel watch start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "sass src/scss:dist/css --watch live-server",
+    "dev": "npm-run-all --parallel watch start"
   },
   "keywords": [
     "website",
