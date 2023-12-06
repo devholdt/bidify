@@ -6,7 +6,8 @@
   "main": "src/index.js",
   "scripts": {
     "build": "sass src/scss:dist/css",
-    "start": "sass src/scss:dist/css --watch live-server",
+    "start": "live-server",
+    "watch": "sass src/scss:dist/css --watch",
     "dev": "npm-run-all --parallel watch start"
   },
   "keywords": [
