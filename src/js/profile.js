@@ -9,7 +9,7 @@ if (!userDataLocal) {
 }
 
 const title = document.querySelector("title");
-title.innerHTML = `Bidify | ${getUser().name}'s profile`;
+title.innerHTML = `Bidify | ${storage.getUser().name}'s profile`;
 
 components.authModals();
 components.renderNav();
