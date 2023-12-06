@@ -18,29 +18,47 @@
 
 <body>
     <header>
-        <nav class="navbar bg-white py-0">
 
-            <div class="container-fluid border-bottom border-light navbar-top mx-5">
-                <a class="navbar-brand" href="index.html">
+        <nav class="navbar navbar-top navbar-expand-lg p-0">
+
+            <div class="container-fluid p-0">
+
+                <a class="navbar-brand p-3" href="index.html">
                     <img src="./src/images/bidify_logo.png" alt="Bidify logo" width="150">
                 </a>
 
-                <form class="d-flex w-100 mx-5" role="search">
-                    <input class="form-control border border-secondary me-2 px-3 bg-white" type="search"
-                        placeholder="search listings..." aria-label="Search listings">
-                    <button class="btn btn-dark btn-circle" type="submit"><span class="material-icons">
-                            search
-                        </span></button>
-                </form>
+                <button class="navbar-toggler border-primary shadow-none m-3" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <ul class="navbar-nav p-3">
+
+                        <div class="nav-links-collapse"></div>
+
+                        <div class="nav-buttons-collapse"></div>
+
+                    </ul>
+
+                </div>
 
                 <div class="text-nowrap user-info-header"></div>
+
             </div>
 
-            <div class="container-fluid bg-primary shadow navbar-bottom">
+        </nav>
+
+        <nav class="navbar navbar-bottom bg-primary shadow py-0">
+
+            <div class="container-fluid">
+
                 <ul class="nav container">
 
                     <li class="nav-item nav-listing">
-                        <a class="nav-link d-flex gap-2" aria-current="page" href="index.html">
+                        <a class="nav-link d-flex gap-2" aria-current="page" href="/">
                             <span class="nav-listing_span">
                                 <span class="material-icons">storefront</span>
                                 <span>Listings</span>
@@ -49,9 +67,11 @@
                     </li>
 
                     <div class="nav-links d-flex"></div>
+
                     <div class="nav-buttons d-flex"></div>
 
                 </ul>
+
             </div>
 
         </nav>

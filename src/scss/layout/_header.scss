@@ -1,94 +1,84 @@
-.navbar {
-    & > .container-fluid {
-        flex-wrap: nowrap;
-    }
-    
-    &-top {
-        height: 100px;
-
-        form input {
-            height: 45px;
-            border-radius: 25px;
-        }
-    }
-
-    &-bottom {
-        height: 60px;
-
-        .nav {
-            max-width: 1420px;
-            height: 100%;
-            font-weight: 100;
-
-            &-item {
-                height: inherit;
+.navbar-bottom {
+    .nav {
+        &-item {
+            a, button {
                 display: flex;
+                justify-content: center;
                 align-items: center;
-
-                a, button {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: inherit;
-                    text-transform: lowercase;
-                    transition: 0.2s;
-                    
-                    span {
-                        transition: 0.2s;
-                    }
-                }
-
-                .active span {
-                    box-shadow: inset 0 -3px 0 $light;
-                }
-            }
-
-            &-regular {
-                width: 120px;
-                font-size: 20px;
-
-
-                a, button {
-                    margin: auto;
-                    width: 100%;
-
-
-                    span {
-                        padding: 6px 8px;
-                    }
-                }
-
-                a:hover span, button:hover span {
-                    box-shadow: inset 0 -3px 0 $light;
-                }
-            }
-            
-            &-listing {
-                font-size: 28px;
-                width: 200px;
+                height: inherit;
+                text-transform: lowercase;
+                transition: 0.2s;
                 
-                a {
-                    background-color: white;
-                    color: $dark;
-                    margin: auto;
-                    height: inherit;
-                    width: 100%;
-                }
-
-                a:hover {
-                    box-shadow: inset 0 -4px 0 $gray-dark;
-                    filter: brightness(90%);
+                span {
+                    transition: 0.2s;
                 }
             }
 
-            &-divider {
-                display: flex;
-                align-self: center;
-                width: 1px;
-                height: 64%;
-                border-radius: 50%;
-                background-color: $light;
+            .active span {
+                box-shadow: inset 0 -3px 0 $light;
             }
         }
+
+        &-regular {
+            width: 120px;
+            font-size: 20px;
+
+            a, button {
+                margin: auto;
+                width: 100%;
+
+
+                span {
+                    padding: 6px 8px;
+                }
+            }
+
+            a:hover span, button:hover span {
+                box-shadow: inset 0 -3px 0 $light;
+            }
+        }
+        
+        &-listing {
+            font-size: 28px;
+            width: 200px;
+            
+            a {
+                background-color: white;
+                color: $dark;
+                margin: auto;
+                height: inherit;
+                width: 100%;
+            }
+
+            a:hover {
+                box-shadow: inset 0 -4px 0 $gray-dark;
+                filter: brightness(90%);
+            }
+        }
+
+        &-divider {
+            display: flex;
+            align-self: center;
+            width: 1px;
+            height: 64%;
+            border-radius: 50%;
+            background-color: $light;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar-top {
+        form, .user-info-header {
+            display: none;
+        }
+
+        a span, button span {
+            color: $dark;
+        }
+    }
+
+    .navbar-bottom {
+        display: none;
     }
 }

@@ -3,13 +3,19 @@ import { getItem, getUser } from "../storage/index.js";
 import { API_URLS, headers } from "../api/index.js";
 import { logoutUser } from "../auth/logout.js";
 import { alert } from "../utilities/index.js";
+import {
+  updateUserHeader,
+  updateNavLinks,
+  updateNavButtons,
+  setupNav,
+} from "../utilities/setupNav.js";
 
 export async function renderNav() {
-  const { pathname } = document.location;
-
   const userInfoHeader = document.querySelector(".user-info-header");
   const navLinks = document.querySelector(".nav-links");
   const navButtons = document.querySelector(".nav-buttons");
+  const navLinksCollapse = document.querySelector(".nav-links-collapse");
+  const navButtonsCollapse = document.querySelector(".nav-buttons-collapse");
   const bannerButtons = document.querySelector(".banner-buttons");
 
   const links = [];
@@ -34,68 +40,27 @@ export async function renderNav() {
           userDataApi.avatar = DEFAULT_URLS.AVATAR;
         }
 
-        userInfoHeader.innerHTML = `
-          <div class="d-flex">
-            <a href="${URLS.PROFILE}?name=${userDataApi.name}" class="d-flex gap-2 text-decoration-none text-dark border-end pe-2">
-              <img src="${userDataApi.avatar}" class="avatar" alt="${userDataApi.name}'s avatar" onerror='this.src="${DEFAULT_URLS.AVATAR}"'>
-              <div class="d-flex flex-column">
-                <p class="mb-0 fw-light">${userDataApi.name}</p>
-                <p class="text-primary fw-normal">$${userDataApi.credits}</p>
-              </div>
-            </a>
-            <button class="btn btn-outline-dark h-100 my-auto ms-2 rounded-0 shadow-sm" 
-            data-bs-toggle="modal" data-bs-target="#logoutModal">
-              <span>logout</span>
-            </button>
-          </div>`;
-
-        navButtons.innerHTML = `
-          <div class="nav-divider"></div>
-          <li class="nav-item nav-regular">
-              <button class="nav-link text-white btn-login" 
-              data-bs-toggle="modal" data-bs-target="#logoutModal">
-                <span>Logout</span>
-              </button>
-          </li>`;
-
-        if (bannerButtons) {
-          bannerButtons.innerHTML = `
-            <button type="button" class="btn btn-yellow btn-cta">Listings</button>`;
-        }
+        updateUserHeader(userInfoHeader, userDataApi);
 
         const logoutButton = document.getElementById("logoutButton");
         logoutButton.addEventListener("click", logoutUser);
 
         links.push(linkProfile);
       }
-    } else {
-      navButtons.innerHTML = `
-      <div class="nav-divider"></div>
-      <li class="nav-item nav-regular">
-          <button class="nav-link text-white btn-login" data-bs-toggle="modal"
-          data-bs-target="#loginModal"><span>Login</span></button>
-      </li>`;
-
-      if (bannerButtons) {
-        bannerButtons.innerHTML = `
-        <button type="button" class="btn btn-primary btn-cta" 
-        data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>`;
-      }
     }
 
-    navLinks.innerHTML = links
-      .map(
-        (link) => `
-    <li class="nav-item nav-regular">
-        <a href="${link.href}" class="nav-link text-white ${
-          pathname === `/${link.href}` ? "active" : ""
-        }">
-            <span>${link.text}</span>
-        </a>
-    </li>`
-      )
-      .join("");
-  } catch {
+    setupNav(navButtons, navLinks, navButtonsCollapse, navLinksCollapse, links);
+
+    window.addEventListener("resize", () => {
+      if (screen.width < 992) {
+        updateNavLinks(navLinksCollapse, links);
+        updateNavButtons(getItem("name"), navButtonsCollapse, bannerButtons);
+      } else {
+        navLinksCollapse.innerHTML = "";
+        navButtonsCollapse.innerHTML = "";
+      }
+    });
+  } catch (error) {
     alert(
       "danger",
       "An error occured when attempting to render navigation menu",
@@ -103,5 +68,7 @@ export async function renderNav() {
       null,
       false
     );
+
+    console.log(error);
   }
 }
