@@ -18,7 +18,7 @@ export function createCard(listing, containerSelector) {
   const listingEndsAt = new Date(listing.endsAt);
 
   if (listing.media.length === 0) {
-    listingMedia = `<img src="../../src/images/bidify_nomediasvg.svg" class="card-img-top no-media-found" alt="Listing image">`;
+    listingMedia = `<img src="src/images/bidify_nomedia.svg" class="card-img-top no-media-found" alt="Listing image">`;
   } else {
     listingMedia = `<img src="${listing.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
   }
@@ -158,7 +158,7 @@ export async function createBidCard(bid, containerSelector) {
   let listingMedia = "";
 
   if (bid.listing.media.length === 0) {
-    listingMedia = `<img src="../../src/images/bidify_nomediasvg.svg" class="card-img-top no-media-found" alt="Listing image">`;
+    listingMedia = `<img src="src/images/bidify_nomedia.svg" class="card-img-top no-media-found" alt="Listing image">`;
   } else {
     listingMedia = `<img src="${bid.listing.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
   }
