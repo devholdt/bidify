@@ -19,33 +19,6 @@ export function setupNav(
   }
 }
 
-function userInfo(container, userData) {
-  container.innerHTML = `
-    <div class="d-flex">
-      <a href="${URLS.PROFILE}?name=${userData.name}" class="d-flex gap-2 text-decoration-none text-dark pe-2">
-        <img src="${userData.avatar}" class="avatar" alt="${userData.name}'s avatar" onerror='this.src="${DEFAULT_URLS.AVATAR}"'>
-        <div class="d-flex flex-column">
-          <p class="mb-0 fw-light">${userData.name}</p>
-          <p class="text-primary fw-normal">$${userData.credits}</p>
-        </div>
-      </a>
-      <button class="btn btn-outline-dark h-100 my-auto ms-2 rounded-0 shadow-sm" 
-      data-bs-toggle="modal" data-bs-target="#logoutModal">
-        <span>logout</span>
-      </button>
-    </div>`;
-}
-
-export function updateUserInfo(headerContainer, collapseContainer, userData) {
-  userInfo(headerContainer, userData);
-
-  if (screen.width < 992) {
-    userInfo(collapseContainer, userData);
-  } else {
-    collapseContainer.innerHTML = "";
-  }
-}
-
 export function updateNavLinks(container, links) {
   const { pathname } = document.location;
 
@@ -63,9 +36,45 @@ export function updateNavLinks(container, links) {
     .join("");
 }
 
-function updateNavButtons(isLoggedIn, container1, container2) {
+export function updateUserInfo(
+  isLoggedIn,
+  headerContainer,
+  collapseContainer,
+  userData
+) {
   if (isLoggedIn) {
-    container1.innerHTML = `
+    collapseContainer.innerHTML = "";
+    userInfo(headerContainer, userData);
+
+    if (screen.width < 992) {
+      collapseContainer.innerHTML = "";
+      userInfo(collapseContainer, userData);
+    } else {
+      collapseContainer.innerHTML = "";
+    }
+  }
+}
+
+function userInfo(container, userData) {
+  container.innerHTML = `
+      <div class="d-flex">
+        <a href="${URLS.PROFILE}?name=${userData.name}" class="d-flex gap-2 text-decoration-none text-dark pe-2">
+          <img src="${userData.avatar}" class="avatar" alt="${userData.name}'s avatar" onerror='this.src="${DEFAULT_URLS.AVATAR}"'>
+          <div class="d-flex flex-column">
+            <p class="mb-0 fw-light">${userData.name}</p>
+            <p class="text-primary fw-normal">$${userData.credits}</p>
+          </div>
+        </a>
+        <button class="btn btn-outline-dark h-100 my-auto ms-2 rounded-0 shadow-sm" 
+        data-bs-toggle="modal" data-bs-target="#logoutModal">
+          <span>logout</span>
+        </button>
+      </div>`;
+}
+
+function updateNavButtons(isLoggedIn, navButton, bannerButton) {
+  if (isLoggedIn) {
+    navButton.innerHTML = `
         <div class="nav-divider"></div>
         <li class="nav-item nav-regular">
             <button class="nav-link text-white btn-login" 
@@ -74,20 +83,20 @@ function updateNavButtons(isLoggedIn, container1, container2) {
             </button>
         </li>`;
 
-    if (container2) {
-      container2.innerHTML = `
+    if (bannerButton) {
+      bannerButton.innerHTML = `
             <button type="button" class="btn btn-yellow btn-cta banner-listings-button">Listings</button>`;
     }
   } else {
-    container1.innerHTML = `
+    navButton.innerHTML = `
       <div class="nav-divider"></div>
       <li class="nav-item nav-regular">
           <button class="nav-link text-white btn-login" data-bs-toggle="modal"
           data-bs-target="#loginModal"><span>Login</span></button>
       </li>`;
 
-    if (container2) {
-      container2.innerHTML = `
+    if (bannerButton) {
+      bannerButton.innerHTML = `
         <button type="button" class="btn btn-primary btn-cta" 
         data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>`;
     }

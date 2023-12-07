@@ -25,44 +25,6 @@ export async function renderNav() {
   try {
     setupNav(navButtons, bannerButtons, navLinks, navLinksCollapse, links);
 
-    if (getItem("name")) {
-      const linkProfile = {
-        href: `${URLS.PROFILE}?name=${getUser().name}`,
-        text: "Profile",
-      };
-      const userDataLocal = getItem("user");
-      const userUrl = `${API_URLS.PROFILES}/${userDataLocal.name}?_listings=true`;
-
-      const response = await fetch(`${userUrl}`, { headers: headers() });
-      const userDataApi = await response.json();
-
-      if (bannerButtons) {
-        document
-          .querySelector(".banner-listings-button")
-          .addEventListener("click", () => {
-            document.querySelector(".listing-sorting").scrollIntoView();
-          });
-      }
-
-      if (response.ok) {
-        if (userDataApi.avatar === null) {
-          userDataApi.avatar = DEFAULT_URLS.AVATAR;
-        }
-
-        updateUserInfo(userInfoHeader, userInfoCollapse, userDataApi);
-
-        window.addEventListener("resize", () => {
-          updateUserInfo(userInfoHeader, userInfoCollapse, userDataApi);
-        });
-
-        const logoutButton = document.getElementById("logoutButton");
-        logoutButton.addEventListener("click", logoutUser);
-
-        links.push(linkProfile);
-        setupNav(navButtons, bannerButtons, navLinks, navLinksCollapse, links);
-      }
-    }
-
     document.querySelector(".nav-listing").addEventListener("click", () => {
       if (location.pathname === "/index.html") {
         document.querySelector(".listing-sorting").scrollIntoView();
@@ -91,6 +53,54 @@ export async function renderNav() {
         navLinksCollapse.innerHTML = "";
       }
     });
+
+    if (getItem("name")) {
+      const linkProfile = {
+        href: `${URLS.PROFILE}?name=${getUser().name}`,
+        text: "Profile",
+      };
+      const userDataLocal = getItem("user");
+      const userUrl = `${API_URLS.PROFILES}/${userDataLocal.name}?_listings=true`;
+
+      const response = await fetch(`${userUrl}`, { headers: headers() });
+      const userDataApi = await response.json();
+
+      if (bannerButtons) {
+        document
+          .querySelector(".banner-listings-button")
+          .addEventListener("click", () => {
+            document.querySelector(".listing-sorting").scrollIntoView();
+          });
+      }
+
+      if (response.ok) {
+        if (userDataApi.avatar === null) {
+          userDataApi.avatar = DEFAULT_URLS.AVATAR;
+        }
+
+        updateUserInfo(
+          getItem("name"),
+          userInfoHeader,
+          userInfoCollapse,
+          userDataApi
+        );
+
+        window.addEventListener("resize", () => {
+          updateUserInfo(
+            getItem("name"),
+            userInfoHeader,
+            userInfoCollapse,
+            userDataApi
+          );
+        });
+
+        const logoutButton = document.getElementById("logoutButton");
+        logoutButton.addEventListener("click", logoutUser);
+
+        links.push(linkProfile);
+        setupNav(navButtons, bannerButtons, navLinks, navLinksCollapse, links);
+      }
+    }
   } catch (error) {
     alert(
       "danger",

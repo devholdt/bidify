@@ -37,7 +37,11 @@
 
                     <ul class="navbar-nav p-3 gap-2">
 
-                        <div class="user-info-collapse text-nowrap mt-2 mb-3"></div>
+                        <div class="user-info-collapse text-nowrap mt-2 mb-3 py-0">
+                            <button type="button"
+                                class="btn btn-outline-primary rounded-1 text-uppercase d-flex ms-auto px-4 shadow-sm"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                        </div>
 
                         <div class="nav-links-collapse d-flex flex-column fw-normal gap-2 mb-1"></div>
 
@@ -340,7 +344,8 @@
             </div>
         </div>
 
-        <div id="listingsCarousel" class="carousel slide carousel-dark" data-bs-touch="false" data-bs-ride="carousel">
+        <div id="listingsCarousel" class="carousel slide carousel-dark d-none d-md-block" data-bs-touch="false"
+            data-bs-ride="carousel">
             <div class="carousel-indicators gap-1 mb-5">
                 <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Popular today"></button>
@@ -407,7 +412,7 @@
                         data-bs-parent="#createListingAccordion">
                         <div class="accordion-body row row-md-auto">
 
-                            <form class="row col-md-6" id="createListingForm">
+                            <form class="row col-md-6 pb-4" id="createListingForm">
 
                                 <div class="col-md-6 mb-3">
                                     <label for="createListingTitle" class="form-label">Title</label>
