@@ -42,15 +42,12 @@
             font-size: 28px;
             width: 200px;
             
-            a {
-                background-color: white;
-                color: $dark;
+            button {
                 margin: auto;
                 height: inherit;
-                width: 100%;
             }
 
-            a:hover {
+            button:hover {
                 box-shadow: inset 0 -4px 0 $gray-dark;
                 filter: brightness(90%);
             }

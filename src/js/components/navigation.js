@@ -1,5 +1,5 @@
 import { DEFAULT_URLS, URLS } from "./index.js";
-import { getItem, getUser } from "../storage/index.js";
+import { setItem, getItem, getUser } from "../storage/index.js";
 import { API_URLS, headers } from "../api/index.js";
 import { logoutUser } from "../auth/logout.js";
 import { alert } from "../utilities/index.js";
@@ -15,6 +15,7 @@ export async function renderNav() {
   const navLinks = document.querySelector(".nav-links");
   const navButtons = document.querySelector(".nav-buttons");
   const navLinksCollapse = document.querySelector(".nav-links-collapse");
+  const bannerButtons = document.querySelector(".banner-buttons");
 
   const links = [];
   const linkHome = { href: URLS.INDEX, text: "Home" };
@@ -22,6 +23,8 @@ export async function renderNav() {
   links.push(linkHome);
 
   try {
+    setupNav(navButtons, bannerButtons, navLinks, navLinksCollapse, links);
+
     if (getItem("name")) {
       const linkProfile = {
         href: `${URLS.PROFILE}?name=${getUser().name}`,
@@ -32,6 +35,14 @@ export async function renderNav() {
 
       const response = await fetch(`${userUrl}`, { headers: headers() });
       const userDataApi = await response.json();
+
+      if (bannerButtons) {
+        document
+          .querySelector(".banner-listings-button")
+          .addEventListener("click", () => {
+            document.querySelector(".listing-sorting").scrollIntoView();
+          });
+      }
 
       if (response.ok) {
         if (userDataApi.avatar === null) {
@@ -48,10 +59,30 @@ export async function renderNav() {
         logoutButton.addEventListener("click", logoutUser);
 
         links.push(linkProfile);
+        setupNav(navButtons, bannerButtons, navLinks, navLinksCollapse, links);
       }
     }
 
-    setupNav(navButtons, navLinks, navLinksCollapse, links);
+    document.querySelector(".nav-listing").addEventListener("click", () => {
+      if (location.pathname === "/index.html") {
+        document.querySelector(".listing-sorting").scrollIntoView();
+      } else if (location.pathname === "/profile.html") {
+        location.href = "index.html";
+
+        setItem({ key: "scrollRequired", value: "true" });
+      }
+    });
+
+    window.onload = function () {
+      const scrollRequired = getItem("scrollRequired");
+
+      setTimeout(() => {
+        if (scrollRequired === "true") {
+          document.querySelector(".listing-sorting").scrollIntoView();
+          localStorage.removeItem("scrollRequired");
+        }
+      }, 100);
+    };
 
     window.addEventListener("resize", () => {
       if (screen.width < 992) {

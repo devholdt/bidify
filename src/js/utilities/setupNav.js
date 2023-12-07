@@ -1,9 +1,15 @@
 import { URLS, DEFAULT_URLS } from "../components/index.js";
 import { getItem } from "../storage/index.js";
 
-export function setupNav(navButtons, navLinks, navLinksCollapse, links) {
+export function setupNav(
+  navButtons,
+  bannerButtons,
+  navLinks,
+  navLinksCollapse,
+  links
+) {
   const isLoggedIn = getItem("name");
-  updateNavButtons(isLoggedIn, navButtons);
+  updateNavButtons(isLoggedIn, navButtons, bannerButtons);
   updateNavLinks(navLinks, links);
 
   if (window.innerWidth < 992) {
@@ -70,7 +76,7 @@ function updateNavButtons(isLoggedIn, container1, container2) {
 
     if (container2) {
       container2.innerHTML = `
-            <button type="button" class="btn btn-yellow btn-cta">Listings</button>`;
+            <button type="button" class="btn btn-yellow btn-cta banner-listings-button">Listings</button>`;
     }
   } else {
     container1.innerHTML = `
