@@ -24,7 +24,7 @@
             <div class="container-fluid p-0">
 
                 <a class="navbar-brand p-3" href="index.html">
-                    <img src="./src/images/bidify_logo.png" alt="Bidify logo" width="150">
+                    <img src="./src/images/bidify_logo.png" class="logo" alt="Bidify logo">
                 </a>
 
                 <button class="navbar-toggler border-primary shadow-none m-3" type="button" data-bs-toggle="collapse"
@@ -481,7 +481,7 @@
                             </form>
 
                             <div class="col-md-6">
-                                <p class="fw-semibold ms-3 mb-0">Requirements:</p>
+                                <p class="ms-3 mb-0 fw-normal">Requirements:</p>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">Title and end date are required.</li>
                                     <li class="list-group-item">Description, media and tags are optional.</li>
@@ -500,9 +500,11 @@
         <div class="container">
 
             <div
-                class="d-flex mb-3 py-3 px-4 border-bottom border-primary listing-sorting d-flex justify-content-between">
-                <div class="d-flex gap-5 w-100">
-                    <div class="btn-group" role="group" aria-label="Change listings layout">
+                class="d-flex flex-column flex-sm-row py-3 mb-3 border-bottom border-primary justify-content-between row-gap-3 listing-sorting">
+
+                <div class="d-flex col-12 col-sm-9">
+
+                    <div class="btn-group d-none d-md-flex me-3" role="group" aria-label="Change listings layout">
                         <button type="button" class="btn btn-outline-primary d-flex align-items-center active">
                             <span class="material-icons">grid_view</span>
                         </button>
@@ -511,23 +513,28 @@
                         </button>
                     </div>
 
-                    <div class="input-group w-100">
+                    <div class="input-group">
                         <input id="searchListings" type="search"
-                            class="form-control rounded-start-5 border-primary px-3" placeholder="Search listings..."
+                            class="form-control rounded-start-5 border-primary ps-3" placeholder="Search listings..."
                             aria-label="Search listings">
                         <button type="button"
                             class="input-group-text btn btn-primary rounded-end-5 d-flex align-items-center">
                             <span class="material-icons">search</span>
                         </button>
                     </div>
+
                 </div>
 
-                <select id="sortListings" class="form-select rounded-0 border-primary ms-5" aria-label="Sort listings">
-                    <option class="sort-latest" value="Latest" selected>Latest</option>
-                    <option class="sort-popular" value="Popular">Popular</option>
-                    <option class="sort-az" value="Title A - Z">Title A - Z</option>
-                    <option class="sort-za" value="Title Z - A">Title Z - A</option>
-                </select>
+                <div class="d-flex col-12 col-sm-3">
+                    <select id="sortListings" class="form-select rounded-0 border-primary ms-auto"
+                        aria-label="Sort listings">
+                        <option class="sort-latest" value="Latest" selected>Latest</option>
+                        <option class="sort-popular" value="Popular">Popular</option>
+                        <option class="sort-az" value="Title A - Z">Title A - Z</option>
+                        <option class="sort-za" value="Title Z - A">Title Z - A</option>
+                    </select>
+                </div>
+
             </div>
 
             <div class="listings row row-cols-3"></div>

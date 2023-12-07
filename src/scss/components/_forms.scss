@@ -78,12 +78,12 @@ input, textarea {
         height: 100%;
         margin: auto;
     }
+}
 
-    .input-group {
-        max-width: 450px;
-    }
-
-    select {
-        max-width: 200px;
+@media (min-width: 576px) {
+    .listing-sorting {
+        .input-group {
+            margin-right: 1rem;
+        }
     }
 }
