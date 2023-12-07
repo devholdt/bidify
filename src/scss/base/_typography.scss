@@ -3,10 +3,12 @@ p, div {
     font-weight: 300;
 }
 
-a, button, .raleway {
+a, button, 
+.raleway {
     font-family: "Raleway", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+.text-heading {
     font-family: "Roboto Slab", serif;
 }
