@@ -1,19 +1,11 @@
 #listingsCarousel {
-    display: flex;
-    max-height: 830px;
-    height: 100%;
-    align-items: center;
     background: url("../../../src/images/bidify_texture.png");
-    background-size: contain;
+    background-size: 40%;
 
     .carousel-indicators button {
-        height: 14px;
-        width: 14px;
+        height: 15px;
+        width: 15px;
         border-radius: 50%;
-    }
-
-    .carousel-inner {
-        height: 100%;
     }
 
     h2 {

@@ -1,17 +1,11 @@
 import { getItem } from "../../storage/index.js";
 import { API_URLS, headers } from "../../api/index.js";
-import { URLS, WIDTH } from "../index.js";
-import { updateUserInfo, setupNav } from "../../utilities/index.js";
+import { WIDTH } from "../index.js";
+import { updateUserInfo, setupNav, alert } from "../../utilities/index.js";
 import { handleWindowResize } from "./index.js";
 import { logoutUser } from "../../auth/index.js";
 
 export async function handleLoggedInUser(elements, links) {
-  // const linkProfile = {
-  //   href: `${URLS.PROFILE}`,
-  //   parameter: `?name=${getItem("name")}`,
-  //   text: "Profile",
-  // };
-
   const userDataLocal = getItem("user");
   const userUrl = `${API_URLS.PROFILES}/${userDataLocal.name}?_listings=true`;
 
@@ -30,10 +24,6 @@ export async function handleLoggedInUser(elements, links) {
 
       setupLogoutButton();
 
-      // links.push(linkProfile);
-
-      // setupNav(elements, links);
-
       const profileLink = links.find((link) => link.text === "Profile");
       if (profileLink) {
         profileLink.hidden = false;
@@ -41,9 +31,13 @@ export async function handleLoggedInUser(elements, links) {
 
       setupNav(elements, links);
     }
-  } catch (error) {
-    console.log("handleUserState.js: ");
-    console.error(error);
+  } catch {
+    alert(
+      "danger",
+      "An error occured when checking login state",
+      ".alert-absolute",
+      null
+    );
   }
 }
 

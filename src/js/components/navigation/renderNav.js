@@ -31,7 +31,7 @@ export async function renderNav() {
     }
 
     setupEventListeners(elements, links);
-  } catch (error) {
+  } catch {
     alert(
       "danger",
       "An error occurred when attempting to render navigation menu",
@@ -39,8 +39,5 @@ export async function renderNav() {
       null,
       false
     );
-
-    console.log("renderNav.js: ");
-    console.error(error);
   }
 }

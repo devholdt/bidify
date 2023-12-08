@@ -322,6 +322,7 @@
     </header>
 
     <main class="d-flex flex-column">
+
         <div class="banner bg-dark py-5">
             <div class="container text-white d-flex flex-column text-center gap-5 justify-content-center">
                 <h1 class="fw-light">Start bidding, start winning <br> - only at <span
@@ -338,9 +339,10 @@
             </div>
         </div>
 
-        <div id="listingsCarousel" class="carousel slide carousel-dark d-none d-md-block" data-bs-touch="false"
+        <div id="listingsCarousel" class="carousel slide carousel-dark d-none d-md-block py-5" data-bs-touch="false"
             data-bs-ride="carousel">
-            <div class="carousel-indicators gap-1 mb-5">
+
+            <div class="carousel-indicators gap-2">
                 <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Popular today"></button>
                 <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="1"
@@ -348,40 +350,41 @@
                 <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="2"
                     aria-label="Last chance"></button>
             </div>
+
             <div class="container carousel-inner">
 
-                <div class="carousel-item active mt-5 text-center" data-bs-interval="5000">
+                <div class="carousel-item active text-center" data-bs-interval="5000">
 
                     <div class="d-block w-100">
 
                         <h2>Popular listings</h2>
                         <p>Our most popular listings. Join the bidding!</p>
-                        <div class="row row-cols-3 mt-5 popular-listings"></div>
+                        <div class="row row-cols-3 popular-listings"></div>
 
                     </div>
 
                 </div>
 
-                <div class="carousel-item mt-5 text-center" data-bs-interval="5000">
+                <div class="carousel-item text-center" data-bs-interval="5000">
 
                     <div class="d-block w-100">
 
                         <h2>Latest listings</h2>
                         <p>Brand new listings. Be the first to place a bid!</p>
-                        <div class="row row-cols-3 mt-5 latest-listings"></div>
+                        <div class="row row-cols-3 latest-listings"></div>
 
                     </div>
 
 
                 </div>
 
-                <div class="carousel-item mt-5 text-center" data-bs-interval="5000">
+                <div class="carousel-item text-center" data-bs-interval="5000">
 
                     <div class="d-block w-100">
 
                         <h2>Last chance</h2>
                         <p>Last chance to bid on these listings. Don't miss out!</p>
-                        <div class="row row-cols-3 mt-5 last-chance"></div>
+                        <div class="row row-cols-3 last-chance"></div>
 
                     </div>
 
