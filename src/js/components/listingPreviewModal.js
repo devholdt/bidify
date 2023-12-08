@@ -8,7 +8,7 @@ import {
   removeQueryString,
   detailsListItem,
 } from "../utilities/index.js";
-import { getUser } from "../storage/index.js";
+import { getItem } from "../storage/index.js";
 
 document.addEventListener("reload", removeQueryString("id"));
 

@@ -6,14 +6,14 @@ import {
   detailsListItem,
 } from "../utilities/index.js";
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
-import { getUser, getItem } from "../storage/index.js";
+import { getItem } from "../storage/index.js";
 import { deleteListingEvent, editListingEvent } from "../events/index.js";
 import { getListing } from "../api/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
 
-  let listingMedia = "";
+  let listingMedia;
   let listingBids = "";
   const listingEndsAt = new Date(listing.endsAt);
 
@@ -21,6 +21,24 @@ export function createCard(listing, containerSelector) {
     listingMedia = `<img src="./src/images/bidify_nomedia.svg" class="card-img-top no-media-found" alt="Listing image">`;
   } else {
     listingMedia = `<img src="${listing.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
+  }
+
+  const img = new Image();
+
+  if (listing.media.length === 0) {
+    img.src = "./src/images/bidify_nomedia.svg";
+    img.alt = listing.title;
+    img.classList.add("card-img-top", "no-media-found");
+  } else {
+    img.src = listing.media[0];
+    img.alt = listing.title;
+    img.classList.add("card-img-top");
+
+    img.onerror = () => {
+      img.src = DEFAULT_URLS.LISTING_MEDIA;
+      img.alt = listing.title;
+      img.classList.add("no-media-found");
+    };
   }
 
   if (listing.bids && listing.bids.length > 0) {
@@ -38,9 +56,7 @@ export function createCard(listing, containerSelector) {
         <div class="listing-card shadow border" data-id="${listing.id}">
           <div class="card">
 
-              <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">
-                  ${listingMedia}
-              </div>
+              <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal"></div>
 
               <div class="card-body pt-5 pb-4 ps-0">
                 ${listingBids}
@@ -54,6 +70,8 @@ export function createCard(listing, containerSelector) {
 
           </div>
         </div>`;
+
+  card.querySelector(".listing-card-top").append(img);
 
   const countdownContainer = document.createElement("div");
   countdownContainer.classList.add("countdown");

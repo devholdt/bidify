@@ -1,4 +1,4 @@
-import { getItem, getUser } from "../../storage/index.js";
+import { getItem } from "../../storage/index.js";
 import { API_URLS, headers } from "../../api/index.js";
 import { DEFAULT_URLS, WIDTH } from "../index.js";
 import { updateUserInfo, setupNav, alert } from "../../utilities/index.js";
