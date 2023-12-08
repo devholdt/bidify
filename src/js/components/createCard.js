@@ -218,10 +218,13 @@ export async function createBidCard(bid, containerSelector) {
 
   const listGroup = card.querySelector(".list-group");
 
-  listGroup.innerHTML += detailsListItem("Your bid", bid.amount);
+  listGroup.innerHTML += detailsListItem(
+    "Your bid",
+    `<span class="fw-medium text-primary">$${bid.amount}</span>`
+  );
   listGroup.innerHTML += detailsListItem(
     "Current bid",
-    sortedListing[0].amount
+    `<span class="fw-medium text-primary">$${sortedListing[0].amount}</span>`
   );
   listGroup.innerHTML += detailsListItem(
     "Date",
