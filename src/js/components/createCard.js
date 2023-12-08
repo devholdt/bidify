@@ -35,7 +35,7 @@ export function createCard(listing, containerSelector) {
   card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4");
 
   card.innerHTML = `
-        <div class="listing-card" data-id="${listing.id}">
+        <div class="listing-card shadow border" data-id="${listing.id}">
           <div class="card">
 
               <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">

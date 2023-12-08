@@ -13,6 +13,7 @@ export async function displayListings() {
   const sortListingsContainer = document.querySelector("#sortListings");
   const listingsContainer = document.querySelector(".listings");
   const button = document.querySelector("#buttonMoreResults");
+  const spanResults = document.querySelector(".span-results");
 
   const INITIAL_LIMIT = 12;
   let limit = INITIAL_LIMIT;
@@ -94,8 +95,13 @@ export async function displayListings() {
   await fetchAllListings();
   sortAndDisplayListings();
 
+  spanResults.innerHTML = `Showing (${limit}) results`;
+
+  console.log(allListings.length);
+
   sortListingsContainer.addEventListener("change", (event) => {
     limit = INITIAL_LIMIT;
+    spanResults.innerHTML = `Showing (${limit}) results`;
     currentSort = event.target.value;
     sortAndDisplayListings();
   });
@@ -103,6 +109,8 @@ export async function displayListings() {
   button.addEventListener("click", () => {
     limit += INITIAL_LIMIT;
     sortAndDisplayListings();
+
+    spanResults.innerHTML = `Showing (${limit}) results`;
 
     if (limit >= allListings.length) {
       button.style.display = "none";

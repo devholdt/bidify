@@ -12,17 +12,9 @@
     p {
         margin: 0;
     }
-
-    &:hover {
-        box-shadow: $shadow-sm;
-    }
 }
 
 .profile-details {
-    &_container {
-        box-shadow: $shadow-sm;
-    }
-
     &_icon {
         p {
             padding: 6px;
@@ -36,7 +28,6 @@
 
     &_user {
         img {
-            box-shadow: $shadow-sm;
             width: 170px;
             height: 170px;
             border-radius: 50%;
