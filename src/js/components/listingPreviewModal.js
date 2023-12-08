@@ -217,10 +217,8 @@ export function listingModalPreview(listing, button) {
     });
 
     title.innerHTML = `
-      <h5 class="fw-bold fs-4 align-self-center align-items-center my-auto">${
-        listing.title
-      }</h5>
-      <span class="fw-light align-self-center align-items-center my-auto">id: ${listing.id.slice(
+      <h5 class="fw-bold fs-4 text-heading mb-0">${listing.title}</h5>
+      <span class="fw-light d-flex align-items-center pe-2 me-4">id: ${listing.id.slice(
         0,
         8
       )}</span>`;
