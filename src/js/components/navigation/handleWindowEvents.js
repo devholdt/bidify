@@ -4,13 +4,15 @@ import { loginButtonHTML } from "./index.js";
 import { WIDTH } from "../index.js";
 
 export function handleWindowLoad() {
-  const scrollRequired = getItem("scrollRequired");
-  if (scrollRequired === "true") {
-    setTimeout(() => {
-      document.querySelector(".listing-sorting").scrollIntoView();
-      localStorage.removeItem("scrollRequired");
-    }, 100);
-  }
+  window.addEventListener("load", () => {
+    const scrollRequired = getItem("scrollRequired");
+    if (scrollRequired === "true") {
+      setTimeout(() => {
+        document.querySelector(".listing-sorting").scrollIntoView();
+        localStorage.removeItem("scrollRequired");
+      }, 500);
+    }
+  });
 }
 
 export function handleWindowResize(elements, links) {

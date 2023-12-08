@@ -9,3 +9,4 @@ api.displayListings();
 components.renderNav();
 components.authModals();
 components.createListingForm();
+components.handleWindowLoad();
