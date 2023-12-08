@@ -10,3 +10,7 @@ export const URLS = {
   INDEX: "index.html",
   PROFILE: `profile.html`,
 };
+
+export const WIDTH = {
+  MEDIUM: 992,
+};
