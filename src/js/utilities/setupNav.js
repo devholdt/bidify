@@ -90,6 +90,12 @@ function updateNavButtons(isLoggedIn, navButton, bannerButton) {
     if (bannerButton) {
       bannerButton.innerHTML = `
             <button type="button" class="btn btn-yellow btn-cta banner-listings-button">Listings</button>`;
+
+      document
+        .querySelector(".banner-listings-button")
+        .addEventListener("click", () => {
+          document.querySelector(".listing-sorting").scrollIntoView();
+        });
     }
   } else {
     navButton.innerHTML = `
