@@ -80,10 +80,22 @@ input, textarea {
     }
 }
 
+@media (min-width: 992px) {
+    .listing-sorting {
+        .span-results {
+            margin: auto;
+        }
+    }
+}
+
 @media (min-width: 576px) {
     .listing-sorting {
         .input-group {
             margin-right: 1rem;
+        }
+
+        .span-results {
+            margin-left: 1rem;
         }
     }
 }

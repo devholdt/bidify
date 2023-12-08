@@ -508,7 +508,7 @@
             <div
                 class="d-flex flex-column flex-sm-row py-3 mb-3 border-bottom border-primary justify-content-between row-gap-3 listing-sorting">
 
-                <div class="d-flex col-12 col-sm-9">
+                <div class="d-flex col-12 col-sm-8 col-md-9">
 
                     <div class="btn-group d-none d-md-flex me-3" role="group" aria-label="Change listings layout">
                         <button type="button" class="btn btn-outline-primary d-flex align-items-center active">
@@ -531,7 +531,7 @@
 
                 </div>
 
-                <div class="d-flex col-12 col-sm-3">
+                <div class="d-flex col-12 col-sm-4 col-md-3">
                     <select id="sortListings" class="form-select rounded-0 border-primary ms-auto"
                         aria-label="Sort listings">
                         <option class="sort-latest" value="Latest" selected>Latest</option>
@@ -546,7 +546,17 @@
 
             </div>
 
+            <div class="d-flex align-items-center justify-content-end mb-3">
+                <span class="span-results fst-italic">Showing (x) results</span>
+            </div>
+
             <div class="listings row row-cols-3"></div>
+
+            <div class="d-flex justify-content-center">
+                <button type="button" id="buttonMoreResults"
+                    class="btn btn-outline-primary px-5 text-lowercase rounded-0 shadow-sm">More
+                    results</button>
+            </div>
 
         </div>
 

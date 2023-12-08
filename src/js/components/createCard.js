@@ -24,8 +24,9 @@ export function createCard(listing, containerSelector) {
   }
 
   if (listing.bids && listing.bids.length > 0) {
-    listing.bids.reverse();
-    listingBids = `<p class="card-text">Current bid: <span class="fw-medium text-primary">$${listing.bids[0].amount}</span> (${listing._count.bids})</p>`;
+    let bidsArray = [...listing.bids];
+    bidsArray.reverse();
+    listingBids = `<p class="card-text">Current bid: <span class="fw-medium text-primary">$${bidsArray[0].amount}</span> (${listing._count.bids})</p>`;
   } else {
     listingBids = `<p class="card-text">No bids yet</p>`;
   }

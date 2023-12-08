@@ -1,9 +1,14 @@
 import { API_URLS } from "../constants.js";
 import { headers } from "../headers.js";
 
-export async function getListings({ sortOrder = "desc", sort = "" } = {}) {
+export async function getListings({
+  sortOrder = "desc",
+  sort = "",
+  limit = "",
+  offset = "",
+} = {}) {
   const response = await fetch(
-    `${API_URLS.LISTINGS}?sortOrder=${sortOrder}${sort}&_seller=true&_bids=true&_active=true`,
+    `${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=${sortOrder}${sort}${limit}${offset}`,
     { headers: headers() }
   );
   if (response.ok) {
