@@ -1,13 +1,12 @@
-import { getItem } from "../../storage/index.js";
+import { getItem, getUser } from "../../storage/index.js";
 import { API_URLS, headers } from "../../api/index.js";
-import { WIDTH } from "../index.js";
+import { DEFAULT_URLS, WIDTH } from "../index.js";
 import { updateUserInfo, setupNav, alert } from "../../utilities/index.js";
 import { handleWindowResize } from "./index.js";
 import { logoutUser } from "../../auth/index.js";
 
 export async function handleLoggedInUser(elements, links) {
-  const userDataLocal = getItem("user");
-  const userUrl = `${API_URLS.PROFILES}/${userDataLocal.name}?_listings=true`;
+  const userUrl = `${API_URLS.PROFILES}/${getItem("name")}?_listings=true`;
 
   try {
     const response = await fetch(`${userUrl}`, { headers: headers() });
@@ -15,7 +14,8 @@ export async function handleLoggedInUser(elements, links) {
 
     if (response.ok) {
       userDataApi.avatar = userDataApi.avatar || DEFAULT_URLS.AVATAR;
-      updateUserInfo(getItem("name"), elements, userDataApi);
+
+      updateUserInfo(userDataApi.name, elements, userDataApi);
 
       window.addEventListener("resize", () => {
         const isMobileView = window.innerWidth < WIDTH.MEDIUM;

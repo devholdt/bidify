@@ -3,14 +3,14 @@ import * as profiles from "./api/profiles/index.js";
 import * as storage from "./storage/index.js";
 import * as events from "./events/index.js";
 
-const userDataLocal = storage.getUser();
+const name = storage.getItem("name");
 
-if (!userDataLocal) {
+if (!name) {
   window.location.href = components.URLS.INDEX;
 }
 
 const title = document.querySelector("title");
-title.innerHTML = `Bidify | ${storage.getUser().name}'s profile`;
+title.innerHTML = `Bidify | ${name}'s profile`;
 
 components.authModals();
 components.renderNav();

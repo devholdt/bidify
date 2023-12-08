@@ -6,7 +6,7 @@ import {
   detailsListItem,
 } from "../utilities/index.js";
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
-import { getUser } from "../storage/index.js";
+import { getUser, getItem } from "../storage/index.js";
 import { deleteListingEvent, editListingEvent } from "../events/index.js";
 import { getListing } from "../api/index.js";
 
@@ -110,8 +110,8 @@ export function createCard(listing, containerSelector) {
   const cardTop = card.querySelector(".card-top");
   listingModalPreview(listing, cardTop);
 
-  if (getUser()) {
-    if (listing.seller && listing.seller.name !== getUser().name) {
+  if (getItem("name")) {
+    if (listing.seller && listing.seller.name !== getItem("name")) {
       const cardButton = document.createElement("button");
       cardButton.classList.add("btn-gavel");
       cardButton.setAttribute("data-bs-toggle", "modal");
@@ -122,7 +122,7 @@ export function createCard(listing, containerSelector) {
 
       const gavelButton = card.querySelector(".btn-gavel");
       listingModalPreview(listing, gavelButton);
-    } else if (!listing.seller || listing.seller.name == getUser().name) {
+    } else if (!listing.seller || listing.seller.name == getItem("name")) {
       const cardButtons = card.querySelector(".card-buttons");
       cardButtons.classList.remove("justify-content-between");
       cardButtons.classList.add("justify-content-end");

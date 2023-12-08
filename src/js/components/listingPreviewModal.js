@@ -74,13 +74,13 @@ export function listingModalPreview(listing, button) {
 
     listingModalFooterDynamic.innerHTML = "";
 
-    if (getUser()) {
+    if (getItem("name")) {
       listingModalFooterDynamic.innerHTML = listingForm;
 
       const listingModalForm = document.querySelector("#listingModalForm");
       listingModalForm.addEventListener("submit", bidEvent);
 
-      if (listing.seller.name === getUser().name) {
+      if (listing.seller.name === getItem("name")) {
         sellerName = "you";
         listingModalFooterDynamic.innerHTML = interactionButtons;
 

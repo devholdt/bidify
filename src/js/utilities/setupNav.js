@@ -1,7 +1,9 @@
 import { URLS, DEFAULT_URLS, WIDTH } from "../components/index.js";
-import { getItem, getUser } from "../storage/index.js";
+import { getItem } from "../storage/index.js";
+import { getProfile } from "../api/profiles/index.js";
+import { alert } from "./index.js";
 
-export function setupNav(elements, links) {
+export async function setupNav(elements, links) {
   const isMobileView = window.innerWidth < WIDTH.MEDIUM;
   const isLoggedIn = getItem("name");
 
@@ -10,8 +12,17 @@ export function setupNav(elements, links) {
   updateNavLinksCollapse(elements.navLinksCollapse, links, isMobileView);
 
   if (isLoggedIn) {
-    const userData = getUser();
-    updateUserInfo(getItem("name"), elements, userData, isMobileView);
+    try {
+      const userData = await getProfile(getItem("name"));
+      updateUserInfo(getItem("name"), elements, userData, isMobileView);
+    } catch {
+      alert(
+        "danger",
+        "An error occured when attempting to update user info",
+        ".alert-absolute",
+        null
+      );
+    }
   } else {
     elements.navLinksCollapse.classList.remove("border-top", "pt-3");
   }
@@ -46,11 +57,11 @@ export function updateNavLinks(container, links) {
 
 export function updateUserInfo(userName, elements, userData, isMobileView) {
   if (userName) {
-    userInfo(elements.userInfoHeader, userData);
-
     if (isMobileView) {
       userInfo(elements.userInfoCollapse, userData);
+      elements.userInfoHeader.innerHTML = "";
     } else {
+      userInfo(elements.userInfoHeader, userData);
       elements.userInfoCollapse.innerHTML = "";
     }
   }

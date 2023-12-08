@@ -1,10 +1,10 @@
 import { API_URLS, headers } from "../index.js";
 import { alert } from "../../utilities/index.js";
-import { getUser } from "../../storage/index.js";
+import { getItem } from "../../storage/index.js";
 
-const user = getUser();
+const name = getItem("name");
 
-if (!user) {
+if (!name) {
   document.querySelector(".create-listing").style.display = "none";
 }
 

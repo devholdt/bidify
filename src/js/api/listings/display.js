@@ -1,5 +1,6 @@
 import { getListings } from "./fetch.js";
 import { createCard } from "../../components/index.js";
+import { alert } from "../../utilities/index.js";
 
 function display(container, listings) {
   container.innerHTML = "";
@@ -23,8 +24,13 @@ export async function displayListings() {
   async function fetchAllListings() {
     try {
       allListings = await getListings({ sort: "&sort=created" });
-    } catch (error) {
-      console.error("Error fetching listings:", error);
+    } catch {
+      alert(
+        "danger",
+        "An error occured when attempting to fetch all listings",
+        ".alert-absolute",
+        null
+      );
     }
   }
 
@@ -96,8 +102,6 @@ export async function displayListings() {
   sortAndDisplayListings();
 
   spanResults.innerHTML = `Showing (${limit}) results`;
-
-  console.log(allListings.length);
 
   sortListingsContainer.addEventListener("change", (event) => {
     limit = INITIAL_LIMIT;

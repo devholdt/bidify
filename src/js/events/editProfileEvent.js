@@ -1,4 +1,4 @@
-import { getUser } from "../storage/index.js";
+import { getItem, setItem } from "../storage/index.js";
 import { API_URLS, headers } from "../api/index.js";
 import { alert } from "../utilities/index.js";
 
@@ -6,7 +6,7 @@ export async function editProfileEvent(event) {
   event.preventDefault();
 
   try {
-    const url = `${API_URLS.PROFILES}/${getUser().name}`;
+    const url = `${API_URLS.PROFILES}/${getItem("name")}`;
     const userMedia = await fetch(`${url}`, { headers: headers() });
     const newAvatarInput = document.querySelector("#editProfileAvatar");
     const newAvatarValue = newAvatarInput.value;
@@ -35,7 +35,7 @@ export async function editProfileEvent(event) {
           avatar.src = newUserMedia.avatar;
         });
 
-        location.reload();
+        // location.reload();
       }, 2000);
     }
   } catch (error) {

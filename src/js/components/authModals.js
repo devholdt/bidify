@@ -1,4 +1,5 @@
 import * as auth from "../auth/index.js";
+import * as events from "../events/index.js";
 
 export const authModals = () => {
   const formModals = document.querySelectorAll(".form-modal");
@@ -33,7 +34,7 @@ export const authModals = () => {
         handleInput();
       });
 
-      editProfileForm.addEventListener("submit", auth.editProfileEvent);
+      editProfileForm.addEventListener("submit", events.editProfileEvent);
     }
 
     modal.addEventListener("hidden.bs.modal", () => {
