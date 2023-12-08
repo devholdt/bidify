@@ -1,6 +1,7 @@
 import { API_URLS, headers } from "../api/index.js";
 import { URLS } from "../components/index.js";
 import { alert } from "../utilities/index.js";
+import { setItem } from "../storage/index.js";
 
 export async function registerUser(name, email, password, avatar) {
   const response = await fetch(API_URLS.REGISTER, {
@@ -37,7 +38,7 @@ export async function registerUser(name, email, password, avatar) {
           location.href = `${URLS.PROFILE}?name=${loginUser.name}`;
         }, 2000);
       }
-    } catch (error) {
+    } catch {
       alert(
         "danger",
         "An error occured when attempting to login - please log in manually",
@@ -81,9 +82,6 @@ export async function registerEvent(event) {
 
   try {
     await registerUser(name, email, password, avatar);
-    setTimeout(() => {
-      location.href = `${URLS.PROFILE}?name=${name}`;
-    }, 2000);
   } catch {
     alert(
       "danger",
