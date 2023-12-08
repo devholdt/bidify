@@ -1,5 +1,5 @@
 import { deleteListingEvent, bidEvent } from "../events/index.js";
-import { DEFAULT_URLS } from "./index.js";
+import { DEFAULT_URLS, WIDTH } from "./index.js";
 import {
   formatDate,
   getListingValues,
@@ -204,12 +204,12 @@ export function listingModalPreview(listing, button) {
       countdownContainer.classList.add("listing-expired");
     }
 
-    if (screen.width < 992) {
+    if (window.innerWidth < WIDTH.MEDIUM) {
       countdownContainer.style.display = "none";
     }
 
     window.addEventListener("resize", () => {
-      if (screen.width < 992) {
+      if (window.innerWidth < WIDTH.MEDIUM) {
         countdownContainer.style.display = "none";
       } else {
         countdownContainer.style.display = "flex";

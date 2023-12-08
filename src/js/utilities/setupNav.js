@@ -1,8 +1,8 @@
-import { URLS, DEFAULT_URLS } from "../components/index.js";
+import { URLS, DEFAULT_URLS, WIDTH } from "../components/index.js";
 import { getItem, getUser } from "../storage/index.js";
 
 export function setupNav(elements, links) {
-  const isMobileView = window.innerWidth < 992;
+  const isMobileView = window.innerWidth < WIDTH.MEDIUM;
   const isLoggedIn = getItem("name");
 
   updateNavButtons(isLoggedIn, elements.navButtons, elements.bannerButtons);
@@ -29,11 +29,12 @@ export function updateNavLinksCollapse(navLinksCollapse, links, isMobileView) {
 
 export function updateNavLinks(container, links) {
   const { pathname } = document.location;
+
   container.innerHTML = links
     .map(
       (link) => `
       <li class="nav-item nav-regular">
-          <a href="${link.href}" class="nav-link text-white ${
+          <a href="${link.href}${link.parameter}" class="nav-link text-white ${
         pathname === `/${link.href}` ? "active" : ""
       }">
               <span>${link.text}</span>
