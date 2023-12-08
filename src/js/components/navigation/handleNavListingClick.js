@@ -1,3 +1,5 @@
+import { setItem } from "../../storage/index.js";
+
 export function handleNavListingClick() {
   const currentPath = location.pathname;
   if (currentPath === "/index.html") {
