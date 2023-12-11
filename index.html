@@ -511,22 +511,22 @@
                 <div class="d-flex col-12 col-sm-8 col-md-9">
 
                     <div class="btn-group d-none d-md-flex me-3" role="group" aria-label="Change listings layout">
-                        <button type="button" class="btn btn-outline-primary d-flex align-items-center active">
+                        <button type="button"
+                            class="btn btn-outline-primary rounded-0 d-flex align-items-center active">
                             <span class="material-icons">grid_view</span>
                         </button>
-                        <button type="button" class="btn btn-outline-primary d-flex align-items-center">
+                        <button type="button" class="btn btn-outline-primary rounded-0 d-flex align-items-center">
                             <span class="material-icons fs-3">list</span>
                         </button>
                     </div>
 
                     <div class="input-group">
-                        <input id="searchListings" type="search"
-                            class="form-control rounded-start-5 border-primary ps-3" placeholder="Search listings..."
-                            aria-label="Search listings">
-                        <button type="button"
-                            class="input-group-text btn btn-primary rounded-end-5 d-flex align-items-center btn-search">
+                        <span
+                            class="input-group-text bg-primary text-light border-primary rounded-0 px-2 d-flex align-items-center">
                             <span class="material-icons">search</span>
-                        </button>
+                        </span>
+                        <input id="searchListings" type="search" class="form-control rounded-0 border-primary ps-3"
+                            placeholder="Search listings..." aria-label="Search listings">
                     </div>
 
                 </div>
@@ -558,6 +558,8 @@
                     class="btn btn-outline-primary px-5 text-lowercase rounded-0 shadow-sm">More
                     results</button>
             </div>
+
+            <div class="alert-listings alert-wrapper"></div>
 
         </div>
 

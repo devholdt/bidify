@@ -1,55 +1,67 @@
 import { getListings } from "../api/index.js";
-import { createCard } from "../components/index.js";
+import { createCard, placeholderCard } from "../components/index.js";
+import { alert } from "./index.js";
 
 const searchInput = document.querySelector("#searchListings");
-const buttonSearch = document.querySelector(".btn-search");
 const buttonMoreResults = document.querySelector("#buttonMoreResults");
 const searchResults = document.querySelector(".search-results");
 const listingsContainer = document.querySelector(".listings");
 
+let typingTimer;
+const doneTypingInterval = 1000;
+
+function debounce(func, delay) {
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => func.apply(context, args), delay);
+  };
+}
+
 export async function handleSearch(value) {
-  value = searchInput.value;
+  value = searchInput.value.trim();
 
   try {
-    const listings = await getListings({ tag: `&_tag=${value}` });
-    searchResults.innerHTML = "";
+    const listings = await getListings({ sort: "&sort=created" });
+    const filteredListings = listings.filter((listing) => {
+      const lowercaseValue = value.toLowerCase().trim();
 
-    if (listings.length === 0) {
-      searchResults.innerHTML = "No results. Please try another search term.";
-      return;
+      return (
+        listing.title.toLowerCase().trim().includes(lowercaseValue) ||
+        listing.tags.some((tag) => tag.toLowerCase().includes(lowercaseValue))
+      );
+    });
+
+    if (filteredListings.length === 0) {
+      searchResults.innerHTML = `<p class="text-center fs-5">No results. Please try a different search term.</p>`;
+    } else {
+      searchResults.innerHTML = "";
+      filteredListings.forEach((listing) =>
+        createCard(listing, ".search-results")
+      );
     }
-
-    listings.forEach((listing) => createCard(listing, ".search-results"));
-    searchInput.value = "";
-  } catch (error) {
-    console.log("handleSearch: ");
-    console.error(error);
+  } catch {
+    alert(
+      "danger",
+      "An error occurred when attempting to search for listing(s)."
+    );
   }
 }
 
-searchInput.addEventListener("search", () => {
-  const searchTerm = searchInput.value.trim();
+const debouncedSearch = debounce(handleSearch, doneTypingInterval);
 
-  if (searchTerm.length === 0) {
-    return;
+searchInput.addEventListener("keyup", () => {
+  const value = searchInput.value.trim();
+
+  if (value) {
+    listingsContainer.style.display = "none";
+    buttonMoreResults.style.display = "none";
+    searchResults.innerHTML = placeholderCard;
+    debouncedSearch(value);
+  } else {
+    searchResults.innerHTML = "";
+    listingsContainer.style.display = "flex";
+    buttonMoreResults.style.display = "flex";
   }
-
-  listingsContainer.innerHTML = "";
-  buttonMoreResults.style.display = "none";
-  searchResults.style.display = "flex";
-
-  handleSearch(searchTerm);
-});
-
-buttonSearch.addEventListener("click", () => {
-  const searchTerm = searchInput.value.trim();
-
-  if (searchTerm.length === 0) {
-    return;
-  }
-
-  listingsContainer.innerHTML = "";
-  searchResults.style.display = "block";
-
-  handleSearch(searchTerm);
 });

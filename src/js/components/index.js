@@ -4,3 +4,4 @@ export * from "./authModals.js";
 export * from "./listingPreviewModal.js";
 export * from "./createListingForm.js";
 export * from "./navigation/index.js";
+export * from "./placeholder.js";

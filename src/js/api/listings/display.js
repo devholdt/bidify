@@ -1,13 +1,23 @@
 import { getListings } from "./fetch.js";
-import { createCard } from "../../components/index.js";
+import { createCard, placeholderCard } from "../../components/index.js";
 import { alert } from "../../utilities/index.js";
 
 function display(container, listings) {
   container.innerHTML = "";
 
   listings
-    .filter((listing) => listing.title && listing.title.trim() !== "")
+    .map((listing) => {
+      return listing.title === ""
+        ? { ...listing, title: "[listing]" }
+        : listing;
+    })
     .forEach((listing) => createCard(listing, ".listings"));
+
+  listings.map((listing) => () => {
+    if (listing.title === "") {
+      listing.title = "Title";
+    }
+  });
 }
 
 export async function displayListings() {
@@ -16,10 +26,16 @@ export async function displayListings() {
   const button = document.querySelector("#buttonMoreResults");
   const spanResults = document.querySelector(".span-results");
 
+  listingsContainer.innerHTML = "";
+
   const INITIAL_LIMIT = 12;
   let limit = INITIAL_LIMIT;
   let currentSort = "Latest";
   let allListings = [];
+
+  for (let i = 0; i < INITIAL_LIMIT; i++) {
+    listingsContainer.innerHTML += placeholderCard;
+  }
 
   async function fetchAllListings() {
     try {
