@@ -3,21 +3,10 @@ import { createCard, placeholderCard } from "../components/index.js";
 import { alert } from "./index.js";
 
 const searchInput = document.querySelector("#searchListings");
-const buttonMoreResults = document.querySelector("#buttonMoreResults");
 const searchResults = document.querySelector(".search-results");
+const spanResults = document.querySelector(".span-results");
+const buttonMoreResults = document.querySelector("#buttonMoreResults");
 const listingsContainer = document.querySelector(".listings");
-
-let typingTimer;
-const doneTypingInterval = 1000;
-
-function debounce(func, delay) {
-  return function () {
-    const context = this;
-    const args = arguments;
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(() => func.apply(context, args), delay);
-  };
-}
 
 export async function handleSearch(value) {
   value = searchInput.value.trim();
@@ -33,35 +22,49 @@ export async function handleSearch(value) {
       );
     });
 
+    searchResults.innerHTML = "";
+
     if (filteredListings.length === 0) {
       searchResults.innerHTML = `<p class="text-center fs-5">No results. Please try a different search term.</p>`;
     } else {
-      searchResults.innerHTML = "";
       filteredListings.forEach((listing) =>
         createCard(listing, ".search-results")
       );
     }
+
+    if (value.length === 0) {
+      spanResults.innerHTML = "Showing (12) results";
+    } else {
+      spanResults.innerHTML = `Showing (${filteredListings.length}) results`;
+    }
   } catch {
     alert(
       "danger",
-      "An error occurred when attempting to search for listing(s)."
+      "An error occurred when attempting to search for listing(s).",
+      ".listings",
+      null
     );
   }
 }
 
-const debouncedSearch = debounce(handleSearch, doneTypingInterval);
-
-searchInput.addEventListener("keyup", () => {
+searchInput.addEventListener("input", async () => {
   const value = searchInput.value.trim();
 
   if (value) {
-    listingsContainer.style.display = "none";
+    spanResults.innerHTML = "";
+    searchResults.style.display = "flex";
     buttonMoreResults.style.display = "none";
+    listingsContainer.style.display = "none";
     searchResults.innerHTML = placeholderCard;
-    debouncedSearch(value);
+
+    setTimeout(() => {
+      handleSearch(value);
+    }, 1000);
   } else {
-    searchResults.innerHTML = "";
-    listingsContainer.style.display = "flex";
-    buttonMoreResults.style.display = "flex";
+    setTimeout(() => {
+      searchResults.style.display = "none";
+      buttonMoreResults.style.display = "flex";
+      listingsContainer.style.display = "flex";
+    }, 1000);
   }
 });
