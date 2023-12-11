@@ -35,7 +35,7 @@ export async function editProfileEvent(event) {
           avatar.src = newUserMedia.avatar;
         });
 
-        // location.reload();
+        location.reload();
       }, 2000);
     }
   } catch (error) {
