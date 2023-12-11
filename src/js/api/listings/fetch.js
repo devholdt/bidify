@@ -6,9 +6,10 @@ export async function getListings({
   sort = "",
   limit = "",
   offset = "",
+  tag = "",
 } = {}) {
   const response = await fetch(
-    `${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=${sortOrder}${sort}${limit}${offset}`,
+    `${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=${sortOrder}${sort}${limit}${offset}${tag}`,
     { headers: headers() }
   );
   if (response.ok) {

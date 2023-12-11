@@ -7,3 +7,4 @@ export * from "./getListingValues.js";
 export * from "./changeUrl.js";
 export * from "./detailsListItem.js";
 export * from "./setupNav.js";
+export * from "./handleSearch.js";
