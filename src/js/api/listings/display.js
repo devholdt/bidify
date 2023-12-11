@@ -2,22 +2,22 @@ import { getListings } from "./fetch.js";
 import { createCard, placeholderCard } from "../../components/index.js";
 import { alert } from "../../utilities/index.js";
 
-function display(container, listings) {
-  container.innerHTML = "";
+function display(listings) {
+  const listingsContainer = document.querySelector(".listings");
+  const button = document.querySelector("#buttonMoreResults");
+  const searchResults = document.querySelector(".search-results");
+  const searchInput = document.querySelector("#searchListings");
+  listingsContainer.innerHTML = "";
+  listingsContainer.style.display = "flex";
+  searchResults.innerHTML = "";
+  button.style.display = "flex";
+  searchInput.value = "";
 
   listings
     .map((listing) => {
-      return listing.title === ""
-        ? { ...listing, title: "[listing]" }
-        : listing;
+      return listing.title === "" ? { ...listing, title: "Listing" } : listing;
     })
     .forEach((listing) => createCard(listing, ".listings"));
-
-  listings.map((listing) => () => {
-    if (listing.title === "") {
-      listing.title = "Title";
-    }
-  });
 }
 
 export async function displayListings() {
@@ -111,17 +111,17 @@ export async function displayListings() {
         break;
     }
 
-    display(listingsContainer, sortedListings.slice(0, limit));
+    display(sortedListings.slice(0, limit));
   }
 
   await fetchAllListings();
   sortAndDisplayListings();
 
-  spanResults.innerHTML = `Showing (${limit}) results`;
+  spanResults.innerHTML = `(${limit})`;
 
   sortListingsContainer.addEventListener("change", (event) => {
     limit = INITIAL_LIMIT;
-    spanResults.innerHTML = `Showing (${limit}) results`;
+    spanResults.innerHTML = `(${limit})`;
     currentSort = event.target.value;
     sortAndDisplayListings();
   });
@@ -130,7 +130,7 @@ export async function displayListings() {
     limit += INITIAL_LIMIT;
     sortAndDisplayListings();
 
-    spanResults.innerHTML = `Showing (${limit}) results`;
+    spanResults.innerHTML = `(${limit})`;
 
     if (limit >= allListings.length) {
       button.style.display = "none";

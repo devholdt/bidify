@@ -7,6 +7,7 @@ const searchResults = document.querySelector(".search-results");
 const spanResults = document.querySelector(".span-results");
 const buttonMoreResults = document.querySelector("#buttonMoreResults");
 const listingsContainer = document.querySelector(".listings");
+const sortSelect = document.querySelector("#sortListings");
 
 export async function handleSearch(value) {
   value = searchInput.value.trim();
@@ -30,8 +31,11 @@ export async function handleSearch(value) {
       filteredListings.forEach((listing) =>
         createCard(listing, ".search-results")
       );
-      spanResults.innerHTML = `Showing (${filteredListings.length}) results`;
+      spanResults.innerHTML = `(${filteredListings.length})`;
     }
+
+    spanResults.innerHTML =
+      value.length === 0 ? "(12)" : `(${filteredListings.length})`;
   } catch {
     alert(
       "danger",
@@ -42,15 +46,16 @@ export async function handleSearch(value) {
   }
 }
 
-searchInput.addEventListener("input", async () => {
+searchInput.addEventListener("input", () => {
   const value = searchInput.value.trim();
 
   if (value.length > 0) {
-    spanResults.innerHTML = "";
-    searchResults.style.display = "flex";
     buttonMoreResults.style.display = "none";
     listingsContainer.style.display = "none";
+    spanResults.innerHTML = "(...)";
+    searchResults.style.display = "flex";
     searchResults.innerHTML = placeholderCard;
+    sortSelect.value = "Latest";
 
     setTimeout(() => {
       handleSearch(value);
@@ -58,7 +63,8 @@ searchInput.addEventListener("input", async () => {
   } else {
     buttonMoreResults.style.display = "flex";
     listingsContainer.style.display = "flex";
-    spanResults.innerHTML = "Showing (12) results";
+    spanResults.innerHTML = "(12)";
     searchResults.style.display = "none";
+    sortSelect.dispatchEvent(new Event("change"));
   }
 });
