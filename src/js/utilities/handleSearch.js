@@ -30,11 +30,6 @@ export async function handleSearch(value) {
       filteredListings.forEach((listing) =>
         createCard(listing, ".search-results")
       );
-    }
-
-    if (value.length === 0) {
-      spanResults.innerHTML = "Showing (12) results";
-    } else {
       spanResults.innerHTML = `Showing (${filteredListings.length}) results`;
     }
   } catch {
@@ -50,7 +45,7 @@ export async function handleSearch(value) {
 searchInput.addEventListener("input", async () => {
   const value = searchInput.value.trim();
 
-  if (value) {
+  if (value.length > 0) {
     spanResults.innerHTML = "";
     searchResults.style.display = "flex";
     buttonMoreResults.style.display = "none";
@@ -61,10 +56,9 @@ searchInput.addEventListener("input", async () => {
       handleSearch(value);
     }, 1000);
   } else {
-    setTimeout(() => {
-      searchResults.style.display = "none";
-      buttonMoreResults.style.display = "flex";
-      listingsContainer.style.display = "flex";
-    }, 1000);
+    buttonMoreResults.style.display = "flex";
+    listingsContainer.style.display = "flex";
+    spanResults.innerHTML = "Showing (12) results";
+    searchResults.style.display = "none";
   }
 });
