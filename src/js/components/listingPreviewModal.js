@@ -9,6 +9,7 @@ import {
   detailsListItem,
 } from "../utilities/index.js";
 import { getItem } from "../storage/index.js";
+import { fetchBidHistory } from "./index.js";
 
 document.addEventListener("reload", removeQueryString("id"));
 
@@ -38,7 +39,13 @@ export function listingModalPreview(listing, button) {
 
     const listingForm = `
     <div class="bg-light border rounded-2 shadow-sm p-3">
-      <p class="mb-0">Current bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
+
+      <div class="d-flex justify-content-between">
+        <p class="mb-0">Current bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBidHistory" aria-controls="offcanvasBidHistory">
+          Bid History
+        </button>
+      </div>
 
       <form id="listingModalForm"
         class="d-flex align-items-end justify-content-between align-items-center mt-2">
@@ -57,17 +64,22 @@ export function listingModalPreview(listing, button) {
     </div>`;
 
     const interactionButtons = `
-    <div id="listingModalButtons" class="btn-group float-end" role="group"
-      aria-label="Listing interaction">
-      <button type="button" class="btn btn-light d-flex gap-1 align-items-center btn-edit"
-          title="edit" aria-label="edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
-          <span class="material-icons">edit</span>
+    <div class="d-flex justify-content-between">
+      <button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBidHistory" aria-controls="offcanvasBidHistory">
+      Bid History
       </button>
-      <button type="button"
-          class="btn btn-light d-flex gap-1 align-items-center btn-delete" title="delete"
-          aria-label="delete" data-id="${listing.id}">
-          <span class="material-icons">delete</span>
-      </button>
+      <div id="listingModalButtons" class="btn-group float-end" role="group"
+        aria-label="Listing interaction">
+        <button type="button" class="btn btn-light d-flex gap-1 align-items-center btn-edit"
+            title="edit" aria-label="edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
+            <span class="material-icons">edit</span>
+        </button>
+        <button type="button"
+            class="btn btn-light d-flex gap-1 align-items-center btn-delete" title="delete"
+            aria-label="delete" data-id="${listing.id}">
+            <span class="material-icons">delete</span>
+        </button>
+      </div>
     </div>`;
 
     sellerName = listing.seller.name;
@@ -254,5 +266,7 @@ export function listingModalPreview(listing, button) {
     modal.addEventListener("hidden.bs.modal", () => {
       details.innerHTML = "";
     });
+
+    fetchBidHistory(listing.id);
   });
 }

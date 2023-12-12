@@ -46,25 +46,27 @@ export async function handleSearch(value) {
   }
 }
 
-searchInput.addEventListener("input", () => {
-  const value = searchInput.value.trim();
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    const value = searchInput.value.trim();
 
-  if (value.length > 0) {
-    buttonMoreResults.style.display = "none";
-    listingsContainer.style.display = "none";
-    spanResults.innerHTML = "(...)";
-    searchResults.style.display = "flex";
-    searchResults.innerHTML = placeholderCard;
-    sortSelect.value = "Latest";
+    if (value.length > 0) {
+      buttonMoreResults.style.display = "none";
+      listingsContainer.style.display = "none";
+      spanResults.innerHTML = "(...)";
+      searchResults.style.display = "flex";
+      searchResults.innerHTML = placeholderCard;
+      sortSelect.value = "Latest";
 
-    setTimeout(() => {
-      handleSearch(value);
-    }, 1000);
-  } else {
-    buttonMoreResults.style.display = "flex";
-    listingsContainer.style.display = "flex";
-    spanResults.innerHTML = "(12)";
-    searchResults.style.display = "none";
-    sortSelect.dispatchEvent(new Event("change"));
-  }
-});
+      setTimeout(() => {
+        handleSearch(value);
+      }, 1000);
+    } else {
+      buttonMoreResults.style.display = "flex";
+      listingsContainer.style.display = "flex";
+      spanResults.innerHTML = "(12)";
+      searchResults.style.display = "none";
+      sortSelect.dispatchEvent(new Event("change"));
+    }
+  });
+}
