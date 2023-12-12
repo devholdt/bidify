@@ -6,7 +6,7 @@ import {
   detailsListItem,
 } from "../utilities/index.js";
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
-import { getItem } from "../storage/index.js";
+import { getItem, setItem } from "../storage/index.js";
 import { deleteListingEvent, editListingEvent } from "../events/index.js";
 import { getListing } from "../api/index.js";
 
@@ -108,9 +108,38 @@ export function createCard(listing, containerSelector) {
   listingsContainer.appendChild(card);
 
   if (daysElement.innerHTML === "Expired") {
+    card.classList.add("d-none");
+
     card.querySelector(".card-img-top").style.opacity = "50%";
     card.querySelector(".card-body").style.opacity = "50%";
     card.querySelector(".countdown-part").style.backgroundColor = "#FF5252";
+  }
+
+  const checkbox = document.querySelector("#toggleActiveListings");
+
+  if (checkbox) {
+    const checked = getItem("toggleActiveListings");
+
+    if (checked) {
+      checkbox.checked = true;
+      card.classList.remove("d-none");
+    }
+
+    checkbox.addEventListener("change", (event) => {
+      if (event.currentTarget.checked) {
+        if (daysElement.innerHTML === "Expired") {
+          card.classList.remove("d-none");
+        }
+
+        localStorage.setItem("toggleActiveListings", checkbox.checked);
+      } else {
+        if (daysElement.innerHTML === "Expired") {
+          card.classList.add("d-none");
+        }
+
+        localStorage.removeItem("toggleActiveListings");
+      }
+    });
   }
 
   const titleElement = document.createElement("h5");
@@ -185,7 +214,7 @@ export async function createBidCard(bid, containerSelector) {
   const listingEndsAt = new Date(bid.listing.endsAt);
 
   card.innerHTML = `
-  <div class="listing-card" id="${bid.listing.id}">
+  <div class="listing-card shadow border" id="${bid.listing.id}">
     <div class="card">
 
       <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">
@@ -254,6 +283,37 @@ export async function createBidCard(bid, containerSelector) {
   bidsContainer.appendChild(card);
 
   if (daysElement.innerHTML === "Expired") {
-    card.style.display = "none";
+    card.classList.add("d-none");
+
+    card.querySelector(".card-img-top").style.opacity = "50%";
+    card.querySelector(".card-body").style.opacity = "50%";
+    card.querySelector(".countdown-part").style.backgroundColor = "#FF5252";
+  }
+
+  const checkbox = document.querySelector("#toggleActiveBids");
+
+  if (checkbox) {
+    const checked = getItem("toggleActiveBids");
+
+    if (checked) {
+      checkbox.checked = true;
+      card.classList.remove("d-none");
+    }
+
+    checkbox.addEventListener("change", (event) => {
+      if (event.currentTarget.checked) {
+        if (daysElement.innerHTML === "Expired") {
+          card.classList.remove("d-none");
+        }
+
+        localStorage.setItem("toggleActiveBids", checkbox.checked);
+      } else {
+        if (daysElement.innerHTML === "Expired") {
+          card.classList.add("d-none");
+        }
+
+        localStorage.removeItem("toggleActiveBids");
+      }
+    });
   }
 }
