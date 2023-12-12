@@ -18,6 +18,8 @@ export async function profileListings() {
           .forEach((listing) => createCard(listing, ".profile-listings"));
       } else {
         profileListingsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active listings.</p>`;
+        document.querySelector(".toggle-active-listings").style.display =
+          "none";
       }
     }
   } catch {
@@ -45,6 +47,7 @@ export async function profileBids() {
         bids.slice(0, 6).forEach((bid) => createBidCard(bid, ".profile-bids"));
       } else {
         profileBidsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active bids</p>`;
+        document.querySelector(".toggle-active-bids").style.display = "none";
       }
     }
   } catch (error) {
