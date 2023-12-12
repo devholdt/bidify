@@ -4,9 +4,10 @@ import {
   getListingValues,
   formatDate,
   detailsListItem,
+  updateVisibleCount,
 } from "../utilities/index.js";
 import { DEFAULT_URLS, listingModalPreview } from "./index.js";
-import { getItem, setItem } from "../storage/index.js";
+import { getItem } from "../storage/index.js";
 import { deleteListingEvent, editListingEvent } from "../events/index.js";
 import { getListing } from "../api/index.js";
 
@@ -122,21 +123,25 @@ export function createCard(listing, containerSelector) {
 
     if (checked) {
       checkbox.checked = true;
-      card.classList.remove("d-none");
+      Array.from(listingsContainer.children).forEach((card) =>
+        card.classList.remove("d-none")
+      );
     }
 
+    updateVisibleCount(".profile-listings-active", ".profile-listings");
+
     checkbox.addEventListener("change", (event) => {
+      Array.from(listingsContainer.children).forEach((card) => {
+        if (card.querySelector(".countdown-part").innerHTML === "Expired") {
+          card.classList.toggle("d-none", !event.currentTarget.checked);
+        }
+      });
+
+      updateVisibleCount(".profile-listings-active", ".profile-listings");
+
       if (event.currentTarget.checked) {
-        if (daysElement.innerHTML === "Expired") {
-          card.classList.remove("d-none");
-        }
-
-        localStorage.setItem("toggleActiveListings", checkbox.checked);
+        localStorage.setItem("toggleActiveListings", "true");
       } else {
-        if (daysElement.innerHTML === "Expired") {
-          card.classList.add("d-none");
-        }
-
         localStorage.removeItem("toggleActiveListings");
       }
     });
@@ -297,21 +302,25 @@ export async function createBidCard(bid, containerSelector) {
 
     if (checked) {
       checkbox.checked = true;
-      card.classList.remove("d-none");
+      Array.from(bidsContainer.children).forEach((card) =>
+        card.classList.remove("d-none")
+      );
     }
 
+    updateVisibleCount(".profile-bids-active", ".profile-bids");
+
     checkbox.addEventListener("change", (event) => {
+      Array.from(bidsContainer.children).forEach((card) => {
+        if (card.querySelector(".countdown-part").innerHTML === "Expired") {
+          card.classList.toggle("d-none", !event.currentTarget.checked);
+        }
+      });
+
+      updateVisibleCount(".profile-bids-active", ".profile-bids");
+
       if (event.currentTarget.checked) {
-        if (daysElement.innerHTML === "Expired") {
-          card.classList.remove("d-none");
-        }
-
-        localStorage.setItem("toggleActiveBids", checkbox.checked);
+        localStorage.setItem("toggleActiveBids", "true");
       } else {
-        if (daysElement.innerHTML === "Expired") {
-          card.classList.add("d-none");
-        }
-
         localStorage.removeItem("toggleActiveBids");
       }
     });

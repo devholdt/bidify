@@ -8,3 +8,4 @@ export * from "./changeUrl.js";
 export * from "./detailsListItem.js";
 export * from "./setupNav.js";
 export * from "./handleSearch.js";
+export * from "./updateVisibleCount.js";

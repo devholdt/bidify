@@ -4,6 +4,10 @@ import { DEFAULT_URLS } from "../../components/index.js";
 
 export async function renderProfileDetails() {
   const profileDetailsContainer = document.querySelector(".profile-details");
+  const profileListingsCount = document.querySelector(
+    ".profile-listings-count"
+  );
+  const profileBidsCount = document.querySelector(".profile-bids-count");
   const name = getItem("name");
   const user = await getProfile(name);
   const bids = await getProfile(name, true);
@@ -53,4 +57,7 @@ export async function renderProfileDetails() {
     </div>
 
   </div>`;
+
+  profileListingsCount.innerHTML = user._count.listings;
+  profileBidsCount.innerHTML = bids.length;
 }
