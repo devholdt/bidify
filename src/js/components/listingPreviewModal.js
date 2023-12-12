@@ -40,10 +40,10 @@ export function listingModalPreview(listing, button) {
     const listingForm = `
     <div class="bg-light border rounded-2 shadow-sm p-3">
 
-      <div class="d-flex justify-content-between">
-        <p class="mb-0">Current bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBidHistory" aria-controls="offcanvasBidHistory">
-          Bid History
+      <div class="d-flex justify-content-between mb-0">
+        <p>Current bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
+        <button type="button" class="btn btn-outline-dark d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBidHistory" aria-controls="offcanvasBidHistory">
+          <span class="material-icons me-1">history</span>bid history
         </button>
       </div>
 
@@ -51,8 +51,9 @@ export function listingModalPreview(listing, button) {
         class="d-flex align-items-end justify-content-between align-items-center mt-2">
         <div class="input-group d-flex align-items-center">
           <span class="input-group-text text-primary bg-white">$</span>
-          <input type="number" class="form-control bg-white" name="amount" id="amount" min="1" 
-          value="${bidAmount + 1}" aria-label="Bid amount">
+          <input type="number" class="form-control bg-white" name="amount" id="amount" placeholder="amount" min="${
+            bidAmount + 1
+          }" aria-label="Bid amount">
           <button type="submit" id="placeBidButton" class="btn btn-primary text-uppercase" data-id="${
             listing.id
           }">
@@ -65,8 +66,8 @@ export function listingModalPreview(listing, button) {
 
     const interactionButtons = `
     <div class="d-flex justify-content-between">
-      <button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBidHistory" aria-controls="offcanvasBidHistory">
-      Bid History
+      <button type="button" class="btn btn-outline-dark d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBidHistory" aria-controls="offcanvasBidHistory">
+        <span class="material-icons me-1">history</span>bid history
       </button>
       <div id="listingModalButtons" class="btn-group float-end" role="group"
         aria-label="Listing interaction">
