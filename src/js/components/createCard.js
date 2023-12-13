@@ -326,3 +326,52 @@ export async function createBidCard(bid, containerSelector) {
     });
   }
 }
+
+export async function createWinCard(win, containerSelector) {
+  const winsContainer = document.querySelector(containerSelector);
+  const listing = await getListing(win.id);
+  const card = document.createElement("div");
+  card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4", "listing-win");
+
+  let listingMedia = "";
+
+  if (win.media.length === 0) {
+    listingMedia = `<img src="./src/images/bidify_nomedia.svg" class="card-img-top no-media-found" alt="Listing image">`;
+  } else {
+    listingMedia = `<img src="${win.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
+  }
+
+  card.innerHTML = `
+  <div class="listing-card shadow border" id="${win.id}">
+    <div class="card">
+
+      <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">
+        ${listingMedia}
+      </div>
+
+      <div class="card-body d-flex flex-column justify-content-between border-0 w-100 m-0 p-0">
+        <ul class="list-group list-group-flush w-100"></ul>
+      
+      </div>
+
+    </div>
+  </div>`;
+
+  const cardTop = card.querySelector(".card-top");
+  listingModalPreview(listing, cardTop);
+
+  const listGroup = card.querySelector(".list-group");
+
+  listGroup.innerHTML += detailsListItem("Title", win.title);
+  listGroup.innerHTML += detailsListItem(
+    "Created",
+    formatDate(new Date(win.created))
+  );
+  listGroup.innerHTML += detailsListItem(
+    "Ended at",
+    formatDate(new Date(win.endsAt), true)
+  );
+  listGroup.innerHTML += detailsListItem("ID", win.id.slice(0, 8));
+
+  winsContainer.appendChild(card);
+}

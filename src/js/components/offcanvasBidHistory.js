@@ -1,5 +1,5 @@
 import { getListing } from "../api/index.js";
-import { formatDate } from "../utilities/index.js";
+import { formatDate, alert } from "../utilities/index.js";
 
 export async function fetchBidHistory(id) {
   const tableBids = document.querySelector(".table-bids");
@@ -31,7 +31,11 @@ export async function fetchBidHistory(id) {
         tableBids.append(bidElement);
       });
   } catch (error) {
-    console.log("fetchBidsHistory:");
-    console.error(error);
+    alert(
+      "danger",
+      "An error occured when attempting to get bid history",
+      ".alert-absolute",
+      null
+    );
   }
 }

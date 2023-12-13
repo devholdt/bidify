@@ -18,6 +18,7 @@ components.createListingForm();
 
 profiles.profileListings();
 profiles.profileBids();
+profiles.profileWins();
 profiles.renderProfileDetails();
 
 events.elementVisibility("#buttonScrollUp", "d-flex", 600);
