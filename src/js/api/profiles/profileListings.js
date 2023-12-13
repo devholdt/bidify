@@ -28,7 +28,7 @@ export async function profileListings() {
   } catch (error) {
     alert(
       "danger",
-      "An error occured when attempting to fetch profile listings",
+      "An error occured when attempting to fetch profile listings. <strong>This does not mean your listings are inactive.</strong>",
       ".profile-listings",
       null,
       false
@@ -55,7 +55,7 @@ export async function profileBids() {
   } catch (error) {
     alert(
       "danger",
-      "An error occured when trying to get profile bids",
+      "An error occured when trying to get profile bids. <strong>This does not mean your bids are inactive.</strong>",
       ".profile-bids",
       null,
       false
@@ -72,7 +72,6 @@ export async function profileWins() {
 
       if (winsId.length > 0) {
         profileWinsContainer.classList.add("row", "row-cols-3");
-
         winsId.forEach(async (id) => {
           const win = await getSingleListing(id);
           createWinCard(win, ".profile-wins");
@@ -84,7 +83,7 @@ export async function profileWins() {
   } catch (error) {
     alert(
       "danger",
-      "An error occured when trying to get wins. <strong>This does not mean your wins are gone.</strong>",
+      "An error occured when trying to get and display your wins. <strong>This does not mean your wins are gone.</strong>",
       ".profile-wins",
       null,
       false

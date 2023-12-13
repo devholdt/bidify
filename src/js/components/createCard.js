@@ -4,13 +4,17 @@ import {
   getListingValues,
   formatDate,
   detailsListItem,
-  updateVisibleCount,
 } from "../utilities/index.js";
 import { listingModalPreview } from "./index.js";
 import { getItem } from "../storage/index.js";
 import { deleteListingEvent, editListingEvent } from "../events/index.js";
 import { getSingleListing } from "../api/index.js";
-import { listingMedia, listingBids, cardHtml } from "../default/index.js";
+import {
+  listingMedia,
+  listingBids,
+  cardHtml,
+  checkboxState,
+} from "../default/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -23,37 +27,7 @@ export function createCard(listing, containerSelector) {
   listingBids(listing, card);
   listingMedia(listing, card);
   countdownCard(card, listingEndsAt, listingsContainer);
-
-  const checkbox = document.querySelector("#toggleActiveListings");
-
-  if (checkbox) {
-    const checked = getItem("toggleActiveListings");
-
-    if (checked) {
-      checkbox.checked = true;
-      Array.from(listingsContainer.children).forEach((card) =>
-        card.classList.remove("d-none")
-      );
-    }
-
-    updateVisibleCount(".profile-listings-active", ".profile-listings");
-
-    checkbox.addEventListener("change", (event) => {
-      Array.from(listingsContainer.children).forEach((card) => {
-        if (card.querySelector(".countdown-part").innerHTML === "Expired") {
-          card.classList.toggle("d-none", !event.currentTarget.checked);
-        }
-      });
-
-      updateVisibleCount(".profile-listings-active", ".profile-listings");
-
-      if (event.currentTarget.checked) {
-        localStorage.setItem("toggleActiveListings", "true");
-      } else {
-        localStorage.removeItem("toggleActiveListings");
-      }
-    });
-  }
+  checkboxState("Listings", listingsContainer);
 
   const titleElement = document.createElement("h5");
   titleElement.classList.add("card-title", "fw-bold");
@@ -77,9 +51,7 @@ export function createCard(listing, containerSelector) {
       cardButton.setAttribute("data-bs-toggle", "modal");
       cardButton.setAttribute("data-bs-target", "#listingModal");
       cardButton.innerHTML = `<p class="material-icons">gavel</p>`;
-
       card.querySelector(".card-buttons").prepend(cardButton);
-
       const gavelButton = card.querySelector(".btn-gavel");
       listingModalPreview(listing, gavelButton);
     } else if (!listing.seller || listing.seller.name == getItem("name")) {
@@ -123,6 +95,7 @@ export async function createBidCard(bid, containerSelector) {
   listingModalPreview(listing, cardTop);
   listingMedia(bid.listing, card);
   countdownCard(card, listingEndsAt, bidsContainer);
+  checkboxState("Bids", bidsContainer);
 
   const listGroup = card.querySelector(".list-group");
 
@@ -141,37 +114,6 @@ export async function createBidCard(bid, containerSelector) {
   listGroup.innerHTML += detailsListItem("Bid ID", bid.id.slice(0, 8));
 
   bidsContainer.appendChild(card);
-
-  const checkbox = document.querySelector("#toggleActiveBids");
-
-  if (checkbox) {
-    const checked = getItem("toggleActiveBids");
-
-    if (checked) {
-      checkbox.checked = true;
-      Array.from(bidsContainer.children).forEach((card) =>
-        card.classList.remove("d-none")
-      );
-    }
-
-    updateVisibleCount(".profile-bids-active", ".profile-bids");
-
-    checkbox.addEventListener("change", (event) => {
-      Array.from(bidsContainer.children).forEach((card) => {
-        if (card.querySelector(".countdown-part").innerHTML === "Expired") {
-          card.classList.toggle("d-none", !event.currentTarget.checked);
-        }
-      });
-
-      updateVisibleCount(".profile-bids-active", ".profile-bids");
-
-      if (event.currentTarget.checked) {
-        localStorage.setItem("toggleActiveBids", "true");
-      } else {
-        localStorage.removeItem("toggleActiveBids");
-      }
-    });
-  }
 }
 
 export async function createWinCard(win, containerSelector) {
