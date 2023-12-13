@@ -42,18 +42,12 @@ export function createCard(listing, containerSelector) {
   scrollingTitle();
 
   const cardTop = card.querySelector(".card-top");
+  const gavelButton = card.querySelector(".btn-gavel");
   listingModalPreview(listing, cardTop);
+  listingModalPreview(listing, gavelButton);
 
   if (getItem("name")) {
     if (listing.seller && listing.seller.name !== getItem("name")) {
-      const cardButton = document.createElement("button");
-      cardButton.classList.add("btn-gavel");
-      cardButton.setAttribute("data-bs-toggle", "modal");
-      cardButton.setAttribute("data-bs-target", "#listingModal");
-      cardButton.innerHTML = `<p class="material-icons">gavel</p>`;
-      card.querySelector(".card-buttons").prepend(cardButton);
-      const gavelButton = card.querySelector(".btn-gavel");
-      listingModalPreview(listing, gavelButton);
     } else if (!listing.seller || listing.seller.name == getItem("name")) {
       const cardButtons = card.querySelector(".card-buttons");
       cardButtons.classList.remove("justify-content-between");
