@@ -6,7 +6,7 @@ import {
   createWinCard,
 } from "../../components/index.js";
 import { alert } from "../../utilities/index.js";
-import { getListing } from "../listings/index.js";
+import { getSingleListing } from "../listings/index.js";
 
 export async function profileListings() {
   try {
@@ -74,7 +74,7 @@ export async function profileWins() {
         profileWinsContainer.classList.add("row", "row-cols-3");
 
         winsId.forEach(async (id) => {
-          const win = await getListing(id);
+          const win = await getSingleListing(id);
           createWinCard(win, ".profile-wins");
         });
       } else {

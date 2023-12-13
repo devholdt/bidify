@@ -1,9 +1,8 @@
 import { deleteListingEvent, bidEvent } from "../events/index.js";
-import { DEFAULT_URLS, WIDTH } from "./index.js";
+import { DEFAULT_URLS } from "./index.js";
 import {
   formatDate,
   getListingValues,
-  updateCountdown,
   setQueryString,
   removeQueryString,
   detailsListItem,
@@ -136,21 +135,6 @@ export function listingModalPreview(listing, button) {
 
     media.innerHTML = "";
 
-    const listingEndsAt = new Date(listing.endsAt);
-
-    const countdownContainer = document.createElement("div");
-    countdownContainer.classList.add("countdown");
-
-    const daysElement = document.createElement("span");
-    const hoursElement = document.createElement("span");
-    const minsElement = document.createElement("span");
-    const secsElement = document.createElement("span");
-
-    [daysElement, hoursElement, minsElement, secsElement].forEach((element) => {
-      element.classList.add("countdown-part");
-      countdownContainer.appendChild(element);
-    });
-
     if (listing.media.length < 1) {
       media.classList.remove("media-carousel");
       media.innerHTML = `
@@ -193,41 +177,6 @@ export function listingModalPreview(listing, button) {
       media.innerHTML = `
       <img src="${listing.media[0]}" class="w-100 h-100 border object-fit-cover" alt="Listing media" onerror="this.src='${DEFAULT_URLS.LISTING_MEDIA}'">`;
     }
-
-    modal.querySelector("#listingModalMedia").appendChild(countdownContainer);
-
-    updateCountdown(
-      listingEndsAt,
-      daysElement,
-      hoursElement,
-      minsElement,
-      secsElement
-    );
-    countdownContainer.countdownInterval = setInterval(() => {
-      updateCountdown(
-        listingEndsAt,
-        daysElement,
-        hoursElement,
-        minsElement,
-        secsElement
-      );
-    }, 1000);
-
-    if (daysElement.innerHTML === "Expired") {
-      countdownContainer.classList.add("listing-expired");
-    }
-
-    if (window.innerWidth < WIDTH.MEDIUM) {
-      countdownContainer.style.display = "none";
-    }
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth < WIDTH.MEDIUM) {
-        countdownContainer.style.display = "none";
-      } else {
-        countdownContainer.style.display = "flex";
-      }
-    });
 
     title.innerHTML = `
       <p class="fw-bold fs-4 text-heading mb-0">${listing.title}</p>

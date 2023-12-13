@@ -1,4 +1,48 @@
-export function updateCountdown(
+export function countdownCard(card, listingEndsAt, container) {
+  const countdownContainer = document.createElement("div");
+  countdownContainer.classList.add("countdown");
+
+  const daysElement = document.createElement("span");
+  const hoursElement = document.createElement("span");
+  const minsElement = document.createElement("span");
+  const secsElement = document.createElement("span");
+
+  [daysElement, hoursElement, minsElement, secsElement].forEach((element) => {
+    element.classList.add("countdown-part");
+    countdownContainer.appendChild(element);
+  });
+
+  card.querySelector(".card-top").appendChild(countdownContainer);
+
+  updateCountdown(
+    listingEndsAt,
+    daysElement,
+    hoursElement,
+    minsElement,
+    secsElement
+  );
+  countdownContainer.countdownInterval = setInterval(() => {
+    updateCountdown(
+      listingEndsAt,
+      daysElement,
+      hoursElement,
+      minsElement,
+      secsElement
+    );
+  }, 1000);
+
+  container.appendChild(card);
+
+  if (daysElement.innerHTML === "Expired") {
+    card.classList.add("d-none");
+
+    card.querySelector(".card-img-top").style.opacity = "50%";
+    card.querySelector(".card-body").style.opacity = "50%";
+    card.querySelector(".countdown-part").style.backgroundColor = "#FF5252";
+  }
+}
+
+function updateCountdown(
   endDate,
   daysElement,
   hoursElement,
@@ -28,3 +72,5 @@ export function updateCountdown(
     daysElement.classList.add("w-auto");
   }
 }
+
+export function expiredState() {}

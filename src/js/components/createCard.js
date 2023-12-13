@@ -1,120 +1,28 @@
 import {
-  updateCountdown,
+  countdownCard,
   scrollingTitle,
   getListingValues,
   formatDate,
   detailsListItem,
   updateVisibleCount,
 } from "../utilities/index.js";
-import { DEFAULT_URLS, listingModalPreview } from "./index.js";
+import { listingModalPreview } from "./index.js";
 import { getItem } from "../storage/index.js";
 import { deleteListingEvent, editListingEvent } from "../events/index.js";
-import { getListing } from "../api/index.js";
+import { getSingleListing } from "../api/index.js";
+import { listingMedia, listingBids, cardHtml } from "../default/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
-
-  let listingMedia = "";
-  let listingBids = "";
   const listingEndsAt = new Date(listing.endsAt);
-
-  if (listing.media.length === 0) {
-    listingMedia = `<img src="./src/images/bidify_nomedia.svg" class="card-img-top no-media-found" alt="Listing image">`;
-  } else {
-    listingMedia = `<img src="${listing.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
-  }
-
-  const img = new Image();
-
-  if (listing.media.length === 0) {
-    img.src = "./src/images/bidify_nomedia.svg";
-    img.alt = listing.title;
-    img.classList.add("card-img-top", "no-media-found");
-  } else {
-    img.src = listing.media[0];
-    img.alt = listing.title;
-    img.classList.add("card-img-top");
-
-    img.onerror = () => {
-      img.src = DEFAULT_URLS.LISTING_MEDIA;
-      img.alt = listing.title;
-      img.classList.add("no-media-found");
-    };
-  }
-
-  if (listing.bids && listing.bids.length > 0) {
-    let bidsArray = [...listing.bids];
-    bidsArray.reverse();
-    listingBids = `<p class="card-text">Current bid: <span class="fw-medium text-primary">$${bidsArray[0].amount}</span> (${listing._count.bids})</p>`;
-  } else {
-    listingBids = `<p class="card-text">No bids yet</p>`;
-  }
 
   const card = document.createElement("div");
   card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4");
 
-  card.innerHTML = `
-        <div class="listing-card shadow border h-100" data-id="${listing.id}">
-          <div class="card">
-
-              <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal"></div>
-
-              <div class="card-body pt-5 pb-4 ps-0">
-                ${listingBids}
-              </div>
-
-              <div class="card-buttons d-flex justify-content-between align-items-end">
-                  <button class="btn-heart">
-                      <p class="material-icons">favorite_border</p>
-                  </button>
-              </div>
-
-          </div>
-        </div>`;
-
-  card.querySelector(".listing-card-top").append(img);
-
-  const countdownContainer = document.createElement("div");
-  countdownContainer.classList.add("countdown");
-
-  const daysElement = document.createElement("span");
-  const hoursElement = document.createElement("span");
-  const minsElement = document.createElement("span");
-  const secsElement = document.createElement("span");
-
-  [daysElement, hoursElement, minsElement, secsElement].forEach((element) => {
-    element.classList.add("countdown-part");
-    countdownContainer.appendChild(element);
-  });
-
-  card.querySelector(".card-top").appendChild(countdownContainer);
-
-  updateCountdown(
-    listingEndsAt,
-    daysElement,
-    hoursElement,
-    minsElement,
-    secsElement
-  );
-  countdownContainer.countdownInterval = setInterval(() => {
-    updateCountdown(
-      listingEndsAt,
-      daysElement,
-      hoursElement,
-      minsElement,
-      secsElement
-    );
-  }, 1000);
-
-  listingsContainer.appendChild(card);
-
-  if (daysElement.innerHTML === "Expired") {
-    card.classList.add("d-none");
-
-    card.querySelector(".card-img-top").style.opacity = "50%";
-    card.querySelector(".card-body").style.opacity = "50%";
-    card.querySelector(".countdown-part").style.backgroundColor = "#FF5252";
-  }
+  cardHtml(card, listing.id);
+  listingBids(listing, card);
+  listingMedia(listing, card);
+  countdownCard(card, listingEndsAt, listingsContainer);
 
   const checkbox = document.querySelector("#toggleActiveListings");
 
@@ -203,71 +111,18 @@ export function createCard(listing, containerSelector) {
 
 export async function createBidCard(bid, containerSelector) {
   const bidsContainer = document.querySelector(containerSelector);
-  const listing = await getListing(bid.listing.id);
+  const listing = await getSingleListing(bid.listing.id);
   const sortedListing = listing.bids.sort((a, b) => b.amount - a.amount);
+  const listingEndsAt = new Date(bid.listing.endsAt);
   const card = document.createElement("div");
   card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4", "listing-bid");
 
-  let listingMedia = "";
-
-  if (bid.listing.media.length === 0) {
-    listingMedia = `<img src="./src/images/bidify_nomedia.svg" class="card-img-top no-media-found" alt="Listing image">`;
-  } else {
-    listingMedia = `<img src="${bid.listing.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
-  }
-
-  const listingEndsAt = new Date(bid.listing.endsAt);
-
-  card.innerHTML = `
-  <div class="listing-card shadow border" id="${bid.listing.id}">
-    <div class="card">
-
-      <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">
-        ${listingMedia}
-      </div>
-
-      <div class="card-body d-flex flex-column justify-content-between border-0 w-100 m-0 p-0">
-        <ul class="list-group list-group-flush w-100"></ul>
-      
-      </div>
-
-    </div>
-  </div>`;
+  cardHtml(card, bid.listing.id, false);
 
   const cardTop = card.querySelector(".card-top");
   listingModalPreview(listing, cardTop);
-
-  const countdownContainer = document.createElement("div");
-  countdownContainer.classList.add("countdown");
-
-  const daysElement = document.createElement("span");
-  const hoursElement = document.createElement("span");
-  const minsElement = document.createElement("span");
-  const secsElement = document.createElement("span");
-
-  [daysElement, hoursElement, minsElement, secsElement].forEach((element) => {
-    element.classList.add("countdown-part");
-    countdownContainer.appendChild(element);
-  });
-
-  card.querySelector(".card-top").appendChild(countdownContainer);
-
-  updateCountdown(
-    listingEndsAt,
-    daysElement,
-    hoursElement,
-    minsElement,
-    secsElement
-  );
-  countdownContainer.countdownInterval = setInterval(() => {
-    updateCountdown(
-      listingEndsAt,
-      daysElement,
-      hoursElement,
-      minsElement,
-      secsElement
-    );
-  }, 1000);
+  listingMedia(bid.listing, card);
+  countdownCard(card, listingEndsAt, bidsContainer);
 
   const listGroup = card.querySelector(".list-group");
 
@@ -286,14 +141,6 @@ export async function createBidCard(bid, containerSelector) {
   listGroup.innerHTML += detailsListItem("Bid ID", bid.id.slice(0, 8));
 
   bidsContainer.appendChild(card);
-
-  if (daysElement.innerHTML === "Expired") {
-    card.classList.add("d-none");
-
-    card.querySelector(".card-img-top").style.opacity = "50%";
-    card.querySelector(".card-body").style.opacity = "50%";
-    card.querySelector(".countdown-part").style.backgroundColor = "#FF5252";
-  }
 
   const checkbox = document.querySelector("#toggleActiveBids");
 
@@ -329,36 +176,15 @@ export async function createBidCard(bid, containerSelector) {
 
 export async function createWinCard(win, containerSelector) {
   const winsContainer = document.querySelector(containerSelector);
-  const listing = await getListing(win.id);
+  const listing = await getSingleListing(win.id);
   const card = document.createElement("div");
   card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4", "listing-win");
 
-  let listingMedia = "";
-
-  if (win.media.length === 0) {
-    listingMedia = `<img src="./src/images/bidify_nomedia.svg" class="card-img-top no-media-found" alt="Listing image">`;
-  } else {
-    listingMedia = `<img src="${win.media[0]}" class="card-img-top" alt="Listing image" onerror='this.src="${DEFAULT_URLS.LISTING_MEDIA}";this.classList.add("no-media-found")'>`;
-  }
-
-  card.innerHTML = `
-  <div class="listing-card shadow border" id="${win.id}">
-    <div class="card">
-
-      <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal">
-        ${listingMedia}
-      </div>
-
-      <div class="card-body d-flex flex-column justify-content-between border-0 w-100 m-0 p-0">
-        <ul class="list-group list-group-flush w-100"></ul>
-      
-      </div>
-
-    </div>
-  </div>`;
+  cardHtml(card, win.id, false);
 
   const cardTop = card.querySelector(".card-top");
   listingModalPreview(listing, cardTop);
+  listingMedia(win, card);
 
   const listGroup = card.querySelector(".list-group");
 

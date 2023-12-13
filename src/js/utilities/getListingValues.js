@@ -1,5 +1,5 @@
 import { handleInputs, removeQueryString, setQueryString } from "./index.js";
-import { getListing } from "../api/index.js";
+import { getSingleListing } from "../api/index.js";
 import { alert } from "./index.js";
 
 document.addEventListener("reload", removeQueryString("id"));
@@ -20,7 +20,7 @@ export async function getListingValues(event) {
     setQueryString("id", id);
 
     const editModal = document.getElementById("editListingModal");
-    const listing = await getListing(id);
+    const listing = await getSingleListing(id);
     const titleInput = document.querySelector("#editListingTitle");
     const descriptionInput = document.querySelector("#editListingDescription");
     const mediaContainer = document.getElementById("editMediaInputsContainer");
