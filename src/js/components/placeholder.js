@@ -12,9 +12,8 @@ export const placeholderCard = `
             <p class="card-text placeholder-glow mb-5">
                 <span class="placeholder col-7"></span>
             </p>
-            <div class="card-buttons d-flex justify-content-between align-items-end mx-0">
+            <div class="card-buttons mx-0">
                 <button class="btn-gavel disabled placeholder" aria-disabled="true"></button>
-                <button class="btn-heart disabled placeholder" aria-disabled="true"></button
             </div>
         </div>
     </div>
