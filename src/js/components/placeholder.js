@@ -6,9 +6,9 @@ export const placeholderCard = `
             <rect width="100%" height="100%" fill="#868e96"></rect>
         </svg>
         <div class="card-body">
-            <h5 class="card-title placeholder-glow mt-5">
+            <p class="card-title placeholder-glow mt-5">
                 <span class="placeholder col-5"></span>
-            </h5>
+            </p>
             <p class="card-text placeholder-glow mb-5">
                 <span class="placeholder col-7"></span>
             </p>
