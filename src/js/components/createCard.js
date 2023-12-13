@@ -14,7 +14,7 @@ import { getListing } from "../api/index.js";
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
 
-  let listingMedia;
+  let listingMedia = "";
   let listingBids = "";
   const listingEndsAt = new Date(listing.endsAt);
 
@@ -54,7 +54,7 @@ export function createCard(listing, containerSelector) {
   card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4");
 
   card.innerHTML = `
-        <div class="listing-card shadow border" data-id="${listing.id}">
+        <div class="listing-card shadow border h-100" data-id="${listing.id}">
           <div class="card">
 
               <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal"></div>
