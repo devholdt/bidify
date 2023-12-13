@@ -5,16 +5,16 @@ import {
   formatDate,
   detailsListItem,
 } from "../utilities/index.js";
-import { listingModalPreview } from "./index.js";
-import { getItem } from "../storage/index.js";
-import { deleteListingEvent, editListingEvent } from "../events/index.js";
-import { getSingleListing } from "../api/index.js";
 import {
+  listingModalPreview,
   listingMedia,
   listingBids,
   cardHtml,
   checkboxState,
-} from "../default/index.js";
+} from "./index.js";
+import { getItem } from "../storage/index.js";
+import { deleteListingEvent, editListingEvent } from "../events/index.js";
+import { getSingleListing } from "../api/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);

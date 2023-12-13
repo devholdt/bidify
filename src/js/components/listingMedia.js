@@ -1,4 +1,4 @@
-import { DEFAULT_URLS } from "../components/index.js";
+import { DEFAULT_URLS } from "./index.js";
 
 export function listingMedia(listing, card) {
   const img = new Image();
