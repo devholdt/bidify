@@ -8,9 +8,9 @@ api.lastChance();
 api.displayListings();
 
 components.renderNav();
+components.handleWindowLoad();
 components.authModals();
 components.createListingForm();
-components.handleWindowLoad();
 
 events.elementVisibility("#buttonScrollUp", "d-flex", 600);
 events.scrollToTop();
