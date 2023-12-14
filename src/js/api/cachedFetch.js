@@ -1,18 +1,18 @@
-const cache = {};
+import { setCache, getCache } from "../storage/index.js";
 
-export async function cachedFetch(url, options, cacheDuration = 300000) {
+export async function cachedFetch(url, options) {
   const key = JSON.stringify({ url, options });
-  const now = new Date().getTime();
+  const cachedData = getCache(key);
 
-  if (cache[key] && now - cache[key].timestamp < cacheDuration) {
-    return cache[key].data;
+  if (cachedData) {
+    return cachedData;
   }
 
   const response = await fetch(url, options);
   const data = await response.json();
 
   if (response.ok) {
-    cache[key] = { data, timestamp: now };
+    setCache(key, data);
     return data;
   } else {
     throw new Error(`Error: ${response.status} - ${data.message}`);
