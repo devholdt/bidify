@@ -14,11 +14,7 @@ export function getListings({
 }
 
 export function getSingleListing(id) {
-  return cachedFetch(
-    `${API_URLS.LISTINGS}/${id}?_seller=true&_bids=true`,
-    {
-      headers: headers(),
-    },
-    false
-  );
+  return cachedFetch(`${API_URLS.LISTINGS}/${id}?_seller=true&_bids=true`, {
+    headers: headers(),
+  });
 }

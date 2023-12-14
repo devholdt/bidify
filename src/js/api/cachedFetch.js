@@ -1,5 +1,5 @@
 import { getListings } from "./listings/index.js";
-import { setCache, getCache } from "../storage/index.js";
+import { setCachedItem, getCachedItem } from "../storage/index.js";
 
 const listingsCache = {
   data: null,
@@ -48,7 +48,7 @@ export async function cachedFetch(url, options, useListingsCache = false) {
     return listings;
   }
 
-  const cachedData = getCache(key);
+  const cachedData = getCachedItem(key);
   if (cachedData) {
     return cachedData;
   }
@@ -57,7 +57,7 @@ export async function cachedFetch(url, options, useListingsCache = false) {
   const data = await response.json();
 
   if (response.ok) {
-    setCache(key, data);
+    setCachedItem(key, data);
     return data;
   } else {
     throw new Error(`Error: ${response.status} - ${data.message}`);
