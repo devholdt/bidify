@@ -1,4 +1,4 @@
-export function countdownCard(card, listingEndsAt, container) {
+export function countdownCard(card, target, listingEndsAt, container) {
   const countdownContainer = document.createElement("div");
   countdownContainer.classList.add("countdown");
 
@@ -8,11 +8,11 @@ export function countdownCard(card, listingEndsAt, container) {
   const secsElement = document.createElement("span");
 
   [daysElement, hoursElement, minsElement, secsElement].forEach((element) => {
-    element.classList.add("countdown-part");
+    element.classList.add("countdown-part", "ms-1");
     countdownContainer.appendChild(element);
   });
 
-  card.querySelector(".card-top").appendChild(countdownContainer);
+  card.querySelector(target).appendChild(countdownContainer);
 
   updateCountdown(
     listingEndsAt,
@@ -35,9 +35,6 @@ export function countdownCard(card, listingEndsAt, container) {
 
   if (daysElement.innerHTML === "Expired") {
     card.classList.add("d-none");
-
-    card.querySelector(".card-img-top").style.opacity = "50%";
-    card.querySelector(".card-body").style.opacity = "50%";
     card.querySelector(".countdown-part").style.backgroundColor = "#FF5252";
   }
 }
@@ -72,5 +69,3 @@ function updateCountdown(
     daysElement.classList.add("w-auto");
   }
 }
-
-export function expiredState() {}

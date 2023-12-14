@@ -6,8 +6,8 @@ export function formatDate(date, time = false) {
   const minutes = date.getMinutes().toString().padStart(2, "0");
 
   if (time) {
-    return `${day}/${month}/${year} ${hours}:${minutes}`;
+    return `${day}/${month}/${year.slice(-2, 4)} ${hours}:${minutes}`;
   }
 
-  return `${day}/${month}/${year}`;
+  return `${day}/${month}/${year.slice(-2, 4)}`;
 }

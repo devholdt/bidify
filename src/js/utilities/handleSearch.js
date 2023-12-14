@@ -1,13 +1,10 @@
 import { getListings } from "../api/index.js";
-import { createCard, placeholderCard } from "../components/index.js";
+import { createCard } from "../components/index.js";
 import { alert } from "./index.js";
 
 const searchInput = document.querySelector("#searchListings");
 const searchResults = document.querySelector(".search-results");
 const spanResults = document.querySelector(".span-results");
-const buttonMoreResults = document.querySelector("#buttonMoreResults");
-const listingsContainer = document.querySelector(".listings");
-const sortSelect = document.querySelector("#sortListings");
 
 export async function handleSearch(value) {
   value = searchInput.value.trim();
@@ -44,29 +41,4 @@ export async function handleSearch(value) {
       null
     );
   }
-}
-
-if (searchInput) {
-  searchInput.addEventListener("input", () => {
-    const value = searchInput.value.trim();
-
-    if (value.length > 0) {
-      buttonMoreResults.style.display = "none";
-      listingsContainer.style.display = "none";
-      spanResults.innerHTML = "(...)";
-      searchResults.style.display = "flex";
-      searchResults.innerHTML = placeholderCard;
-      sortSelect.value = "Latest";
-
-      setTimeout(() => {
-        handleSearch(value);
-      }, 1000);
-    } else {
-      buttonMoreResults.style.display = "flex";
-      listingsContainer.style.display = "flex";
-      spanResults.innerHTML = "(12)";
-      searchResults.style.display = "none";
-      sortSelect.dispatchEvent(new Event("change"));
-    }
-  });
 }

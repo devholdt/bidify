@@ -41,15 +41,15 @@
         border-radius: 50%;
 
         span {
-            opacity: 0;
+            opacity: 0%;
         }
 
         &:hover {
             filter: grayscale(100%);
 
             span {
-                opacity: 100;
-                text-shadow: 1px 1px 2px $light;
+                opacity: 100%;
+                text-shadow: 1px 1px 2px $dark;
             }
         }
     }

@@ -1,7 +1,6 @@
-import { getSingleListing } from "../api/index.js";
 import { formatDate, alert } from "../utilities/index.js";
 
-export async function fetchBidHistory(id) {
+export async function fetchBidHistory(listing) {
   const tableBids = document.querySelector(".table-bids");
   tableBids.innerHTML = `
     <tr class="bg-light text-uppercase">
@@ -11,8 +10,6 @@ export async function fetchBidHistory(id) {
     </tr>`;
 
   try {
-    const listing = await getSingleListing(id);
-
     if (listing.bids.length < 1) {
       tableBids.innerHTML = `<p class="px-5 pt-3">This listing does not have any bids yet. Be the first one to bid!</p>`;
     }

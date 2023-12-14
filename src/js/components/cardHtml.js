@@ -13,13 +13,13 @@ export function cardHtml(card, id, regular = true) {
       </div>
     </div>`;
   } else {
-    card.innerHTML = `<div class="listing-card shadow border" id="${id}">
-        <div class="card">
-          <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal"></div>
-          <div class="card-body d-flex flex-column justify-content-between border-0 w-100 m-0 p-0">
-            <ul class="list-group list-group-flush w-100"></ul>
-          </div>
-        </div>
-      </div>`;
+    card.innerHTML = `
+    <div class="listing-card-small shadow border" id="${id}">
+      <div class="card">
+        <div class="card-body d-flex align-items-center p-0 m-0">
+          <div class="card-media listing-card-top"></div>
+          <ul class="list-group list-group-flush w-100"></ul>
+      </div>
+    </div>`;
   }
 }

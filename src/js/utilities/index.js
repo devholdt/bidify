@@ -9,3 +9,4 @@ export * from "./detailsListItem.js";
 export * from "./setupNav.js";
 export * from "./handleSearch.js";
 export * from "./updateVisibleCount.js";
+export * from "./debounce.js";

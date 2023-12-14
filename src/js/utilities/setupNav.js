@@ -3,6 +3,8 @@ import { getItem } from "../storage/index.js";
 import { getProfile } from "../api/profiles/index.js";
 import { alert } from "./index.js";
 
+let cachedUserData = null;
+
 export async function setupNav(elements, links) {
   const isMobileView = window.innerWidth < WIDTH.MEDIUM;
   const isLoggedIn = getItem("name");
@@ -11,18 +13,21 @@ export async function setupNav(elements, links) {
   updateNavLinks(elements.navLinks, links, isMobileView);
   updateNavLinksCollapse(elements.navLinksCollapse, links, isMobileView);
 
-  if (isLoggedIn) {
+  if (isLoggedIn && !cachedUserData) {
     try {
-      const userData = await getProfile(getItem("name"));
-      updateUserInfo(getItem("name"), elements, userData, isMobileView);
+      cachedUserData = await getProfile(getItem("name"));
     } catch {
       alert(
         "danger",
-        "An error occured when attempting to update user info",
+        "An error occurred when attempting to update user info",
         ".alert-absolute",
         null
       );
     }
+  }
+
+  if (isLoggedIn) {
+    updateUserInfo(getItem("name"), elements, cachedUserData, isMobileView);
   } else {
     elements.navLinksCollapse.classList.remove("border-top", "pt-3");
   }
@@ -44,13 +49,13 @@ export function updateNavLinks(container, links) {
   container.innerHTML = links
     .map(
       (link) => `
-      <li class="nav-item nav-regular">
+      <div class="nav-item nav-regular">
           <a href="${link.href}${link.parameter}" class="nav-link text-white ${
         pathname === `/${link.href}` ? "active" : ""
       }">
               <span>${link.text}</span>
           </a>
-      </li>`
+      </div>`
     )
     .join("");
 }
@@ -91,12 +96,12 @@ function updateNavButtons(isLoggedIn, navButton, bannerButton) {
   if (isLoggedIn) {
     navButton.innerHTML = `
         <div class="nav-divider"></div>
-        <li class="nav-item nav-regular">
+        <div class="nav-item nav-regular">
             <button class="nav-link text-white btn-login"
             data-bs-toggle="modal" data-bs-target="#logoutModal">
               <span>Logout</span>
             </button>
-        </li>`;
+        </div>`;
 
     if (bannerButton) {
       bannerButton.innerHTML = `
@@ -111,10 +116,10 @@ function updateNavButtons(isLoggedIn, navButton, bannerButton) {
   } else {
     navButton.innerHTML = `
       <div class="nav-divider"></div>
-      <li class="nav-item nav-regular">
+      <div class="nav-item nav-regular">
           <button class="nav-link text-white btn-login" data-bs-toggle="modal"
           data-bs-target="#loginModal"><span>Login</span></button>
-      </li>`;
+      </div>`;
 
     if (bannerButton) {
       bannerButton.innerHTML = `

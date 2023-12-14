@@ -11,8 +11,7 @@ import { getSingleListing } from "../listings/index.js";
 export async function profileListings() {
   try {
     if (getItem("name")) {
-      const userDataLocal = getItem("user");
-      const listings = await getProfileListings(userDataLocal.name);
+      const listings = await getProfileListings(getItem("name"));
       const profileListingsContainer =
         document.querySelector(".profile-listings");
 
@@ -25,7 +24,7 @@ export async function profileListings() {
           "none";
       }
     }
-  } catch (error) {
+  } catch {
     alert(
       "danger",
       "An error occured when attempting to fetch profile listings. <strong>This does not mean your listings are inactive.</strong>",
@@ -39,8 +38,7 @@ export async function profileListings() {
 export async function profileBids() {
   try {
     if (getItem("name")) {
-      const userDataLocal = getItem("user");
-      const userDataApi = await getProfile(userDataLocal.name, true);
+      const userDataApi = await getProfile(getItem("name"), true);
       const bids = userDataApi;
       const profileBidsContainer = document.querySelector(".profile-bids");
 
@@ -52,7 +50,7 @@ export async function profileBids() {
         document.querySelector(".toggle-active-bids").style.display = "none";
       }
     }
-  } catch (error) {
+  } catch {
     alert(
       "danger",
       "An error occured when trying to get profile bids. <strong>This does not mean your bids are inactive.</strong>",
@@ -80,7 +78,7 @@ export async function profileWins() {
         profileWinsContainer.innerHTML = `<p class="d-flex justify-content-center">You haven't won anything yet. Keep bidding!</p>`;
       }
     }
-  } catch (error) {
+  } catch {
     alert(
       "danger",
       "An error occured when trying to get and display your wins. <strong>This does not mean your wins are gone.</strong>",

@@ -77,15 +77,6 @@ export function createListingDetails(listing) {
   details.innerHTML += detailsListItem("Created", createdDate);
   details.innerHTML += detailsListItem("Ends at", endsAtDate);
 
-  modal.addEventListener("hide.bs.modal", () => {
-    document.querySelector(".alert-preview").innerHTML = "";
-    removeQueryString("id");
-
-    if (modal.querySelector("#listingModalForm")) {
-      amount.value = "";
-    }
-  });
-
   title.innerHTML = `
   <p class="fw-bold fs-4 text-heading mb-0">${listing.title}</p>
   <span class="fw-light d-flex align-items-center pe-2 me-4">id: ${listing.id.slice(
@@ -93,7 +84,7 @@ export function createListingDetails(listing) {
     8
   )}</span>`;
 
-  if (listing.description.length < 1) {
+  if (!listing.description) {
     description.innerHTML = `<div class="fst-italic">No description</div>`;
   } else {
     description.innerHTML = listing.description;
@@ -122,6 +113,12 @@ export function createListingDetails(listing) {
   }
 
   modal.addEventListener("hidden.bs.modal", () => {
+    document.querySelector(".alert-preview").innerHTML = "";
     details.innerHTML = "";
+    removeQueryString("id");
+
+    if (modal.querySelector("#listingModalForm")) {
+      amount.value = "";
+    }
   });
 }

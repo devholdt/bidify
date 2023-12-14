@@ -1,7 +1,12 @@
 import { getItem } from "../../storage/index.js";
 import { API_URLS, headers } from "../../api/index.js";
 import { DEFAULT_URLS, WIDTH } from "../index.js";
-import { updateUserInfo, setupNav, alert } from "../../utilities/index.js";
+import {
+  updateUserInfo,
+  setupNav,
+  alert,
+  debounce,
+} from "../../utilities/index.js";
 import { handleWindowResize } from "./index.js";
 import { logoutUser } from "../../auth/index.js";
 
@@ -17,10 +22,12 @@ export async function handleLoggedInUser(elements, links) {
 
       updateUserInfo(userDataApi.name, elements, userDataApi);
 
-      window.addEventListener("resize", () => {
-        const isMobileView = window.innerWidth < WIDTH.MEDIUM;
+      const debouncedSetupNav = debounce(() => {
+        const isMobileView = window.innerWidth <= WIDTH.MEDIUM;
         setupNav(elements, links, isMobileView);
       });
+
+      window.addEventListener("resize", debouncedSetupNav);
 
       setupLogoutButton();
 

@@ -1,6 +1,6 @@
 import { DEFAULT_URLS } from "./index.js";
 
-export function listingMedia(listing, card) {
+export function listingMedia(listing, card, target) {
   const img = new Image();
   if (listing.media.length === 0) {
     img.src = "./src/images/bidify_nomedia.svg";
@@ -18,5 +18,5 @@ export function listingMedia(listing, card) {
     };
   }
 
-  card.querySelector(".listing-card-top").append(img);
+  card.querySelector(target).append(img);
 }

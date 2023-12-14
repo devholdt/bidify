@@ -32,9 +32,9 @@ export async function renderProfileDetails() {
       <div class="profile-details_user mb-5 col-6 col-lg-12">
 
         <button class="profile-details_avatar border-1 shadow-sm mb-3" 
-          style="background-image: url(${avatar}); background-size: cover;"
+          style="background: url(${avatar}); background-size: cover;"
           data-bs-toggle="modal" data-bs-target="#editProfileModal">
-            <span class="fw-bold text-dark">change avatar</span>
+            <span class="fw-bold text-light">change avatar</span>
         </button>
 
         <div>

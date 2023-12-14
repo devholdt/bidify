@@ -30,7 +30,7 @@ export function setupInteractionButtons(footer, listing, listingForm) {
     const listingModalForm = document.querySelector("#listingModalForm");
     listingModalForm.addEventListener("submit", bidEvent);
 
-    if (listing.seller.name === getItem("name")) {
+    if (listing.seller && listing.seller.name === getItem("name")) {
       sellerName = "you";
       footer.innerHTML = interactionButtons;
 

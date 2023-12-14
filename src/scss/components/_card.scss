@@ -5,11 +5,6 @@
     margin: auto;
     background-color: white;
 
-    &:hover img {
-        transform: scale(1.1);
-        cursor: pointer;
-    }
-
     &-top {
         position: relative;
         width: 100%;
@@ -116,5 +111,37 @@
             height: 50px;
             background-color: $yellow;
         }
+    }
+}
+
+.listing-card {
+    &:hover img {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+}
+
+.listing-card-small {
+    .card-media {
+        height: 220px;
+        width: 135px;
+
+        img {
+            height: 100%;
+            max-width: 100px;
+            object-fit: cover;
+            position: absolute;
+            z-index: 1;
+            transition: 0.4s;
+
+            &:hover {
+                max-width: 100%;
+            }
+        }
+    }
+
+    .w-auto {
+        padding: 4px 8px;
+        border-radius: 5px;
     }
 }

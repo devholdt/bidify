@@ -4,10 +4,10 @@ import { createListingDetails, createMedia } from "./index.js";
 
 document.addEventListener("reload", removeQueryString("id"));
 
-export function listingModalPreview(listing, button) {
+export function listingPreviewModal(listing, button) {
   button.addEventListener("click", () => {
     createListingDetails(listing);
     createMedia(listing);
-    fetchBidHistory(listing.id);
+    fetchBidHistory(listing);
   });
 }

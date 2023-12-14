@@ -1,5 +1,5 @@
-import { getItem, setItem } from "../storage/index.js";
-import { API_URLS, headers } from "../api/index.js";
+import { API_URLS, headers, invalidateCache } from "../api/index.js";
+import { getItem } from "../storage/index.js";
 import { alert } from "../utilities/index.js";
 
 export async function editProfileEvent(event) {
@@ -25,6 +25,8 @@ export async function editProfileEvent(event) {
 
     if (response.ok) {
       alert("success", "Avatar updated", ".alert-editprofile");
+
+      invalidateCache();
 
       setTimeout(() => {
         userMedia.avatar = newUserMedia.avatar;

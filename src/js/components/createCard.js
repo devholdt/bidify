@@ -6,7 +6,7 @@ import {
   detailsListItem,
 } from "../utilities/index.js";
 import {
-  listingModalPreview,
+  listingPreviewModal,
   listingMedia,
   listingBids,
   cardHtml,
@@ -14,7 +14,6 @@ import {
 } from "./index.js";
 import { getItem } from "../storage/index.js";
 import { deleteListingEvent, editListingEvent } from "../events/index.js";
-import { getSingleListing } from "../api/index.js";
 
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
@@ -25,8 +24,8 @@ export function createCard(listing, containerSelector) {
 
   cardHtml(card, listing.id);
   listingBids(listing, card);
-  listingMedia(listing, card);
-  countdownCard(card, listingEndsAt, listingsContainer);
+  listingMedia(listing, card, ".listing-card-top");
+  countdownCard(card, ".card-top", listingEndsAt, listingsContainer);
   checkboxState("Listings", listingsContainer);
 
   const titleElement = document.createElement("h5");
@@ -43,8 +42,8 @@ export function createCard(listing, containerSelector) {
 
   const cardTop = card.querySelector(".card-top");
   const gavelButton = card.querySelector(".btn-gavel");
-  listingModalPreview(listing, cardTop);
-  listingModalPreview(listing, gavelButton);
+  listingPreviewModal(listing, cardTop);
+  listingPreviewModal(listing, gavelButton);
 
   if (getItem("name")) {
     if (listing.seller && listing.seller.name !== getItem("name")) {
@@ -75,65 +74,60 @@ export function createCard(listing, containerSelector) {
   }
 }
 
-export async function createBidCard(bid, containerSelector) {
+export function createBidCard(bid, containerSelector) {
   const bidsContainer = document.querySelector(containerSelector);
-  const listing = await getSingleListing(bid.listing.id);
-  const sortedListing = listing.bids.sort((a, b) => b.amount - a.amount);
-  const listingEndsAt = new Date(bid.listing.endsAt);
+  const endsAtDate = new Date(bid.listing.endsAt);
   const card = document.createElement("div");
-  card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4", "listing-bid");
+  card.classList.add("col-12", "col-md-6", "mb-4", "listing-bid");
 
   cardHtml(card, bid.listing.id, false);
-
-  const cardTop = card.querySelector(".card-top");
-  listingModalPreview(listing, cardTop);
-  listingMedia(bid.listing, card);
-  countdownCard(card, listingEndsAt, bidsContainer);
+  listingMedia(bid.listing, card, ".card-media");
   checkboxState("Bids", bidsContainer);
 
   const listGroup = card.querySelector(".list-group");
 
   listGroup.innerHTML += detailsListItem(
+    "",
+    `<span class="countdown-small"></span>`
+  );
+  listGroup.innerHTML += detailsListItem(
+    "Title",
+    `<span class="d-block text-truncate" style="max-width: 110px;">${bid.listing.title}</span>`
+  );
+  listGroup.innerHTML += detailsListItem(
     "Your bid",
     `<span class="fw-medium text-primary">$${bid.amount}</span>`
   );
   listGroup.innerHTML += detailsListItem(
-    "Current bid",
-    `<span class="fw-medium text-primary">$${sortedListing[0].amount}</span>`
+    "Date",
+    `<span>${formatDate(new Date(bid.created))}</span>`
   );
   listGroup.innerHTML += detailsListItem(
-    "Date",
-    formatDate(new Date(bid.created))
+    "Bid ID",
+    `<span>${bid.id.slice(0, 5)}</span>`
   );
-  listGroup.innerHTML += detailsListItem("Bid ID", bid.id.slice(0, 8));
 
   bidsContainer.appendChild(card);
+
+  countdownCard(card, ".countdown-small", endsAtDate, bidsContainer);
 }
 
 export async function createWinCard(win, containerSelector) {
   const winsContainer = document.querySelector(containerSelector);
-  const listing = await getSingleListing(win.id);
   const card = document.createElement("div");
-  card.classList.add("col-12", "col-sm-6", "col-lg-4", "mb-4", "listing-win");
+  card.classList.add("col-6", "mb-4", "listing-bid");
 
   cardHtml(card, win.id, false);
-
-  const cardTop = card.querySelector(".card-top");
-  listingModalPreview(listing, cardTop);
-  listingMedia(win, card);
+  listingMedia(win, card, ".card-media");
 
   const listGroup = card.querySelector(".list-group");
 
   listGroup.innerHTML += detailsListItem("Title", win.title);
   listGroup.innerHTML += detailsListItem(
-    "Created",
-    formatDate(new Date(win.created))
+    "Ended",
+    formatDate(new Date(win.endsAt))
   );
-  listGroup.innerHTML += detailsListItem(
-    "Ended at",
-    formatDate(new Date(win.endsAt), true)
-  );
-  listGroup.innerHTML += detailsListItem("ID", win.id.slice(0, 8));
+  listGroup.innerHTML += detailsListItem("ID", win.id.slice(0, 5));
 
   winsContainer.appendChild(card);
 }

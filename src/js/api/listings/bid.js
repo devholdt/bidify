@@ -1,4 +1,9 @@
-import { API_URLS, headers, getSingleListing } from "../index.js";
+import {
+  API_URLS,
+  headers,
+  getSingleListing,
+  invalidateCache,
+} from "../index.js";
 import { alert } from "../../utilities/index.js";
 
 export async function bidListing(id, amount) {
@@ -38,6 +43,8 @@ export async function bidListing(id, amount) {
         ".alert-preview",
         null
       );
+
+      invalidateCache();
 
       setTimeout(() => {
         location.reload();

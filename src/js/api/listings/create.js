@@ -1,4 +1,4 @@
-import { API_URLS, headers } from "../index.js";
+import { API_URLS, headers, invalidateCache } from "../index.js";
 import { alert } from "../../utilities/index.js";
 import { getItem } from "../../storage/index.js";
 
@@ -32,6 +32,8 @@ export async function createListing(title, endsAt, description, media, tags) {
         3000,
         false
       );
+
+      invalidateCache();
 
       setTimeout(() => {
         location.reload();
