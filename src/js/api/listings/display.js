@@ -15,7 +15,9 @@ function display(listings) {
 
   listings
     .map((listing) => {
-      return listing.title === "" ? { ...listing, title: "Listing" } : listing;
+      return listing.title === ""
+        ? { ...listing, title: "[listing]" }
+        : listing;
     })
     .forEach((listing) => createCard(listing, ".listings"));
 }

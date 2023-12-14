@@ -1,8 +1,10 @@
-import { getListings } from "./index.js";
 import { createCard } from "../../components/index.js";
+import { cachedFetch, API_URLS } from "../index.js";
 
 export async function latestListings() {
-  const listings = await getListings({ sort: "&sort=created" });
+  const listings = await cachedFetch(
+    `${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=desc&sort=created`
+  );
 
   listings
     .slice(0, 3)

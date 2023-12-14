@@ -12,7 +12,7 @@ export function createListingDetails(listing) {
   const title = document.querySelector("#listingModalTitle");
   const details = document.querySelector("#listingModalDetails");
   const description = document.querySelector("#listingModalDescription");
-  const createdDate = formatDate(new Date(listing.created));
+  const createdDate = formatDate(new Date(listing.created), true);
   const endsAtDate = formatDate(new Date(listing.endsAt), true);
   const listingModalFooterDynamic = modal.querySelector(
     "#listingModalFooterDynamic"

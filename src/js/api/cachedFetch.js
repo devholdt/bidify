@@ -1,9 +1,32 @@
+import { getListings } from "./listings/index.js";
 import { setCache, getCache } from "../storage/index.js";
 
-export async function cachedFetch(url, options) {
+export async function cachedFetch(url, options, useListingsCache = false) {
   const key = JSON.stringify({ url, options });
-  const cachedData = getCache(key);
 
+  if (useListingsCache) {
+    const listingsCache = {
+      data: null,
+      timeStamp: null,
+      cacheDuration: 300000,
+    };
+
+    const now = new Date().getTime();
+    if (
+      listingsCache.data &&
+      now - listingsCache.timestamp < listingsCache.cacheDuration
+    ) {
+      return listingsCache.data;
+    }
+
+    const listings = await getListings({ sort: "&sort=created" });
+    listingsCache.data = listings;
+    listingsCache.timestamp = now;
+
+    return listings;
+  }
+
+  const cachedData = getCache(key);
   if (cachedData) {
     return cachedData;
   }

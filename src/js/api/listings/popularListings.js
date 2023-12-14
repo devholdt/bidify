@@ -1,12 +1,12 @@
-import { getListings } from "./index.js";
 import { createCard } from "../../components/index.js";
+import { cachedFetch, API_URLS } from "../index.js";
 
 export async function popularListings() {
   const container = document.querySelector(".popular-listings");
 
-  const listings = await getListings({
-    sort: "&sort=created",
-  });
+  const listings = await cachedFetch(
+    `${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=desc&sort=created`
+  );
 
   const sortedListings = listings.sort((a, b) => b._count.bids - a._count.bids);
 

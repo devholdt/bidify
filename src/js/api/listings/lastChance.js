@@ -1,15 +1,16 @@
-import { getListings } from "./index.js";
 import { createCard } from "../../components/index.js";
+import { cachedFetch, API_URLS } from "../index.js";
 
 export async function lastChance() {
-  const listings = await getListings({
-    sortOrder: "asc",
-    sort: "&sort=endsAt",
-  });
+  const allListings = await cachedFetch(
+    `${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true`
+  );
 
-  listings
-    .slice(0, 3)
-    .forEach((listing) => createCard(listing, ".last-chance"));
+  const lastChanceListings = allListings
+    .sort((a, b) => new Date(a.endsAt) - new Date(b.endsAt))
+    .slice(0, 3);
+
+  lastChanceListings.forEach((listing) => createCard(listing, ".last-chance"));
 
   const container = document.querySelector(".last-chance");
   const cards = Array.from(container.children);
