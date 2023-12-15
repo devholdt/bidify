@@ -52,8 +52,7 @@ export function createCard(listing, containerSelector) {
   listingPreviewModal(listing, gavelButton);
 
   if (getItem("name")) {
-    if (listing.seller && listing.seller.name !== getItem("name")) {
-    } else if (!listing.seller || listing.seller.name == getItem("name")) {
+    if (!listing.seller || listing.seller.name == getItem("name")) {
       const cardButtons = card.querySelector(".card-buttons");
       cardButtons.classList.remove("justify-content-between");
       cardButtons.classList.add("justify-content-end");

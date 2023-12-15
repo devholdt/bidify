@@ -20,6 +20,20 @@ export async function getListingValues(event) {
     targetElement = targetElement.parentElement;
   }
 
+  function resetInputs() {
+    const resetContainer = (containerId) => {
+      const container = document.getElementById(containerId);
+      while (container.children.length > 1) {
+        container.removeChild(container.lastChild);
+      }
+      const firstInput = container.querySelector('input[type="text"]');
+      if (firstInput) firstInput.value = "";
+    };
+
+    resetContainer("editMediaInputsContainer");
+    resetContainer("editTagInputsContainer");
+  }
+
   if (targetElement.classList.contains("btn-edit")) {
     const id = targetElement.dataset.id;
 
@@ -37,20 +51,6 @@ export async function getListingValues(event) {
         event.target.closest(".input-group").querySelector("input").value = "";
       }
     });
-
-    function resetInputs() {
-      const resetContainer = (containerId) => {
-        const container = document.getElementById(containerId);
-        while (container.children.length > 1) {
-          container.removeChild(container.lastChild);
-        }
-        const firstInput = container.querySelector('input[type="text"]');
-        if (firstInput) firstInput.value = "";
-      };
-
-      resetContainer("editMediaInputsContainer");
-      resetContainer("editTagInputsContainer");
-    }
 
     editModal.addEventListener("hide.bs.modal", () => {
       removeQueryString("id");

@@ -69,6 +69,8 @@ export async function cachedFetch(url, options, useListingsCache = false) {
       ".alert-absolute",
       null
     );
-    throw new Error(`Error: ${response.status} - ${data.message}`);
+    throw new Error(
+      `An error occured when attempting to make a cached fetch: ${error}`
+    );
   }
 }
