@@ -23,9 +23,8 @@ export async function setupNav(elements, links) {
         ".alert-absolute",
         null
       );
-      console.error(
-        "An error occured when attempting to update user info: ",
-        error
+      throw new Error(
+        `An error occured when attempting to update user info: ${error}`
       );
     }
   }

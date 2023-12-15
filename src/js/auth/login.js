@@ -5,31 +5,32 @@ import { setItem } from "../storage/index.js";
 import { alert } from "../utilities/index.js";
 
 export async function loginUser(email, password) {
-  const response = await fetch(API_URLS.LOGIN, {
-    method: "POST",
-    body: JSON.stringify({ email, password }),
-    headers: headers("application/json"),
-  });
+  try {
+    const response = await fetch(API_URLS.LOGIN, {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: headers("application/json"),
+    });
 
-  if (response.ok) {
-    const user = await response.json();
-    setItem({ key: "token", value: user.accessToken });
-    setItem({ key: "user", value: user });
-    setItem({ key: "name", value: user.name });
+    if (response.ok) {
+      const user = await response.json();
+      setItem({ key: "token", value: user.accessToken });
+      setItem({ key: "user", value: user });
+      setItem({ key: "name", value: user.name });
 
-    alert(
-      "success",
-      `Login successful! Welcome back, <span class="fw-semibold">${user.name}</span>`,
-      ".alert-login",
-      null,
-      false
-    );
+      alert(
+        "success",
+        `Login successful! Welcome back, <span class="fw-semibold">${user.name}</span>`,
+        ".alert-login",
+        null,
+        false
+      );
 
-    return user;
-  } else {
-    alert("danger", "Login unsuccsessful.", ".alert-login", null);
-
-    throw new Error("Login unsuccessful");
+      return user;
+    }
+  } catch (error) {
+    alert("danger", "Login unsuccsessful", ".alert-login", null);
+    throw new Error(`Login unsuccessful: ${error}`);
   }
 }
 
@@ -58,7 +59,7 @@ export async function loginEvent(event) {
       location.href = `${URLS.PROFILE}?name=${name}`;
     }, 2000);
   } catch (error) {
-    alert("danger", "Invalid login credentials.", ".alert-login", null);
-    console.error("Invalid login credentials: ", error);
+    alert("danger", "Invalid login credentials", ".alert-login", null);
+    throw new Error(`Invalid login credentials: ${error}`);
   }
 }

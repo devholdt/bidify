@@ -17,21 +17,33 @@ export async function createListing(title, endsAt, description, media, tags) {
     tags: tags,
   };
 
-  const response = await fetch(API_URLS.LISTINGS, {
-    method: "POST",
-    body: JSON.stringify(listing),
-    headers: headers("application/json"),
-  });
+  try {
+    const response = await fetch(API_URLS.LISTINGS, {
+      method: "POST",
+      body: JSON.stringify(listing),
+      headers: headers("application/json"),
+    });
 
-  if (response.ok) {
+    if (response.ok) {
+      alert(
+        "success",
+        "Listing successfully posted!",
+        ".alert-create-listing",
+        3000,
+        false
+      );
+
+      return await response.json();
+    }
+  } catch (error) {
     alert(
-      "success",
-      "Listing successfully posted!",
+      "danger",
+      "An error occured when attempting to create listing",
       ".alert-create-listing",
-      3000,
-      false
+      null
     );
-
-    return await response.json();
+    throw new Error(
+      `An error occured when attempting to create listing: ${error}`
+    );
   }
 }

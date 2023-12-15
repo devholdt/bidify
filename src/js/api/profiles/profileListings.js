@@ -32,9 +32,8 @@ export async function profileListings() {
       null,
       false
     );
-    console.error(
-      "An error occured when attempting to fetch profile listings: ",
-      error
+    throw new Error(
+      `An error occured when attempting to fetch profile listings: ${error}`
     );
   }
 }
@@ -62,9 +61,8 @@ export async function profileBids() {
       null,
       false
     );
-    console.error(
-      "An error occured when attempting to get profile bids: ",
-      error
+    throw new Error(
+      `An error occured when attempting to get profile bids: ${error}`
     );
   }
 }
@@ -94,9 +92,8 @@ export async function profileWins() {
       null,
       false
     );
-    console.error(
-      "An error occured when attempting to get and display won listings: ",
-      error
+    throw new Error(
+      `An error occured when attempting to get and display won listings: ${error}`
     );
   }
 }

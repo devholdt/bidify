@@ -40,9 +40,8 @@ export async function handleSearch(value) {
       ".listings",
       null
     );
-    console.error(
-      "An error occured when attempting to search listings: ",
-      error
+    throw new Error(
+      `An error occured when attempting to search listings: ${error}`
     );
   }
 }

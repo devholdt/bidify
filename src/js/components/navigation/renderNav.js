@@ -46,9 +46,8 @@ export async function renderNav() {
       null,
       false
     );
-    console.error(
-      "An error occured when attempting to render navigation menu: ",
-      error
+    throw new Error(
+      `An error occured when attempting to render navigation menu: ${error}`
     );
   }
 }

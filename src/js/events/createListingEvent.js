@@ -68,9 +68,8 @@ export async function createListingEvent(event) {
       ".alert-create-listing",
       null
     );
-    console.error(
-      "An error occured when attempting to create listing: ",
-      error
+    throw new Error(
+      `An error occured when attempting to create listing: ${error}`
     );
   }
 }

@@ -91,9 +91,8 @@ export async function getListingValues(event) {
         ".alert-editlisting",
         null
       );
-      console.error(
-        "An error occured when attempting to get listing values: ",
-        error
+      throw new Error(
+        `An error occured when attempting to get listing values: ${error}`
       );
     }
   }

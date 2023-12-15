@@ -18,9 +18,8 @@ export async function bidEvent(event) {
       ".alert-preview",
       null
     );
-    console.error(
-      "An error occured when attempting to bid on listing: ",
-      error
+    throw new Error(
+      `An error occured when attempting to bid on listing: ${error}`
     );
   }
 }

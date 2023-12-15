@@ -38,6 +38,8 @@ export async function editListing(id, title, description, media, tags) {
       ".alert-absolute",
       null
     );
-    console.error("An error occured when attempting to edit listing: ", error);
+    throw new Error(
+      `An error occured when attempting to edit listing: ${error}`
+    );
   }
 }

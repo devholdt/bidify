@@ -52,9 +52,8 @@ export async function bidListing(id, amount) {
       ".alert-preview",
       null
     );
-    console.error(
-      "An error occured when attempting to place a bid on listing: ",
-      error
+    throw new Error(
+      `An error occured when attempting to place a bid on listing: ${error}`
     );
   }
 }

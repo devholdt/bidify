@@ -4,62 +4,64 @@ import { alert } from "../utilities/index.js";
 import { setItem } from "../storage/index.js";
 
 export async function registerUser(name, email, password, avatar) {
-  const response = await fetch(API_URLS.REGISTER, {
-    method: "POST",
-    body: JSON.stringify({ name, email, password, avatar }),
-    headers: headers("application/json"),
-  });
+  try {
+    const response = await fetch(API_URLS.REGISTER, {
+      method: "POST",
+      body: JSON.stringify({ name, email, password, avatar }),
+      headers: headers("application/json"),
+    });
 
-  if (response.ok) {
-    const user = await response.json();
+    if (response.ok) {
+      const user = await response.json();
 
-    alert(
-      "success",
-      `User registration successful! Welcome, <span class="fw-semibold">${user.name}</span>`,
-      ".alert-register",
-      null,
-      false
-    );
-
-    try {
-      const loginResponse = await fetch(API_URLS.LOGIN, {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: headers("application/json"),
-      });
-
-      if (loginResponse.ok) {
-        const loginUser = await loginResponse.json();
-        setItem({ key: "token", value: loginUser.accessToken });
-        setItem({ key: "user", value: loginUser });
-        setItem({ key: "name", value: loginUser.name });
-
-        setTimeout(() => {
-          location.href = `${URLS.PROFILE}?name=${loginUser.name}`;
-        }, 2000);
-      }
-    } catch (error) {
       alert(
-        "danger",
-        "An error occured when attempting to automatically login - please log in manually",
-        ".alert-register"
+        "success",
+        `User registration successful! Welcome, <span class="fw-semibold">${user.name}</span>`,
+        ".alert-register",
+        null,
+        false
       );
-      console.error(
-        "An error occured when attempting to automatically login: ",
-        error
-      );
-    }
 
-    return user;
-  } else {
+      try {
+        const loginResponse = await fetch(API_URLS.LOGIN, {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+          headers: headers("application/json"),
+        });
+
+        if (loginResponse.ok) {
+          const loginUser = await loginResponse.json();
+          setItem({ key: "token", value: loginUser.accessToken });
+          setItem({ key: "user", value: loginUser });
+          setItem({ key: "name", value: loginUser.name });
+
+          setTimeout(() => {
+            location.href = `${URLS.PROFILE}?name=${loginUser.name}`;
+          }, 2000);
+        }
+      } catch (error) {
+        alert(
+          "danger",
+          "An error occured when attempting to automatically login - please log in manually",
+          ".alert-register"
+        );
+        throw new Error(
+          `An error occured when attempting to automatically login: ${error}`
+        );
+      }
+
+      return user;
+    }
+  } catch (error) {
     alert(
       "danger",
       "An error occured when attempting user registration",
       ".alert-register",
       null
     );
-
-    throw new Error("An error occured when attempting user registration");
+    throw new Error(
+      `An error occured when attempting user registration: ${error}`
+    );
   }
 }
 
@@ -93,6 +95,6 @@ export async function registerEvent(event) {
       ".alert-register",
       null
     );
-    console.error("Invalid user registration credentials: ", error);
+    throw new Error(`Invalid user registration credentials: ${error}`);
   }
 }

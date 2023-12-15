@@ -27,11 +27,10 @@ export async function deleteListingEvent(event) {
         "danger",
         "An error occured when attempting to delete listing",
         ".alert-absolute",
-        4000
+        null
       );
-      console.error(
-        "An error occured when attempting to delete listing: ",
-        error
+      throw new Error(
+        `An error occured when attempting to delete listing: ${error}`
       );
     }
   }

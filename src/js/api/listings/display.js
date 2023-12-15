@@ -49,9 +49,8 @@ export async function displayListings() {
         ".alert-absolute",
         null
       );
-      console.error(
-        "An error occured when attempting to fetch all listings: ",
-        error
+      throw new Error(
+        `An error occured when attempting to fetch all listings: ${error}`
       );
     }
   }

@@ -1,5 +1,6 @@
 import { getListings } from "./listings/index.js";
 import { setCachedItem, getCachedItem } from "../storage/index.js";
+import { alert } from "../utilities/index.js";
 
 const listingsCache = {
   data: null,
@@ -22,12 +23,12 @@ const listingsCache = {
  * // To fetch data with general caching:
  * cachedFetch("https://api.example.com/data", { method: "GET" })
  *  .then(data => console.log(data))
- *  .catch(error => console.error(error));
+ *  .catch(error => throw new Error(error));
  *
  * // To fetch listings with specialized listings caching:
  * cachedFetch("https://api.example.com/listings", { method: "GET" }, true)
  *  .then(listings => console.log(listings))
- *  .catch(error => console.error(error));
+ *  .catch(error => throw new Error(error));
  */
 export async function cachedFetch(url, options, useListingsCache = false) {
   const key = JSON.stringify({ url, options });
@@ -53,13 +54,21 @@ export async function cachedFetch(url, options, useListingsCache = false) {
     return cachedData;
   }
 
-  const response = await fetch(url, options);
-  const data = await response.json();
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
 
-  if (response.ok) {
-    setCachedItem(key, data);
-    return data;
-  } else {
+    if (response.ok) {
+      setCachedItem(key, data);
+      return data;
+    }
+  } catch (error) {
+    alert(
+      "danger",
+      "An error occured when attempting to make a cached fetch",
+      ".alert-absolute",
+      null
+    );
     throw new Error(`Error: ${response.status} - ${data.message}`);
   }
 }

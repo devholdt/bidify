@@ -45,7 +45,7 @@ export async function handleLoggedInUser(elements, links) {
       ".alert-absolute",
       null
     );
-    console.error("An error occured when checking login state: ", error);
+    throw new Error(`An error occured when checking login state: ${error}`);
   }
 }
 
