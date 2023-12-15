@@ -1,4 +1,4 @@
-import { API_URLS, headers, invalidateCache } from "../index.js";
+import { API_URLS, headers } from "../index.js";
 import { alert } from "../../utilities/index.js";
 import { getItem } from "../../storage/index.js";
 
@@ -17,31 +17,21 @@ export async function createListing(title, endsAt, description, media, tags) {
     tags: tags,
   };
 
-  try {
-    const response = await fetch(API_URLS.LISTINGS, {
-      method: "POST",
-      body: JSON.stringify(listing),
-      headers: headers("application/json"),
-    });
+  const response = await fetch(API_URLS.LISTINGS, {
+    method: "POST",
+    body: JSON.stringify(listing),
+    headers: headers("application/json"),
+  });
 
-    if (response.ok) {
-      alert(
-        "success",
-        "Listing successfully posted!",
-        ".alert-create-listing",
-        3000,
-        false
-      );
+  if (response.ok) {
+    alert(
+      "success",
+      "Listing successfully posted!",
+      ".alert-create-listing",
+      3000,
+      false
+    );
 
-      invalidateCache();
-
-      setTimeout(() => {
-        location.reload();
-      }, 3000);
-
-      return await response.json();
-    }
-  } catch {
-    throw new Error(response.statusText);
+    return await response.json();
   }
 }

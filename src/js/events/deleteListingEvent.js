@@ -1,4 +1,4 @@
-import { API_URLS, headers, invalidateCache } from "../api/index.js";
+import { API_URLS, headers } from "../api/index.js";
 
 export async function deleteListingEvent(event) {
   let targetElement = event.target;
@@ -20,7 +20,6 @@ export async function deleteListingEvent(event) {
       });
 
       if (response.ok) {
-        invalidateCache();
         location.reload();
       }
     } catch {

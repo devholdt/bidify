@@ -25,32 +25,30 @@ export async function createListingEvent(event) {
 
   if (title.length < 1) {
     const titleInput = form.querySelector("#createListingTitle");
-
-    titleInput.style.borderColor = "#FF5252";
+    titleInput.classList.add("border-danger");
 
     setTimeout(() => {
-      titleInput.style.borderColor = "#9D9696";
-    }, 2000);
+      titleInput.classList.remove("border-danger");
+    }, 3000);
 
-    alert("danger", "Title is required", ".alert-create-listing", null);
+    alert("warning", "Title is required", ".alert-create-listing", 3000);
 
     return;
   }
 
   if (new Date(endsAt) <= now) {
     const endsAtInput = form.querySelector("#createListingDate");
-
-    endsAtInput.style.borderColor = "#FF5252";
+    endsAtInput.classList.add("border-danger");
 
     setTimeout(() => {
-      endsAtInput.style.borderColor = "#9D9696";
+      endsAtInput.classList.remove("border-danger");
     }, 2000);
 
     alert(
-      "danger",
+      "warning",
       "End date must be in the future",
       ".alert-create-listing",
-      null
+      3000
     );
 
     return;
@@ -59,21 +57,35 @@ export async function createListingEvent(event) {
   try {
     await createListing(title, endsAt, description, media, tags);
 
-    form.reset();
-
-    alert(
-      "success",
-      "Listing successfully posted!",
-      ".alert-create-listing",
-      6000,
-      false
-    );
+    setTimeout(() => {
+      form.reset();
+      location.reload();
+    }, 3000);
   } catch {
     alert(
       "danger",
-      "An error occured when attempting to post listing",
+      "An error occured when attempting to create listing",
       ".alert-create-listing",
       null
     );
   }
 }
+
+document
+  .querySelector("#createListingDescription")
+  .addEventListener("input", (event) => {
+    const textarea = event.target;
+    if (textarea.value.length === 280) {
+      textarea.classList.add("border-danger");
+      alert(
+        "warning",
+        "Maximum character length reached",
+        ".alert-create-listing",
+        3000
+      );
+
+      setTimeout(() => {
+        textarea.classList.remove("border-danger");
+      }, 3000);
+    }
+  });

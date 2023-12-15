@@ -5,7 +5,7 @@ export function setItem(obj) {
 export function setCachedItem(key, data) {
   const item = {
     value: data,
-    expiry: new Date().getTime() + 10000,
+    expiry: new Date().getTime() + 3000,
   };
   sessionStorage.setItem(key, JSON.stringify(item));
 }

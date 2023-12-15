@@ -4,7 +4,7 @@ import { setCachedItem, getCachedItem } from "../storage/index.js";
 const listingsCache = {
   data: null,
   timeStamp: null,
-  cacheDuration: 10000,
+  cacheDuration: 3000,
 };
 
 /**
@@ -62,9 +62,4 @@ export async function cachedFetch(url, options, useListingsCache = false) {
   } else {
     throw new Error(`Error: ${response.status} - ${data.message}`);
   }
-}
-
-export function invalidateCache() {
-  listingsCache.data = null;
-  listingsCache.timestamp = null;
 }

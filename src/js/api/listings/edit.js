@@ -1,4 +1,4 @@
-import { API_URLS, headers, invalidateCache } from "../index.js";
+import { API_URLS, headers } from "../index.js";
 import { alert } from "../../utilities/index.js";
 
 export async function editListing(id, title, description, media, tags) {
@@ -24,8 +24,6 @@ export async function editListing(id, title, description, media, tags) {
         3000,
         false
       );
-
-      invalidateCache();
 
       setTimeout(() => {
         location.reload();

@@ -431,32 +431,35 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label for="createListingTitle" class="form-label">Title</label>
-                                    <input type="text" class="form-control" id="createListingTitle" name="title"
-                                        placeholder="title">
+                                    <input type="text" class="form-control shadow-none" id="createListingTitle"
+                                        name="title" placeholder="title">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <label for="createListingDate" class="form-label">End date</label>
-                                    <input type="date" class="form-control" id="createListingDate" name="endsAt">
+                                    <input type="date" class="form-control shadow-none" id="createListingDate"
+                                        name="endsAt">
                                 </div>
 
                                 <div class="col-12 mb-3">
                                     <label for="createListingDescription" class="form-label">Description</label>
-                                    <textarea class="form-control" name="description" id="createListingDescription"
-                                        placeholder="description"></textarea>
+                                    <textarea class="form-control shadow-none" name="description"
+                                        id="createListingDescription" placeholder="description"
+                                        maxlength="280"></textarea>
                                 </div>
 
                                 <div class="col-12 mb-3">
                                     <div class="d-flex justify-content-between">
                                         <label for="createListingMedia" class="form-label">Media URL</label>
-                                        <span id="mediaInputCount" class="text-danger fw-normal">max. 4</span>
+                                        <span id="mediaInputCount" class="text-danger fw-normal shadow-none">max.
+                                            4</span>
                                     </div>
                                     <div class="d-flex">
 
                                         <div id="createMediaInputsContainer"
                                             class="w-100 me-1 d-flex flex-column gap-2">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="media"
+                                                <input type="text" class="form-control shadow-none" name="media"
                                                     id="createListingMedia" placeholder="media URL">
                                                 <button type="button"
                                                     class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">clear</button>
@@ -473,14 +476,14 @@
                                 <div class="col-12 mb-3">
                                     <div class="d-flex justify-content-between">
                                         <label for="createListingTags" class="form-label">Tags</label>
-                                        <span id="tagInputCount" class="text-danger fw-normal">max. 6</span>
+                                        <span id="tagInputCount" class="text-danger fw-normal shadow-none">max. 6</span>
                                     </div>
                                     <div class="d-flex">
 
                                         <div id="createTagInputsContainer" class="w-100 me-1 d-flex flex-column gap-2">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="createListingTag"
-                                                    name="tags" placeholder="tag">
+                                                <input type="text" class="form-control shadow-none"
+                                                    id="createListingTag" name="tags" placeholder="tag">
                                                 <button type="button" id="addCreateTagButton"
                                                     class="btn ps-1 pe-0 border-0 input-group-text text-primary add-tag-button">
                                                     <span class="material-icons">add</span>
