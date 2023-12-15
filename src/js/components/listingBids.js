@@ -6,12 +6,12 @@
  */
 export function listingBids(listing, card) {
   if (listing.bids && listing.bids.length > 0) {
-    let bidsArray = [...listing.bids];
-    bidsArray.reverse();
+    const currentBid = listing.bids.sort((a, b) => b.amount - a.amount)[0]
+      .amount;
 
     const listingBids = document.createElement("p");
     listingBids.classList.add("card-text");
-    listingBids.innerHTML = `<p class="card-text">Current bid: <span class="fw-medium text-primary">$${bidsArray[0].amount}</span> (${listing._count.bids})</p>`;
+    listingBids.innerHTML = `<p class="card-text">Current bid: <span class="fw-medium text-primary">$${currentBid}</span> (${listing._count.bids})</p>`;
 
     card.querySelector(".card-body").append(listingBids);
   } else {

@@ -29,7 +29,7 @@ export async function fetchBidHistory(listing) {
         bidElement.innerHTML = `
         <td>${created}</td>
         <td class="text-primary fw-normal">$${bid.amount}</td>
-        <td>${bid.bidderName}</td>`;
+        <td><p class="text-truncate my-auto" style="max-width: 100px;">${bid.bidderName}</p></td>`;
 
         tableBids.append(bidElement);
       });
