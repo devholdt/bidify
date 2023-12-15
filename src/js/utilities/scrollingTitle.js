@@ -1,9 +1,11 @@
 export function scrollingTitle() {
   const carousel = document.getElementById("listingsCarousel");
 
-  carousel.addEventListener("slid.bs.carousel", () => {
-    addScrollingTitleClass();
-  });
+  if (carousel) {
+    carousel.addEventListener("slid.bs.carousel", () => {
+      addScrollingTitleClass();
+    });
+  }
 
   addScrollingTitleClass();
 }
@@ -20,7 +22,6 @@ function addScrollingTitleClass() {
         "--title-wrapper-width",
         `${titleWrapper.clientWidth}px`
       );
-
       if (titleElement.scrollWidth > titleWrapper.clientWidth) {
         titleElement.classList.add("scrolling-title");
       } else {
