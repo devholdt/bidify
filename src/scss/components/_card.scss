@@ -1,0 +1,147 @@
+.card {
+    width: 100%;
+    max-height: 550px;
+    height: 100%;
+    margin: auto;
+    background-color: white;
+
+    &-top {
+        position: relative;
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+        height: 300px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s;
+            object-fit: cover;
+            object-position: 50% 50%;
+        }
+
+        .no-media-found {
+            object-fit: contain;
+            padding: 0 20px 40px 20px;
+        }
+
+        .countdown {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            width: 100%;
+
+            .countdown-part {
+                backdrop-filter: blur(2px);
+                background-color: rgba(0, 0, 0, 0.33);
+                color: white;
+                padding: 4px 8px;
+                border-radius: 5px;
+                font-size: 1.2em;
+
+                span {
+                    font-size: .8em;
+                }
+            }
+        }
+    }
+
+    &-body {
+        text-align: left;
+        margin: 0 20px;
+        border-top: 1px solid $light;
+
+        .title-wrapper {
+            overflow-x: hidden;
+            width: 100%;
+
+            /* Hide scrollbar for IE, Edge and Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .card-title {
+                text-align: center;
+                white-space: nowrap;
+                display: inline-flex;
+            }
+
+            .scrolling-title {
+                animation: backAndForth 12s linear infinite;
+            }
+
+            @keyframes backAndForth {
+                0% { transform: translateX(0); }
+                10% { transform: translateX(0); }
+                45% { transform: translateX(calc(-100% + var(--title-wrapper-width) )); }
+                55% { transform: translateX(calc(-100% + var(--title-wrapper-width) )); }
+                90% { transform: translateX(0); }
+                100% { transform: translateX(0); }
+            }
+        }
+    }
+
+    &-buttons {
+        margin: 0 20px 20px 20px;
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: none;
+
+            p {
+                margin: auto;
+                padding: auto;
+            }
+        }
+
+        .btn-gavel {
+            width: 50px;
+            height: 50px;
+            background-color: $yellow;
+        }
+    }
+}
+
+.listing-card {
+    &:hover img {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+}
+
+.listing-card-small {
+    .card-media {
+        height: 220px;
+        width: 135px;
+
+        img {
+            height: 100%;
+            max-width: 100px;
+            object-fit: cover;
+            position: absolute;
+            z-index: 1;
+            transition: 0.4s;
+
+            &:hover {
+                max-width: 100%;
+            }
+        }
+    }
+
+    .w-auto {
+        padding: 4px 8px;
+        border-radius: 5px;
+    }
+}

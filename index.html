@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bidify | Home</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Roboto+Slab:wght@300;400;600&family=Roboto:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./dist/css/styles.css">
+</head>
+
+<body>
+    <header>
+
+        <nav class="navbar navbar-top navbar-expand-lg px-1 py-0">
+
+            <div class="container-fluid">
+
+                <a class="navbar-brand p-3" href="index.html">
+                    <img src="./src/images/bidify_logo.png" class="logo" alt="Bidify logo">
+                </a>
+
+                <button class="navbar-toggler border-primary shadow-none m-3" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <ul class="navbar-nav p-3 gap-2">
+
+                        <li class="user-info-collapse text-nowrap mt-2 mb-3 py-0"></li>
+
+                        <li class="nav-links-collapse d-flex flex-column fw-normal gap-2 mb-1"></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="user-info-header text-nowrap"></div>
+
+            </div>
+
+        </nav>
+
+        <nav class="navbar navbar-bottom bg-primary shadow py-0">
+
+            <div class="container-fluid">
+
+                <ul class="nav container">
+
+                    <li class="nav-item nav-listing me-4">
+                        <button class="nav-link bg-white text-dark w-100 d-flex gap-2" aria-current="page">
+                            <span class="nav-listing_span">
+                                <span class="material-icons">storefront</span>
+                                <span>Listings</span>
+                            </span>
+                        </button>
+                    </li>
+
+                    <li class="nav-links d-flex"></li>
+
+                    <li class="nav-buttons d-flex"></li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+        <div class="modal fade shadow form-modal" id="registerModal" tabindex="-1" data-bs-backdrop="static"
+            data-bs-keyboard="false" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header d-flex flex-column">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <img src="./src/images/bidify_logo_dark.png" alt="Bidify logo" width="230" class="my-3">
+                        <p class="modal-title fs-4 text-center w-100 fw-semibold text-heading" id="registerModalLabel">
+                            User Registration
+                        </p>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registerForm" class="d-flex flex-column justify-content-center mx-auto mt-3">
+                            <div class="mb-3">
+                                <label for="registerUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="registerUsername" name="name"
+                                    placeholder="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="registerEmail" name="email"
+                                    placeholder="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="registerPassword" name="password"
+                                    placeholder="password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerAvatar" class="form-label">Avatar URL (Optional)</label>
+                                <input type="text" class="form-control" id="registerAvatar" name="avatar"
+                                    placeholder="avatar URL">
+                            </div>
+
+                            <div class="d-flex mt-3 gap-3 modal-buttons">
+                                <button type="button" class="btn btn-dark cancel-button"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit"
+                                    class="btn btn-primary text-uppercase submit-button">Register</button>
+                            </div>
+
+                            <div class="alert-register alert-wrapper mt-2"></div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-center w-100">Already have an account? Click <button
+                                class="border-0 bg-light text-primary fw-semibold p-0 text-decoration-underline"
+                                data-bs-target="#loginModal" data-bs-toggle="modal">here</button> to log in.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade shadow form-modal" id="loginModal" tabindex="-1" data-bs-backdrop="static"
+            data-bs-keyboard="false" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header d-flex flex-column">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <img src="./src/images/bidify_logo_dark.png" alt="Bidify logo" width="230" class="my-3">
+                        <p class="modal-title fs-4 text-center w-100 fw-semibold text-heading" id="loginModalLabel">
+                            Login</p>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginForm" class="d-flex flex-column justify-content-center mx-auto mt-3">
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="loginEmail" name="email"
+                                    placeholder="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" id="loginPassword"
+                                    placeholder="password">
+                            </div>
+
+                            <div class="d-flex mt-3 gap-3 modal-buttons">
+                                <button type="button" class="btn btn-dark cancel-button"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit"
+                                    class="btn btn-primary text-uppercase submit-button">Login</button>
+                            </div>
+
+                            <div class="alert-login alert-wrapper mt-2"></div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-center w-100">Don't have an account? Click <button
+                                class="border-0 bg-light text-primary fw-semibold p-0 text-decoration-underline"
+                                data-bs-target="#registerModal" data-bs-toggle="modal">here</button> to register.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade shadow" id="logoutModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title fs-4 fw-semibold text-heading" id="loginModalLabel">Logout</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"
+                            aria-label="Cancel">Cancel</button>
+                        <button type="button" class="btn btn-dark w-25" id="logoutButton">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal modal-xl fade shadow" id="listingModal" tabindex="-1" aria-labelledby="listingModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-0">
+                    <button type="button" class="btn-close position-absolute end-0 p-3 shadow-none"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <div class="row p-2">
+                        <div id="listingModalMedia" class="col-12 col-lg-6 d-flex listing-media">
+                        </div>
+
+                        <div class="col-12 col-lg-6 pt-2 d-flex flex-column listing-detail">
+
+                            <div class="modal-header flex-column align-items-start ps-0 py-0 border-0">
+                                <p id="listingModalTitle"
+                                    class="d-flex justify-content-between w-100 align-items-end fs-6 border-bottom px-2 pt-4 mb-0">
+                                </p>
+                            </div>
+
+                            <div id="listingModalDescription"
+                                class="modal-body d-flex flex-column justify-content-between pb-3 flex-1">
+                            </div>
+
+                            <div class="modal-footer justify-content-start m-auto border-0 w-100 mb-0 pb-0">
+
+                                <p class="badge bg-dark rounded-0 d-flex w-100 fw-normal fs-6 text-heading">
+                                    Details
+                                </p>
+
+                                <ul id="listingModalDetails" class="list-group list-group-flush w-100">
+                                </ul>
+
+                                <div id="listingModalFooterDynamic" class="w-100"></div>
+
+                                <div class="alert-preview alert-wrapper mt-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasBidHistory"
+            aria-labelledby="offcanvasBidHistoryLabel">
+            <div class="offcanvas-header ps-3 pb-0">
+                <p class="fs-5 fw-semibold my-auto text-heading">Bid History</p>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body px-2">
+                <table class="table-bids"></table>
+            </div>
+            <button type="button" class="btn btn-outline-dark m-3 d-flex ms-auto"
+                data-bs-dismiss="offcanvas">Close</button>
+        </div>
+
+        <div class="modal modal-lg fade shadow" id="editListingModal" tabindex="-1" data-bs-backdrop="static"
+            data-bs-keyboard="false" aria-labelledby="editListingModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <p class="modal-title fs-4 text-center w-100 fw-semibold text-heading"
+                            id="editListingModalLabel">Edit Listing</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <form id="editListingForm" class="d-flex justify-content-center mx-auto mt-3 row w-100">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="editListingTitle" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="editListingTitle" name="title"
+                                        placeholder="title">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="editListingDescription" class="form-label">Description</label>
+                                    <textarea class="form-control" name="description" id="editListingDescription"
+                                        placeholder="description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div>
+                                    <div class="d-flex justify-content-between pb-0">
+                                        <label for="editListingMedia" class="form-label">Media URL</label>
+                                        <span id="editMediaInputCount" class="text-danger fw-normal">max.
+                                            4</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div id="editMediaInputsContainer" class="w-100 me-1">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control mb-0" name="media"
+                                                    id="editListingMedia" placeholder="media URL">
+                                                <button type="button"
+                                                    class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">clear</button>
+                                                <button type="button" id="addEditMediaButton"
+                                                    class="btn border-0 input-group-text text-primary">
+                                                    <span class="material-icons">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between pb-0">
+                                        <label for="editListingTags" class="form-label mb-0">Tags</label>
+                                        <span class="text-danger fw-normal">max. 6</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div id="editTagInputsContainer" class="w-100 me-1">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="editListingTag"
+                                                    name="editTags" placeholder="tag">
+                                                <button type="button" id="addEditTagButton"
+                                                    class="btn border-0 input-group-text text-primary">
+                                                    <span class="material-icons">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex mt-3 gap-3 modal-buttons">
+                                <button type="button" class="btn btn-dark cancel-button"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary text-uppercase submit-button">Edit</button>
+                            </div>
+
+                            <div class="alert-editlisting alert-wrapper mt-2"></div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main class="d-flex flex-column">
+
+        <div id="buttonScrollUp" class="position-fixed z-3 d-flex justify-content-end bottom-0 end-0 mx-3 my-4 d-none">
+            <button type="button" class="btn btn-secondary d-flex p-2 rounded-5 align-items-center">
+                <span class="material-icons fs-2">arrow_upward</span>
+            </button>
+        </div>
+
+        </div>
+
+        <div
+            class="container-fluid banner bg-dark py-5 align-items-center shadow-lg text-white d-flex flex-column text-center gap-5 justify-content-center">
+            <h1 class="fw-light">Start bidding, start winning <br> - only at <span
+                    class="text-secondary fw-normal">bidify.</span>
+            </h1>
+            <p class="fs-5 welcome-text">
+                Welcome to Bidify, your premier online auction destination. Join us today and start
+                bidding your way to incredible savings!
+            </p>
+            <div class="d-flex justify-content-center gap-4 banner-buttons"></div>
+        </div>
+
+        <div id="listingsCarousel" class="carousel slide carousel-dark d-none d-md-block py-5" data-bs-touch="false"
+            data-bs-ride="carousel">
+
+            <div class="carousel-indicators gap-2">
+                <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Popular today"></button>
+                <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="1"
+                    aria-label="Latest listings"></button>
+                <button type="button" data-bs-target="#listingsCarousel" data-bs-slide-to="2"
+                    aria-label="Last chance"></button>
+            </div>
+
+            <div class="container carousel-inner">
+
+                <div class="carousel-item active text-center" data-bs-interval="5000">
+
+                    <div class="d-block w-100">
+
+                        <h2>Popular listings</h2>
+                        <p>Our most popular listings. Join the bidding!</p>
+                        <div class="row row-cols-3 popular-listings"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="carousel-item text-center" data-bs-interval="5000">
+
+                    <div class="d-block w-100">
+
+                        <h2>Latest listings</h2>
+                        <p>Brand new listings. Be the first to place a bid!</p>
+                        <div class="row row-cols-3 latest-listings"></div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="carousel-item text-center" data-bs-interval="5000">
+
+                    <div class="d-block w-100">
+
+                        <h2>Last chance</h2>
+                        <p>Last chance to bid on these listings. Don't miss out!</p>
+                        <div class="row row-cols-3 last-chance"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr class="green-border mt-0 border-primary">
+
+        <div class="container-sm mb-5 create-listing">
+            <div class="accordion" id="createListingAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header fs-2">
+                        <button class="accordion-button shadow-none" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Create listing
+                        </button>
+                    </h3>
+                    <div id="collapseOne" class="accordion-collapse collapse show"
+                        data-bs-parent="#createListingAccordion">
+                        <div class="accordion-body row row-md-auto">
+
+                            <form class="row col-md-6 pb-4" id="createListingForm">
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="createListingTitle" class="form-label">Title</label>
+                                    <input type="text" class="form-control shadow-none" id="createListingTitle"
+                                        name="title" placeholder="title">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="createListingDate" class="form-label">End date</label>
+                                    <input type="date" class="form-control shadow-none" id="createListingDate"
+                                        name="endsAt">
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label for="createListingDescription" class="form-label">Description</label>
+                                    <textarea class="form-control shadow-none" name="description"
+                                        id="createListingDescription" placeholder="description"
+                                        maxlength="280"></textarea>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <label for="createListingMedia" class="form-label">Media URL</label>
+                                        <span id="mediaInputCount" class="text-danger fw-normal shadow-none">max.
+                                            4</span>
+                                    </div>
+                                    <div class="d-flex">
+
+                                        <div id="createMediaInputsContainer"
+                                            class="w-100 me-1 d-flex flex-column gap-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control shadow-none" name="media"
+                                                    id="createListingMedia" placeholder="media URL">
+                                                <button type="button"
+                                                    class="btn btn-outline-dark px-1 btn-sm input-group-text clear-button">clear</button>
+                                                <button type="button" id="addCreateMediaButton"
+                                                    class="btn ps-1 pe-0 border-0 input-group-text text-primary add-media-button">
+                                                    <span class="material-icons">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <label for="createListingTags" class="form-label">Tags</label>
+                                        <span id="tagInputCount" class="text-danger fw-normal shadow-none">max. 6</span>
+                                    </div>
+                                    <div class="d-flex">
+
+                                        <div id="createTagInputsContainer" class="w-100 me-1 d-flex flex-column gap-2">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control shadow-none"
+                                                    id="createListingTag" name="tags" placeholder="tag">
+                                                <button type="button" id="addCreateTagButton"
+                                                    class="btn ps-1 pe-0 border-0 input-group-text text-primary add-tag-button">
+                                                    <span class="material-icons">add</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary text-uppercase">Create</button>
+                                </div>
+
+                            </form>
+
+                            <div class="col-md-6">
+                                <p class="ms-3 mb-0 fw-normal">Requirements:</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Title and end date are required.</li>
+                                    <li class="list-group-item">Description, media and tags are optional.</li>
+                                    <li class="list-group-item">Media must be a valid image URL.</li>
+                                    <li class="list-group-item">Max. 280 characters in description.</li>
+                                </ul>
+
+                                <div class="alert-create-listing alert-wrapper mt-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div
+                class="d-flex flex-column flex-sm-row py-3 mb-3 border-bottom border-primary justify-content-between row-gap-3 listing-sorting">
+
+                <div class="d-flex col-12 col-sm-8 col-md-9">
+
+                    <div class="input-group">
+                        <span
+                            class="input-group-text bg-primary text-light border-primary rounded-0 px-2 d-flex align-items-center">
+                            <span class="material-icons">search</span>
+                        </span>
+                        <input id="searchListings" type="search" class="form-control rounded-0 border-primary ps-3"
+                            placeholder="Search listings..." aria-label="Search listings">
+                    </div>
+
+                </div>
+
+                <div class="d-flex col-12 col-sm-4 col-md-3">
+                    <select id="sortListings" class="form-select rounded-0 border-primary ms-auto"
+                        aria-label="Sort listings">
+                        <option class="sort-latest" value="Latest" selected>Latest</option>
+                        <option class="sort-popular" value="Popular">Popular</option>
+                        <option class="sort-az" value="Title A-Z">Title A-Z</option>
+                        <option class="sort-za" value="Title Z-A">Title Z-A</option>
+                        <option class="sort-high-low" value="Bid high-low">Bid high-low</option>
+                        <option class="sort-low-high" value="Bid low-high">Bid low-high</option>
+                        <option class="sort-ends-soon" value="Ends soon">Ends soon</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="d-flex align-items-center justify-content-end mb-3">
+                <span class="fst-italic">Showing <span class="span-results"></span> result(s)</span>
+            </div>
+
+            <div class="listings row"></div>
+            <div class="search-results row"></div>
+
+            <div class="d-flex justify-content-center">
+                <button type="button" id="buttonMoreResults"
+                    class="btn btn-outline-primary px-5 text-lowercase rounded-0 shadow-sm">More
+                    results</button>
+            </div>
+
+            <div class="alert-listings alert-wrapper"></div>
+
+        </div>
+
+        <div class="alert-absolute alert-wrapper position-fixed bottom-0 start-0 translate-start m-4"></div>
+
+    </main>
+
+    <footer class="align-items-center">
+        <div class="container text-center">
+            <img src="./src/images/bidify_logoimage_yellow.png" alt="Bidify logo" width="200">
+        </div>
+    </footer>
+
+    <script src="./src/js/index.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

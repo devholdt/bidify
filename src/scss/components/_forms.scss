@@ -1,0 +1,101 @@
+input, textarea {
+    &::placeholder {
+        font-weight: 300;
+    }
+}
+
+.navbar {
+    form {
+        max-width: 672px;
+        min-width: 240px;
+    }
+
+    input {
+        height: 45px;
+        border-radius: 25px;
+    }
+}
+
+#createListingAccordion form, #editListingModal form {
+    label {
+        margin-bottom: 0;
+    }
+
+    textarea {
+        resize: none;
+        height: 250px;
+    }
+
+    input, textarea {
+        border: 1px solid $gray-dark;
+        border-radius: 0;
+    }
+
+    button[type="submit"] {
+        width: 110px;
+    }
+
+    #editListingTitle {
+        height: 43px;
+    }
+
+    #editListingDescription {
+        height: 435px;
+        margin-bottom: 1.1em;
+    }
+}
+
+#registerModal form, #loginModal form, #editProfileModal form, #editListingModal form {
+    width: 300px;
+
+    div {
+        padding-bottom: 6px;
+    }
+
+    input {
+        border: 1px solid $gray-dark;
+        border-radius: 0;
+    }
+
+    label {
+        margin-bottom: 2px;
+    }
+
+    .modal-buttons {
+        .cancel-button {
+            width: 33%;
+        }
+
+        .submit-button {
+            width: 66%;
+        }
+    }
+}
+
+.listing-sorting {
+    .btn-group button {
+        width: 50px;
+        height: 100%;
+        margin: auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .listing-sorting {
+        .span-results {
+            margin: auto;
+        }
+    }
+}
+
+@media (min-width: 576px) {
+    .listing-sorting {
+        .input-group {
+            margin-right: 1rem;
+        }
+
+        .span-results {
+            margin-left: 1rem;
+        }
+    }
+}

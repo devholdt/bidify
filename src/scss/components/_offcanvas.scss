@@ -1,0 +1,26 @@
+.offcanvas {
+    z-index: 1056;
+
+    &-backdrop {
+        z-index: 1055;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid $gray-light;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: $gray-light;
+    }
+
+    tr:first-of-type {
+        background-color: $secondary-transparent;
+    }
+}

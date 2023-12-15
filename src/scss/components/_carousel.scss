@@ -1,0 +1,14 @@
+#listingsCarousel {
+    background: url("../../../src/images/bidify_texture.png");
+    background-size: 40%;
+
+    .carousel-indicators button {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+    }
+
+    h2 {
+        font-family: "Roboto Slab", serif;
+    }
+}
