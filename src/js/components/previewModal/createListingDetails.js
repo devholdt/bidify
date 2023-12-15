@@ -34,28 +34,25 @@ export function createListingDetails(listing) {
   }
 
   const listingForm = `
-      <div class="bg-light border rounded-2 shadow-sm p-3">
-        <div class="d-flex justify-content-between mb-0">
-          <p>Current bid: <span class="text-primary fw-medium">$${bidAmount}</span></p>
-          <button type="button" class="btn btn-outline-dark d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBidHistory" aria-controls="offcanvasBidHistory">
-            <span class="material-icons me-1">history</span>bid history
+    <div class="d-flex bg-light border rounded-2 shadow-sm p-2">
+      <form id="listingModalForm"
+        class="d-flex align-items-end justify-content-between align-items-center me-1 w-100">
+        <div class="input-group d-flex align-items-center w-100">
+          <span class="input-group-text text-primary bg-white px-2">$</span>
+          <input type="number" class="form-control bg-white" name="amount" id="amount" placeholder="amount" min="${
+            bidAmount + 1
+          }" aria-label="Bid amount">
+          <button type="submit" id="placeBidButton" class="btn btn-primary text-uppercase btn-sm py-2 px-1" data-id="${
+            listing.id
+          }">
+            Place bid
           </button>
         </div>
-        <form id="listingModalForm"
-          class="d-flex align-items-end justify-content-between align-items-center mt-2">
-          <div class="input-group d-flex align-items-center">
-            <span class="input-group-text text-primary bg-white">$</span>
-            <input type="number" class="form-control bg-white" name="amount" id="amount" placeholder="amount" min="${
-              bidAmount + 1
-            }" aria-label="Bid amount">
-            <button type="submit" id="placeBidButton" class="btn btn-primary text-uppercase" data-id="${
-              listing.id
-            }">
-              Place bid
-            </button>
-          </div>
-        </form>
-      </div>`;
+      </form>
+      <button type="button" class="btn btn-outline-dark d-flex align-items-center btn-sm ms-auto text-nowrap" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBidHistory" aria-controls="offcanvasBidHistory" aria-label="Bid history">
+        <span class="material-icons me-1 fs-5">history</span><span class="d-none d-sm-block">bid history</span>
+      </button>
+    </div>`;
 
   sellerName = listing.seller.name;
 
@@ -83,10 +80,10 @@ export function createListingDetails(listing) {
   details.innerHTML += detailsListItem("Ends at", endsAtDate);
 
   title.innerHTML = `
-  <p class="fw-bold fs-4 text-heading mb-0">${listing.title}</p>
-  <span class="fw-light d-flex align-items-center pe-2 me-4">id: ${listing.id.slice(
+  <p class="fw-bold fs-4 text-heading mb-0 text-truncate">${listing.title}</p>
+  <span class="fw-light d-flex align-items-center mx-2 text-nowrap d-none d-md-block">id: ${listing.id.slice(
     0,
-    8
+    5
   )}</span>`;
 
   if (!listing.description) {

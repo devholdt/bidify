@@ -9,7 +9,7 @@
         .carousel {
             width: 100%;
 
-            .carousel-indicators {
+            &-indicators {
                 position: relative;
                 margin: 9px 0 0;
             }
@@ -22,17 +22,6 @@
                 height: 40px;
                 width: 78px;
             }
-        }
-    }
-}
-
-#editListingModal {
-    .back-button {
-        color: $gray-dark;
-        transition: 0s;
-
-        &:hover {
-            color: $dark;
         }
     }
 }
