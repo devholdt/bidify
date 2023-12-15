@@ -1,6 +1,9 @@
 import { createCard } from "../../components/index.js";
 import { cachedFetch, API_URLS } from "../index.js";
 
+/**
+ * Fetches and displays the top 3 most popular listings.
+ */
 export async function popularListings() {
   const container = document.querySelector(".popular-listings");
 

@@ -1,3 +1,11 @@
+/**
+ * Creates and attaches a countdown timer to a card element.
+ *
+ * @param {HTMLElement} card - The card element to which the countdown timer will be attached.
+ * @param {string} target - The CSS selector within the card where the countdown will be placed.
+ * @param {Date} listingEndsAt - The end date and time for the countdown.
+ * @param {HTMLElement} container - The container element where the card will be appended.
+ */
 export function countdownCard(card, target, listingEndsAt, container) {
   const countdownContainer = document.createElement("div");
   countdownContainer.classList.add("countdown");

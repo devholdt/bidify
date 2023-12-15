@@ -1,3 +1,12 @@
+/**
+ * Displays an alert message of a specified type in a target element.
+ *
+ * @param {string} type - The type of alert (e.g., 'success', 'danger').
+ * @param {string} content - The HTML content to display in the alert.
+ * @param {string} target - The CSS selector of the target element where the alert will be displayed.
+ * @param {number|null} [duration=2000] - The duration in milliseconds before the alert disappears. If null, the alert remains visible.
+ * @param {boolean} [dismissible=true] - Whether the alert should have a dismiss button.
+ */
 export function alert(
   type,
   content,

@@ -4,6 +4,12 @@ import { alert } from "./index.js";
 
 document.addEventListener("reload", removeQueryString("id"));
 
+/**
+ * Fetches and populates the values of a listing into an edit form.
+ *
+ * @param {Event} event - The event object associated with the edit action.
+ * @throws {Error} Throws an error if fetching the listing details fails.
+ */
 export async function getListingValues(event) {
   let targetElement = event.target;
 

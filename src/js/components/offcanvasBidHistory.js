@@ -1,5 +1,11 @@
 import { formatDate, alert } from "../utilities/index.js";
 
+/**
+ * Fetches and displays the bid history for a listing.
+ *
+ * @param {object} listing - The listing object whose bid history is to be fetched.
+ * @throws {Error} Throws an error if fetching the bid history fails.
+ */
 export async function fetchBidHistory(listing) {
   const tableBids = document.querySelector(".table-bids");
   tableBids.innerHTML = `

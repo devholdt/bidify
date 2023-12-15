@@ -1,5 +1,12 @@
 import { DEFAULT_URLS } from "./index.js";
 
+/**
+ * Appends the first media image to a listing card.
+ *
+ * @param {object} listing - The listing object containing media information.
+ * @param {HTMLElement} card - The card element to which the media image will be appended.
+ * @param {string} target - The CSS selector within the card where the image will be placed.
+ */
 export function listingMedia(listing, card, target) {
   const img = new Image();
   if (listing.media.length === 0) {

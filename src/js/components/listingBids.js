@@ -1,3 +1,9 @@
+/**
+ * Displays the current bid information on a listing card.
+ *
+ * @param {object} listing - The listing object containing bid information.
+ * @param {HTMLElement} card - The card element where bid information will be displayed.
+ */
 export function listingBids(listing, card) {
   if (listing.bids && listing.bids.length > 0) {
     let bidsArray = [...listing.bids];

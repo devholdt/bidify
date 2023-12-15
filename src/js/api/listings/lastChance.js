@@ -1,6 +1,9 @@
 import { createCard } from "../../components/index.js";
 import { cachedFetch, API_URLS } from "../index.js";
 
+/**
+ * Fetches and displays the top 3 listings that are closest to ending.
+ */
 export async function lastChance() {
   const allListings = await cachedFetch(
     `${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true`

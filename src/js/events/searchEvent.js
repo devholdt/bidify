@@ -1,6 +1,9 @@
 import { handleSearch } from "../utilities/index.js";
 import { placeholderCard } from "../components/index.js";
 
+/**
+ * Handles the search input event for listings.
+ */
 export function searchEvent() {
   const searchInput = document.querySelector("#searchListings");
   const searchResults = document.querySelector(".search-results");

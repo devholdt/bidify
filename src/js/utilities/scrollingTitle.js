@@ -1,3 +1,6 @@
+/**
+ * Initializes the functionality for scrolling titles in card elements.
+ */
 export function scrollingTitle() {
   const carousel = document.getElementById("listingsCarousel");
 
@@ -10,6 +13,9 @@ export function scrollingTitle() {
   addScrollingTitleClass();
 }
 
+/**
+ * Applies a scrolling effect to titles in card elements if they overflow their container.
+ */
 function addScrollingTitleClass() {
   const cards = document.querySelectorAll(".card");
 

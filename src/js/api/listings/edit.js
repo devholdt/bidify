@@ -1,6 +1,17 @@
 import { API_URLS, headers } from "../index.js";
 import { alert } from "../../utilities/index.js";
 
+/**
+ * Edits an existing listing with new details.
+ *
+ * @param {string} id - The unique ID of the listing to be edited.
+ * @param {string} title - The new title of the listing.
+ * @param {string} description - The new description of the listing.
+ * @param {string[]} media - An array of new media URLs for the listing.
+ * @param {string[]} tags - An array of new tags relevant to the listing.
+ * @returns {Promise<object>} - A promise that resolves to the response of the edit listing request.
+ * @throws {Error} - Throws an error if the listing edit fails.
+ */
 export async function editListing(id, title, description, media, tags) {
   const editedListing = {
     title: title,

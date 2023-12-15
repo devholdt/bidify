@@ -1,6 +1,12 @@
 import { bidListing } from "../api/index.js";
 import { alert } from "../utilities/index.js";
 
+/**
+ * Handles the event for placing a bid on a listing.
+ *
+ * @param {Event} event - The event object associated with the bid action.
+ * @throws {Error} Throws an error if the bid submission fails.
+ */
 export async function bidEvent(event) {
   event.preventDefault();
 

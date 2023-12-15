@@ -7,6 +7,10 @@ import { setupNav, alert } from "../../utilities/index.js";
 import { getItem } from "../../storage/index.js";
 import { URLS } from "../index.js";
 
+/**
+ * Renders the navigation menu, configuring elements based on the user's login status.
+ * @throws {Error} Throws an error if there's an issue in rendering the navigation menu.
+ */
 export async function renderNav() {
   const elements = {
     userInfoHeader: document.querySelector(".user-info-header"),

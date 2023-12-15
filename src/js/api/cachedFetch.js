@@ -9,26 +9,26 @@ const listingsCache = {
 };
 
 /**
- * Performs a fetch request with caching capability.
- *  It can use a general cache or a specific listings
- *  cache based on the provided parameters.
+ * Performs a fetch request with caching capability. It can use either a general cache
+ * or a specialized listings cache based on the provided parameters. The function retrieves
+ * data from the cache if available and not expired. Otherwise, it performs a fetch request.
  *
  * @param {string} url - The URL to fetch data from.
- * @param {object} options - The options to pass to the fetch request.
- * @param {boolean} useListingsCache - Determines to use specialized listings cache or not.
+ * @param {object} options - The options to pass to the fetch request, similar to the fetch API options.
+ * @param {boolean} [useListingsCache=false] - Determines whether to use the specialized listings cache.
  * @returns {Promise<any>} - A promise that resolves with the fetched data.
- * @throws {Error} - Throws an error if the fetch request fails.
+ * @throws {Error} - Throws an error if the fetch request fails or if the response status is not successful.
  *
  * @example
  * // To fetch data with general caching:
  * cachedFetch("https://api.example.com/data", { method: "GET" })
- *  .then(data => console.log(data))
- *  .catch(error => throw new Error(error));
+ *   .then(data => console.log(data))
+ *   .catch(error => throw new Error(error));
  *
  * // To fetch listings with specialized listings caching:
  * cachedFetch("https://api.example.com/listings", { method: "GET" }, true)
- *  .then(listings => console.log(listings))
- *  .catch(error => throw new Error(error));
+ *   .then(listings => console.log(listings))
+ *   .catch(error => throw new Error(error));
  */
 export async function cachedFetch(url, options, useListingsCache = false) {
   const key = JSON.stringify({ url, options });

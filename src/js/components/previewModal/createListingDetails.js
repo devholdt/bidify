@@ -6,6 +6,11 @@ import {
 } from "../../utilities/index.js";
 import { setupInteractionButtons } from "./index.js";
 
+/**
+ * Populates the listing preview modal with details from a given listing.
+ *
+ * @param {object} listing - The listing object containing details to display.
+ */
 export function createListingDetails(listing) {
   setQueryString("id", listing.id);
   const modal = document.querySelector("#listingModal");

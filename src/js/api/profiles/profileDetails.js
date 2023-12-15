@@ -2,6 +2,11 @@ import { getProfile } from "./index.js";
 import { getItem } from "../../storage/index.js";
 import { DEFAULT_URLS } from "../../components/index.js";
 
+/**
+ * Renders the profile details of the current user in the DOM.
+ *
+ * @returns {Promise<void>} A promise that resolves once the profile details are rendered.
+ */
 export async function renderProfileDetails() {
   const profileDetailsContainer = document.querySelector(".profile-details");
   const profileListingsCount = document.querySelector(

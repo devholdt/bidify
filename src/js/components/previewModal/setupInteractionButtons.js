@@ -2,6 +2,13 @@ import { deleteListingEvent, bidEvent } from "../../events/index.js";
 import { getListingValues } from "../../utilities/index.js";
 import { getItem } from "../../storage/index.js";
 
+/**
+ * Sets up interaction buttons for a listing, allowing bidding, editing, and deletion.
+ *
+ * @param {HTMLElement} footer - The modal footer element where the buttons will be placed.
+ * @param {object} listing - The listing object for which the interaction buttons are being set up.
+ * @param {string} listingForm - The HTML string for the listing form to be displayed in the modal.
+ */
 export function setupInteractionButtons(footer, listing, listingForm) {
   if (getItem("name")) {
     const modal = document.querySelector("#listingModal");

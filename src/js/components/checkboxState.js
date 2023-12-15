@@ -1,6 +1,12 @@
 import { updateVisibleCount } from "../utilities/index.js";
 import { getItem } from "../storage/index.js";
 
+/**
+ * Manages the state of a checkbox and updates the visibility of associated elements.
+ *
+ * @param {string} target - The target identifier for the checkbox and related elements.
+ * @param {HTMLElement} container - The container element whose child elements are affected by the checkbox state.
+ */
 export function checkboxState(target, container) {
   const checkbox = document.querySelector(`#toggleActive${target}`);
 

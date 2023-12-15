@@ -1,9 +1,16 @@
 import { API_URLS } from "../api/index.js";
-import { URLS } from "../components/index.js";
 import { headers } from "../api/index.js";
 import { setItem } from "../storage/index.js";
 import { alert } from "../utilities/index.js";
 
+/**
+ * Attempts to log in a user with the provided email and password.
+ *
+ * @param {string} email - The email of the user trying to log in.
+ * @param {string} password - The password of the user trying to log in.
+ * @returns {Promise<object>} A promise that resolves to the user's data if login is successful.
+ * @throws {Error} Throws an error if the login process fails.
+ */
 export async function loginUser(email, password) {
   try {
     const response = await fetch(API_URLS.LOGIN, {
@@ -31,35 +38,5 @@ export async function loginUser(email, password) {
   } catch (error) {
     alert("danger", "Login unsuccsessful", ".alert-login", null);
     throw new Error(`Login unsuccessful: ${error}`);
-  }
-}
-
-export async function loginEvent(event) {
-  event.preventDefault();
-
-  const form = event.target;
-  const data = new FormData(form);
-  const email = data.get("email");
-  const password = data.get("password");
-
-  if (email.length < 1 || password.length < 1) {
-    alert(
-      "danger",
-      "Both email and password are required.",
-      ".alert-login",
-      null
-    );
-
-    return;
-  }
-
-  try {
-    const { name } = await loginUser(email, password);
-    setTimeout(() => {
-      location.href = `${URLS.PROFILE}?name=${name}`;
-    }, 2000);
-  } catch (error) {
-    alert("danger", "Invalid login credentials", ".alert-login", null);
-    throw new Error(`Invalid login credentials: ${error}`);
   }
 }

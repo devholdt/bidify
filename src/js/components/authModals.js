@@ -1,4 +1,3 @@
-import * as auth from "../auth/index.js";
 import * as events from "../events/index.js";
 
 export const authModals = () => {
@@ -10,11 +9,11 @@ export const authModals = () => {
     const editProfileForm = modal.querySelector("#editProfileForm");
 
     if (registerForm) {
-      registerForm.addEventListener("submit", auth.registerEvent);
+      registerForm.addEventListener("submit", events.registerEvent);
     }
 
     if (loginForm) {
-      loginForm.addEventListener("submit", auth.loginEvent);
+      loginForm.addEventListener("submit", events.loginEvent);
     }
 
     if (editProfileForm) {

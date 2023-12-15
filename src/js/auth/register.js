@@ -3,6 +3,16 @@ import { URLS } from "../components/index.js";
 import { alert } from "../utilities/index.js";
 import { setItem } from "../storage/index.js";
 
+/**
+ * Registers a new user with the provided details and attempts to log them in.
+ *
+ * @param {string} name - The name of the user.
+ * @param {string} email - The email of the user.
+ * @param {string} password - The password for the user's account.
+ * @param {string} avatar - The avatar URL for the user.
+ * @returns {Promise<object>} A promise that resolves to the registered user's data.
+ * @throws {Error} Throws an error if registration or automatic login fails.
+ */
 export async function registerUser(name, email, password, avatar) {
   try {
     const response = await fetch(API_URLS.REGISTER, {
@@ -62,39 +72,5 @@ export async function registerUser(name, email, password, avatar) {
     throw new Error(
       `An error occured when attempting user registration: ${error}`
     );
-  }
-}
-
-export async function registerEvent(event) {
-  event.preventDefault();
-
-  const form = event.target;
-  const data = new FormData(form);
-  const name = data.get("name");
-  const email = data.get("email");
-  const password = data.get("password");
-  const avatar = data.get("avatar");
-
-  if (name.length < 1 || email.length < 1 || password.length < 1) {
-    alert(
-      "danger",
-      "Please fill out all required fields.",
-      ".alert-register",
-      null
-    );
-
-    return;
-  }
-
-  try {
-    await registerUser(name, email, password, avatar);
-  } catch (error) {
-    alert(
-      "danger",
-      "Invalid user registration credentials",
-      ".alert-register",
-      null
-    );
-    throw new Error(`Invalid user registration credentials: ${error}`);
   }
 }

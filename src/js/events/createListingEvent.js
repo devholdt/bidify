@@ -1,6 +1,12 @@
 import { createListing } from "../api/index.js";
 import { alert } from "../utilities/index.js";
 
+/**
+ * Handles the event for creating a new listing.
+ *
+ * @param {Event} event - The event object associated with the listing creation.
+ * @throws {Error} Throws an error if the listing creation fails.
+ */
 export async function createListingEvent(event) {
   event.preventDefault();
 

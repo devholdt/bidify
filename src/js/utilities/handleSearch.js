@@ -6,6 +6,12 @@ const searchInput = document.querySelector("#searchListings");
 const searchResults = document.querySelector(".search-results");
 const spanResults = document.querySelector(".span-results");
 
+/**
+ * Handles the search functionality for listings based on a given input value.
+ *
+ * @param {string} value - The search term used to filter listings.
+ * @throws {Error} Throws an error if the search operation encounters an issue.
+ */
 export async function handleSearch(value) {
   value = searchInput.value.trim();
 

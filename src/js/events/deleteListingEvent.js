@@ -1,5 +1,11 @@
 import { API_URLS, headers } from "../api/index.js";
 
+/**
+ * Handles the event for deleting a listing.
+ *
+ * @param {Event} event - The event object associated with the delete action.
+ * @throws {Error} Throws an error if the deletion fails.
+ */
 export async function deleteListingEvent(event) {
   let targetElement = event.target;
 

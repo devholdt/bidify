@@ -10,6 +10,13 @@ import {
 import { handleWindowResize } from "./index.js";
 import { logoutUser } from "../../auth/index.js";
 
+/**
+ * Performs actions based on the logged-in user's information and updates the UI accordingly.
+ *
+ * @param {HTMLElement[]} elements - A collection of elements to be updated with user information.
+ * @param {object[]} links - A collection of navigation links to be updated based on user status.
+ * @throws {Error} Throws an error if fetching user information fails.
+ */
 export async function handleLoggedInUser(elements, links) {
   const userUrl = `${API_URLS.PROFILES}/${getItem("name")}?_listings=true`;
 

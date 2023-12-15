@@ -15,6 +15,12 @@ import {
 import { getItem } from "../storage/index.js";
 import { deleteListingEvent, editListingEvent } from "../events/index.js";
 
+/**
+ * Creates a card element for a listing and appends it to a specified container.
+ *
+ * @param {object} listing - The listing object containing data for the card.
+ * @param {string} containerSelector - The CSS selector of the container where the card will be appended.
+ */
 export function createCard(listing, containerSelector) {
   const listingsContainer = document.querySelector(containerSelector);
   const listingEndsAt = new Date(listing.endsAt);
@@ -74,6 +80,12 @@ export function createCard(listing, containerSelector) {
   }
 }
 
+/**
+ * Creates a card element for a bid and appends it to a specified container.
+ *
+ * @param {object} bid - The bid object containing data for the card.
+ * @param {string} containerSelector - The CSS selector of the container where the bid card will be appended.
+ */
 export function createBidCard(bid, containerSelector) {
   const bidsContainer = document.querySelector(containerSelector);
   const endsAtDate = new Date(bid.listing.endsAt);
@@ -112,6 +124,12 @@ export function createBidCard(bid, containerSelector) {
   countdownCard(card, ".countdown-small", endsAtDate, bidsContainer);
 }
 
+/**
+ * Creates a card element for a won listing and appends it to a specified container.
+ *
+ * @param {object} win - The won listing object containing data for the card.
+ * @param {string} containerSelector - The CSS selector of the container where the win card will be appended.
+ */
 export async function createWinCard(win, containerSelector) {
   const winsContainer = document.querySelector(containerSelector);
   const card = document.createElement("div");

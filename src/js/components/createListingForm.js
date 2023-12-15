@@ -1,6 +1,9 @@
 import { createListingEvent } from "../events/index.js";
 import { handleInputs } from "../utilities/index.js";
 
+/**
+ * Initializes and configures the form for creating a new listing.
+ */
 export const createListingForm = () => {
   const form = document.querySelector("form#createListingForm");
   const mediaInputsContainer = document.getElementById(

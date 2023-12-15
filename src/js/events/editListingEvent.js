@@ -1,6 +1,12 @@
 import { editListing } from "../api/index.js";
 import { alert, collectInputValues } from "../utilities/index.js";
 
+/**
+ * Handles the event for editing a listing.
+ *
+ * @param {Event} event - The event object associated with the listing edit action.
+ * @throws {Error} Throws an error if the listing edit fails.
+ */
 export async function editListingEvent(event) {
   event.preventDefault();
 

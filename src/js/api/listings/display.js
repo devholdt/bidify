@@ -2,6 +2,11 @@ import { getListings } from "./fetch.js";
 import { createCard, placeholderCard } from "../../components/index.js";
 import { alert } from "../../utilities/index.js";
 
+/**
+ * Displays a list of listings in the DOM.
+ *
+ * @param {Array} listings - An array of listing objects to be displayed.
+ */
 function display(listings) {
   const listingsContainer = document.querySelector(".listings");
   const button = document.querySelector("#buttonMoreResults");
@@ -22,6 +27,12 @@ function display(listings) {
     .forEach((listing) => createCard(listing, ".listings"));
 }
 
+/**
+ * Fetches, sorts, and displays listings based on user interactions.
+ *
+ * @returns {Promise<void>} - A promise that resolves once listings are fetched and displayed.
+ * @throws {Error} - Throws and error if fetching listings fails.
+ */
 export async function displayListings() {
   const sortListingsContainer = document.querySelector("#sortListings");
   const listingsContainer = document.querySelector(".listings");

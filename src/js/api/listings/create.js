@@ -8,6 +8,17 @@ if (!name) {
   document.querySelector(".create-listing").style.display = "none";
 }
 
+/**
+ * Creates a new listing with the provided details.
+ *
+ * @param {string} title - The title of the listing.
+ * @param {Date} endsAt - The end date of the listing.
+ * @param {string} description - The description of the listing.
+ * @param {string[]} media - An array of media URLs of the listing.
+ * @param {string[]} tags - An array of tags relevant to the listing.
+ * @returns {Promise<object>} - A promise that resolves to the response of the create listing request.
+ * @throws {Errror} - Throws an error if the listing creation fails.
+ */
 export async function createListing(title, endsAt, description, media, tags) {
   const listing = {
     title: title,

@@ -6,3 +6,5 @@ export * from "./deleteListingEvent.js";
 export * from "./scrollEvents.js";
 export * from "./clickEvents.js";
 export * from "./searchEvent.js";
+export * from "./loginEvent.js";
+export * from "./registerEvent.js";

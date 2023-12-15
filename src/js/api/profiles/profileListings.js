@@ -8,6 +8,11 @@ import {
 import { alert } from "../../utilities/index.js";
 import { getSingleListing } from "../listings/index.js";
 
+/**
+ * Fetches and displays the listings associated with the current user's profile.
+ *
+ * @throws {Error} Throws an error if fetching profile listings fails.
+ */
 export async function profileListings() {
   try {
     if (getItem("name")) {
@@ -38,6 +43,11 @@ export async function profileListings() {
   }
 }
 
+/**
+ * Fetches and displays the bids made by the current user.
+ *
+ * @throws {Error} Throws an error if fetching profile bids fails.
+ */
 export async function profileBids() {
   try {
     if (getItem("name")) {
@@ -67,6 +77,11 @@ export async function profileBids() {
   }
 }
 
+/**
+ * Fetches and displays the listings won by the current user.
+ *
+ * @throws {Error} Throws an error if fetching or displaying won listings fails.
+ */
 export async function profileWins() {
   try {
     if (getItem("name")) {

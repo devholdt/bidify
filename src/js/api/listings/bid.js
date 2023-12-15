@@ -1,6 +1,14 @@
 import { API_URLS, headers, getSingleListing } from "../index.js";
 import { alert } from "../../utilities/index.js";
 
+/**
+ * Submits a bid for a specific listing.
+ *
+ * @param {string} id - The unique ID for the listing.
+ * @param {number} amount - The bid amount to be submitted.
+ * @returns {Promise<object>} - A promise that resolves to the response of the bid request.
+ * @throws {error} - Throws an error if the bid submission fails.
+ */
 export async function bidListing(id, amount) {
   let currentBid = 0;
 

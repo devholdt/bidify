@@ -5,6 +5,13 @@ import { alert } from "./index.js";
 
 let cachedUserData = null;
 
+/**
+ * Sets up the navigation menu and user information based on the user's login status and viewport size.
+ *
+ * @param {object} elements - An object containing elements to be updated in the navigation.
+ * @param {object[]} links - An array of objects representing navigation links.
+ * @throws {Error} Throws an error if updating user information encounters an issue.
+ */
 export async function setupNav(elements, links) {
   const isMobileView = window.innerWidth < WIDTH.MEDIUM;
   const isLoggedIn = getItem("name");
@@ -63,6 +70,14 @@ export function updateNavLinks(container, links) {
     .join("");
 }
 
+/**
+ * Updates the user info display in the navigation for mobile or desktop views.
+ *
+ * @param {string} userName - The name of the logged-in user.
+ * @param {object} elements - An object containing elements where user info is displayed.
+ * @param {object} userData - Data object containing user information.
+ * @param {boolean} isMobileView - Indicates if the current view is mobile.
+ */
 export function updateUserInfo(userName, elements, userData, isMobileView) {
   if (userName) {
     if (isMobileView) {
@@ -95,6 +110,13 @@ function userInfo(container, userData) {
       </div>`;
 }
 
+/**
+ * Updates the navigation buttons based on the user's login status.
+ *
+ * @param {boolean} isLoggedIn - Indicates whether the user is logged in.
+ * @param {HTMLElement} navButton - The element where navigation buttons are displayed.
+ * @param {HTMLElement} bannerButton - The element where banner buttons are displayed.
+ */
 function updateNavButtons(isLoggedIn, navButton, bannerButton) {
   if (isLoggedIn) {
     navButton.innerHTML = `

@@ -1,3 +1,14 @@
+/**
+ * Dynamically creates and manages input fields within a specified container.
+ *
+ * @param {string} containerElement - The ID of the container element where input fields are managed.
+ * @param {string} request - The request type for identifying the add button (e.g., 'Create', 'Edit').
+ * @param {string} type - The type of input (e.g., 'Media', 'Tag').
+ * @param {string} placeholder - Placeholder text for the input fields.
+ * @param {boolean} includeButton - Whether to include a clear button for each input field.
+ * @param {number} maxCount - The maximum number of input fields allowed.
+ * @param {string[]} [initialValues=[]] - Initial values to populate the input fields.
+ */
 export function handleInputs(
   containerElement,
   request,
@@ -57,6 +68,12 @@ export function handleInputs(
   }
 }
 
+/**
+ * Collects and returns the values from input fields within a specified container.
+ *
+ * @param {string} containerId - The ID of the container element containing the input fields.
+ * @returns {string[]} An array of trimmed input values.
+ */
 export function collectInputValues(containerId) {
   const values = [];
 

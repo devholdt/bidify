@@ -2,6 +2,12 @@ import { API_URLS, headers } from "../api/index.js";
 import { getItem } from "../storage/index.js";
 import { alert } from "../utilities/index.js";
 
+/**
+ * Handles the event for editing a user's profile, specifically updating the avatar.
+ *
+ * @param {Event} event - The event object associated with the profile edit action.
+ * @throws {Error} Throws an error if the profile edit fails.
+ */
 export async function editProfileEvent(event) {
   event.preventDefault();
 

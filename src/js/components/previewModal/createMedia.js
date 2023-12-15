@@ -1,5 +1,10 @@
 import { DEFAULT_URLS } from "../index.js";
 
+/**
+ * Populates the listing media section with images or a carousel, based on the listing's media.
+ *
+ * @param {object} listing - The listing object containing media information.
+ */
 export function createMedia(listing) {
   const media = document.querySelector("#listingModalMedia");
 
