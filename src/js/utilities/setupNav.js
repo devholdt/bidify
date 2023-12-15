@@ -16,12 +16,16 @@ export async function setupNav(elements, links) {
   if (isLoggedIn && !cachedUserData) {
     try {
       cachedUserData = await getProfile(getItem("name"));
-    } catch {
+    } catch (error) {
       alert(
         "danger",
         "An error occurred when attempting to update user info",
         ".alert-absolute",
         null
+      );
+      console.error(
+        "An error occured when attempting to update user info: ",
+        error
       );
     }
   }

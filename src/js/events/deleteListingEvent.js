@@ -22,12 +22,16 @@ export async function deleteListingEvent(event) {
       if (response.ok) {
         location.reload();
       }
-    } catch {
+    } catch (error) {
       alert(
         "danger",
         "An error occured when attempting to delete listing",
         ".alert-absolute",
         4000
+      );
+      console.error(
+        "An error occured when attempting to delete listing: ",
+        error
       );
     }
   }

@@ -34,5 +34,9 @@ export async function fetchBidHistory(listing) {
       ".alert-absolute",
       null
     );
+    console.error(
+      "An error occured when attempting to get bid history: ",
+      error
+    );
   }
 }

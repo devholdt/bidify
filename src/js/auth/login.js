@@ -59,5 +59,6 @@ export async function loginEvent(event) {
     }, 2000);
   } catch (error) {
     alert("danger", "Invalid login credentials.", ".alert-login", null);
+    console.error("Invalid login credentials: ", error);
   }
 }

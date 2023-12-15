@@ -84,12 +84,16 @@ export async function getListingValues(event) {
         6,
         listing.tags
       );
-    } catch {
+    } catch (error) {
       alert(
         "danger",
         "An error occured when attempting to get listing values",
         ".alert-editlisting",
         null
+      );
+      console.error(
+        "An error occured when attempting to get listing values: ",
+        error
       );
     }
   }

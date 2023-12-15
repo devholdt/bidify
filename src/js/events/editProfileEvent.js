@@ -44,5 +44,6 @@ export async function editProfileEvent(event) {
       "An error occured when attempting to edit profile",
       ".alert-editprofile"
     );
+    console.error("An error occured when attempting to edit profile: ", error);
   }
 }

@@ -45,12 +45,16 @@ export async function bidListing(id, amount) {
 
       return await response.json();
     }
-  } catch {
+  } catch (error) {
     alert(
       "danger",
       `An error occured when attempting to place a bid on listing ${listing.id}`,
       ".alert-preview",
       null
+    );
+    console.error(
+      "An error occured when attempting to place a bid on listing: ",
+      error
     );
   }
 }

@@ -21,12 +21,13 @@ export async function editListingEvent(event) {
       mediaValues,
       tagValues
     );
-  } catch {
+  } catch (error) {
     alert(
       "danger",
       "An error occured when attempting to edit listing",
       ".alert-absolute",
       null
     );
+    console.error("An error occured when attempting to edit listing: ", error);
   }
 }

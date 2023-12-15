@@ -42,12 +42,16 @@ export async function displayListings() {
   async function fetchAllListings() {
     try {
       allListings = await getListings({ sort: "&sort=created" });
-    } catch {
+    } catch (error) {
       alert(
         "danger",
         "An error occured when attempting to fetch all listings",
         ".alert-absolute",
         null
+      );
+      console.error(
+        "An error occured when attempting to fetch all listings: ",
+        error
       );
     }
   }

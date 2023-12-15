@@ -31,7 +31,13 @@ export async function editListing(id, title, description, media, tags) {
 
       return await response.json();
     }
-  } catch {
-    throw new Error(response.statusText);
+  } catch (error) {
+    alert(
+      "danger",
+      "An error occured when attempting to edit listing",
+      ".alert-absolute",
+      null
+    );
+    console.error("An error occured when attempting to edit listing: ", error);
   }
 }

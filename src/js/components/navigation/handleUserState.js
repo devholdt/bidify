@@ -38,13 +38,14 @@ export async function handleLoggedInUser(elements, links) {
 
       setupNav(elements, links);
     }
-  } catch {
+  } catch (error) {
     alert(
       "danger",
       "An error occured when checking login state",
       ".alert-absolute",
       null
     );
+    console.error("An error occured when checking login state: ", error);
   }
 }
 

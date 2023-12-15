@@ -24,13 +24,17 @@ export async function profileListings() {
           "none";
       }
     }
-  } catch {
+  } catch (error) {
     alert(
       "danger",
       "An error occured when attempting to fetch profile listings. <strong>This does not mean your listings are inactive.</strong>",
       ".profile-listings",
       null,
       false
+    );
+    console.error(
+      "An error occured when attempting to fetch profile listings: ",
+      error
     );
   }
 }
@@ -50,13 +54,17 @@ export async function profileBids() {
         document.querySelector(".toggle-active-bids").style.display = "none";
       }
     }
-  } catch {
+  } catch (error) {
     alert(
       "danger",
-      "An error occured when trying to get profile bids. <strong>This does not mean your bids are inactive.</strong>",
+      "An error occured when attempting to get profile bids. <strong>This does not mean your bids are inactive.</strong>",
       ".profile-bids",
       null,
       false
+    );
+    console.error(
+      "An error occured when attempting to get profile bids: ",
+      error
     );
   }
 }
@@ -78,13 +86,17 @@ export async function profileWins() {
         profileWinsContainer.innerHTML = `<p class="d-flex justify-content-center">You haven't won anything yet. Keep bidding!</p>`;
       }
     }
-  } catch {
+  } catch (error) {
     alert(
       "danger",
-      "An error occured when trying to get and display your wins. <strong>This does not mean your wins are gone.</strong>",
+      "An error occured when attempting to get and display won listings. <strong>This does not mean your wins are gone.</strong>",
       ".profile-wins",
       null,
       false
+    );
+    console.error(
+      "An error occured when attempting to get and display won listings: ",
+      error
     );
   }
 }

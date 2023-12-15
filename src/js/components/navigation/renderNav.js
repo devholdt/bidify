@@ -38,13 +38,17 @@ export async function renderNav() {
     }
 
     setupEventListeners(elements, links);
-  } catch {
+  } catch (error) {
     alert(
       "danger",
       "An error occurred when attempting to render navigation menu",
       ".alert-absolute",
       null,
       false
+    );
+    console.error(
+      "An error occured when attempting to render navigation menu: ",
+      error
     );
   }
 }

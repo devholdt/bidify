@@ -33,12 +33,16 @@ export async function handleSearch(value) {
 
     spanResults.innerHTML =
       value.length === 0 ? "(12)" : `(${filteredListings.length})`;
-  } catch {
+  } catch (error) {
     alert(
       "danger",
-      "An error occurred when attempting to search for listing(s).",
+      "An error occurred when attempting to search listings",
       ".listings",
       null
+    );
+    console.error(
+      "An error occured when attempting to search listings: ",
+      error
     );
   }
 }

@@ -11,12 +11,16 @@ export async function bidEvent(event) {
 
   try {
     await bidListing(id, parseInt(amountInput.value));
-  } catch {
+  } catch (error) {
     alert(
       "danger",
       "An error occured when attempting to bid on listing",
       ".alert-preview",
       null
+    );
+    console.error(
+      "An error occured when attempting to bid on listing: ",
+      error
     );
   }
 }

@@ -61,12 +61,16 @@ export async function createListingEvent(event) {
       form.reset();
       location.reload();
     }, 3000);
-  } catch {
+  } catch (error) {
     alert(
       "danger",
       "An error occured when attempting to create listing",
       ".alert-create-listing",
       null
+    );
+    console.error(
+      "An error occured when attempting to create listing: ",
+      error
     );
   }
 }

@@ -38,11 +38,15 @@ export async function registerUser(name, email, password, avatar) {
           location.href = `${URLS.PROFILE}?name=${loginUser.name}`;
         }, 2000);
       }
-    } catch {
+    } catch (error) {
       alert(
         "danger",
-        "An error occured when attempting to login - please log in manually",
+        "An error occured when attempting to automatically login - please log in manually",
         ".alert-register"
+      );
+      console.error(
+        "An error occured when attempting to automatically login: ",
+        error
       );
     }
 
@@ -82,12 +86,13 @@ export async function registerEvent(event) {
 
   try {
     await registerUser(name, email, password, avatar);
-  } catch {
+  } catch (error) {
     alert(
       "danger",
       "Invalid user registration credentials",
       ".alert-register",
       null
     );
+    console.error("Invalid user registration credentials: ", error);
   }
 }
