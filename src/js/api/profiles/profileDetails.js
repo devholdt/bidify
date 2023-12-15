@@ -39,18 +39,18 @@ export async function renderProfileDetails() {
         <button class="profile-details_avatar border-1 shadow-sm mb-3" 
           style="background: url(${avatar}); background-size: cover;"
           data-bs-toggle="modal" data-bs-target="#editProfileModal">
-            <span class="fw-bold text-light">change avatar</span>
+            <span class="fw-semibold text-light">change avatar</span>
         </button>
 
         <div>
-          <p class="fs-4 fw-medium mb-0">${user.name}</p>
+          <p class="fs-4 fw-normal mb-0">${user.name}</p>
           <p>${user.email}</p>
         </div>
       </div>
       
       <div class="profile-details_info col-6 col-lg-12">
 
-        <p class="fs-5 fw-medium pb-5">$${user.credits}</p>
+        <p class="fs-5 fw-normal text-primary pb-5">$${user.credits}</p>
         
         <div>
           <p class="mb-0">listings: ${user._count.listings}</p>

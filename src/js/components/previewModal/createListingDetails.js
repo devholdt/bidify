@@ -69,7 +69,7 @@ export function createListingDetails(listing) {
     if (bidderName.length > 10) {
       bidderName = listing.bids[0].bidderName.substring(0, 10) + "...";
     }
-    currentBidder = `<span class="text-primary fw-medium">$${listing.bids[0].amount}</span> (${bidderName})`;
+    currentBidder = `<span class="text-primary fw-normal">$${listing.bids[0].amount}</span> (${bidderName})`;
 
     details.innerHTML += detailsListItem("Current bid", currentBidder);
   } else {
@@ -80,7 +80,9 @@ export function createListingDetails(listing) {
   details.innerHTML += detailsListItem("Ends at", endsAtDate);
 
   title.innerHTML = `
-  <p class="fw-bold fs-4 text-heading mb-0 text-truncate">${listing.title}</p>
+  <p class="fw-semibold fs-4 text-heading mb-0 text-truncate">${
+    listing.title
+  }</p>
   <span class="fw-light d-flex align-items-center mx-2 text-nowrap d-none d-md-block">id: ${listing.id.slice(
     0,
     5
@@ -94,7 +96,7 @@ export function createListingDetails(listing) {
 
   let tagsHtml = listing.tags
     .map((tag) => {
-      return `<span class="fw-medium badge bg-dark listing-tag">${tag}</span>`;
+      return `<span class="fw-normal badge bg-dark listing-tag">${tag}</span>`;
     })
     .join(" ");
 
@@ -102,7 +104,7 @@ export function createListingDetails(listing) {
     listing.tags.forEach((tag) => {
       if (tag === "") {
         // Populate existing tags with no inner text
-        tagsHtml = `<span class="fw-medium badge bg-dark listing-tag">tag</span>`;
+        tagsHtml = `<span class="fw-normal badge bg-dark listing-tag">tag</span>`;
       }
     });
 

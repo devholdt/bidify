@@ -35,7 +35,7 @@ export function createCard(listing, containerSelector) {
   checkboxState("Listings", listingsContainer);
 
   const titleElement = document.createElement("h5");
-  titleElement.classList.add("card-title", "fw-bold");
+  titleElement.classList.add("card-title", "text-heading", "fw-semibold");
   titleElement.textContent = listing.title;
 
   const titleWrapper = document.createElement("div");
@@ -107,7 +107,7 @@ export function createBidCard(bid, containerSelector) {
   );
   listGroup.innerHTML += detailsListItem(
     "Your bid",
-    `<span class="fw-medium text-primary">$${bid.amount}</span>`
+    `<span class="fw-normal text-primary">$${bid.amount}</span>`
   );
   listGroup.innerHTML += detailsListItem(
     "Date",

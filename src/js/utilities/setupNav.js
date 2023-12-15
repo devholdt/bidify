@@ -100,7 +100,7 @@ function userInfo(container, userData) {
             userData.avatar || DEFAULT_URLS.AVATAR
           }" class="avatar" alt="${userData.name}'s avatar">
           <div class="d-flex flex-column">
-            <p class="mb-0 fw-light">${userData.name}</p>
+            <p class="mb-0 fw-normal">${userData.name}</p>
             <p class="text-primary fw-normal">$${userData.credits}</p>
           </div>
         </a>

@@ -11,7 +11,7 @@ export function listingBids(listing, card) {
 
     const listingBids = document.createElement("p");
     listingBids.classList.add("card-text");
-    listingBids.innerHTML = `<p class="card-text">Current bid: <span class="fw-medium text-primary">$${currentBid}</span> (${listing._count.bids})</p>`;
+    listingBids.innerHTML = `<p class="card-text">Current bid: <span class="fw-normal text-primary">$${currentBid}</span> (${listing._count.bids})</p>`;
 
     card.querySelector(".card-body").append(listingBids);
   } else {
