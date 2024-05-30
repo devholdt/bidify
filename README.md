@@ -10,6 +10,14 @@
 
 <br/>
 
+<div align="center">
+  
+  [Live site](https://bidify-auctions.netlify.app/)
+
+</div>
+
+<br/>
+
 ![bidify_frontpage](https://github.com/MHerholdt94/bidify/assets/81162745/f2d63881-2d6c-4342-b0b2-73b125da67b1)
 
 <br/>
@@ -17,9 +25,9 @@
 ## Features
 
 - **User Authentication**: Users can register, log in, and manage their profiles.
-- **Listing Management**: Users can create, edit, and delete listings.
-- **Bidding System**: Users can place bids on listings and view bid history.
-- **Responsive Design**: The website is designed to be responsive and user-friendly across various devices.
+- **Listing Management**: Users can create, edit, and delete their own listings, making it easy to manage items they wish to auction.
+- **Bidding System**: Users can place bids on active listings and view the complete bid history for transparency and engagement.
+- **Responsive Design**: The website features a responsive design, ensuring a seamless and user-friendly experience across various devices.
 
 ## Getting Started
 
