@@ -12,8 +12,6 @@
 
 ![bidify_frontpage](https://github.com/MHerholdt94/bidify/assets/81162745/f2d63881-2d6c-4342-b0b2-73b125da67b1)
 
-Link to [Trello](https://trello.com/b/10k4pkmu/semester-project-2) board
-
 <br/>
 
 ## Features
@@ -27,15 +25,15 @@ Link to [Trello](https://trello.com/b/10k4pkmu/semester-project-2) board
 
 ### Prerequisites
 
-- Node.js
-- npm (Node Package Manager)
+- [Node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
 
 ### Installation
 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/MHerholdt94/bidify.git
+   git clone https://github.com/devholdt/bidify.git
    cd bidify
 
    ```
@@ -45,19 +43,14 @@ Link to [Trello](https://trello.com/b/10k4pkmu/semester-project-2) board
    npm install
    ```
 
-### Running the project
-
-1. **Start the development server:**
+3. **Start the development server:**
 
    ```bash
    npm run dev
 
    ```
 
-2. **Build the project (optional):**
-   ```bash
-   npm run build
-   ```
+   The application should now be running on http://localhost:3000.
 
 ## License
 
