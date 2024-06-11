@@ -1,30 +1,30 @@
 {
-  "name": "bidify",
-  "version": "0.2.0",
-  "description": "An auction website where users can view, create and bid on listings using the Noroff API. Made for the Semester Project 2 course at Noroff.",
-  "type": "module",
-  "main": "src/index.js",
-  "scripts": {
-    "build": "sass src/scss:dist/css",
-    "start": "live-server",
-    "watch": "sass src/scss:dist/css --watch",
-    "dev": "npm-run-all --parallel watch start"
-  },
-  "keywords": [
-    "website",
-    "auction",
-    "bidify",
-    "noroff"
-  ],
-  "author": "MHerholdt94 <mathiasbherholdt@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "bootstrap": "^5.3.2"
-  },
-  "devDependencies": {
-    "eslint": "^8.55.0",
-    "live-server": "^1.2.2",
-    "npm-run-all": "^4.1.5",
-    "sass": "^1.69.5"
-  }
+	"name": "bidify",
+	"version": "0.2.0",
+	"description": "An auction website where users can view, create and bid on listings using the Noroff API. Made for the Semester Project 2 course at Noroff.",
+	"type": "module",
+	"main": "src/index.js",
+	"scripts": {
+		"build": "sass src/scss:dist/css",
+		"start": "live-server",
+		"watch": "sass src/scss:dist/css --watch",
+		"dev": "npm-run-all --parallel watch start"
+	},
+	"keywords": [
+		"website",
+		"auction",
+		"bidify",
+		"noroff"
+	],
+	"author": "devholdt <mathiasbherholdt@gmail.com>",
+	"license": "MIT",
+	"dependencies": {
+		"bootstrap": "^5.3.2"
+	},
+	"devDependencies": {
+		"eslint": "^8.55.0",
+		"live-server": "^1.2.2",
+		"npm-run-all": "^4.1.5",
+		"sass": "^1.69.5"
+	}
 }
