@@ -9,6 +9,7 @@ import { DEFAULT_URLS } from "./index.js";
  */
 export function listingMedia(listing, card, target) {
 	const img = new Image();
+
 	if (listing.media.length === 0) {
 		img.src = "./src/images/bidify_nomedia.svg";
 		img.alt = listing.title;

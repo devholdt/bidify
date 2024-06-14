@@ -1,6 +1,6 @@
 export function cardHtml(card, id, regular = true) {
-  if (regular) {
-    card.innerHTML = `
+	if (regular) {
+		card.innerHTML = `
     <div class="listing-card shadow border h-100" data-id="${id}">
       <div class="card">
           <div class="card-top listing-card-top" data-bs-toggle="modal" data-bs-target="#listingModal"></div>
@@ -12,14 +12,14 @@ export function cardHtml(card, id, regular = true) {
           </div>
       </div>
     </div>`;
-  } else {
-    card.innerHTML = `
-    <div class="listing-card-small shadow border" id="${id}">
-      <div class="card">
-        <div class="card-body d-flex align-items-center p-0 m-0">
-          <div class="card-media listing-card-top"></div>
-          <ul class="list-group list-group-flush w-100"></ul>
-      </div>
-    </div>`;
-  }
+	} else {
+		card.innerHTML = `
+		<div class="listing-card-small shadow border" id="${id}">
+		  <div class="card">
+		    <div class="card-body d-flex align-items-center p-0 m-0">
+		      <div class="card-media listing-card-top"></div>
+		      <ul class="list-group list-group-flush w-100"></ul>
+		  </div>
+		</div>`;
+	}
 }

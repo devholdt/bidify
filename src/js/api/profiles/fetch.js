@@ -9,9 +9,12 @@ import { API_URLS, cachedFetch, headers } from "../index.js";
  */
 export async function getProfile(name, bids = false) {
 	const endpoint = bids ? `${name}/bids` : `${name}`;
-	return await cachedFetch(`${API_URLS.PROFILES}/${endpoint}?_listings=true`, {
-		headers: headers(null, true),
-	});
+	return await cachedFetch(
+		`${API_URLS.PROFILES}/${endpoint}?_listings=true&_wins=true`,
+		{
+			headers: headers(null, true),
+		}
+	);
 }
 
 /**
