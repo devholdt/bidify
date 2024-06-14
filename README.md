@@ -10,6 +10,14 @@
 
 <br/>
 
+<div align="center">
+  
+  [Live site](https://bidify-auctions.netlify.app/)
+
+</div>
+
+<br/>
+
 ![bidify_frontpage](https://github.com/devholdt/bidify/assets/81162745/f2d63881-2d6c-4342-b0b2-73b125da67b1)
 
 Link to [Trello](https://trello.com/b/10k4pkmu/semester-project-2) board
@@ -19,16 +27,16 @@ Link to [Trello](https://trello.com/b/10k4pkmu/semester-project-2) board
 ## Features
 
 - **User Authentication**: Users can register, log in, and manage their profiles.
-- **Listing Management**: Users can create, edit, and delete listings.
-- **Bidding System**: Users can place bids on listings and view bid history.
-- **Responsive Design**: The website is designed to be responsive and user-friendly across various devices.
+- **Listing Management**: Users can create, edit, and delete their own listings, making it easy to manage items they wish to auction.
+- **Bidding System**: Users can place bids on active listings and view the complete bid history for transparency and engagement.
+- **Responsive Design**: The website features a responsive design, ensuring a seamless and user-friendly experience across various devices.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js
-- npm (Node Package Manager)
+- [Node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
 
 ### Installation
 
@@ -41,23 +49,19 @@ Link to [Trello](https://trello.com/b/10k4pkmu/semester-project-2) board
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
-### Running the project
-
-1. **Start the development server:**
+3. **Start the development server:**
 
    ```bash
    npm run dev
 
    ```
 
-2. **Build the project (optional):**
-   ```bash
-   npm run build
-   ```
+   The application should now be running on http://localhost:3000.
 
 ## License
 
