@@ -8,24 +8,24 @@ import { DEFAULT_URLS } from "../../components/index.js";
  * @returns {Promise<void>} A promise that resolves once the profile details are rendered.
  */
 export async function renderProfileDetails() {
-  const profileDetailsContainer = document.querySelector(".profile-details");
-  const profileListingsCount = document.querySelector(
-    ".profile-listings-count"
-  );
-  const profileBidsCount = document.querySelector(".profile-bids-count");
-  const name = getItem("name");
-  const user = await getProfile(name);
-  const bids = await getProfile(name, true);
+	const profileDetailsContainer = document.querySelector(".profile-details");
+	const profileListingsCount = document.querySelector(
+		".profile-listings-count"
+	);
+	const profileBidsCount = document.querySelector(".profile-bids-count");
+	const name = getItem("name");
+	const user = await getProfile(name);
+	const bids = await getProfile(name, true);
 
-  let avatar;
+	let avatar;
 
-  if (!user.avatar) {
-    avatar = DEFAULT_URLS.AVATAR;
-  } else {
-    avatar = user.avatar;
-  }
+	if (!user.avatar.url) {
+		avatar = DEFAULT_URLS.AVATAR;
+	} else {
+		avatar = user.avatar.url;
+	}
 
-  profileDetailsContainer.innerHTML = `
+	profileDetailsContainer.innerHTML = `
   <div class="profile-details_container text-center shadow">
 
     <div class="profile-details_icon text-end">
@@ -63,6 +63,6 @@ export async function renderProfileDetails() {
 
   </div>`;
 
-  profileListingsCount.innerHTML = user._count.listings;
-  profileBidsCount.innerHTML = bids.length;
+	profileListingsCount.innerHTML = user._count.listings;
+	profileBidsCount.innerHTML = bids.length;
 }

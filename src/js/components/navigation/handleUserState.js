@@ -29,7 +29,7 @@ export async function handleLoggedInUser(elements, links) {
 		const userDataApi = json.data;
 
 		if (response.ok) {
-			userDataApi.avatar = userDataApi.avatar || DEFAULT_URLS.AVATAR;
+			userDataApi.avatar.url = userDataApi.avatar.url || DEFAULT_URLS.AVATAR;
 
 			updateUserInfo(userDataApi.name, elements, userDataApi);
 

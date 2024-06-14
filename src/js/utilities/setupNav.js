@@ -13,61 +13,61 @@ let cachedUserData = null;
  * @throws {Error} Throws an error if updating user information encounters an issue.
  */
 export async function setupNav(elements, links) {
-  const isMobileView = window.innerWidth < WIDTH.MEDIUM;
-  const isLoggedIn = getItem("name");
+	const isMobileView = window.innerWidth < WIDTH.MEDIUM;
+	const isLoggedIn = getItem("name");
 
-  updateNavButtons(isLoggedIn, elements.navButtons, elements.bannerButtons);
-  updateNavLinks(elements.navLinks, links, isMobileView);
-  updateNavLinksCollapse(elements.navLinksCollapse, links, isMobileView);
+	updateNavButtons(isLoggedIn, elements.navButtons, elements.bannerButtons);
+	updateNavLinks(elements.navLinks, links, isMobileView);
+	updateNavLinksCollapse(elements.navLinksCollapse, links, isMobileView);
 
-  if (isLoggedIn && !cachedUserData) {
-    try {
-      cachedUserData = await getProfile(getItem("name"));
-    } catch (error) {
-      alert(
-        "danger",
-        "An error occurred when attempting to update user info",
-        ".alert-absolute",
-        null
-      );
-      throw new Error(
-        `An error occured when attempting to update user info: ${error}`
-      );
-    }
-  }
+	if (isLoggedIn && !cachedUserData) {
+		try {
+			cachedUserData = await getProfile(getItem("name"));
+		} catch (error) {
+			alert(
+				"danger",
+				"An error occurred when attempting to update user info",
+				".alert-absolute",
+				null
+			);
+			throw new Error(
+				`An error occured when attempting to update user info: ${error}`
+			);
+		}
+	}
 
-  if (isLoggedIn) {
-    updateUserInfo(getItem("name"), elements, cachedUserData, isMobileView);
-  } else {
-    elements.navLinksCollapse.classList.remove("border-top", "pt-3");
-  }
+	if (isLoggedIn) {
+		updateUserInfo(getItem("name"), elements, cachedUserData, isMobileView);
+	} else {
+		elements.navLinksCollapse.classList.remove("border-top", "pt-3");
+	}
 }
 
 export function updateNavLinksCollapse(navLinksCollapse, links, isMobileView) {
-  if (isMobileView) {
-    updateNavLinks(navLinksCollapse, links);
-    navLinksCollapse.classList.add("border-top", "pt-3");
-  } else {
-    navLinksCollapse.classList.remove("border-top", "pt-3");
-    navLinksCollapse.innerHTML = "";
-  }
+	if (isMobileView) {
+		updateNavLinks(navLinksCollapse, links);
+		navLinksCollapse.classList.add("border-top", "pt-3");
+	} else {
+		navLinksCollapse.classList.remove("border-top", "pt-3");
+		navLinksCollapse.innerHTML = "";
+	}
 }
 
 export function updateNavLinks(container, links) {
-  const { pathname } = document.location;
+	const { pathname } = document.location;
 
-  container.innerHTML = links
-    .map(
-      (link) => `
+	container.innerHTML = links
+		.map(
+			(link) => `
       <div class="nav-item nav-regular">
           <a href="${link.href}${link.parameter}" class="nav-link text-white ${
-        pathname === `/${link.href}` ? "active" : ""
-      }">
+				pathname === `/${link.href}` ? "active" : ""
+			}">
               <span>${link.text}</span>
           </a>
       </div>`
-    )
-    .join("");
+		)
+		.join("");
 }
 
 /**
@@ -79,26 +79,26 @@ export function updateNavLinks(container, links) {
  * @param {boolean} isMobileView - Indicates if the current view is mobile.
  */
 export function updateUserInfo(userName, elements, userData, isMobileView) {
-  if (userName) {
-    if (isMobileView) {
-      userInfo(elements.userInfoCollapse, userData);
-      elements.userInfoHeader.innerHTML = "";
-    } else {
-      userInfo(elements.userInfoHeader, userData);
-      elements.userInfoCollapse.innerHTML = "";
-    }
-  }
+	if (userName) {
+		if (isMobileView) {
+			userInfo(elements.userInfoCollapse, userData);
+			elements.userInfoHeader.innerHTML = "";
+		} else {
+			userInfo(elements.userInfoHeader, userData);
+			elements.userInfoCollapse.innerHTML = "";
+		}
+	}
 }
 
 function userInfo(container, userData) {
-  container.innerHTML = `
+	container.innerHTML = `
       <div class="d-flex">
         <a href="${URLS.PROFILE}?name=${
-    userData.name
-  }" class="d-flex gap-2 text-decoration-none text-dark pe-2">
+		userData.name
+	}" class="d-flex gap-2 text-decoration-none text-dark pe-2">
           <img src="${
-            userData.avatar || DEFAULT_URLS.AVATAR
-          }" class="avatar" alt="${userData.name}'s avatar">
+						userData.avatar.url || DEFAULT_URLS.AVATAR
+					}" class="avatar" alt="${userData.avatar.alt || userData.name}"}>
           <div class="d-flex flex-column">
             <p class="mb-0 fw-normal">${userData.name}</p>
             <p class="text-primary fw-normal">$${userData.credits}</p>
@@ -118,8 +118,8 @@ function userInfo(container, userData) {
  * @param {HTMLElement} bannerButton - The element where banner buttons are displayed.
  */
 function updateNavButtons(isLoggedIn, navButton, bannerButton) {
-  if (isLoggedIn) {
-    navButton.innerHTML = `
+	if (isLoggedIn) {
+		navButton.innerHTML = `
         <div class="nav-divider"></div>
         <div class="nav-item nav-regular">
             <button class="nav-link text-white btn-login"
@@ -128,28 +128,28 @@ function updateNavButtons(isLoggedIn, navButton, bannerButton) {
             </button>
         </div>`;
 
-    if (bannerButton) {
-      bannerButton.innerHTML = `
+		if (bannerButton) {
+			bannerButton.innerHTML = `
             <button type="button" class="btn btn-yellow btn-cta banner-listings-button">Listings</button>`;
 
-      document
-        .querySelector(".banner-listings-button")
-        .addEventListener("click", () => {
-          document.querySelector(".listing-sorting").scrollIntoView();
-        });
-    }
-  } else {
-    navButton.innerHTML = `
+			document
+				.querySelector(".banner-listings-button")
+				.addEventListener("click", () => {
+					document.querySelector(".listing-sorting").scrollIntoView();
+				});
+		}
+	} else {
+		navButton.innerHTML = `
       <div class="nav-divider"></div>
       <div class="nav-item nav-regular">
           <button class="nav-link text-white btn-login" data-bs-toggle="modal"
           data-bs-target="#loginModal"><span>Login</span></button>
       </div>`;
 
-    if (bannerButton) {
-      bannerButton.innerHTML = `
+		if (bannerButton) {
+			bannerButton.innerHTML = `
         <button type="button" class="btn btn-primary btn-cta"
         data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>`;
-    }
-  }
+		}
+	}
 }
