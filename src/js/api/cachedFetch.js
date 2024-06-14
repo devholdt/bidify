@@ -3,9 +3,9 @@ import { setCachedItem, getCachedItem } from "../storage/index.js";
 import { alert } from "../utilities/index.js";
 
 const listingsCache = {
-  data: null,
-  timeStamp: null,
-  cacheDuration: 3000,
+	data: null,
+	timeStamp: null,
+	cacheDuration: 3000,
 };
 
 /**
@@ -31,46 +31,47 @@ const listingsCache = {
  *   .catch(error => throw new Error(error));
  */
 export async function cachedFetch(url, options, useListingsCache = false) {
-  const key = JSON.stringify({ url, options });
+	const key = JSON.stringify({ url, options });
 
-  if (useListingsCache) {
-    const now = new Date().getTime();
-    if (
-      listingsCache.data &&
-      now - listingsCache.timestamp < listingsCache.cacheDuration
-    ) {
-      return listingsCache.data;
-    }
+	if (useListingsCache) {
+		const now = new Date().getTime();
+		if (
+			listingsCache.data &&
+			now - listingsCache.timestamp < listingsCache.cacheDuration
+		) {
+			return listingsCache.data;
+		}
 
-    const listings = await getListings({ sort: "&sort=created" });
-    listingsCache.data = listings;
-    listingsCache.timestamp = now;
+		const listings = await getListings({ sort: "&sort=created" });
+		listingsCache.data = listings;
+		listingsCache.timestamp = now;
 
-    return listings;
-  }
+		return listings;
+	}
 
-  const cachedData = getCachedItem(key);
-  if (cachedData) {
-    return cachedData;
-  }
+	const cachedData = getCachedItem(key);
+	if (cachedData) {
+		return cachedData;
+	}
 
-  try {
-    const response = await fetch(url, options);
-    const data = await response.json();
+	try {
+		const response = await fetch(url, options);
+		const json = await response.json();
+		const data = json.data;
 
-    if (response.ok) {
-      setCachedItem(key, data);
-      return data;
-    }
-  } catch (error) {
-    alert(
-      "danger",
-      "An error occured when attempting to make a cached fetch",
-      ".alert-absolute",
-      null
-    );
-    throw new Error(
-      `An error occured when attempting to make a cached fetch: ${error}`
-    );
-  }
+		if (response.ok) {
+			setCachedItem(key, data);
+			return data;
+		}
+	} catch (error) {
+		alert(
+			"danger",
+			"An error occured when attempting to make a cached fetch",
+			".alert-absolute",
+			null
+		);
+		throw new Error(
+			`An error occured when attempting to make a cached fetch: ${error}`
+		);
+	}
 }

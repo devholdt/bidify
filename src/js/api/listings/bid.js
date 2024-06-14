@@ -1,4 +1,4 @@
-import { API_URLS, headers, getSingleListing } from "../index.js";
+import { APIv2_URLS, headers, getSingleListing } from "../index.js";
 import { alert } from "../../utilities/index.js";
 
 /**
@@ -10,58 +10,60 @@ import { alert } from "../../utilities/index.js";
  * @throws {error} - Throws an error if the bid submission fails.
  */
 export async function bidListing(id, amount) {
-  let currentBid = 0;
+	let currentBid = 0;
 
-  const amountInputValue = parseInt(document.querySelector("#amount").value);
-  const listing = await getSingleListing(id);
+	const amountInputValue = parseInt(document.querySelector("#amount").value);
+	const listing = await getSingleListing(id);
 
-  if (listing.bids.length > 0) {
-    const highestBid = listing.bids.sort((a, b) => b.amount - a.amount)[0]
-      .amount;
-    currentBid = highestBid;
-  }
+	if (listing.bids.length > 0) {
+		const highestBid = listing.bids.sort((a, b) => b.amount - a.amount)[0]
+			.amount;
+		currentBid = highestBid;
+	}
 
-  if (amountInputValue <= currentBid) {
-    alert(
-      "warning",
-      `Your bid of <strong>$${amountInputValue}</strong> must exceed the current highest bid of <strong>${currentBid}</strong>`,
-      ".alert-preview",
-      null
-    );
+	if (amountInputValue <= currentBid) {
+		alert(
+			"warning",
+			`Your bid of <strong>$${amountInputValue}</strong> must exceed the current highest bid of <strong>${currentBid}</strong>`,
+			".alert-preview",
+			null
+		);
 
-    return;
-  }
+		return;
+	}
 
-  try {
-    const response = await fetch(`${API_URLS.LISTINGS}/${id}/bids`, {
-      method: "POST",
-      body: JSON.stringify({ amount: amount }),
-      headers: headers("application/json"),
-    });
+	try {
+		const response = await fetch(`${APIv2_URLS.LISTINGS}/${id}/bids`, {
+			method: "POST",
+			body: JSON.stringify({ amount: amount }),
+			headers: headers("application/json"),
+		});
 
-    if (response.ok) {
-      alert(
-        "success",
-        `Your bid of <strong>${amountInputValue} credit(s)</strong> on <strong>"${listing.title}"</strong> accepted! Good luck!`,
-        ".alert-preview",
-        null
-      );
+		if (response.ok) {
+			alert(
+				"success",
+				`Your bid of <strong>${amountInputValue} credit(s)</strong> on <strong>"${listing.title}"</strong> accepted! Good luck!`,
+				".alert-preview",
+				null
+			);
 
-      setTimeout(() => {
-        location.reload();
-      }, 3000);
+			setTimeout(() => {
+				location.reload();
+			}, 3000);
 
-      return await response.json();
-    }
-  } catch (error) {
-    alert(
-      "danger",
-      `An error occured when attempting to place a bid on listing ${listing.id}`,
-      ".alert-preview",
-      null
-    );
-    throw new Error(
-      `An error occured when attempting to place a bid on listing: ${error}`
-    );
-  }
+			const json = await response.json();
+
+			return json.data;
+		}
+	} catch (error) {
+		alert(
+			"danger",
+			`An error occured when attempting to place a bid on listing ${listing.id}`,
+			".alert-preview",
+			null
+		);
+		throw new Error(
+			`An error occured when attempting to place a bid on listing: ${error}`
+		);
+	}
 }

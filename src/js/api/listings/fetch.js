@@ -1,4 +1,5 @@
-import { API_URLS, headers, cachedFetch } from "../index.js";
+import { APIv2_URLS, PUBLIC_API_KEY, headers, cachedFetch } from "../index.js";
+import { getItem } from "../../storage/index.js";
 
 /**
  * Fetches listings from the API with the specified query parameters.
@@ -12,16 +13,24 @@ import { API_URLS, headers, cachedFetch } from "../index.js";
  * @returns {Promise<object>} - A promise that resolves to the fetched listings.
  */
 export async function getListings({
-  sortOrder = "desc",
-  sort = "",
-  limit = "",
-  offset = "",
-  tag = "",
+	sortOrder = "desc",
+	sort = "",
+	limit = "",
+	offset = "",
+	tag = "",
 } = {}) {
-  return await cachedFetch(
-    `${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=${sortOrder}${sort}${limit}${offset}${tag}`,
-    { headers: headers() }
-  );
+	return await cachedFetch(
+		`${APIv2_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=${sortOrder}${sort}${limit}${offset}${tag}`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${getItem("token")}`,
+				"X-Noroff-API-Key": PUBLIC_API_KEY,
+			},
+			// headers: headers()
+		}
+	);
 }
 
 /**
@@ -31,10 +40,16 @@ export async function getListings({
  * @returns {Promise<object>} - A promise that resolves to the details of the listing.
  */
 export async function getSingleListing(id) {
-  return await cachedFetch(
-    `${API_URLS.LISTINGS}/${id}?_seller=true&_bids=true`,
-    {
-      headers: headers(),
-    }
-  );
+	return await cachedFetch(
+		`${APIv2_URLS.LISTINGS}/${id}?_seller=true&_bids=true`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${getItem("token")}`,
+				"X-Noroff-API-Key": PUBLIC_API_KEY,
+			},
+			// headers: headers(),
+		}
+	);
 }
