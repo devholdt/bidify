@@ -1,5 +1,4 @@
-import { APIv2_URLS, PUBLIC_API_KEY, headers, cachedFetch } from "../index.js";
-import { getItem } from "../../storage/index.js";
+import { APIv2_URLS, headers, cachedFetch } from "../index.js";
 
 /**
  * Fetches listings from the API with the specified query parameters.

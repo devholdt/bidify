@@ -1,5 +1,5 @@
 import { getItem } from "../../storage/index.js";
-import { APIv2_URLS, PUBLIC_API_KEY, headers } from "../../api/index.js";
+import { APIv2_URLS, headers } from "../../api/index.js";
 import { DEFAULT_URLS, WIDTH } from "../index.js";
 import {
 	updateUserInfo,

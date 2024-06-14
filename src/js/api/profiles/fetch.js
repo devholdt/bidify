@@ -1,5 +1,4 @@
-import { APIv2_URLS, PUBLIC_API_KEY, cachedFetch, headers } from "../index.js";
-import { getItem } from "../../storage/index.js";
+import { APIv2_URLS, cachedFetch, headers } from "../index.js";
 
 /**
  * Fetches profile information for a specified user.
