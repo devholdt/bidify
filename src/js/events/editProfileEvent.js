@@ -1,4 +1,4 @@
-import { APIv2_URLS, headers } from "../api/index.js";
+import { API_URLS, headers } from "../api/index.js";
 import { getItem } from "../storage/index.js";
 import { alert } from "../utilities/index.js";
 
@@ -12,7 +12,7 @@ export async function editProfileEvent(event) {
 	event.preventDefault();
 
 	try {
-		const url = `${APIv2_URLS.PROFILES}/${getItem("name")}`;
+		const url = `${API_URLS.PROFILES}/${getItem("name")}`;
 		const userMedia = await fetch(`${url}`, {
 			headers: headers(null, true),
 		});

@@ -1,12 +1,12 @@
 import { createCard } from "../../components/index.js";
-import { cachedFetch, APIv2_URLS } from "../index.js";
+import { cachedFetch, API_URLS } from "../index.js";
 
 /**
  * Fetches and displays the top 3 latest listings.
  */
 export async function latestListings() {
 	const listings = await cachedFetch(
-		`${APIv2_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=desc&sort=created`
+		`${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=desc&sort=created`
 	);
 
 	listings

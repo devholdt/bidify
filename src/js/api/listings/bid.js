@@ -1,4 +1,4 @@
-import { APIv2_URLS, headers, getSingleListing } from "../index.js";
+import { API_URLS, headers, getSingleListing } from "../index.js";
 import { alert } from "../../utilities/index.js";
 
 /**
@@ -33,7 +33,7 @@ export async function bidListing(id, amount) {
 	}
 
 	try {
-		const response = await fetch(`${APIv2_URLS.LISTINGS}/${id}/bids`, {
+		const response = await fetch(`${API_URLS.LISTINGS}/${id}/bids`, {
 			method: "POST",
 			body: JSON.stringify({ amount: amount }),
 			headers: headers("application/json", true),

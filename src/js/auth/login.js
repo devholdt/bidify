@@ -1,5 +1,4 @@
-import { APIv2_URLS } from "../api/index.js";
-import { headers } from "../api/index.js";
+import { API_URLS, headers } from "../api/index.js";
 import { setItem } from "../storage/index.js";
 import { alert } from "../utilities/index.js";
 
@@ -13,7 +12,7 @@ import { alert } from "../utilities/index.js";
  */
 export async function loginUser(email, password) {
 	try {
-		const response = await fetch(APIv2_URLS.LOGIN, {
+		const response = await fetch(API_URLS.LOGIN, {
 			method: "POST",
 			body: JSON.stringify({ email, password }),
 			headers: headers("application/json"),

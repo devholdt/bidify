@@ -1,4 +1,4 @@
-import { APIv2_URLS, headers } from "../api/index.js";
+import { API_URLS, headers } from "../api/index.js";
 import { URLS } from "../components/index.js";
 import { alert } from "../utilities/index.js";
 import { setItem } from "../storage/index.js";
@@ -14,7 +14,7 @@ import { setItem } from "../storage/index.js";
  */
 export async function registerUser(name, email, password) {
 	try {
-		const response = await fetch(APIv2_URLS.REGISTER, {
+		const response = await fetch(API_URLS.REGISTER, {
 			method: "POST",
 			body: JSON.stringify({ name, email, password }),
 			headers: headers("application/json"),
@@ -35,7 +35,7 @@ export async function registerUser(name, email, password) {
 			);
 
 			try {
-				const loginResponse = await fetch(APIv2_URLS.LOGIN, {
+				const loginResponse = await fetch(API_URLS.LOGIN, {
 					method: "POST",
 					body: JSON.stringify({ email, password }),
 					headers: headers("application/json"),

@@ -1,4 +1,4 @@
-import { APIv2_URLS, headers } from "../index.js";
+import { API_URLS, headers } from "../index.js";
 import { alert } from "../../utilities/index.js";
 import { getItem } from "../../storage/index.js";
 
@@ -29,7 +29,7 @@ export async function createListing(title, endsAt, description, media, tags) {
 	};
 
 	try {
-		const response = await fetch(APIv2_URLS.LISTINGS, {
+		const response = await fetch(API_URLS.LISTINGS, {
 			method: "POST",
 			body: JSON.stringify(listing),
 			headers: headers("application/json", true),

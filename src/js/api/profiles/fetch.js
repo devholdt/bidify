@@ -1,4 +1,4 @@
-import { APIv2_URLS, cachedFetch, headers } from "../index.js";
+import { API_URLS, cachedFetch, headers } from "../index.js";
 
 /**
  * Fetches profile information for a specified user.
@@ -9,12 +9,9 @@ import { APIv2_URLS, cachedFetch, headers } from "../index.js";
  */
 export async function getProfile(name, bids = false) {
 	const endpoint = bids ? `${name}/bids` : `${name}`;
-	return await cachedFetch(
-		`${APIv2_URLS.PROFILES}/${endpoint}?_listings=true`,
-		{
-			headers: headers(null, true),
-		}
-	);
+	return await cachedFetch(`${API_URLS.PROFILES}/${endpoint}?_listings=true`, {
+		headers: headers(null, true),
+	});
 }
 
 /**
@@ -25,7 +22,7 @@ export async function getProfile(name, bids = false) {
  */
 export async function getProfileListings(name) {
 	return await cachedFetch(
-		`${APIv2_URLS.PROFILES}/${name}/listings?_bids=true&_seller=true`,
+		`${API_URLS.PROFILES}/${name}/listings?_bids=true&_seller=true`,
 		{
 			headers: headers(null, true),
 		}

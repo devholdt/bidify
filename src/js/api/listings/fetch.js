@@ -1,4 +1,4 @@
-import { APIv2_URLS, headers, cachedFetch } from "../index.js";
+import { API_URLS, headers, cachedFetch } from "../index.js";
 
 /**
  * Fetches listings from the API with the specified query parameters.
@@ -19,7 +19,7 @@ export async function getListings({
 	tag = "",
 } = {}) {
 	return await cachedFetch(
-		`${APIv2_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=${sortOrder}${sort}${limit}${offset}${tag}`,
+		`${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=${sortOrder}${sort}${limit}${offset}${tag}`,
 		{
 			headers: headers(),
 		}
@@ -34,7 +34,7 @@ export async function getListings({
  */
 export async function getSingleListing(id) {
 	return await cachedFetch(
-		`${APIv2_URLS.LISTINGS}/${id}?_seller=true&_bids=true`,
+		`${API_URLS.LISTINGS}/${id}?_seller=true&_bids=true`,
 		{
 			headers: headers(),
 		}

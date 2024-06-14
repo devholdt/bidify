@@ -1,5 +1,5 @@
 import { getItem } from "../../storage/index.js";
-import { APIv2_URLS, headers } from "../../api/index.js";
+import { API_URLS, headers } from "../../api/index.js";
 import { DEFAULT_URLS, WIDTH } from "../index.js";
 import {
 	updateUserInfo,
@@ -18,7 +18,7 @@ import { logoutUser } from "../../auth/index.js";
  * @throws {Error} Throws an error if fetching user information fails.
  */
 export async function handleLoggedInUser(elements, links) {
-	const userUrl = `${APIv2_URLS.PROFILES}/${getItem("name")}?_listings=true`;
+	const userUrl = `${API_URLS.PROFILES}/${getItem("name")}?_listings=true`;
 
 	try {
 		const response = await fetch(`${userUrl}`, {

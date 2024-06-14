@@ -1,4 +1,4 @@
-import { APIv2_URLS, headers } from "../index.js";
+import { API_URLS, headers } from "../index.js";
 import { alert } from "../../utilities/index.js";
 
 /**
@@ -21,7 +21,7 @@ export async function editListing(id, title, description, media, tags) {
 	};
 
 	try {
-		const response = await fetch(`${APIv2_URLS.LISTINGS}/${id}`, {
+		const response = await fetch(`${API_URLS.LISTINGS}/${id}`, {
 			method: "PUT",
 			body: JSON.stringify(editedListing),
 			headers: headers("application/json", true),

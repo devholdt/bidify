@@ -1,4 +1,4 @@
-import { APIv2_URLS, headers } from "../api/index.js";
+import { API_URLS, headers } from "../api/index.js";
 
 /**
  * Handles the event for deleting a listing.
@@ -20,7 +20,7 @@ export async function deleteListingEvent(event) {
 
 	if (confirm("Are you sure you want to delete this listing?") === true) {
 		try {
-			const response = await fetch(`${APIv2_URLS.LISTINGS}/${id}`, {
+			const response = await fetch(`${API_URLS.LISTINGS}/${id}`, {
 				method: "DELETE",
 				headers: headers("application/json", true),
 			});
