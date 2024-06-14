@@ -1,5 +1,5 @@
 import { getItem } from "../../storage/index.js";
-import { APIv2_URLS, headers } from "../../api/index.js";
+import { APIv2_URLS, PUBLIC_API_KEY, headers } from "../../api/index.js";
 import { DEFAULT_URLS, WIDTH } from "../index.js";
 import {
 	updateUserInfo,
@@ -21,7 +21,10 @@ export async function handleLoggedInUser(elements, links) {
 	const userUrl = `${APIv2_URLS.PROFILES}/${getItem("name")}?_listings=true`;
 
 	try {
-		const response = await fetch(`${userUrl}`, { headers: headers() });
+		const response = await fetch(`${userUrl}`, {
+			method: "GET",
+			headers: headers(null, true),
+		});
 		const json = await response.json();
 		const userDataApi = json.data;
 

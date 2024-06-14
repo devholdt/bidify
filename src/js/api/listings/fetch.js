@@ -22,13 +22,7 @@ export async function getListings({
 	return await cachedFetch(
 		`${APIv2_URLS.LISTINGS}?_seller=true&_bids=true&_active=true&sortOrder=${sortOrder}${sort}${limit}${offset}${tag}`,
 		{
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${getItem("token")}`,
-				"X-Noroff-API-Key": PUBLIC_API_KEY,
-			},
-			// headers: headers()
+			headers: headers(),
 		}
 	);
 }
@@ -43,13 +37,7 @@ export async function getSingleListing(id) {
 	return await cachedFetch(
 		`${APIv2_URLS.LISTINGS}/${id}?_seller=true&_bids=true`,
 		{
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${getItem("token")}`,
-				"X-Noroff-API-Key": PUBLIC_API_KEY,
-			},
-			// headers: headers(),
+			headers: headers(),
 		}
 	);
 }

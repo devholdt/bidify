@@ -49,9 +49,9 @@ export async function registerUser(name, email, password) {
 					setItem({ key: "user", value: loginUser });
 					setItem({ key: "name", value: loginUser.name });
 
-					// setTimeout(() => {
-					// 	location.href = `${URLS.PROFILE}?name=${loginUser.name}`;
-					// }, 2000);
+					setTimeout(() => {
+						location.href = `${URLS.PROFILE}?name=${loginUser.name}`;
+					}, 2000);
 				}
 			} catch (error) {
 				alert(

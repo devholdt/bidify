@@ -13,7 +13,9 @@ export async function editProfileEvent(event) {
 
 	try {
 		const url = `${APIv2_URLS.PROFILES}/${getItem("name")}`;
-		const userMedia = await fetch(`${url}`, { headers: headers() });
+		const userMedia = await fetch(`${url}`, {
+			headers: headers(null, true),
+		});
 		const newAvatarInput = document.querySelector("#editProfileAvatar");
 		const newAvatarValue = newAvatarInput.value;
 
@@ -26,7 +28,7 @@ export async function editProfileEvent(event) {
 		const response = await fetch(`${url}/media`, {
 			method: "PUT",
 			body: JSON.stringify(newUserMedia),
-			headers: headers("application/json"),
+			headers: headers("application/json", true),
 		});
 
 		if (response.ok) {

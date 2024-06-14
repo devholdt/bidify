@@ -24,7 +24,7 @@ export async function editListing(id, title, description, media, tags) {
 		const response = await fetch(`${APIv2_URLS.LISTINGS}/${id}`, {
 			method: "PUT",
 			body: JSON.stringify(editedListing),
-			headers: headers("application/json"),
+			headers: headers("application/json", true),
 		});
 
 		if (response.ok) {

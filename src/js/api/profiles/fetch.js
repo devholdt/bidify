@@ -1,4 +1,5 @@
-import { APIv2_URLS, headers, cachedFetch } from "../index.js";
+import { APIv2_URLS, PUBLIC_API_KEY, cachedFetch, headers } from "../index.js";
+import { getItem } from "../../storage/index.js";
 
 /**
  * Fetches profile information for a specified user.
@@ -12,7 +13,7 @@ export async function getProfile(name, bids = false) {
 	return await cachedFetch(
 		`${APIv2_URLS.PROFILES}/${endpoint}?_listings=true`,
 		{
-			headers: headers(),
+			headers: headers(null, true),
 		}
 	);
 }
@@ -26,6 +27,8 @@ export async function getProfile(name, bids = false) {
 export async function getProfileListings(name) {
 	return await cachedFetch(
 		`${APIv2_URLS.PROFILES}/${name}/listings?_bids=true&_seller=true`,
-		{ headers: headers() }
+		{
+			headers: headers(null, true),
+		}
 	);
 }

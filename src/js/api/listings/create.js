@@ -32,7 +32,7 @@ export async function createListing(title, endsAt, description, media, tags) {
 		const response = await fetch(APIv2_URLS.LISTINGS, {
 			method: "POST",
 			body: JSON.stringify(listing),
-			headers: headers("application/json"),
+			headers: headers("application/json", true),
 		});
 
 		if (response.ok) {

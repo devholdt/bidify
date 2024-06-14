@@ -22,7 +22,7 @@ export async function deleteListingEvent(event) {
 		try {
 			const response = await fetch(`${APIv2_URLS.LISTINGS}/${id}`, {
 				method: "DELETE",
-				headers: headers("application/json"),
+				headers: headers("application/json", true),
 			});
 
 			if (response.ok) {

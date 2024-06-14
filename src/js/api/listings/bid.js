@@ -36,7 +36,7 @@ export async function bidListing(id, amount) {
 		const response = await fetch(`${APIv2_URLS.LISTINGS}/${id}/bids`, {
 			method: "POST",
 			body: JSON.stringify({ amount: amount }),
-			headers: headers("application/json"),
+			headers: headers("application/json", true),
 		});
 
 		if (response.ok) {
