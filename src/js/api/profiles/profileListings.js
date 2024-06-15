@@ -63,15 +63,18 @@ export async function profileBids() {
 			const bidsTable = document.querySelector(".bids-table");
 
 			if (bids.length > 0) {
-				bids.forEach(async (bid) => {
+				const highestBidsMap = {};
+
+				for (const bid of bids) {
 					const listing = await getSingleListing(bid.listing.id);
 
 					if (bid && listing) {
-						createBidRow(bid, listing, ".profile-bids");
+						createBidRow(bid, listing, ".profile-bids", highestBidsMap);
 					} else {
 						console.error("Invalid bid or listing data:", bid);
 					}
-				});
+				}
+
 				checkboxState("Bids", profileBidsContainer);
 			} else {
 				bidsTable.innerHTML = `<p class="d-flex justify-content-center">You have no active bids</p>`;

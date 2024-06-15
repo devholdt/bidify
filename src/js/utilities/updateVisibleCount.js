@@ -1,14 +1,12 @@
-export function updateVisibleCount(activeElement, parentElement) {
-	const activeSpan = document.querySelector(activeElement);
-	const totalSpan = document.querySelector(`${parentElement}-count`);
-	const container = document.querySelector(parentElement);
+export function updateVisibleCount(activeSelector, containerSelector) {
+	const activeSpan = document.querySelector(activeSelector);
+	const totalSpan = document.querySelector(`${containerSelector}-count`);
+	const container = document.querySelector(containerSelector);
 
 	if (!container) return;
 
-	const visibleElements = container.querySelectorAll(
-		":scope > tr:not(.d-none), :scope > div:not(.d-none)"
-	);
-	const totalElements = container.querySelectorAll(":scope > tr, :scope > div");
+	const visibleElements = container.querySelectorAll(":scope > :not(.d-none)");
+	const totalElements = container.querySelectorAll(":scope > *");
 
 	activeSpan.textContent = visibleElements.length;
 	totalSpan.textContent = totalElements.length;

@@ -127,37 +127,72 @@ export function createListingRow(listing, containerSelector) {
 		.querySelector(".btn-edit")
 		.addEventListener("click", getListingValues);
 }
-
 /**
- * Creates a table row element for a bid and appends it to a specified container.
+ * Creates a row in the bids table for a given bid and listing, and appends it to a specified container.
+ * If a row for the same listing already exists, checks if the new bid is higher and updates the row accordingly.
  *
- * @param {object} bid - The bid object containing data for the table row.
- * @param {string} containerSelector - The CSS selector of the container where the table row will be appended.
+ * @param {object} bid - The bid object containing data for the row.
+ * @param {object} listing - The listing object associated with the bid.
+ * @param {string} containerSelector - The CSS selector of the container where the row will be appended.
+ * @param {Map} highestBidsMap - A map to store the highest bid for each listing.
  */
-export function createBidRow(bid, listing, containerSelector) {
+export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 	const bidsContainer = document.querySelector(containerSelector);
 	const endsAtDate = new Date(bid.listing.endsAt);
+
+	const existingRow = bidsContainer.querySelector(
+		`tr[data-listing-id="${listing.id}"]`
+	);
+	const userBid = bid.amount;
+
+	if (existingRow && userBid <= highestBidsMap[listing.id]) {
+		return;
+	}
+
 	const tableRow = document.createElement("tr");
 	tableRow.setAttribute("id", bid.id);
+	tableRow.setAttribute("data-listing-id", listing.id);
 	tableRow.setAttribute("role", "button");
 	tableRow.setAttribute("data-bs-toggle", "modal");
 	tableRow.setAttribute("data-bs-target", "#listingModal");
 
 	listingPreviewModal(listing, tableRow);
 
-	tableRow.innerHTML += `
+	const highestBid =
+		highestBidsMap[listing.id] ||
+		listing.bids.sort((a, b) => b.amount - a.amount)[0].amount;
+
+	let status;
+
+	if (bid.listing.endsAt < new Date()) {
+		status = "🔴 Closed";
+	} else if (userBid < highestBid) {
+		status = "🟠 Outbid";
+	} else {
+		status = bid.listing.endsAt < new Date() ? "🟢 Won" : "🟢 Winning";
+	}
+
+	tableRow.innerHTML = `
         <td>
             <span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
                 ${bid.listing.title}
             </span>
         </td>
-        <td>$${bid.amount}</td>
+        <td class="bid-amount">$${bid.amount}</td>
         <td>${formatDate(new Date(bid.created))}</td>
         <td class="countdown-small"></td>
+        <td>${status}</td>
     `;
 
-	bidsContainer.appendChild(tableRow);
+	if (existingRow) {
+		existingRow.replaceWith(tableRow);
+	} else {
+		bidsContainer.appendChild(tableRow);
+	}
+
 	countdownCard(tableRow, ".countdown-small", endsAtDate, bidsContainer);
+
+	highestBidsMap[listing.id] = userBid;
 }
 
 /**
