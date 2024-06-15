@@ -3,7 +3,7 @@ import { getItem } from "../../storage/index.js";
 import {
 	createListingRow,
 	createBidRow,
-	createWinCard,
+	createWinRow,
 } from "../../components/index.js";
 import { alert } from "../../utilities/index.js";
 import { getSingleListing } from "../listings/index.js";
@@ -104,17 +104,19 @@ export async function profileWins() {
 	try {
 		if (getItem("name")) {
 			const userdata = await getProfile(getItem("name"));
-			const winsId = userdata.wins;
-			const profileWinsContainer = document.querySelector(".profile-wins");
+			const wins = userdata.wins;
 
-			if (winsId.length > 0) {
+			const profileWinsContainer = document.querySelector(".profile-wins");
+			const winsTable = document.querySelector(".wins-table");
+
+			if (wins.length > 0) {
 				profileWinsContainer.classList.add("row", "row-cols-3");
-				winsId.forEach(async (id) => {
+				wins.forEach(async (id) => {
 					const win = await getSingleListing(id);
-					createWinCard(win, ".profile-wins");
+					createWinRow(win, ".profile-wins");
 				});
 			} else {
-				profileWinsContainer.innerHTML = `<p class="d-flex justify-content-center">You haven't won anything yet. Keep bidding!</p>`;
+				winsTable.innerHTML = `<p class="d-flex justify-content-center">You haven't won anything yet. Keep bidding!</p>`;
 			}
 		}
 	} catch (error) {

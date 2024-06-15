@@ -54,7 +54,7 @@ export async function renderProfileDetails() {
         
         <div>
           <p class="mb-0">listings: ${user._count.listings}</p>
-          <p class="mb-0">bids: ${bids.length}</p>
+          <p class="mb-0">total bids: ${bids.length}</p>
           <p>wins: ${user.wins.length}</p>
         </div>
       </div>

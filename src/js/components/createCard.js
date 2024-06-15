@@ -203,27 +203,25 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 }
 
 /**
- * Creates a card element for a won listing and appends it to a specified container.
+ * Creates a row element for a won listing and appends it to a specified container.
  *
- * @param {object} win - The won listing object containing data for the card.
- * @param {string} containerSelector - The CSS selector of the container where the win card will be appended.
+ * @param {object} win - The won listing object containing data for the row.
+ * @param {string} containerSelector - The CSS selector of the container where the win row will be appended.
  */
-export async function createWinCard(win, containerSelector) {
+export async function createWinRow(win, containerSelector) {
 	const winsContainer = document.querySelector(containerSelector);
-	const card = document.createElement("div");
-	card.classList.add("col-6", "mb-4", "listing-bid");
+	const tableRow = document.createElement("tr");
 
-	cardHtml(card, win.id, false);
-	listingMedia(win, card, ".card-media");
+	tableRow.setAttribute("id", win.id);
 
-	const listGroup = card.querySelector(".list-group");
+	const bidAmount = win.bids.sort((a, b) => b.amount - a.amount)[0].amount;
 
-	listGroup.innerHTML += detailsListItem("Title", win.title);
-	listGroup.innerHTML += detailsListItem(
-		"Ended",
-		formatDate(new Date(win.endsAt))
-	);
-	listGroup.innerHTML += detailsListItem("ID", win.id.slice(0, 5));
+	tableRow.innerHTML += `
+		<td>${win.title}</td>
+		<td>${bidAmount}</td>
+		<td>${formatDate(new Date(win.endsAt))}</td>
+		<td>${win.id.slice(0, 5)}</td>
+	`;
 
-	winsContainer.appendChild(card);
+	winsContainer.appendChild(tableRow);
 }
