@@ -20,8 +20,6 @@ export async function registerUser(name, email, password) {
 			headers: headers("application/json"),
 		});
 
-		console.log("RESPONSE - ", response);
-
 		if (response.ok) {
 			const json = await response.json();
 			const user = json.data;
