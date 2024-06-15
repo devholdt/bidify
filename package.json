@@ -19,7 +19,7 @@
 	"author": "devholdt <mathiasbherholdt@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
-		"bootstrap": "^5.3.2"
+		"bootstrap": "^5.3.3"
 	},
 	"devDependencies": {
 		"eslint": "^8.55.0",
