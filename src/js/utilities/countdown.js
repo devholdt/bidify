@@ -1,3 +1,12 @@
+/**
+ * Adds a countdown to a card element.
+ * @param {Element} card - The card element to add the countdown to.
+ * @param {string} target - The selector for the target element to add the countdown to.
+ * @param {Date} listingEndsAt - The date and time when the countdown should end.
+ * @param {Element} container - The container element to add the card to.
+ * @returns {Object} An object with the countdown interval and update function.
+ * @throws {Error} If any of the arguments are invalid.
+ */
 export function countdownCard(card, target, listingEndsAt, container) {
 	if (!card || !target || !listingEndsAt || !container) {
 		throw new Error("Invalid argument");
@@ -6,15 +15,13 @@ export function countdownCard(card, target, listingEndsAt, container) {
 	const countdownContainer = document.createElement("div");
 	countdownContainer.classList.add("countdown");
 
-	const daysElement = document.createElement("span");
-	const hoursElement = document.createElement("span");
-	const minsElement = document.createElement("span");
-	const secsElement = document.createElement("span");
-
-	const elements = [daysElement, hoursElement, minsElement, secsElement];
-	elements.forEach((element) => {
+	const [daysElement, hoursElement, minsElement, secsElement] = [
+		...Array(4),
+	].map(() => {
+		const element = document.createElement("span");
 		element.classList.add("countdown-part", "ms-1");
 		countdownContainer.appendChild(element);
+		return element;
 	});
 
 	const targetElement = card.querySelector(target);
@@ -23,70 +30,49 @@ export function countdownCard(card, target, listingEndsAt, container) {
 	}
 	targetElement.appendChild(countdownContainer);
 
-	updateCountdown(
-		listingEndsAt,
-		daysElement,
-		hoursElement,
-		minsElement,
-		secsElement
-	);
-	countdownContainer.countdownInterval = setInterval(() => {
-		updateCountdown(
-			listingEndsAt,
-			daysElement,
-			hoursElement,
-			minsElement,
-			secsElement
+	const countdownUpdate = (days, hours, mins, secs) => {
+		[daysElement, hoursElement, minsElement, secsElement].forEach(
+			(element, index) => {
+				element.innerHTML = `${[days, hours, mins, secs][index]}<span>${
+					["d", "h", "m", "s"][index]
+				}</span>`;
+			}
 		);
+	};
+
+	daysElement.innerHTML = "loading...";
+
+	const countdownInterval = setInterval(() => {
+		const now = new Date();
+		const distance = listingEndsAt - now;
+		if (distance < 0) {
+			clearInterval(countdownInterval);
+			[hoursElement, minsElement, secsElement].forEach(
+				(element) => (element.style.display = "none")
+			);
+			daysElement.innerHTML = "Expired";
+			daysElement.classList.add("w-auto");
+			const cardElement = daysElement.closest(".card");
+			if (cardElement) {
+				cardElement.classList.add("expired-listing");
+			}
+			return;
+		}
+
+		const [days, hours, mins, secs] = [
+			Math.floor(distance / (1000 * 60 * 60 * 24)),
+			Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+			Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+			Math.floor((distance % (1000 * 60)) / 1000),
+		];
+
+		countdownUpdate(days, hours, mins, secs);
 	}, 1000);
 
 	container.appendChild(card);
-}
 
-function updateCountdown(
-	endDate,
-	daysElement,
-	hoursElement,
-	minsElement,
-	secsElement
-) {
-	if (
-		!endDate ||
-		!daysElement ||
-		!hoursElement ||
-		!minsElement ||
-		!secsElement
-	) {
-		throw new Error("Invalid argument");
-	}
-
-	const now = new Date();
-	const distance = endDate - now;
-
-	if (distance < 0) {
-		clearInterval(daysElement.countdownInterval);
-		[hoursElement, minsElement, secsElement].forEach(
-			(element) => (element.style.display = "none")
-		);
-
-		daysElement.innerHTML = "Expired";
-		daysElement.classList.add("w-auto");
-		const cardElement = daysElement.closest(".card");
-		if (cardElement) {
-			cardElement.classList.add("expired-listing");
-		}
-		return;
-	}
-
-	const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	const hours = Math.floor(
-		(distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-	);
-	const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-	daysElement.innerHTML = `${days}<span>d</span>`;
-	hoursElement.innerHTML = `${hours}<span>h</span>`;
-	minsElement.innerHTML = `${minutes}<span>m</span>`;
-	secsElement.innerHTML = `${seconds}<span>s</span>`;
+	return {
+		countdownInterval,
+		update: countdownUpdate,
+	};
 }

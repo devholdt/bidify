@@ -78,6 +78,13 @@ export function createCard(listing, containerSelector) {
 	}
 }
 
+/**
+ * Creates a table row for a given listing and appends it to a specified container.
+ *
+ * @param {Object} listing - The listing object containing the data for the row.
+ * @param {string} containerSelector - The CSS selector of the container where the row will be appended.
+ * @return {void}
+ */
 export function createListingRow(listing, containerSelector) {
 	const listingsContainer = document.querySelector(containerSelector);
 	const endsAtDate = new Date(listing.endsAt);
