@@ -1,27 +1,38 @@
 /**
- * Updates the count of visible elements in a container, excluding those with a specific class.
+ * Updates the text content of two spans with the number of visible and total elements in a container.
  *
- * @param {string} activeElement - The selector for the element displaying the count.
- * @param {string} parentElement - The selector for the parent container of the elements to count.
+ * @param {string} activeElement - A CSS selector for the span to be updated with the number of visible elements.
+ * @param {string} parentElement - A CSS selector for the container of the elements to be counted.
+ * @return {void} This function does not return anything.
  */
 export function updateVisibleCount(activeElement, parentElement) {
-  const activeSpan = document.querySelector(activeElement);
-  const count = countElementsWithoutClass(parentElement);
-  activeSpan.textContent = `${count}`;
+	const activeSpan = document.querySelector(activeElement);
+	const totalSpan = document.querySelector(`${parentElement}-count`);
+	const container = document.querySelector(parentElement);
+
+	if (!container) return;
+
+	const visibleElements = container.querySelectorAll(
+		":scope > tr:not(.d-none)"
+	);
+	const totalElements = container.querySelectorAll(":scope > tr");
+
+	activeSpan.textContent = visibleElements.length;
+	totalSpan.textContent = totalElements.length;
 }
 
 /**
- * Counts the number of child elements within a container that do not have a specified class.
+ * Returns the number of elements in a container that do not have a specific class.
  *
- * @param {string} parentElement - The selector for the parent container.
- * @returns {number} The count of elements without the specified class.
+ * @param {string} parentElement - A CSS selector for the container of the elements to be counted.
+ * @return {number} The number of elements in the container that do not have the class 'd-none'.
  */
 function countElementsWithoutClass(parentElement) {
-  const container = document.querySelector(parentElement);
-  if (!container) return 0;
+	const container = document.querySelector(parentElement);
+	if (!container) return 0;
 
-  const elementsWithoutClass = container.querySelectorAll(
-    `:scope > :not(.d-none)`
-  );
-  return elementsWithoutClass.length;
+	const elementsWithoutClass = container.querySelectorAll(
+		":scope > :not(.d-none)"
+	);
+	return elementsWithoutClass.length;
 }

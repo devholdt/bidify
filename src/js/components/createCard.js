@@ -80,54 +80,30 @@ export function createCard(listing, containerSelector) {
 }
 
 /**
- * Creates a card element for a bid and appends it to a specified container.
+ * Creates a table row element for a bid and appends it to a specified container.
  *
- * @param {object} bid - The bid object containing data for the card.
- * @param {string} containerSelector - The CSS selector of the container where the bid card will be appended.
+ * @param {object} bid - The bid object containing data for the table row.
+ * @param {string} containerSelector - The CSS selector of the container where the table row will be appended.
  */
-export function createBidCard(bid, containerSelector) {
+export function createBidRow(bid, containerSelector) {
 	const bidsContainer = document.querySelector(containerSelector);
 	const endsAtDate = new Date(bid.listing.endsAt);
-	const card = document.createElement("tr");
-	// card.classList.add("col-12", "col-md-6", "mb-4", "listing-bid");
+	const tableRow = document.createElement("tr");
+	tableRow.setAttribute("id", bid.listing.id);
 
-	// cardHtml(card, bid.listing.id, false);
-	// listingMedia(bid.listing, card, ".card-media");
-	checkboxState("Bids", bidsContainer);
+	tableRow.innerHTML += `
+	<td>
+	<span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
+	${bid.listing.title}
+	</span>
+	</td>
+	<td>$${bid.amount}</td>
+	<td>${formatDate(new Date(bid.created))}</td>
+	<td class="countdown-small"></td>
+	`;
 
-	card.innerHTML = `
-    <td>${bid.listing.title}</td>
-    <td>${bid.amount}</td>
-    <td>${formatDate(new Date(bid.created))}</td>
-    <td class="countdown-small"></td>
-  `;
-
-	// const listGroup = card.querySelector(".list-group");
-
-	// listGroup.innerHTML += detailsListItem(
-	// 	"",
-	// 	`<span class="countdown-small"></span>`
-	// );
-	// listGroup.innerHTML += detailsListItem(
-	// 	"Title",
-	// 	`<span class="d-block text-truncate" style="max-width: 110px;">${bid.listing.title}</span>`
-	// );
-	// listGroup.innerHTML += detailsListItem(
-	// 	"Your bid",
-	// 	`<span class="fw-normal text-primary">$${bid.amount}</span>`
-	// );
-	// listGroup.innerHTML += detailsListItem(
-	// 	"Date",
-	// 	`<span>${formatDate(new Date(bid.created))}</span>`
-	// );
-	// listGroup.innerHTML += detailsListItem(
-	// 	"Bid ID",
-	// 	`<span>${bid.id.slice(0, 5)}</span>`
-	// );
-
-	bidsContainer.appendChild(card);
-
-	countdownCard(card, ".countdown-small", endsAtDate, bidsContainer);
+	bidsContainer.appendChild(tableRow);
+	countdownCard(tableRow, ".countdown-small", endsAtDate, bidsContainer);
 }
 
 /**
