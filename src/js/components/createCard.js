@@ -83,16 +83,17 @@ export function createListingRow(listing, containerSelector) {
 	const endsAtDate = new Date(listing.endsAt);
 	const tableRow = document.createElement("tr");
 	tableRow.setAttribute("id", listing.id);
+	tableRow.setAttribute("role", "button");
 
 	tableRow.innerHTML += `
-        <td>
+        <td class="clickable-cell">
             <span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
                 ${listing.title}
             </span>
         </td>
-        <td>${listing.bids.length}</td>
-        <td>${formatDate(new Date(listing.created))}</td>
-        <td class="countdown-small"></td>
+        <td class="clickable-cell">${listing.bids.length}</td>
+        <td class="clickable-cell">${formatDate(new Date(listing.created))}</td>
+        <td class="countdown-small clickable-cell"></td>
         <td class="d-flex justify-content-center p-1">
             <button class="btn btn-light border rounded-0 w-50 rounded-start btn-edit d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${
 							listing.id
@@ -106,6 +107,15 @@ export function createListingRow(listing, containerSelector) {
             </button>
         </td>
     `;
+
+	const clickableCell = tableRow.querySelectorAll(".clickable-cell");
+
+	clickableCell.forEach((cell) => {
+		cell.setAttribute("data-bs-toggle", "modal");
+		cell.setAttribute("data-bs-target", "#listingModal");
+
+		listingPreviewModal(listing, cell);
+	});
 
 	listingsContainer.appendChild(tableRow);
 	countdownCard(tableRow, ".countdown-small", endsAtDate, listingsContainer);
@@ -124,11 +134,16 @@ export function createListingRow(listing, containerSelector) {
  * @param {object} bid - The bid object containing data for the table row.
  * @param {string} containerSelector - The CSS selector of the container where the table row will be appended.
  */
-export function createBidRow(bid, containerSelector) {
+export function createBidRow(bid, listing, containerSelector) {
 	const bidsContainer = document.querySelector(containerSelector);
 	const endsAtDate = new Date(bid.listing.endsAt);
 	const tableRow = document.createElement("tr");
 	tableRow.setAttribute("id", bid.id);
+	tableRow.setAttribute("role", "button");
+	tableRow.setAttribute("data-bs-toggle", "modal");
+	tableRow.setAttribute("data-bs-target", "#listingModal");
+
+	listingPreviewModal(listing, tableRow);
 
 	tableRow.innerHTML += `
         <td>

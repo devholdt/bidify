@@ -21,6 +21,7 @@ export async function profileListings() {
 
 			const profileListingsContainer =
 				document.querySelector(".profile-listings");
+			const listingsTable = document.querySelector(".listings-table");
 
 			if (listings.length > 0) {
 				listings.forEach((listing) =>
@@ -28,7 +29,7 @@ export async function profileListings() {
 				);
 				checkboxState("Listings", profileListingsContainer);
 			} else {
-				profileListingsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active listings.</p>`;
+				listingsTable.innerHTML = `<p class="d-flex justify-content-center">You have no active listings.</p>`;
 				document.querySelector(".toggle-active-listings").style.display =
 					"none";
 			}
@@ -59,18 +60,21 @@ export async function profileBids() {
 			const bids = await getProfile(getItem("name"), true);
 
 			const profileBidsContainer = document.querySelector(".profile-bids");
+			const bidsTable = document.querySelector(".bids-table");
 
 			if (bids.length > 0) {
-				bids.forEach((bid) => {
-					if (bid && bid.listing) {
-						createBidRow(bid, ".profile-bids");
+				bids.forEach(async (bid) => {
+					const listing = await getSingleListing(bid.listing.id);
+
+					if (bid && listing) {
+						createBidRow(bid, listing, ".profile-bids");
 					} else {
 						console.error("Invalid bid or listing data:", bid);
 					}
 				});
 				checkboxState("Bids", profileBidsContainer);
 			} else {
-				profileBidsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active bids</p>`;
+				bidsTable.innerHTML = `<p class="d-flex justify-content-center">You have no active bids</p>`;
 				document.querySelector(".toggle-active-bids").style.display = "none";
 			}
 		}
