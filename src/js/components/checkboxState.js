@@ -1,12 +1,6 @@
 import { updateVisibleCount } from "../utilities/index.js";
 import { getItem } from "../storage/index.js";
 
-/**
- * Toggles the visibility of elements based on the state of a checkbox.
- *
- * @param {string} target - The target element to toggle.
- * @param {HTMLElement} container - The container element to search for target elements.
- */
 export function checkboxState(target, container) {
 	const checkbox = document.querySelector(`#toggleActive${target}`);
 
@@ -27,7 +21,7 @@ export function checkboxState(target, container) {
 
 		checkbox.addEventListener("change", (event) => {
 			Array.from(container.children).forEach((item) => {
-				if (item.classList.contains("expired-bid")) {
+				if (item.classList.contains(`expired-${target.toLowerCase()}`)) {
 					item.classList.toggle("d-none", !event.currentTarget.checked);
 				}
 			});

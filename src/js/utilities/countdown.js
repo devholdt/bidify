@@ -1,10 +1,3 @@
-/**
- * Adds a countdown to a card element.
- * @param {HTMLElement} card - The card element to add the countdown to.
- * @param {string} target - The target selector within the card to add the countdown to.
- * @param {Date} listingEndsAt - The date the listing ends at.
- * @param {HTMLElement} container - The container element to append the card to.
- */
 export function countdownCard(card, target, listingEndsAt, container) {
 	const countdownContainer = document.createElement("div");
 	countdownContainer.classList.add("countdown");
@@ -41,14 +34,6 @@ export function countdownCard(card, target, listingEndsAt, container) {
 	container.appendChild(card);
 }
 
-/**
- * Updates the countdown elements with the remaining time.
- * @param {Date} endDate - The date the countdown ends at.
- * @param {HTMLElement} daysElement - The element to display the remaining days in.
- * @param {HTMLElement} hoursElement - The element to display the remaining hours in.
- * @param {HTMLElement} minsElement - The element to display the remaining minutes in.
- * @param {HTMLElement} secsElement - The element to display the remaining seconds in.
- */
 function updateCountdown(
 	endDate,
 	daysElement,
@@ -77,6 +62,6 @@ function updateCountdown(
 
 		daysElement.innerHTML = "Expired";
 		daysElement.classList.add("w-auto");
-		daysElement.closest("tr").classList.add("expired-bid");
+		daysElement.closest(".card").classList.add("expired-listing");
 	}
 }

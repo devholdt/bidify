@@ -1,7 +1,7 @@
 import { getProfile, getProfileListings } from "./index.js";
 import { getItem } from "../../storage/index.js";
 import {
-	createCard,
+	createListingRow,
 	createBidRow,
 	createWinCard,
 } from "../../components/index.js";
@@ -23,8 +23,10 @@ export async function profileListings() {
 				document.querySelector(".profile-listings");
 
 			if (listings.length > 0) {
-				profileListingsContainer.classList.add("row");
-				listings.forEach((listing) => createCard(listing, ".profile-listings"));
+				listings.forEach((listing) =>
+					createListingRow(listing, ".profile-listings")
+				);
+				checkboxState("Listings", profileListingsContainer);
 			} else {
 				profileListingsContainer.innerHTML = `<p class="d-flex justify-content-center">You have no active listings.</p>`;
 				document.querySelector(".toggle-active-listings").style.display =
@@ -34,13 +36,13 @@ export async function profileListings() {
 	} catch (error) {
 		alert(
 			"danger",
-			"An error occured when attempting to fetch profile listings. <strong>This does not mean your listings are inactive.</strong>",
+			"An error occurred when attempting to fetch profile listings. <strong>This does not mean your listings are inactive.</strong>",
 			".profile-listings",
 			null,
 			false
 		);
 		throw new Error(
-			`An error occured when attempting to fetch profile listings: ${error}`
+			`An error occurred when attempting to fetch profile listings: ${error}`
 		);
 	}
 }

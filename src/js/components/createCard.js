@@ -57,17 +57,16 @@ export function createCard(listing, containerSelector) {
 			cardButtons.classList.remove("justify-content-between");
 			cardButtons.classList.add("justify-content-end");
 			cardButtons.innerHTML = `
-      <button class="btn btn-light rounded-0 rounded-start btn-edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
-        <span class="material-icons">edit</span>
-      </button>
-      <button class="btn btn-light rounded-0 rounded-end btn-delete" data-id="${listing.id}">
-        <span class="material-icons">delete</span>
-      </button>`;
+                <button class="btn btn-light rounded-0 rounded-start btn-edit" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${listing.id}">
+                    <span class="material-icons">edit</span>
+                </button>
+                <button class="btn btn-light rounded-0 rounded-end btn-delete" data-id="${listing.id}">
+                    <span class="material-icons">delete</span>
+                </button>`;
 
 			cardButtons
 				.querySelector(".btn-delete")
 				.addEventListener("click", deleteListingEvent);
-
 			cardButtons
 				.querySelector(".btn-edit")
 				.addEventListener("click", getListingValues);
@@ -77,6 +76,46 @@ export function createCard(listing, containerSelector) {
 				.addEventListener("submit", editListingEvent);
 		}
 	}
+}
+
+export function createListingRow(listing, containerSelector) {
+	const listingsContainer = document.querySelector(containerSelector);
+	const endsAtDate = new Date(listing.endsAt);
+	const tableRow = document.createElement("tr");
+	tableRow.setAttribute("id", listing.id);
+
+	tableRow.innerHTML += `
+        <td>
+            <span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
+                ${listing.title}
+            </span>
+        </td>
+        <td>${listing.bids.length}</td>
+        <td>${formatDate(new Date(listing.created))}</td>
+        <td class="countdown-small"></td>
+        <td class="d-flex justify-content-center p-1">
+            <button class="btn btn-light border rounded-0 w-50 rounded-start btn-edit d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${
+							listing.id
+						}">
+                <span class="material-icons fs-5">edit</span>
+            </button>
+            <button class="btn btn-light border rounded-0 w-50 rounded-end btn-delete d-flex justify-content-center align-items-center" data-id="${
+							listing.id
+						}">
+                <span class="material-icons fs-5">delete</span>
+            </button>
+        </td>
+    `;
+
+	listingsContainer.appendChild(tableRow);
+	countdownCard(tableRow, ".countdown-small", endsAtDate, listingsContainer);
+
+	tableRow
+		.querySelector(".btn-delete")
+		.addEventListener("click", deleteListingEvent);
+	tableRow
+		.querySelector(".btn-edit")
+		.addEventListener("click", getListingValues);
 }
 
 /**
@@ -89,18 +128,18 @@ export function createBidRow(bid, containerSelector) {
 	const bidsContainer = document.querySelector(containerSelector);
 	const endsAtDate = new Date(bid.listing.endsAt);
 	const tableRow = document.createElement("tr");
-	tableRow.setAttribute("id", bid.listing.id);
+	tableRow.setAttribute("id", bid.id);
 
 	tableRow.innerHTML += `
-	<td>
-	<span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
-	${bid.listing.title}
-	</span>
-	</td>
-	<td>$${bid.amount}</td>
-	<td>${formatDate(new Date(bid.created))}</td>
-	<td class="countdown-small"></td>
-	`;
+        <td>
+            <span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
+                ${bid.listing.title}
+            </span>
+        </td>
+        <td>$${bid.amount}</td>
+        <td>${formatDate(new Date(bid.created))}</td>
+        <td class="countdown-small"></td>
+    `;
 
 	bidsContainer.appendChild(tableRow);
 	countdownCard(tableRow, ".countdown-small", endsAtDate, bidsContainer);

@@ -393,28 +393,36 @@
 
                     <div class="border">
                         <h1 class="text-center bg-dark text-light fs-2 mb-3 py-1">Your listings</h1>
-
                         <div class="d-flex justify-content-between align-items-center m-3">
                             <div class="form-check form-switch toggle-active-listings">
                                 <input type="checkbox" class="form-check-input" role="switch" id="toggleActiveListings"
                                     name="toggleActiveListings">
-                                <label for="toggleActiveListings" class="form-check-label">
-                                    Show inactive listings
-                                </label>
+                                <label for="toggleActiveListings" class="form-check-label">Show inactive
+                                    listings</label>
                             </div>
-
                             <span class="fst-italic ms-auto">Showing (<span
                                     class="profile-listings-active">0</span>/<span
-                                    class="profile-listings-count">0</span>)
-                                listings</span>
+                                    class="profile-listings-count">0</span>) listings</span>
                         </div>
 
-                        <div class="profile-listings mx-1"></div>
+                        <div class="table-responsive">
+                            <table class="w-100 table table-striped-columns table-bordered mb-0">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col" class="fw-medium col-2">Title</th>
+                                        <th scope="col" class="fw-medium col-2">Bids</th>
+                                        <th scope="col" class="fw-medium col-2">Created</th>
+                                        <th scope="col" class="fw-medium col-2">Ends in</th>
+                                        <th scope="col" class="fw-medium col-2">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="profile-listings table-light align-middle"></tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="border mt-5">
                         <h2 class="text-center bg-dark text-light fs-2 mb-3 py-1">Your bids</h2>
-
                         <div class="d-flex justify-content-between align-items-center m-3">
                             <div class="form-check form-switch toggle-active-bids">
                                 <input type="checkbox" class="form-check-input" role="switch" id="toggleActiveBids"
@@ -424,19 +432,18 @@
                             <span class="fst-italic ms-auto">Showing (<span class="profile-bids-active">0</span>/<span
                                     class="profile-bids-count">0</span>) bids</span>
                         </div>
-
                         <div class="table-responsive">
                             <table class="w-100 table table-striped-columns table-bordered mb-0">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th scope="col" class="fw-medium col-2">Item</th>
-                                        <th scope="col" class="fw-medium col-1">Amount</th>
-                                        <th scope="col" class="fw-medium col-1">Created</th>
+                                        <th scope="col" class="fw-medium col-2">Title</th>
+                                        <th scope="col" class="fw-medium col-2">Amount</th>
+                                        <th scope="col" class="fw-medium col-2">Created</th>
                                         <th scope="col" class="fw-medium col-2">Ends in</th>
                                         <th scope="col" class="fw-medium col-2">Status</th>
                                     </tr>
                                 </thead>
-                                <tbody class="profile-bids table-light"></tbody>
+                                <tbody class="profile-bids table-light align-middle"></tbody>
                             </table>
                         </div>
                     </div>
