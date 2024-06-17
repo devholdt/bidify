@@ -29,7 +29,7 @@ export async function profileListings() {
 				);
 				checkboxState("Listings", profileListingsContainer);
 			} else {
-				listingsTable.innerHTML = `<p class="d-flex justify-content-center">You have no active listings.</p>`;
+				listingsTable.innerHTML = `<p class="d-flex justify-content-center">You have no active listings</p>`;
 				document.querySelector(".toggle-active-listings").style.display =
 					"none";
 			}

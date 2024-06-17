@@ -17,12 +17,15 @@ export async function renderProfileDetails() {
 	const user = await getProfile(name);
 	const bids = await getProfile(name, true);
 
-	let avatar;
+	let avatarUrl;
+	let avatarAlt;
 
-	if (!user.avatar.url) {
-		avatar = DEFAULT_URLS.AVATAR;
+	if (!user.avatar.url || user.avatar.url === "") {
+		avatarUrl = DEFAULT_URLS.AVATAR;
+		avatarAlt = "Profile avatar";
 	} else {
-		avatar = user.avatar.url;
+		avatarUrl = user.avatar.url;
+		avatarAlt = user.avatar.alt;
 	}
 
 	profileDetailsContainer.innerHTML = `
@@ -36,16 +39,16 @@ export async function renderProfileDetails() {
 
       <div class="profile-details_user mb-5 col-6 col-lg-12">
 
-        <button class="profile-details_avatar border-1 shadow-sm mb-3" 
-          style="background: url(${avatar}); background-size: cover;"
-          data-bs-toggle="modal" data-bs-target="#editProfileModal">
-            <span class="fw-semibold text-light">change avatar</span>
+        <button class="profile-details_avatar border border-light shadow-sm mb-3" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+            <img src="${avatarUrl}" alt="${avatarAlt}" class="profile-details_avatar-img avatar">
+            <span class="fw-semibold text-light overlay-text">change avatar</span>
         </button>
 
         <div>
           <p class="fs-4 fw-normal mb-0">${user.name}</p>
           <p>${user.email}</p>
         </div>
+
       </div>
       
       <div class="profile-details_info col-6 col-lg-12">
@@ -57,6 +60,7 @@ export async function renderProfileDetails() {
           <p class="mb-0">total bids: ${bids.length}</p>
           <p>wins: ${user.wins.length}</p>
         </div>
+        
       </div>
 
     </div>

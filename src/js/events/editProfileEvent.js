@@ -13,46 +13,73 @@ export async function editProfileEvent(event) {
 
 	try {
 		const url = `${API_URLS.PROFILES}/${getItem("name")}`;
-		const userMedia = await fetch(`${url}`, {
+
+		const userResponse = await fetch(`${url}`, {
 			headers: headers(null, true),
 		});
-		const newAvatarInput = document.querySelector("#editProfileAvatar");
-		const newAvatarValue = newAvatarInput.value;
 
-		let newUserMedia = { avatar: userMedia.avatar };
+		const userJson = await userResponse.json();
+		const user = userJson.data;
 
-		if (newAvatarValue.trim() !== "") {
-			newUserMedia.avatar = newAvatarValue;
+		const avatarUrlInput = document.querySelector("#editAvatarUrl");
+		const avatarAltInput = document.querySelector("#editAvatarAlt");
+		const avatarUrl = avatarUrlInput.value;
+		const avatarAlt = avatarAltInput.value;
+
+		let newUser = {
+			avatar: {
+				url: user.avatar.url,
+				alt: user.avatar.alt,
+			},
+		};
+
+		if (avatarUrl.trim() !== "" || avatarAlt.trim() !== "") {
+			newUser = {
+				avatar: {
+					url: avatarUrl,
+					alt: avatarAlt,
+				},
+			};
 		}
 
-		const response = await fetch(`${url}/media`, {
+		const response = await fetch(url, {
 			method: "PUT",
-			body: JSON.stringify(newUserMedia),
+			body: JSON.stringify(newUser),
 			headers: headers("application/json", true),
 		});
+
+		const json = await response.json();
 
 		if (response.ok) {
 			alert("success", "Avatar updated", ".alert-editprofile");
 
+			user.avatar.url = newUser.avatar.url;
+			user.avatar.alt = newUser.avatar.alt;
+
+			const avatars = document.querySelectorAll(".avatar");
+
+			avatars.forEach((avatar) => {
+				avatar.src = newUser.avatar.url;
+				avatar.alt = newUser.avatar.alt;
+			});
+
+			const editProfileModal = bootstrap.Modal.getInstance(
+				document.getElementById("editProfileModal")
+			);
 			setTimeout(() => {
-				userMedia.avatar = newUserMedia.avatar;
-
-				const avatars = document.querySelectorAll(".avatar");
-
-				avatars.forEach((avatar) => {
-					avatar.src = newUserMedia.avatar;
-				});
-
-				location.reload();
+				editProfileModal.hide();
 			}, 2000);
+		} else {
+			alert(
+				"danger",
+				`An error with status "${json.errors.statusCode} ${json.errors.status}" occurred: ${json.errors.message}`
+			);
+
+			throw new Error(
+				`An error with status "${json.errors.statusCode} ${json.errors.status}" occurred: ${json.errors.message}`
+			);
 		}
 	} catch (error) {
-		alert(
-			"danger",
-			"An error occured when attempting to edit profile",
-			".alert-editprofile",
-			null
-		);
 		throw new Error(
 			`An error occured when attempting to edit profile: ${error}`
 		);
