@@ -60,9 +60,6 @@ export async function editProfileEvent(event) {
 			const newAvatarUrl = newUser.avatar.url;
 			const newAvatarAlt = newUser.avatar.alt;
 
-			console.log("New avatar URL: ", newAvatarUrl);
-			console.log("New avatar alt: ", newAvatarAlt);
-
 			user.avatar.url = newAvatarUrl;
 			user.avatar.alt = newAvatarAlt;
 

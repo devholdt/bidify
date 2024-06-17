@@ -15,5 +15,3 @@ components.createListingForm();
 events.elementVisibility("#buttonScrollUp", "d-flex", 600);
 events.scrollToTop();
 events.searchEvent();
-
-localStorage.clear();

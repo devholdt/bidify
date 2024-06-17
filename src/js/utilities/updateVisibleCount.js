@@ -1,20 +1,27 @@
 /**
- * Updates the visible count and total count of elements within a container.
+ * Updates the count of visible elements in a container, excluding those with a specific class.
  *
- * @param {string} activeSelector - The CSS selector for the active span element.
- * @param {string} containerSelector - The CSS selector for the container element.
- * @return {void} This function does not return anything.
+ * @param {string} activeElement - The selector for the element displaying the count.
+ * @param {string} parentElement - The selector for the parent container of the elements to count.
  */
-export function updateVisibleCount(activeSelector, containerSelector) {
-	const activeSpan = document.querySelector(activeSelector);
-	const totalSpan = document.querySelector(`${containerSelector}-count`);
-	const container = document.querySelector(containerSelector);
+export function updateVisibleCount(activeElement, parentElement) {
+	const activeSpan = document.querySelector(activeElement);
+	const count = countElementsWithoutClass(parentElement);
+	activeSpan.textContent = `${count}`;
+}
 
-	if (!container) return;
+/**
+ * Counts the number of child elements within a container that do not have a specified class.
+ *
+ * @param {string} parentElement - The selector for the parent container.
+ * @returns {number} The count of elements without the specified class.
+ */
+function countElementsWithoutClass(parentElement) {
+	const container = document.querySelector(parentElement);
+	if (!container) return 0;
 
-	const visibleElements = container.querySelectorAll(":scope > :not(.d-none)");
-	const totalElements = container.querySelectorAll(":scope > *");
-
-	activeSpan.textContent = visibleElements.length;
-	totalSpan.textContent = totalElements.length;
+	const elementsWithoutClass = container.querySelectorAll(
+		`:scope > :not(.d-none)`
+	);
+	return elementsWithoutClass.length;
 }

@@ -68,11 +68,7 @@ export async function profileBids() {
 				for (const bid of bids) {
 					const listing = await getSingleListing(bid.listing.id);
 
-					if (bid && listing) {
-						createBidRow(bid, listing, ".profile-bids", highestBidsMap);
-					} else {
-						console.error("Invalid bid or listing data:", bid);
-					}
+					createBidRow(bid, listing, ".profile-bids", highestBidsMap);
 				}
 
 				checkboxState("Bids", profileBidsContainer);
@@ -103,18 +99,15 @@ export async function profileBids() {
 export async function profileWins() {
 	try {
 		if (getItem("name")) {
-			const userdata = await getProfile(getItem("name"));
-			const wins = userdata.wins;
+			const user = await getProfile(getItem("name"));
+			const wins = user.wins;
 
-			const profileWinsContainer = document.querySelector(".profile-wins");
 			const winsTable = document.querySelector(".wins-table");
 
 			if (wins.length > 0) {
-				profileWinsContainer.classList.add("row", "row-cols-3");
-				wins.forEach(async (id) => {
-					const win = await getSingleListing(id);
+				for (const win of wins) {
 					createWinRow(win, ".profile-wins");
-				});
+				}
 			} else {
 				winsTable.innerHTML = `<p class="d-flex justify-content-center">You haven't won anything yet. Keep bidding!</p>`;
 			}

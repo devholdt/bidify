@@ -3,7 +3,6 @@ import {
 	scrollingTitle,
 	getListingValues,
 	formatDate,
-	detailsListItem,
 } from "../utilities/index.js";
 import {
 	listingPreviewModal,
@@ -164,50 +163,58 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 	tableRow.setAttribute("data-bs-toggle", "modal");
 	tableRow.setAttribute("data-bs-target", "#listingModal");
 
+	tableRow.classList.add("table-row");
+
 	listingPreviewModal(listing, tableRow);
 
 	const highestBid =
 		highestBidsMap[listing.id] ||
-		listing.bids.sort((a, b) => b.amount - a.amount)[0].amount;
+		listing.bids.reduce((max, bid) => Math.max(max, bid.amount), 0);
 
-	let status;
+	const isClosed = bid.listing.endsAt < new Date().toISOString();
+	const isWinning = userBid >= highestBid;
+	const isOutbid = userBid < highestBid;
 
-	if (bid.listing.endsAt < new Date()) {
-		status = `
-			<td>
-				<div class="d-flex justify-content-between">
-					<span>Closed</span>
-					🔴 
-				</div>
-			</td>`;
-		tableRow.classList.add("table-danger");
-	} else if (userBid < highestBid) {
-		status = `
-			<td>
-				<div class="d-flex justify-content-between">
-					<span>Outbid</span>
-					🟡 
-				</div>
-			</td>`;
-		tableRow.classList.add("table-warning");
-	} else {
-		status =
-			bid.listing.endsAt < new Date()
-				? `
-					<td>
-						<div class="d-flex justify-content-between">
-							<span>Won</span>
-							🎉
-						</div>
-					</td>`
-				: `
-					<td>
-						<div class="d-flex justify-content-between">
-							<span>Winning</span>
-							🟢
-						</div>
-					</td>`;
-	}
+	const statusCell = `
+		<div class="d-flex justify-content-between">
+			<span>${
+				isClosed && isWinning
+					? `<span class="fw-normal text-success">Won</span>`
+					: isOutbid
+					? "Outbid"
+					: "Winning"
+			}</span>
+			${
+				isClosed && !isWinning
+					? "🔴"
+					: isClosed && isWinning
+					? "🎉"
+					: isOutbid
+					? "🟡"
+					: "🟢"
+			}
+		</div>`;
+
+	if (isClosed) tableRow.classList.add("d-none");
+
+	const statusClassMap = {
+		default: "table-light",
+		outbid: "table-warning",
+		closed: "table-danger",
+	};
+
+	const statusClass =
+		statusClassMap[
+			isClosed
+				? isWinning
+					? "won"
+					: "closed"
+				: isOutbid
+				? "outbid"
+				: "default"
+		];
+
+	tableRow.classList.add(statusClass);
 
 	tableRow.innerHTML = `
         <td>
@@ -217,8 +224,8 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
         </td>
         <td class="bid-amount">$${bid.amount}</td>
         <td>${formatDate(new Date(bid.created))}</td>
-        <td class="countdown-small"></td>
-        ${status}
+		<td class="countdown-small"></td>
+        <td>${statusCell}</td>
     `;
 
 	if (existingRow) {
@@ -244,13 +251,10 @@ export async function createWinRow(win, containerSelector) {
 
 	tableRow.setAttribute("id", win.id);
 
-	const bidAmount = win.bids.sort((a, b) => b.amount - a.amount)[0].amount;
-
 	tableRow.innerHTML += `
-		<td>${win.title}</td>
-		<td>${bidAmount}</td>
+		<td class="text-nowrap">${win.title}</td>
 		<td>${formatDate(new Date(win.endsAt))}</td>
-		<td>${win.id.slice(0, 5)}</td>
+		<td class="text-nowrap">${win.id}</td>
 	`;
 
 	winsContainer.appendChild(tableRow);

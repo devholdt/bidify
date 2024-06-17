@@ -13,21 +13,27 @@ export function countdownCard(card, target, listingEndsAt, container) {
 	}
 
 	const countdownContainer = document.createElement("div");
+
 	countdownContainer.classList.add("countdown");
 
 	const [daysElement, hoursElement, minsElement, secsElement] = [
 		...Array(4),
 	].map(() => {
 		const element = document.createElement("span");
+
 		element.classList.add("countdown-part", "ms-1");
+
 		countdownContainer.appendChild(element);
+
 		return element;
 	});
 
 	const targetElement = card.querySelector(target);
+
 	if (!targetElement) {
 		throw new Error(`Target element not found: ${target}`);
 	}
+
 	targetElement.appendChild(countdownContainer);
 
 	const countdownUpdate = (days, hours, mins, secs) => {
@@ -40,22 +46,22 @@ export function countdownCard(card, target, listingEndsAt, container) {
 		);
 	};
 
-	daysElement.innerHTML = "loading...";
+	daysElement.innerHTML = "Loading...";
 
 	const countdownInterval = setInterval(() => {
 		const now = new Date();
 		const distance = listingEndsAt - now;
+
 		if (distance < 0) {
 			clearInterval(countdownInterval);
+
 			[hoursElement, minsElement, secsElement].forEach(
 				(element) => (element.style.display = "none")
 			);
+
 			daysElement.innerHTML = "Expired";
 			daysElement.classList.add("w-auto");
-			const cardElement = daysElement.closest(".card");
-			if (cardElement) {
-				cardElement.classList.add("expired-listing");
-			}
+
 			return;
 		}
 
@@ -67,9 +73,7 @@ export function countdownCard(card, target, listingEndsAt, container) {
 		];
 
 		countdownUpdate(days, hours, mins, secs);
-	}, 1000);
-
-	container.appendChild(card);
+	}, 250);
 
 	return {
 		countdownInterval,
