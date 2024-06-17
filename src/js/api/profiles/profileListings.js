@@ -132,5 +132,3 @@ export async function profileWins() {
 		);
 	}
 }
-
-localStorage.clear();
