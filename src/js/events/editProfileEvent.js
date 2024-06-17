@@ -53,8 +53,18 @@ export async function editProfileEvent(event) {
 		if (response.ok) {
 			alert("success", "Avatar updated", ".alert-editprofile");
 
-			user.avatar.url = newUser.avatar.url;
-			user.avatar.alt = newUser.avatar.alt;
+			if (newUser.avatar.alt === "") {
+				newUser.avatar.alt = "Profile avatar";
+			}
+
+			const newAvatarUrl = newUser.avatar.url;
+			const newAvatarAlt = newUser.avatar.alt;
+
+			console.log("New avatar URL: ", newAvatarUrl);
+			console.log("New avatar alt: ", newAvatarAlt);
+
+			user.avatar.url = newAvatarUrl;
+			user.avatar.alt = newAvatarAlt;
 
 			const avatars = document.querySelectorAll(".avatar");
 
