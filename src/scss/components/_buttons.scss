@@ -1,17 +1,21 @@
+.btn-light {
+	border: 1px solid $gray-light;
+}
+
 .btn-cta {
-    width: 140px;
-    height: 40px;
-    text-transform: uppercase;
+	width: 140px;
+	height: 40px;
+	text-transform: uppercase;
 }
 
 .btn-yellow {
-    background-color: $yellow;
-    color: $dark;
-    transition: 0.3s;
+	background-color: $yellow;
+	color: $dark;
+	transition: 0.3s;
 
-    &:hover {
-        background-color: $yellow;
-        color: $dark;
-        opacity: 60%;
-    }
+	&:hover {
+		background-color: $yellow;
+		color: $dark;
+		opacity: 60%;
+	}
 }
