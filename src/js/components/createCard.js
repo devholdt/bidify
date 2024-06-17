@@ -134,6 +134,7 @@ export function createListingRow(listing, containerSelector) {
 		.querySelector(".btn-edit")
 		.addEventListener("click", getListingValues);
 }
+
 /**
  * Creates a row in the bids table for a given bid and listing, and appends it to a specified container.
  * If a row for the same listing already exists, checks if the new bid is higher and updates the row accordingly.
@@ -172,23 +173,52 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 	let status;
 
 	if (bid.listing.endsAt < new Date()) {
-		status = "🔴 Closed";
+		status = `
+			<td>
+				<div class="d-flex justify-content-between">
+					<span>Closed</span>
+					🔴 
+				</div>
+			</td>`;
+		tableRow.classList.add("table-danger");
 	} else if (userBid < highestBid) {
-		status = "🟠 Outbid";
+		status = `
+			<td>
+				<div class="d-flex justify-content-between">
+					<span>Outbid</span>
+					🟡 
+				</div>
+			</td>`;
+		tableRow.classList.add("table-warning");
 	} else {
-		status = bid.listing.endsAt < new Date() ? "🟢 Won" : "🟢 Winning";
+		status =
+			bid.listing.endsAt < new Date()
+				? `
+					<td>
+						<div class="d-flex justify-content-between">
+							<span>Won</span>
+							🎉
+						</div>
+					</td>`
+				: `
+					<td>
+						<div class="d-flex justify-content-between">
+							<span>Winning</span>
+							🟢
+						</div>
+					</td>`;
 	}
 
 	tableRow.innerHTML = `
         <td>
-            <span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
-                ${bid.listing.title}
-            </span>
+			<span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
+				${bid.listing.title}
+			</span>
         </td>
         <td class="bid-amount">$${bid.amount}</td>
         <td>${formatDate(new Date(bid.created))}</td>
         <td class="countdown-small"></td>
-        <td>${status}</td>
+        ${status}
     `;
 
 	if (existingRow) {
