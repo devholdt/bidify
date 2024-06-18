@@ -24,7 +24,9 @@ function display(listings) {
 				? { ...listing, title: "[listing]" }
 				: listing;
 		})
-		.forEach((listing) => createCard(listing, ".listings"));
+		.forEach((listing) => {
+			createCard(listing, ".listings");
+		});
 }
 
 /**

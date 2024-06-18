@@ -75,6 +75,8 @@ export function createCard(listing, containerSelector) {
 				.addEventListener("submit", editListingEvent);
 		}
 	}
+
+	listingsContainer.appendChild(card);
 }
 
 /**
