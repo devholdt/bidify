@@ -134,6 +134,10 @@ export function createListingRow(listing, containerSelector) {
 	tableRow
 		.querySelector(".btn-edit")
 		.addEventListener("click", getListingValues);
+
+	document
+		.querySelector("#editListingForm")
+		.addEventListener("submit", editListingEvent);
 }
 
 /**

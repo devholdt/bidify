@@ -14,19 +14,33 @@ export async function editListingEvent(event) {
 	const params = new URLSearchParams(url.search);
 	const id = params.get("id");
 
+	const form = document.getElementById("editListingForm");
+
 	const titleInput = document.querySelector("#editListingTitle");
 	const descriptionInput = document.querySelector("#editListingDescription");
-	const mediaValues = collectInputValues("editMediaInputsContainer");
 	const tagValues = collectInputValues("editTagInputsContainer");
 
+	collectInputValues("editMediaInputsContainer");
+
+	const mediaInputs = form.querySelectorAll("#editMediaInputsContainer input");
+
+	const media = Array.from(mediaInputs)
+		.filter((input) => input.value.trim() !== "")
+		.map((input) => ({
+			url: input.value,
+			alt: "Alt text",
+		}));
+
 	try {
-		await editListing(
+		const response = await editListing(
 			id,
 			titleInput.value,
 			descriptionInput.value,
-			mediaValues,
+			media,
 			tagValues
 		);
+
+		return response;
 	} catch (error) {
 		alert(
 			"danger",
