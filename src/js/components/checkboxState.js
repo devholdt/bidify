@@ -8,8 +8,8 @@ export function checkboxState(target, container) {
 
 		if (checked) {
 			checkbox.checked = true;
-			Array.from(container.children).forEach((card) =>
-				card.classList.remove("d-none")
+			Array.from(container.children).forEach((element) =>
+				element.classList.remove("d-none")
 			);
 		}
 
@@ -19,9 +19,12 @@ export function checkboxState(target, container) {
 		);
 
 		checkbox.addEventListener("change", (event) => {
-			Array.from(container.children).forEach((card) => {
-				if (card.querySelector(".countdown-part").innerHTML === "Expired") {
-					card.classList.toggle("d-none", !event.currentTarget.checked);
+			Array.from(container.children).forEach((element) => {
+				if (
+					element.querySelector(".countdown-part").innerHTML === "Expired" ||
+					element.querySelector(".status-cell span").innerHTML === "Self-Outbid"
+				) {
+					element.classList.toggle("d-none", !event.currentTarget.checked);
 				}
 			});
 

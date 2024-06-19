@@ -8,13 +8,12 @@ import { API_URLS, cachedFetch, headers } from "../index.js";
  * @returns {Promise<object>} A promise that resolves to the profile information of the user.
  */
 export async function getProfile(name, bids = false) {
-	const endpoint = bids ? `${name}/bids` : `${name}`;
-	return await cachedFetch(
-		`${API_URLS.PROFILES}/${endpoint}?_listings=true&_wins=true`,
-		{
-			headers: headers(null, true),
-		}
-	);
+	const endpoint = bids
+		? `${name}/bids?_listings=true`
+		: `${name}?_listings=true&_wins=true`;
+	return await cachedFetch(`${API_URLS.PROFILES}/${endpoint}`, {
+		headers: headers(null, true),
+	});
 }
 
 /**

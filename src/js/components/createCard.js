@@ -161,11 +161,8 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 	const existingRow = bidsContainer.querySelector(
 		`tr[data-listing-id="${listing.id}"]`
 	);
-	const userBid = bid.amount;
 
-	if (existingRow && userBid <= highestBidsMap[listing.id]) {
-		return;
-	}
+	const userBid = bid.amount;
 
 	const tableRow = document.createElement("tr");
 	tableRow.setAttribute("id", bid.id);
@@ -174,23 +171,29 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 	tableRow.setAttribute("data-bs-toggle", "modal");
 	tableRow.setAttribute("data-bs-target", "#listingModal");
 
-	tableRow.classList.add("table-row");
-
 	listingPreviewModal(listing, tableRow);
 
 	const highestBid =
 		highestBidsMap[listing.id] ||
 		listing.bids.reduce((max, bid) => Math.max(max, bid.amount), 0);
 
+	const isOldBid = existingRow && userBid <= highestBidsMap[listing.id];
 	const isClosed = bid.listing.endsAt < new Date().toISOString();
 	const isWinning = userBid >= highestBid;
 	const isOutbid = userBid < highestBid;
+	const isSelfOutbid =
+		existingRow &&
+		!isWinning &&
+		highestBidsMap[listing.id] &&
+		userBid < highestBidsMap[listing.id];
 
 	const statusCell = `
-		<div class="d-flex justify-content-between">
+		<div class="d-flex justify-content-between status-cell">
 			<span>${
 				isClosed && isWinning
 					? `<span class="text-primary">Won</span>`
+					: isSelfOutbid
+					? "Self-Outbid"
 					: isOutbid
 					? "Outbid"
 					: "Winning"
@@ -200,18 +203,23 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 					? "🔴"
 					: isClosed && isWinning
 					? "🎉"
+					: isSelfOutbid
+					? "🔵"
 					: isOutbid
 					? "🟡"
 					: "🟢"
 			}
 		</div>`;
 
-	if (isClosed) tableRow.classList.add("d-none");
+	if (isClosed || isOldBid || isSelfOutbid) {
+		tableRow.classList.add("d-none");
+	}
 
 	const statusClassMap = {
 		default: "table-light",
 		outbid: "table-warning",
 		closed: "table-danger",
+		selfOutbid: "table-info",
 	};
 
 	const statusClass =
@@ -220,6 +228,8 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 				? isWinning
 					? "won"
 					: "closed"
+				: isSelfOutbid
+				? "selfOutbid"
 				: isOutbid
 				? "outbid"
 				: "default"
@@ -239,7 +249,7 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
         <td>${statusCell}</td>
     `;
 
-	if (existingRow) {
+	if (existingRow && userBid > highestBidsMap[listing.id]) {
 		existingRow.replaceWith(tableRow);
 	} else {
 		bidsContainer.appendChild(tableRow);
@@ -247,7 +257,9 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 
 	countdownCard(tableRow, ".countdown-small", endsAtDate, bidsContainer);
 
-	highestBidsMap[listing.id] = userBid;
+	if (userBid > (highestBidsMap[listing.id] || 0)) {
+		highestBidsMap[listing.id] = userBid;
+	}
 }
 
 /**
