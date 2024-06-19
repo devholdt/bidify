@@ -8,34 +8,34 @@ import { alert, collectInputValues } from "../utilities/index.js";
  * @throws {Error} Throws an error if the listing edit fails.
  */
 export async function editListingEvent(event) {
-  event.preventDefault();
+	event.preventDefault();
 
-  const url = new URL(location.href);
-  const params = new URLSearchParams(url.search);
-  const id = params.get("id");
+	const url = new URL(location.href);
+	const params = new URLSearchParams(url.search);
+	const id = params.get("id");
 
-  const titleInput = document.querySelector("#editListingTitle");
-  const descriptionInput = document.querySelector("#editListingDescription");
-  const mediaValues = collectInputValues("editMediaInputsContainer");
-  const tagValues = collectInputValues("editTagInputsContainer");
+	const titleInput = document.querySelector("#editListingTitle");
+	const descriptionInput = document.querySelector("#editListingDescription");
+	const mediaValues = collectInputValues("editMediaInputsContainer");
+	const tagValues = collectInputValues("editTagInputsContainer");
 
-  try {
-    await editListing(
-      id,
-      titleInput.value,
-      descriptionInput.value,
-      mediaValues,
-      tagValues
-    );
-  } catch (error) {
-    alert(
-      "danger",
-      "An error occured when attempting to edit listing",
-      ".alert-absolute",
-      null
-    );
-    throw new Error(
-      `An error occured when attempting to edit listing: ${error}`
-    );
-  }
+	try {
+		await editListing(
+			id,
+			titleInput.value,
+			descriptionInput.value,
+			mediaValues,
+			tagValues
+		);
+	} catch (error) {
+		alert(
+			"danger",
+			"An error occured when attempting to edit listing",
+			".alert-absolute",
+			null
+		);
+		throw new Error(
+			`An error occured when attempting to edit listing: ${error}`
+		);
+	}
 }

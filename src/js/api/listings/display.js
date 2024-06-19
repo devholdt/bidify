@@ -12,6 +12,7 @@ function display(listings) {
 	const button = document.querySelector("#buttonMoreResults");
 	const searchResults = document.querySelector(".search-results");
 	const searchInput = document.querySelector("#searchListings");
+
 	listingsContainer.innerHTML = "";
 	listingsContainer.style.display = "flex";
 	searchResults.innerHTML = "";
