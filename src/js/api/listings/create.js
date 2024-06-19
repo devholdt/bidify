@@ -47,6 +47,10 @@ export async function createListing(title, endsAt, description, media, tags) {
 			const json = await response.json();
 
 			return json.data;
+		} else {
+			const json = await response.json();
+
+			alert("danger", `${json.errors[0].message}`, null);
 		}
 	} catch (error) {
 		alert(

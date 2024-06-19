@@ -8,93 +8,98 @@ import { alert } from "../utilities/index.js";
  * @throws {Error} Throws an error if the listing creation fails.
  */
 export async function createListingEvent(event) {
-  event.preventDefault();
+	event.preventDefault();
 
-  const form = document.getElementById("createListingForm");
-  const title = form.querySelector("#createListingTitle").value;
-  const endsAt = form.querySelector("#createListingDate").value;
-  const description = form.querySelector("#createListingDescription").value;
+	const form = document.getElementById("createListingForm");
+	const title = form.querySelector("#createListingTitle").value;
+	const endsAt = form.querySelector("#createListingDate").value;
+	const description = form.querySelector("#createListingDescription").value;
 
-  const mediaInputs = form.querySelectorAll(
-    "#createMediaInputsContainer input"
-  );
-  const media = Array.from(mediaInputs)
-    .map((input) => input.value)
-    .filter((value) => value.trim() !== "");
+	const mediaInputs = form.querySelectorAll(
+		"#createMediaInputsContainer input"
+	);
 
-  const tagInputs = form.querySelectorAll("#createTagInputsContainer input");
-  const tags = Array.from(tagInputs)
-    .map((input) => input.value)
-    .filter((value) => value.trim() !== "");
+	const media = Array.from(mediaInputs)
+		.filter((input) => input.value.trim() !== "")
+		.map((input) => ({
+			url: input.value,
+			alt: "Alt text",
+		}));
 
-  const now = new Date();
+	const tagInputs = form.querySelectorAll("#createTagInputsContainer input");
 
-  if (title.length < 1) {
-    const titleInput = form.querySelector("#createListingTitle");
-    titleInput.classList.add("border-danger");
+	const tags = Array.from(tagInputs)
+		.map((input) => input.value)
+		.filter((value) => value.trim() !== "");
 
-    setTimeout(() => {
-      titleInput.classList.remove("border-danger");
-    }, 3000);
+	const now = new Date();
 
-    alert("warning", "Title is required", ".alert-create-listing", 3000);
+	if (title.length < 1) {
+		const titleInput = form.querySelector("#createListingTitle");
+		titleInput.classList.add("border-danger");
 
-    return;
-  }
+		setTimeout(() => {
+			titleInput.classList.remove("border-danger");
+		}, 3000);
 
-  if (new Date(endsAt) <= now) {
-    const endsAtInput = form.querySelector("#createListingDate");
-    endsAtInput.classList.add("border-danger");
+		alert("warning", "Title is required", ".alert-create-listing", 3000);
 
-    setTimeout(() => {
-      endsAtInput.classList.remove("border-danger");
-    }, 2000);
+		return;
+	}
 
-    alert(
-      "warning",
-      "End date must be in the future",
-      ".alert-create-listing",
-      3000
-    );
+	if (new Date(endsAt) <= now) {
+		const endsAtInput = form.querySelector("#createListingDate");
+		endsAtInput.classList.add("border-danger");
 
-    return;
-  }
+		setTimeout(() => {
+			endsAtInput.classList.remove("border-danger");
+		}, 2000);
 
-  try {
-    await createListing(title, endsAt, description, media, tags);
+		alert(
+			"warning",
+			"End date must be in the future",
+			".alert-create-listing",
+			3000
+		);
 
-    setTimeout(() => {
-      form.reset();
-      location.reload();
-    }, 3000);
-  } catch (error) {
-    alert(
-      "danger",
-      "An error occured when attempting to create listing",
-      ".alert-create-listing",
-      null
-    );
-    throw new Error(
-      `An error occured when attempting to create listing: ${error}`
-    );
-  }
+		return;
+	}
+
+	try {
+		await createListing(title, endsAt, description, media, tags);
+
+		setTimeout(() => {
+			form.reset();
+			location.reload();
+		}, 3000);
+	} catch (error) {
+		alert(
+			"danger",
+			"An error occured when attempting to create listing",
+			".alert-create-listing",
+			null
+		);
+		throw new Error(
+			`An error occured when attempting to create listing: ${error}`
+		);
+	}
 }
 
 document
-  .querySelector("#createListingDescription")
-  .addEventListener("input", (event) => {
-    const textarea = event.target;
-    if (textarea.value.length === 280) {
-      textarea.classList.add("border-danger");
-      alert(
-        "warning",
-        "Maximum character length reached",
-        ".alert-create-listing",
-        3000
-      );
+	.querySelector("#createListingDescription")
+	.addEventListener("input", (event) => {
+		const textarea = event.target;
+		if (textarea.value.length === 280) {
+			textarea.classList.add("border-danger");
+			alert(
+				"warning",
+				"Maximum character length reached",
+				".alert-create-listing",
+				3000
+			);
 
-      setTimeout(() => {
-        textarea.classList.remove("border-danger");
-      }, 3000);
-    }
-  });
+			setTimeout(() => {
+				textarea.classList.remove("border-danger");
+			}, 3000);
+		}
+	});
