@@ -20,11 +20,22 @@ export function checkboxState(target, container) {
 
 		checkbox.addEventListener("change", (event) => {
 			Array.from(container.children).forEach((element) => {
-				if (
-					element.querySelector(".countdown-part").innerHTML === "Expired" ||
-					element.querySelector(".status-cell span").innerHTML === "Self-Outbid"
-				) {
-					element.classList.toggle("d-none", !event.currentTarget.checked);
+				const statusCell = element.querySelector(".status-cell span");
+
+				if (statusCell) {
+					if (
+						element.querySelector(".countdown-part").innerHTML === "Expired" ||
+						element.querySelector(".status-cell span").innerHTML ===
+							"Self-Outbid"
+					) {
+						element.classList.toggle("d-none", !event.currentTarget.checked);
+					}
+				} else {
+					if (
+						element.querySelector(".countdown-part").innerHTML === "Expired"
+					) {
+						element.classList.toggle("d-none", !event.currentTarget.checked);
+					}
 				}
 			});
 
