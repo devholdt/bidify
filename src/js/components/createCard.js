@@ -95,7 +95,7 @@ export function createListingRow(listing, containerSelector) {
 
 	tableRow.innerHTML += `
         <td class="clickable-cell">
-            <span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
+            <span class="text-nowrap d-block text-truncate" style="max-width: 110px;">
                 ${listing.title}
             </span>
         </td>
@@ -125,7 +125,6 @@ export function createListingRow(listing, containerSelector) {
 		listingPreviewModal(listing, cell);
 	});
 
-	listingsContainer.appendChild(tableRow);
 	countdownCard(tableRow, ".countdown-small", endsAtDate, listingsContainer);
 
 	tableRow
@@ -138,6 +137,8 @@ export function createListingRow(listing, containerSelector) {
 	document
 		.querySelector("#editListingForm")
 		.addEventListener("submit", editListingEvent);
+
+	listingsContainer.appendChild(tableRow);
 }
 
 /**
@@ -185,7 +186,7 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 		<div class="d-flex justify-content-between">
 			<span>${
 				isClosed && isWinning
-					? `<span class="fw-normal text-success">Won</span>`
+					? `<span class="text-primary">Won</span>`
 					: isOutbid
 					? "Outbid"
 					: "Winning"
@@ -224,7 +225,7 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 
 	tableRow.innerHTML = `
         <td>
-			<span class="text-nowrap fw-normal d-block text-truncate" style="max-width: 110px;">
+			<span class="text-nowrap d-block text-truncate" style="max-width: 110px;">
 				${bid.listing.title}
 			</span>
         </td>

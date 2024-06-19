@@ -1,7 +1,7 @@
 export function scrollToTop() {
-  const element = document.querySelector("#buttonScrollUp button");
+	const element = document.querySelector("#buttonScrollUp button");
 
-  element.addEventListener("click", () => {
-    window.scrollTo({ top: 0 });
-  });
+	element.addEventListener("click", () => {
+		window.scrollTo({ top: 0 });
+	});
 }

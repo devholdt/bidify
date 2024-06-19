@@ -115,7 +115,7 @@ export function createListingDetails(listing) {
 		);
 	}
 
-	modal.addEventListener("hidden.bs.modal", () => {
+	modal.addEventListener("hide.bs.modal", () => {
 		document.querySelector(".alert-preview").innerHTML = "";
 		details.innerHTML = "";
 		removeQueryString("id");

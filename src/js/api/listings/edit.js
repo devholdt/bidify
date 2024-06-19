@@ -36,9 +36,9 @@ export async function editListing(id, title, description, media, tags) {
 				false
 			);
 
-			// setTimeout(() => {
-			// 	location.reload();
-			// }, 3000);
+			setTimeout(() => {
+				location.reload();
+			}, 3000);
 
 			const json = await response.json();
 
