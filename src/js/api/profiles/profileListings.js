@@ -24,9 +24,10 @@ export async function profileListings() {
 			const listingsTable = document.querySelector(".listings-table");
 
 			if (listings.length > 0) {
-				listings.forEach((listing) =>
-					createListingRow(listing, ".profile-listings")
-				);
+				for (const listing of listings) {
+					createListingRow(listing, ".profile-listings");
+				}
+
 				checkboxState("Listings", profileListingsContainer);
 			} else {
 				listingsTable.innerHTML = `<p class="d-flex justify-content-center">You have no active listings</p>`;

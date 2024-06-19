@@ -93,6 +93,10 @@ export function createListingRow(listing, containerSelector) {
 	tableRow.setAttribute("id", listing.id);
 	tableRow.setAttribute("role", "button");
 
+	const isExpired = endsAtDate <= new Date();
+
+	if (isExpired) tableRow.classList.add("d-none");
+
 	tableRow.innerHTML += `
         <td class="clickable-cell">
             <span class="text-nowrap d-block text-truncate" style="max-width: 110px;">

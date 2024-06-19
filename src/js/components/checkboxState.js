@@ -1,6 +1,6 @@
 import { updateVisibleCount } from "../utilities/index.js";
 
-export function checkboxState(target, container) {
+export function checkboxState(target, container, countTarget) {
 	const checkbox = document.querySelector(`#toggleActive${target}`);
 
 	if (checkbox) {

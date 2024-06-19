@@ -23,5 +23,6 @@ function countElementsWithoutClass(parentElement) {
 	const elementsWithoutClass = container.querySelectorAll(
 		`:scope > :not(.d-none)`
 	);
+
 	return elementsWithoutClass.length;
 }
