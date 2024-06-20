@@ -1,6 +1,6 @@
 import { URLS, DEFAULT_URLS, WIDTH } from "../components/index.js";
 import { getItem } from "../storage/index.js";
-import { getProfile } from "../api/profiles/index.js";
+import { getProfileData } from "../api/profiles/index.js";
 import { alert } from "./index.js";
 
 let cachedUserData = null;
@@ -21,8 +21,10 @@ export async function setupNav(elements, links) {
 	updateNavLinksCollapse(elements.navLinksCollapse, links, isMobileView);
 
 	if (isLoggedIn && !cachedUserData) {
+		const name = getItem("name");
+
 		try {
-			cachedUserData = await getProfile(getItem("name"));
+			cachedUserData = await getProfileData(name, "user");
 		} catch (error) {
 			alert(
 				"danger",

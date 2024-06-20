@@ -1,41 +1,33 @@
 import { API_URLS, cachedFetch, headers } from "../index.js";
 
 /**
- * Fetches profile information for a specified user.
+ * Fetches profile information for a specified user based on the endpoint type.
  *
- * @param {string} name - The name of the user whose profile is to be fetched.
- * @param {boolean} [bids=false] - Indicates whether to fetch bid information along with the profile.
+ * @param {string} name - The name of the user whose profile data is to be fetched.
+ * @param {string} type - The type of endpoint to use ('user', 'listings', 'bids', or 'wins').
  * @returns {Promise<object>} A promise that resolves to the profile information of the user.
  */
-export async function getProfile(name, bids = false) {
-	const endpoint = bids
-		? `${name}/bids?_listings=true`
-		: `${name}?_listings=true&_wins=true`;
+export async function getProfileData(name, type) {
+	let endpoint;
+
+	switch (type) {
+		case "user":
+			endpoint = `${name}?_listings=true&_wins=true`;
+			break;
+		case "listings":
+			endpoint = `${name}/listings?_bids=true&_seller=true`;
+			break;
+		case "bids":
+			endpoint = `${name}/bids?_listings=true`;
+			break;
+		case "wins":
+			endpoint = `${name}/wins?_listings=true&_bids=true&_seller=true`;
+			break;
+		default:
+			throw new Error(`Invalid endpoint type: ${type}`);
+	}
+
 	return await cachedFetch(`${API_URLS.PROFILES}/${endpoint}`, {
 		headers: headers(null, true),
 	});
-}
-
-export async function getProfileData(name, wins = false) {
-	const endpoint = wins
-		? `${name}/wins?_listings=true&_bids=true&_seller=true`
-		: `${name}/bids?_listings=true`;
-	return await cachedFetch(`${API_URLS.PROFILES}/${endpoint}`, {
-		headers: headers(null, true),
-	});
-}
-
-/**
- * Fetches listings associated with a specific user's profile.
- *
- * @param {string} name - The name of the user whose listings are to be fetched.
- * @returns {Promise<Array>} A promise that resolves to an array of listings associated with the user.
- */
-export async function getProfileListings(name) {
-	return await cachedFetch(
-		`${API_URLS.PROFILES}/${name}/listings?_bids=true&_seller=true`,
-		{
-			headers: headers(null, true),
-		}
-	);
 }

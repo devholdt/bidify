@@ -1,4 +1,4 @@
-import { getProfile } from "./index.js";
+import { getProfileData } from "./index.js";
 import { getItem } from "../../storage/index.js";
 import { DEFAULT_URLS } from "../../components/index.js";
 
@@ -14,8 +14,8 @@ export async function renderProfileDetails() {
 	);
 	const profileBidsCount = document.querySelector(".profile-bids-count");
 	const name = getItem("name");
-	const user = await getProfile(name);
-	const bids = await getProfile(name, true);
+	const user = await getProfileData(name, "user");
+	const bids = await getProfileData(name, "bids");
 
 	let avatarUrl;
 	let avatarAlt;

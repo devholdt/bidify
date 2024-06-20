@@ -1,4 +1,4 @@
-import { getProfile, getProfileListings, getProfileData } from "./index.js";
+import { getProfileData } from "./index.js";
 import { getItem } from "../../storage/index.js";
 import {
 	createListingRow,
@@ -15,9 +15,11 @@ import { checkboxState } from "../../components/checkboxState.js";
  * @throws {Error} Throws an error if fetching profile listings fails.
  */
 export async function profileListings() {
+	const name = getItem("name");
+
 	try {
 		if (getItem("name")) {
-			const listings = await getProfileListings(getItem("name"));
+			const listings = await getProfileData(name, "listings");
 
 			const profileListingsContainer =
 				document.querySelector(".profile-listings");
@@ -56,9 +58,11 @@ export async function profileListings() {
  * @throws {Error} Throws an error if fetching profile bids fails.
  */
 export async function profileBids() {
+	const name = getItem("name");
+
 	try {
 		if (getItem("name")) {
-			const bids = await getProfile(getItem("name"), true);
+			const bids = await getProfileData(name, "bids");
 
 			const profileBidsContainer = document.querySelector(".profile-bids");
 			const bidsTable = document.querySelector(".bids-table");
@@ -98,9 +102,11 @@ export async function profileBids() {
  * @throws {Error} Throws an error if fetching or displaying won listings fails.
  */
 export async function profileWins() {
+	const name = getItem("name");
+
 	try {
 		if (getItem("name")) {
-			const wins = await getProfileData(getItem("name"), true);
+			const wins = await getProfileData(name, "wins");
 			const winsTable = document.querySelector(".wins-table");
 
 			if (wins.length > 0) {
