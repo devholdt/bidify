@@ -2,9 +2,9 @@ import * as components from "./components/index.js";
 import * as api from "./api/index.js";
 import * as events from "./events/index.js";
 
-api.popularListings();
-api.latestListings();
-api.lastChance();
+api.displayListingsByType("popular");
+api.displayListingsByType("latest");
+api.displayListingsByType("last-chance");
 api.displayListings();
 
 components.renderNav();

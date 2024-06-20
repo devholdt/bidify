@@ -1,6 +1,7 @@
 import { getListingData } from "./fetch.js";
 import { createCard, placeholderCard } from "../../components/index.js";
 import { alert } from "../../utilities/index.js";
+import { cachedFetch, API_URLS, headers } from "../../api/index.js";
 
 /**
  * Displays a list of listings in the DOM.
@@ -19,12 +20,14 @@ function display(listings) {
 	button.style.display = "flex";
 	searchInput.value = "";
 
+	const discordUrlPattern =
+		/^https:\/\/cdn\.discordapp\.com\/attachments\/\d+\/\d+\/\d+/;
+
 	listings
-		.filter((listing) => {
-			const discordUrlPattern =
-				/^https:\/\/cdn\.discordapp\.com\/attachments\/\d+\/\d+\/\d+/;
-			return !listing.media.some((media) => discordUrlPattern.test(media.url));
-		})
+		.filter(
+			(listing) =>
+				!listing.media.some((media) => discordUrlPattern.test(media.url))
+		)
 		.map((listing) => {
 			return listing.title === ""
 				? { ...listing, title: "[listing]" }
@@ -64,12 +67,12 @@ export async function displayListings() {
 		} catch (error) {
 			alert(
 				"danger",
-				"An error occurred when attempting to fetch all listings",
+				"An error occured when attempting to fetch all listings",
 				".alert-absolute",
 				null
 			);
 			throw new Error(
-				`An error occurred when attempting to fetch all listings: ${error}`
+				`An error occured when attempting to fetch all listings: ${error}`
 			);
 		}
 	}
@@ -77,29 +80,29 @@ export async function displayListings() {
 	function sortAndDisplayListings() {
 		let sortedListings = [...allListings];
 
-		sortedListings = sortedListings.filter((listing) => {
-			const discordUrlPattern =
-				/^https:\/\/cdn\.discordapp\.com\/attachments\/\d+\/\d+\/\d+/;
-			return !listing.media.some((media) => discordUrlPattern.test(media.url));
-		});
-
 		switch (currentSort) {
 			case "Latest":
-				sortedListings.sort(
+				sortedListings = [...allListings].sort(
 					(a, b) => new Date(b.created) - new Date(a.created)
 				);
 				break;
 			case "Popular":
-				sortedListings.sort((a, b) => b._count.bids - a._count.bids);
+				sortedListings = [...allListings].sort(
+					(a, b) => b._count.bids - a._count.bids
+				);
 				break;
 			case "Title A-Z":
-				sortedListings.sort((a, b) => a.title.localeCompare(b.title));
+				sortedListings = [...allListings].sort((a, b) =>
+					a.title.localeCompare(b.title)
+				);
 				break;
 			case "Title Z-A":
-				sortedListings.sort((a, b) => b.title.localeCompare(a.title));
+				sortedListings = [...allListings].sort((a, b) =>
+					b.title.localeCompare(a.title)
+				);
 				break;
 			case "Bid high-low":
-				sortedListings.sort((a, b) => {
+				sortedListings = [...allListings].sort((a, b) => {
 					let maxBidA = a.bids.reduce(
 						(max, bid) => (bid.amount > max ? bid.amount : max),
 						0
@@ -108,11 +111,12 @@ export async function displayListings() {
 						(max, bid) => (bid.amount > max ? bid.amount : max),
 						0
 					);
+
 					return maxBidB - maxBidA;
 				});
 				break;
 			case "Bid low-high":
-				sortedListings = sortedListings
+				sortedListings = [...allListings]
 					.filter((listing) => listing.bids.length > 0)
 					.sort((a, b) => {
 						let maxBidA = a.bids.reduce(
@@ -123,11 +127,14 @@ export async function displayListings() {
 							(max, bid) => (bid.amount > max ? bid.amount : max),
 							0
 						);
+
 						return maxBidA - maxBidB;
 					});
 				break;
 			case "Ends soon":
-				sortedListings.sort((a, b) => new Date(a.endsAt) - new Date(b.endsAt));
+				sortedListings = [...allListings].sort(
+					(a, b) => new Date(a.endsAt) - new Date(b.endsAt)
+				);
 				break;
 		}
 
@@ -149,10 +156,67 @@ export async function displayListings() {
 	button.addEventListener("click", () => {
 		limit += INITIAL_LIMIT;
 		sortAndDisplayListings();
+
 		spanResults.innerHTML = `(${limit})`;
 
 		if (limit >= allListings.length) {
 			button.style.display = "none";
 		}
+	});
+}
+
+/**
+ * Fetches and displays the top 3 listings based on the specified type.
+ *
+ * @param {string} type - The type of listings to fetch ('latest', 'popular', 'last-chance').
+ */
+export async function displayListingsByType(type) {
+	let listings = await cachedFetch(
+		`${API_URLS.LISTINGS}?_seller=true&_bids=true&_active=true`,
+		{ headers: headers() }
+	);
+
+	const discordUrlPattern =
+		/^https:\/\/cdn\.discordapp\.com\/attachments\/\d+\/\d+\/\d+/;
+
+	listings = listings.filter(
+		(listing) =>
+			!listing.media.some((media) => discordUrlPattern.test(media.url))
+	);
+
+	switch (type) {
+		case "latest":
+			listings = listings.sort(
+				(a, b) => new Date(b.created) - new Date(a.created)
+			);
+			break;
+		case "popular":
+			listings = listings.sort((a, b) => b._count.bids - a._count.bids);
+			break;
+		case "last-chance":
+			listings = listings.sort(
+				(a, b) => new Date(a.endsAt) - new Date(b.endsAt)
+			);
+			break;
+		default:
+			throw new Error(`Invalid listing type: ${type}`);
+	}
+
+	const containerSelector = {
+		latest: ".latest-listings",
+		popular: ".popular-listings",
+		"last-chance": ".last-chance",
+	}[type];
+
+	listings
+		.slice(0, 3)
+		.forEach((listing) => createCard(listing, containerSelector));
+
+	const container = document.querySelector(containerSelector);
+	const cards = Array.from(container.children);
+
+	cards.forEach((card) => {
+		card.classList.remove("col-12", "col-sm-6", "col-lg-4");
+		card.classList.add("col-4");
 	});
 }
