@@ -417,10 +417,16 @@
                             <table class="table table-hover table-bordered mb-0">
                                 <thead class="table-secondary">
                                     <tr>
-                                        <th scope="col" class="fw-medium col-2">Title</th>
-                                        <th scope="col" class="fw-medium col-2">Bids</th>
-                                        <th scope="col" class="fw-medium col-2">Created</th>
-                                        <th scope="col" class="fw-medium col-2">Ends in</th>
+                                        <th role="button" scope="col" class="fw-medium col-2 hoverable-cell"
+                                            data-column="listing-title" data-order="desc">Title</th>
+                                        <th role="button" scope="col" class="fw-medium col-2 hoverable-cell"
+                                            data-column="listing-bids" data-order="desc">Bids</th>
+                                        <th role="button" scope="col" class="fw-medium col-2 hoverable-cell"
+                                            data-column="listing-created" data-order="desc">Created
+                                        </th>
+                                        <th role="button" scope="col" class="fw-medium col-2 hoverable-cell"
+                                            data-column="listing-ends_in" data-order="desc">Ends in
+                                        </th>
                                         <th scope="col" class="fw-medium col-2">Actions</th>
                                     </tr>
                                 </thead>
@@ -445,11 +451,21 @@
                             <table class="table table-hover table-bordered mb-0">
                                 <thead class="table-secondary">
                                     <tr>
-                                        <th scope="col" class="fw-medium col-2">Title</th>
-                                        <th scope="col" class="fw-medium col-2">Amount</th>
-                                        <th scope="col" class="fw-medium col-2">Created</th>
-                                        <th scope="col" class="fw-medium col-2">Ends in</th>
-                                        <th scope="col" class="fw-medium col-2">Status</th>
+                                        <th role="button" scope="col" class="fw-medium col-2 hoverable-cell"
+                                            data-column="bid-title" data-order="desc">
+                                            Title</th>
+                                        <th role="button" scope="col" class="fw-medium col-2 hoverable-cell"
+                                            data-column="bid-amount" data-order="desc">
+                                            Amount</th>
+                                        <th role="button" scope="col" class="fw-medium col-2 hoverable-cell"
+                                            data-column="bid-created" data-order="desc">
+                                            Created</th>
+                                        <th role="button" scope="col" class="fw-medium col-2 hoverable-cell"
+                                            data-column="bid-ends_in" data-order="desc">
+                                            Ends in</th>
+                                        <th role="button" scope="col" class="fw-medium col-2 hoverable-cell"
+                                            data-column="bid-status" data-order="desc">
+                                            Status</th>
                                     </tr>
                                 </thead>
                                 <tbody class="profile-bids table-light align-middle"></tbody>
@@ -464,9 +480,12 @@
                             <table class="table table-hover table-bordered mb-0">
                                 <thead class="table-secondary">
                                     <tr>
-                                        <th scope="col" class="fw-medium col-3">Title</th>
-                                        <th scope="col" class="fw-medium col-3">Ended</th>
-                                        <th scope="col" class="fw-medium col-6">ID</th>
+                                        <th role="button" scope="col" class="fw-medium col-3 hoverable-cell"
+                                            data-column="win-title" data-order="desc">Title</th>
+                                        <th role="button" scope="col" class="fw-medium col-3 hoverable-cell"
+                                            data-column="win-ended" data-order="desc">Ended</th>
+                                        <th role="button" scope="col" class="fw-medium col-6 hoverable-cell"
+                                            data-column="win-id" data-order="desc">ID</th>
                                     </tr>
                                 </thead>
                                 <tbody class="profile-wins table-light align-middle"></tbody>

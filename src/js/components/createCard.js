@@ -104,8 +104,13 @@ export function createListingRow(listing, containerSelector) {
             </span>
         </td>
         <td class="clickable-cell">${listing.bids.length}</td>
-        <td class="clickable-cell">${formatDate(new Date(listing.created))}</td>
-        <td class="countdown-small clickable-cell"></td>
+        <td class="clickable-cell">${formatDate(
+					new Date(listing.created),
+					true
+				)}</td>
+        <td class="countdown-small clickable-cell" data-end-date="${
+					listing.endsAt
+				}"></td>
         <td class="d-flex justify-content-center p-1">
             <button class="btn btn-light border rounded-0 w-50 rounded-start btn-edit d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#editListingModal" data-id="${
 							listing.id
@@ -244,8 +249,8 @@ export function createBidRow(bid, listing, containerSelector, highestBidsMap) {
 			</span>
         </td>
         <td class="bid-amount">$${bid.amount}</td>
-        <td>${formatDate(new Date(bid.created))}</td>
-		<td class="countdown-small"></td>
+        <td>${formatDate(new Date(bid.created), true)}</td>
+		<td class="countdown-small" data-end-date="${bid.listing.endsAt}"></td>
         <td>${statusCell}</td>
     `;
 

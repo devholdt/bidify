@@ -1,0 +1,7 @@
+.hoverable-cell {
+	transition: background-color 0.2s;
+
+	&:hover {
+		background-color: $secondary;
+	}
+}
