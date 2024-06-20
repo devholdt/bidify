@@ -64,35 +64,54 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 });
 
+/**
+ * Retrieves the value of a specific cell in a table row.
+ * @param {string} column - The name of the column to retrieve the value from.
+ * @param {HTMLTableRowElement} row - The table row element to retrieve the value from.
+ * @returns {string|number|Date} - The value of the specified cell.
+ */
 function getCellValue(column, row) {
 	switch (column) {
 		case "listing-title":
 		case "bid-title":
 		case "win-title":
 			return row.cells[0].innerText.trim();
+
 		case "listing-bids":
 			return parseInt(row.cells[1].innerText.trim(), 10);
+
 		case "bid-amount":
 		case "win-amount":
 			return parseFloat(row.cells[1].innerText.replace("$", "").trim());
+
 		case "win-id":
 			return row.cells[2].innerText.trim();
+
 		case "listing-created":
 		case "bid-created":
 		case "win-ended":
 			return parseFormattedDate(row.cells[2].innerText.trim());
+
 		case "listing-ends_in":
 		case "bid-ends_in":
 			return new Date(
 				row.querySelector(".countdown-small").getAttribute("data-end-date")
 			).getTime();
+
 		case "bid-status":
 			return row.cells[4].innerText.trim();
+
 		default:
 			return row.cells[0].innerText.trim();
 	}
 }
 
+/**
+ * Parses a formatted date string into a timestamp.
+ *
+ * @param {string} dateString - The formatted date string.
+ * @return {number} The timestamp representing the parsed date.
+ */
 function parseFormattedDate(dateString) {
 	const [datePart, timePart] = dateString.split(" ");
 	const [day, month, year] = datePart.split("/").map(Number);
