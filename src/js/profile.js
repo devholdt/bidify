@@ -73,6 +73,7 @@ function getCellValue(column, row) {
 		case "listing-bids":
 			return parseInt(row.cells[1].innerText.trim(), 10);
 		case "bid-amount":
+		case "win-amount":
 			return parseFloat(row.cells[1].innerText.replace("$", "").trim());
 		case "win-id":
 			return row.cells[2].innerText.trim();

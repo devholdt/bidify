@@ -279,8 +279,11 @@ export async function createWinRow(win, containerSelector) {
 
 	tableRow.setAttribute("id", win.id);
 
+	const amount = win.bids.sort((a, b) => a.amount - b.amount)[0].amount;
+
 	tableRow.innerHTML += `
 		<td class="text-nowrap">${win.title}</td>
+		<td>$${amount}</td>
 		<td>${formatDate(new Date(win.endsAt))}</td>
 		<td class="text-nowrap">${win.id}</td>
 	`;

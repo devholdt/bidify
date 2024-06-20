@@ -16,6 +16,15 @@ export async function getProfile(name, bids = false) {
 	});
 }
 
+export async function getProfileData(name, wins = false) {
+	const endpoint = wins
+		? `${name}/wins?_listings=true&_bids=true&_seller=true`
+		: `${name}/bids?_listings=true`;
+	return await cachedFetch(`${API_URLS.PROFILES}/${endpoint}`, {
+		headers: headers(null, true),
+	});
+}
+
 /**
  * Fetches listings associated with a specific user's profile.
  *

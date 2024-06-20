@@ -1,4 +1,4 @@
-import { getProfile, getProfileListings } from "./index.js";
+import { getProfile, getProfileListings, getProfileData } from "./index.js";
 import { getItem } from "../../storage/index.js";
 import {
 	createListingRow,
@@ -100,9 +100,7 @@ export async function profileBids() {
 export async function profileWins() {
 	try {
 		if (getItem("name")) {
-			const user = await getProfile(getItem("name"));
-			const wins = user.wins;
-
+			const wins = await getProfileData(getItem("name"), true);
 			const winsTable = document.querySelector(".wins-table");
 
 			if (wins.length > 0) {
