@@ -1,5 +1,11 @@
 import { updateVisibleCount } from "../utilities/index.js";
 
+/**
+ * Updates the visibility of elements based on a checkbox state and stored data.
+ *
+ * @param {string} target - The target element to update.
+ * @param {HTMLElement} container - The container element containing the elements to update.
+ */
 export function checkboxState(target, container) {
 	const checkbox = document.querySelector(`#toggleActive${target}`);
 
@@ -30,12 +36,10 @@ export function checkboxState(target, container) {
 					) {
 						element.classList.toggle("d-none", !event.currentTarget.checked);
 					}
-				} else {
-					if (
-						element.querySelector(".countdown-part").innerHTML === "Expired"
-					) {
-						element.classList.toggle("d-none", !event.currentTarget.checked);
-					}
+				} else if (
+					element.querySelector(".countdown-part").innerHTML === "Expired"
+				) {
+					element.classList.toggle("d-none", !event.currentTarget.checked);
 				}
 			});
 
