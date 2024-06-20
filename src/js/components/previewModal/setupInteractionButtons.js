@@ -10,10 +10,10 @@ import { getItem } from "../../storage/index.js";
  * @param {string} listingForm - The HTML string for the listing form to be displayed in the modal.
  */
 export function setupInteractionButtons(footer, listing, listingForm) {
-  if (getItem("name")) {
-    const modal = document.querySelector("#listingModal");
-    let sellerName;
-    const interactionButtons = `
+	if (getItem("name")) {
+		const modal = document.querySelector("#listingModal");
+
+		const interactionButtons = `
           <div class="d-flex justify-content-between">
             <button type="button" class="btn btn-outline-dark d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBidHistory" aria-controls="offcanvasBidHistory">
               <span class="material-icons me-1">history</span>bid history
@@ -32,21 +32,20 @@ export function setupInteractionButtons(footer, listing, listingForm) {
             </div>
           </div>`;
 
-    footer.innerHTML = listingForm;
+		footer.innerHTML = listingForm;
 
-    const listingModalForm = document.querySelector("#listingModalForm");
-    listingModalForm.addEventListener("submit", bidEvent);
+		const listingModalForm = document.querySelector("#listingModalForm");
+		listingModalForm.addEventListener("submit", bidEvent);
 
-    if (listing.seller && listing.seller.name === getItem("name")) {
-      sellerName = "you";
-      footer.innerHTML = interactionButtons;
+		if (listing.seller && listing.seller.name === getItem("name")) {
+			footer.innerHTML = interactionButtons;
 
-      modal
-        .querySelector(".btn-delete")
-        .addEventListener("click", deleteListingEvent);
-      modal
-        .querySelector(".btn-edit")
-        .addEventListener("click", getListingValues);
-    }
-  }
+			modal
+				.querySelector(".btn-delete")
+				.addEventListener("click", deleteListingEvent);
+			modal
+				.querySelector(".btn-edit")
+				.addEventListener("click", getListingValues);
+		}
+	}
 }

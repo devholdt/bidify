@@ -20,6 +20,11 @@ function display(listings) {
 	searchInput.value = "";
 
 	listings
+		.filter((listing) => {
+			const discordUrlPattern =
+				/^https:\/\/cdn\.discordapp\.com\/attachments\/\d+\/\d+\/\d+/;
+			return !listing.media.some((media) => discordUrlPattern.test(media.url));
+		})
 		.map((listing) => {
 			return listing.title === ""
 				? { ...listing, title: "[listing]" }
@@ -59,12 +64,12 @@ export async function displayListings() {
 		} catch (error) {
 			alert(
 				"danger",
-				"An error occured when attempting to fetch all listings",
+				"An error occurred when attempting to fetch all listings",
 				".alert-absolute",
 				null
 			);
 			throw new Error(
-				`An error occured when attempting to fetch all listings: ${error}`
+				`An error occurred when attempting to fetch all listings: ${error}`
 			);
 		}
 	}
@@ -72,29 +77,29 @@ export async function displayListings() {
 	function sortAndDisplayListings() {
 		let sortedListings = [...allListings];
 
+		sortedListings = sortedListings.filter((listing) => {
+			const discordUrlPattern =
+				/^https:\/\/cdn\.discordapp\.com\/attachments\/\d+\/\d+\/\d+/;
+			return !listing.media.some((media) => discordUrlPattern.test(media.url));
+		});
+
 		switch (currentSort) {
 			case "Latest":
-				sortedListings = [...allListings].sort(
+				sortedListings.sort(
 					(a, b) => new Date(b.created) - new Date(a.created)
 				);
 				break;
 			case "Popular":
-				sortedListings = [...allListings].sort(
-					(a, b) => b._count.bids - a._count.bids
-				);
+				sortedListings.sort((a, b) => b._count.bids - a._count.bids);
 				break;
 			case "Title A-Z":
-				sortedListings = [...allListings].sort((a, b) =>
-					a.title.localeCompare(b.title)
-				);
+				sortedListings.sort((a, b) => a.title.localeCompare(b.title));
 				break;
 			case "Title Z-A":
-				sortedListings = [...allListings].sort((a, b) =>
-					b.title.localeCompare(a.title)
-				);
+				sortedListings.sort((a, b) => b.title.localeCompare(a.title));
 				break;
 			case "Bid high-low":
-				sortedListings = [...allListings].sort((a, b) => {
+				sortedListings.sort((a, b) => {
 					let maxBidA = a.bids.reduce(
 						(max, bid) => (bid.amount > max ? bid.amount : max),
 						0
@@ -103,12 +108,11 @@ export async function displayListings() {
 						(max, bid) => (bid.amount > max ? bid.amount : max),
 						0
 					);
-
 					return maxBidB - maxBidA;
 				});
 				break;
 			case "Bid low-high":
-				sortedListings = [...allListings]
+				sortedListings = sortedListings
 					.filter((listing) => listing.bids.length > 0)
 					.sort((a, b) => {
 						let maxBidA = a.bids.reduce(
@@ -119,14 +123,11 @@ export async function displayListings() {
 							(max, bid) => (bid.amount > max ? bid.amount : max),
 							0
 						);
-
 						return maxBidA - maxBidB;
 					});
 				break;
 			case "Ends soon":
-				sortedListings = [...allListings].sort(
-					(a, b) => new Date(a.endsAt) - new Date(b.endsAt)
-				);
+				sortedListings.sort((a, b) => new Date(a.endsAt) - new Date(b.endsAt));
 				break;
 		}
 
@@ -148,7 +149,6 @@ export async function displayListings() {
 	button.addEventListener("click", () => {
 		limit += INITIAL_LIMIT;
 		sortAndDisplayListings();
-
 		spanResults.innerHTML = `(${limit})`;
 
 		if (limit >= allListings.length) {

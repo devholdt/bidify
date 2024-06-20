@@ -119,9 +119,5 @@ export function createListingDetails(listing) {
 		document.querySelector(".alert-preview").innerHTML = "";
 		details.innerHTML = "";
 		removeQueryString("id");
-
-		if (modal.querySelector("#listingModalForm")) {
-			amount.value = "";
-		}
 	});
 }
