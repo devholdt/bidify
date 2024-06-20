@@ -1,4 +1,4 @@
-import { getListings } from "./listings/index.js";
+import { getListingData } from "./listings/index.js";
 import { setCachedItem, getCachedItem } from "../storage/index.js";
 import { alert } from "../utilities/index.js";
 
@@ -42,7 +42,7 @@ export async function cachedFetch(url, options, useListingsCache = false) {
 			return listingsCache.data;
 		}
 
-		const listings = await getListings({ sort: "&sort=created" });
+		const listings = await getListingData("all");
 		listingsCache.data = listings;
 		listingsCache.timestamp = now;
 

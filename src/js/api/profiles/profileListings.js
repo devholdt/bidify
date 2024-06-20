@@ -6,7 +6,7 @@ import {
 	createWinRow,
 } from "../../components/index.js";
 import { alert } from "../../utilities/index.js";
-import { getSingleListing } from "../listings/index.js";
+import { getListingData } from "../listings/index.js";
 import { checkboxState } from "../../components/checkboxState.js";
 
 /**
@@ -71,7 +71,9 @@ export async function profileBids() {
 				const highestBidsMap = {};
 
 				for (const bid of bids) {
-					const listing = await getSingleListing(bid.listing.id);
+					const listing = await getListingData("single", {
+						id: bid.listing.id,
+					});
 
 					createBidRow(bid, listing, ".profile-bids", highestBidsMap);
 				}

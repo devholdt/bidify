@@ -1,4 +1,4 @@
-import { getListings } from "./fetch.js";
+import { getListingData } from "./fetch.js";
 import { createCard, placeholderCard } from "../../components/index.js";
 import { alert } from "../../utilities/index.js";
 
@@ -55,7 +55,7 @@ export async function displayListings() {
 
 	async function fetchAllListings() {
 		try {
-			allListings = await getListings({ sort: "&sort=created" });
+			allListings = await getListingData("all");
 		} catch (error) {
 			alert(
 				"danger",

@@ -1,4 +1,4 @@
-import { API_URLS, headers, getSingleListing } from "../index.js";
+import { API_URLS, headers, getListingData } from "../index.js";
 import { alert } from "../../utilities/index.js";
 
 /**
@@ -13,7 +13,7 @@ export async function bidListing(id, amount) {
 	let currentBid = 0;
 
 	const amountInputValue = parseInt(document.querySelector("#amount").value);
-	const listing = await getSingleListing(id);
+	const listing = await getListingData("single", { id: id });
 
 	if (listing.bids.length > 0) {
 		const highestBid = listing.bids.sort((a, b) => b.amount - a.amount)[0]
