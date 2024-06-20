@@ -93,6 +93,12 @@ function getCellValue(column, row) {
 }
 
 function parseFormattedDate(dateString) {
-	const [day, month, year] = dateString.split("/").map(Number);
-	return new Date(`20${year}`, month - 1, day).getTime();
+	const [datePart, timePart] = dateString.split(" ");
+	const [day, month, year] = datePart.split("/").map(Number);
+	let hours = 0,
+		minutes = 0;
+	if (timePart) {
+		[hours, minutes] = timePart.split(":").map(Number);
+	}
+	return new Date(year, month - 1, day, hours, minutes).getTime();
 }
